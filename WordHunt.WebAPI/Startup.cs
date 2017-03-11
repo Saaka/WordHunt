@@ -29,6 +29,8 @@ namespace WordHunt.WebAPI
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "WordHunt WebAPI", Version = "1.0" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +40,9 @@ namespace WordHunt.WebAPI
             loggerFactory.AddDebug();
 
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s => s.SwaggerEndpoint("/swagger/v1/swagger.json", "WordHunt WebAPI"));
         }
     }
 }
