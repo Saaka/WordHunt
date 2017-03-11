@@ -1,1 +1,2 @@
 # WordHunt
+Better readme soon!

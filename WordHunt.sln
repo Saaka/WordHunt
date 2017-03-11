@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt", "WordHunt\WordHunt.csproj", "{7F42A40A-18CC-4D23-95B4-3F8C5129D338}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.Data", "WordHunt.Data\WordHunt.Data.csproj", "{C0272097-670F-47C2-A258-3D970EB17973}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.WebAPI", "WordHunt.WebAPI\WordHunt.WebAPI.csproj", "{8A7FC7A2-A35B-4343-8DBF-C558047EFAA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F42A40A-18CC-4D23-95B4-3F8C5129D338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F42A40A-18CC-4D23-95B4-3F8C5129D338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F42A40A-18CC-4D23-95B4-3F8C5129D338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F42A40A-18CC-4D23-95B4-3F8C5129D338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0272097-670F-47C2-A258-3D970EB17973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0272097-670F-47C2-A258-3D970EB17973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0272097-670F-47C2-A258-3D970EB17973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0272097-670F-47C2-A258-3D970EB17973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A7FC7A2-A35B-4343-8DBF-C558047EFAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A7FC7A2-A35B-4343-8DBF-C558047EFAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A7FC7A2-A35B-4343-8DBF-C558047EFAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A7FC7A2-A35B-4343-8DBF-C558047EFAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
