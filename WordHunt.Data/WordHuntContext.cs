@@ -22,6 +22,7 @@ namespace WordHunt.Data
             
             optionsBuilder.UseSqlServer(config.DbConnectionString, 
                 ob => ob.MigrationsHistoryTable("WordHuntMigrations"));
+
         }
     }
 }

@@ -32,18 +32,17 @@ namespace WordHunt.WebAPI
         {
             // Add framework services.
             services.AddMvc();
-
+            services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "WordHunt WebAPI", Version = "1.0" }));
             services.AddSingleton(configuration);
 
+            //Add application/business logic services
             services.AddScoped<IAppConfiguration, WordHuntConfiguration>();
-
+            services.AddScoped<IWordHuntDBInitializer, WordHuntDBInitializer>();
             services.AddDbContext<WordHuntContext>(ServiceLifetime.Scoped);
-
-            services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "WordHunt WebAPI", Version = "1.0" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IWordHuntDBInitializer initializer)
         {
             loggerFactory.AddConsole(configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -52,6 +51,8 @@ namespace WordHunt.WebAPI
 
             app.UseSwagger();
             app.UseSwaggerUI(s => s.SwaggerEndpoint("/swagger/v1/swagger.json", "WordHunt WebAPI"));
+
+            initializer.InitDatabase().Wait();
         }
     }
 }
