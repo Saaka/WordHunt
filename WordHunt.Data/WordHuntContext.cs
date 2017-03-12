@@ -19,8 +19,9 @@ namespace WordHunt.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlServer(config.DbConnectionString);
+            
+            optionsBuilder.UseSqlServer(config.DbConnectionString, 
+                ob => ob.MigrationsHistoryTable("WordHuntMigrations"));
         }
     }
 }
