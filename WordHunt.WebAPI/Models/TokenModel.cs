@@ -13,7 +13,7 @@ namespace WordHunt.WebAPI.Models
             Token = token;
             Expires = expires;
         }
-        public string Token { get; set; }
-        public DateTime Expires { get; set; }
+        public string Token { get; private set; }
+        public DateTime Expires { get; private set; }
     }
 }
