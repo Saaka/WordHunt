@@ -30,26 +30,26 @@ namespace WordHunt.WebAPI.Controllers
             this.logger = logger;
         }
 
-        [ValidateModel]
-        [HttpPost("token")]
-        public async Task<IActionResult> CreateToken([FromBody] CredentialsModel model)
+[ValidateModel]
+[HttpPost("token")]
+public async Task<IActionResult> CreateToken([FromBody] CredentialsModel model)
+{
+    try
+    {
+        var result = await tokenGenerator.GenerateToken(model.Email, model.Password);
+        if (result.ResultStatus == TokenGeneratorResultStatus.Success)
+            return Ok(result.Token);
+        else
         {
-            try
-            {
-                var result = await tokenGenerator.GenerateToken(model.Email, model.Password);
-                if (result.ResultStatus == ETokenGeneratorResultStatus.Success)
-                    return Ok(result.Token);
-                else
-                {
-                    logger.LogWarning($"Failed to generate the token: {result.ErrorMessage}");
-                    return BadRequest("Failed to generate token");
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError($"Error occured while creating token {ex.Message}", ex);
-                return StatusCode(500);
-            }
+            logger.LogWarning($"Failed to generate the token: {result.ErrorMessage}");
+            return BadRequest("Failed to generate token");
         }
+    }
+    catch (Exception ex)
+    {
+        logger.LogError($"Error occured while creating token {ex.Message}", ex);
+        return StatusCode(500);
+    }
+}
     }
 }

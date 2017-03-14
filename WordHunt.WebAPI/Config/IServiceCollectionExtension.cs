@@ -21,7 +21,7 @@ namespace WordHunt.WebAPI.Config
             services.AddScoped<IAppConfiguration, WordHuntConfiguration>();
             services.AddScoped<IAuthConfiguration, WordHuntConfiguration>();
             services.AddScoped<ISeedConfiguration, WordHuntConfiguration>();
-            services.AddScoped<IDBInitializer, WordHuntDBInitializer>();
+            services.AddScoped<IDBInitializer, DBInitializer>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
 
             return services;

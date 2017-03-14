@@ -7,4 +7,5 @@ namespace WordHunt.WebAPI.Auth.Token
     {
         Task<TokenGeneratorResult> GenerateToken(string email, string password);
     }
+
 }

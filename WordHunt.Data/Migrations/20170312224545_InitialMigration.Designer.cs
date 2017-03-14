@@ -7,7 +7,7 @@ using WordHunt.Data;
 
 namespace WordHunt.Data.Migrations
 {
-    [DbContext(typeof(WordHuntContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20170312224545_InitialMigration")]
     partial class InitialMigration
     {

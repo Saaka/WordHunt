@@ -7,11 +7,11 @@ using WordHunt.Config;
 
 namespace WordHunt.Data
 {
-    public class WordHuntContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext
     {
         private IAppConfiguration config;
 
-        public WordHuntContext(DbContextOptions options, IAppConfiguration config) : base(options)
+        public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {
             this.config = config;
         }

@@ -11,9 +11,9 @@ namespace WordHunt.WebAPI.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private WordHuntContext dbContext;
+        private AppDbContext dbContext;
 
-        public ValuesController(Data.WordHuntContext ctx)
+        public ValuesController(Data.AppDbContext ctx)
         {
             this.dbContext = ctx;
         }

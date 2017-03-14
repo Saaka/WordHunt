@@ -6,7 +6,7 @@ using WordHunt.WebAPI.Models;
 
 namespace WordHunt.WebAPI.Auth.Token
 {
-    public enum ETokenGeneratorResultStatus
+    public enum TokenGeneratorResultStatus
     {
         Success,
         UserNotFound,
@@ -16,7 +16,7 @@ namespace WordHunt.WebAPI.Auth.Token
     public class TokenGeneratorResult
     {
         public TokenModel Token { get; set; }
-        public ETokenGeneratorResultStatus ResultStatus { get; set; }
+        public TokenGeneratorResultStatus ResultStatus { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

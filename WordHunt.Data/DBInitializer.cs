@@ -14,14 +14,14 @@ namespace WordHunt.Data
         Task InitDatabase();
     }
 
-    public class WordHuntDBInitializer : IDBInitializer
+    public class DBInitializer : IDBInitializer
     {
-        private WordHuntContext context;
+        private AppDbContext context;
         private RoleManager<IdentityRole> roleManager;
         private UserManager<IdentityUser> userManager;
         private ISeedConfiguration seedConfig;
 
-        public WordHuntDBInitializer(WordHuntContext context,
+        public DBInitializer(AppDbContext context,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
             ISeedConfiguration seedConfig)

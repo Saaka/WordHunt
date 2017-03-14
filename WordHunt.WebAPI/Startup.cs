@@ -7,6 +7,7 @@ using WordHunt.Config;
 using WordHunt.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WordHunt.WebAPI.Config;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WordHunt.WebAPI
 {
@@ -32,11 +33,12 @@ namespace WordHunt.WebAPI
         {
             // Add framework services.
             services.AddMvc();
-            services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "WordHunt WebAPI", Version = "1.0" }));
+            services.AddSwaggerGen(s => s.SwaggerDoc("v1", 
+                new Info { Title = "WordHunt WebAPI", Version = "1.0" }));
             services.AddSingleton(configuration);
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<WordHuntContext>();
-            services.AddDbContext<WordHuntContext>(ServiceLifetime.Scoped);
+                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
             services.AddCors();
 
             //Add application/business logic services

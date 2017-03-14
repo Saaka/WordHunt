@@ -7,7 +7,7 @@ using WordHunt.Data;
 
 namespace WordHunt.Data.Migrations
 {
-    [DbContext(typeof(WordHuntContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class WordHuntContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

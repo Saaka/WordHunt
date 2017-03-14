@@ -55,7 +55,7 @@ namespace WordHunt.WebAPI.Auth.Token
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
                     return new TokenGeneratorResult
                     {
-                        ResultStatus = ETokenGeneratorResultStatus.Success,
+                        ResultStatus = TokenGeneratorResultStatus.Success,
                         Token = new TokenModel(tokenString, token.ValidTo)
                     };
                 }
@@ -63,7 +63,7 @@ namespace WordHunt.WebAPI.Auth.Token
                 {
                     return new TokenGeneratorResult
                     {
-                        ResultStatus = ETokenGeneratorResultStatus.InvalidPassword,
+                        ResultStatus = TokenGeneratorResultStatus.InvalidPassword,
                         ErrorMessage = $"Password for email {email} is invalid."
                     };
                 }
@@ -72,7 +72,7 @@ namespace WordHunt.WebAPI.Auth.Token
             {
                 return new TokenGeneratorResult
                 {
-                    ResultStatus = ETokenGeneratorResultStatus.UserNotFound,
+                    ResultStatus = TokenGeneratorResultStatus.UserNotFound,
                     ErrorMessage = $"User for email {email} not found"
                 };
             }
