@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WordHunt.Config
 {
-    public class WordHuntConfiguration : IAppConfiguration
+    public class WordHuntConfiguration : IAppConfiguration, IAuthConfiguration, ISeedConfiguration
     {
         private IConfigurationRoot config;
 
@@ -15,5 +15,14 @@ namespace WordHunt.Config
         }
 
         public string DbConnectionString => config["data:connectionString"].ToString();
+
+        public string TokenKey => config["data:secretKey"].ToString();
+        public string Issuer => config["data:issuer"].ToString();
+        public string Audience => config["data:audience"].ToString();
+        public int TokenValidInMinutes => Convert.ToInt32(config["data:tokenValidInMinutes"].ToString());
+
+        public string AdminEmail => config["data:adminEmail"].ToString();
+        public string AdminName => config["data:adminName"].ToString();
+        public string AdminPassword => config["data:adminPassword"].ToString();
     }
 }

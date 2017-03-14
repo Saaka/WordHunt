@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WordHunt.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WordHunt.WebAPI.Controllers
 {
@@ -16,7 +17,8 @@ namespace WordHunt.WebAPI.Controllers
         {
             this.dbContext = ctx;
         }
-        // GET api/values
+        
+        [Authorize]
         [HttpGet]
         public IEnumerable<string> Get()
         {

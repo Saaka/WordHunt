@@ -35,3 +35,6 @@ msbuild.wrn
 
 #configfiles
 dbsettings.json
+oauth.json
+token.json
+seed.json

@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WordHunt.Config;
 using WordHunt.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WordHunt.WebAPI
 {
@@ -22,6 +25,8 @@ namespace WordHunt.WebAPI
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile("dbsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("token.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("seed.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             configuration = builder.Build();
@@ -37,15 +42,42 @@ namespace WordHunt.WebAPI
 
             //Add application/business logic services
             services.AddScoped<IAppConfiguration, WordHuntConfiguration>();
-            services.AddScoped<IWordHuntDBInitializer, WordHuntDBInitializer>();
+            services.AddScoped<IAuthConfiguration, WordHuntConfiguration>();
+            services.AddScoped<ISeedConfiguration, WordHuntConfiguration>();
+            services.AddScoped<IDBInitializer, WordHuntDBInitializer>();
             services.AddDbContext<WordHuntContext>(ServiceLifetime.Scoped);
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<WordHuntContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IWordHuntDBInitializer initializer)
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
+            ILoggerFactory loggerFactory,
+            IDBInitializer initializer,
+            IAuthConfiguration authConfig)
         {
             loggerFactory.AddConsole(configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseIdentity();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.TokenKey)),
+                    ValidateLifetime = true,
+                    ValidateAudience = true,
+                    ValidAudience = authConfig.Audience,
+                    ValidateIssuer = true,
+                    ValidIssuer = authConfig.Issuer
+                }
+            });
 
             app.UseMvc();
 
