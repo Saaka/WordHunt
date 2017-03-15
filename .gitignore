@@ -35,6 +35,9 @@ msbuild.wrn
 
 #configfiles
 dbsettings.json
+dbsettings.Production.json
 oauth.json
 token.json
+token.Production.json
 seed.json
+PublishProfiles/

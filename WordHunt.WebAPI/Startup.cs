@@ -24,6 +24,9 @@ namespace WordHunt.WebAPI
                 .AddJsonFile("token.json", optional: false, reloadOnChange: true)
                 .AddJsonFile("seed.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"dbsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"token.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"seed.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             configuration = builder.Build();
         }
@@ -33,10 +36,10 @@ namespace WordHunt.WebAPI
         {
             // Add framework services.
             services.AddMvc();
-            services.AddSwaggerGen(s => s.SwaggerDoc("v1", 
+            services.AddSwaggerGen(s => s.SwaggerDoc("v1",
                 new Info { Title = "WordHunt WebAPI", Version = "1.0" }));
             services.AddSingleton(configuration);
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
                 .AddEntityFrameworkStores<AppDbContext>();
             services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
             services.AddCors();
