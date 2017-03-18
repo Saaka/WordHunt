@@ -10,7 +10,7 @@ using Xunit;
 
 namespace WordHunt.UnitTests.Controllers
 {
-    public class AuthControllerTests
+    public class AuthControllerTokenTests
     {
         [Fact]
         public async void Calls_GenerateToken_For_AnyValidParameters()
