@@ -13,6 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.Config", "WordHunt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.UnitTests", "WordHunt.UnitTests\WordHunt.UnitTests.csproj", "{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{427430A5-F76A-4B61-9920-25776453642D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Web", "WordHunt.Web\WordHunt.Web.csproj", "{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +48,10 @@ Global
 		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

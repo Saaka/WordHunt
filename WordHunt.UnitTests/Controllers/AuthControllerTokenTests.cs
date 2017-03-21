@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
 using System.Net;
 using WordHunt.WebAPI.Auth.Token;
 using WordHunt.WebAPI.Controllers;
