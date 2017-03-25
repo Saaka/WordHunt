@@ -1,4 +1,8 @@
-﻿.pretty-counter {
-    color: #00ff21;
-    font-size: 30px;
+﻿@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
+
+html, body {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
 }
