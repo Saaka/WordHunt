@@ -1,17 +1,10 @@
-﻿<!--<div fxLayoutAlign="strech" fxLayout ="row">
-    <div fxFlex.gt-xs="20" fxFlex.xs="100" fxLayout.gt-xs="column" fxLayout.xs="row">
-        <game-sidenav></game-sidenav>
-    </div>
-    <div fxLayout="column" fxFlex>
-        <game-board></game-board>
-    </div>
-</div>-->
-
-<div class="g-screen" fxLayout="row" >
-    <div fxFlex="10">
-        <game-sidenav></game-sidenav>
-    </div>
-    <div fxFlex >
-        <game-board></game-board>
+﻿<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-sm-3'>
+            <game-sidenav></game-sidenav>
+        </div>
+        <div class='col-sm-9 body-content'>
+            <game-board></game-board>
+        </div>
     </div>
 </div>
