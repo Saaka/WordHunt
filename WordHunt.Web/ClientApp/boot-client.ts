@@ -3,6 +3,8 @@ import { enableProdMode } from '@angular/core';
 import { platformUniversalDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
 import 'bootstrap';
+require("font-awesome-webpack");
+
 const rootElemTagName = 'app'; // Update this if you change your root component selector
 
 // Enable either Hot Module Reloading or production mode
