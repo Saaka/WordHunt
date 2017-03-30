@@ -2,8 +2,8 @@
 
 @Component({
     selector: 'game-sidenav',
-    templateUrl: './game.sidenav.component.html',
-    styleUrls: ['./game.sidenav.component.scss']
+    templateUrl: './gameSidenav.component.html',
+    styleUrls: ['./gameSidenav.component.scss']
 })
 export class GameSidenavComponent {
 }

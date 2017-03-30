@@ -2,8 +2,8 @@
 
 @Component({
     selector: 'game-board',
-    templateUrl: './game.board.component.html',
-    styleUrls: ['./game.board.component.scss']
+    templateUrl: './gameBoard.component.html',
+    styleUrls: ['./gameBoard.component.scss']
 })
 export class GameBoardComponent {
 }

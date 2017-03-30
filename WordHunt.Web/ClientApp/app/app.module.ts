@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
-import { AppComponent } from './components/app/app.component';
-import { GameMainComponent } from './components/game/main/game.main.component';
-import { GameBoardComponent } from './components/game/board/game.board.component';
-import { GameSidenavComponent } from './components/game/sidenav/game.sidenav.component';
-import { MainMenuComponent } from './components/mainMenu/mainMenu.component';
+import { AppComponent } from './app.component';
+import { GameMainComponent } from './game/game.component';
+import { GameBoardComponent } from './game/board/gameBoard.component';
+import { GameSidenavComponent } from './game/sidenav/gameSidenav.component';
+import { MainMenuComponent } from './mainMenu/mainMenu.component';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -17,6 +19,7 @@ import { MainMenuComponent } from './components/mainMenu/mainMenu.component';
         MainMenuComponent
     ],
     imports: [
+        FormsModule,
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
             { path: '', redirectTo: 'mainmenu', pathMatch: 'full' },

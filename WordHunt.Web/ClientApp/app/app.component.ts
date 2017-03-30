@@ -5,7 +5,7 @@ import { ViewEncapsulation } from '@angular/core';
     selector: 'app',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './app.component.html',
-    styleUrls: ['../../styles/wordhunt.scss','./app.component.scss']
+    styleUrls: ['./styles/wordhunt.scss','./app.component.scss']
 })
 export class AppComponent {
 }
