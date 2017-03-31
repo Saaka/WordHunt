@@ -1,5 +1,7 @@
-﻿.game-nav {
-    background-color: aqua;
+﻿@import '../../styles/wordhunt.colors.scss';
+
+.game-nav {
+    background-color: $primary-color-dark;
     height: 100%;
     width: 100%;
     float: left;

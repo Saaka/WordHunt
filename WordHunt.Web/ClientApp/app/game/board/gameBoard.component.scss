@@ -1,5 +1,7 @@
-﻿.game-board {
-    background-color: darkcyan;
+﻿@import '../../styles/wordhunt.colors.scss';
+
+.game-board {
+    background-color: $primary-color;
     height: 100%;
     width: 100%;
     float: right;
