@@ -6,10 +6,11 @@ import { GameMainComponent } from './main/mainGame.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'game',
         component: GameComponent,
+        //outlet: 'main-outlet',
         children: [
-            { path: '', component: GameMainComponent }
+            { path: '', component: GameMainComponent, outlet: 'game-outlet' }
         ]
     },    
 ];

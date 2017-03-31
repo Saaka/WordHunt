@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector: 'app',
+    selector: 'app-comp',
     encapsulation: ViewEncapsulation.None,
     templateUrl: './app.component.html',
     styleUrls: ['./styles/wordhunt.scss','./app.component.scss']

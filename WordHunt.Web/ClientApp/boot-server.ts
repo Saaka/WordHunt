@@ -18,7 +18,7 @@ export default createServerRenderer(params => {
                 requestUrl: params.url,
                 originUrl: params.origin,
                 preboot: false,
-                document: '<app></app>'
+                document: '<app-comp></app-comp>'
             },
             onHandleError: (parentZone, currentZone, targetZone, error) => {
                 // If any error occurs while rendering the module, reject the whole operation

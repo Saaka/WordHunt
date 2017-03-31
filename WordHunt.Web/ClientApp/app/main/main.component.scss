@@ -1,0 +1,11 @@
+﻿@import '../styles/wordhunt.colors.scss';
+
+#main-title {
+    padding:1em;
+    color: $primary-color-text;
+}
+.main-screen {
+    text-align: center;
+    background-color: $primary-color;
+    height:100%;
+}

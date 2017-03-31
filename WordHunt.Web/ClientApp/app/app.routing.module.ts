@@ -1,20 +1,18 @@
 ﻿import { NgModule } from '@angular/core';
-import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { MainMenuComponent } from './mainMenu/mainMenu.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'mainmenu', pathMatch: 'full' },
-    { path: 'mainmenu', component: MainMenuComponent },
-    { path: 'game', loadChildren: './game/game.module#GameModule' }
+    {
+        path: '',
+        redirectTo: 'mainmenu',
+        pathMatch: 'full'
+    }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+    imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-export const routableComponents = [
-    MainMenuComponent
-];

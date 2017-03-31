@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import 'bootstrap';
 require("font-awesome-webpack");
 
-const rootElemTagName = 'app'; // Update this if you change your root component selector
+const rootElemTagName = 'app-comp'; // Update this if you change your root component selector
 
 // Enable either Hot Module Reloading or production mode
 if (module['hot']) {

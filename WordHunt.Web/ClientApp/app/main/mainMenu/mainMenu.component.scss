@@ -1,0 +1,15 @@
+﻿@import '../../styles/wordhunt.colors.scss';
+
+#main-menu {
+    width: 200px;
+}
+
+.main-button-group,
+.login-button-group {
+    margin: 10px;
+}
+
+.logout-button-group {
+    @extend .main-button-group;
+    margin-top: 50px;
+}

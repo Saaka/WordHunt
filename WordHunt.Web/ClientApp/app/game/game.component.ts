@@ -2,6 +2,6 @@
 
 
 @Component({
-    template: `<router-outlet></router-outlet>`,
+    template: `<router-outlet name="game-outlet"></router-outlet>`,
 })
 export class GameComponent { }
