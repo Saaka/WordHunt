@@ -1,5 +1,16 @@
 ﻿
+@import 'wordhunt.colors.scss';
+
 html, body, main {
     height: 100%;
     margin: 0;
+}
+
+.button-div {
+    width: 200px;
+}
+
+
+h1, h2 {
+    color: $primary-color-text;
 }

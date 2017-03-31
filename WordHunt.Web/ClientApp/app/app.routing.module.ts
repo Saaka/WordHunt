@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'mainmenu',
+        redirectTo: 'main',
         pathMatch: 'full'
     }
 ];

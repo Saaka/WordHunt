@@ -11,7 +11,7 @@ import { GameModule } from './game/game.module';
         CoreModule,
         AppRoutingModule,
         MainModule,
-        GameModule
+        GameModule,
     ],
     declarations: [
         AppComponent

@@ -8,7 +8,6 @@ const routes: Routes = [
     {
         path: 'game',
         component: GameComponent,
-        //outlet: 'main-outlet',
         children: [
             { path: '', component: GameMainComponent, outlet: 'game-outlet' }
         ]
