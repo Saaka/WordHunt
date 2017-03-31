@@ -13,26 +13,13 @@ const routes: Routes = [
             {
                 path: '',
                 component: MainMenuComponent,
-                outlet: 'main-menu-outlet'
             },
             {
                 path: 'tutorial',
                 component: TutorialComponent,
-                outlet: 'main-menu-outlet'
             },
         ]
     },
-    //{
-    //    path: 'tutorial',
-    //    component: MainComponent,
-    //    children: [
-    //        {
-    //            path: '',
-    //            component: TutorialComponent,
-    //            outlet: 'main-menu-outlet'
-    //        }
-    //    ]
-    //}
 ];
 
 @NgModule({

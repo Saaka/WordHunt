@@ -9,7 +9,7 @@ const routes: Routes = [
         path: 'game',
         component: GameComponent,
         children: [
-            { path: '', component: GameMainComponent, outlet: 'game-outlet' }
+            { path: '', component: GameMainComponent }
         ]
     },    
 ];

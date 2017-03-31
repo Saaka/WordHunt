@@ -1,14 +1,13 @@
 ﻿<div class="center-block button-div">
     <div class="login-button-group">
-        <a class="btn btn-default btn-block" [routerLink]="['login']">LOGIN</a>
+        <a class="btn btn-default btn-block" [routerLink]="['/login']">LOGIN</a>
     </div>
     <div class="main-button-group">
         <a class="btn btn-default btn-block" [routerLink]="['/game']">PLAY</a>
-        <a class="btn btn-default btn-block" [routerLink]="['/tutorial']">TUTORIAL</a>
-        <a class="btn btn-default btn-block" [routerLink]="['/main', { outlets: {'main-menu-outlet': ['tutorial']} }]">TUTORIAL</a>
-        <a class="btn btn-default btn-block" [routerLink]="['settings']">SETTINGS</a>
+        <a class="btn btn-default btn-block" [routerLink]="['/main', 'tutorial']">TUTORIAL</a>
+        <a class="btn btn-default btn-block" [routerLink]="['/settings']">SETTINGS</a>
     </div>
     <div class="logout-button-group">
-        <a class="btn btn-default btn-block" [routerLink]="['login']">LOGUT</a>
+        <a class="btn btn-default btn-block" [routerLink]="['/logout']">LOGUT</a>
     </div>
 </div>
