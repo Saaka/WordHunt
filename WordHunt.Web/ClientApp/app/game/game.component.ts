@@ -1,14 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component } from '@angular/core';
+
 
 @Component({
-    selector: 'game-main',
-    templateUrl: './game.component.html',
-    styleUrls: ['./game.component.scss']
+    template: `<router-outlet></router-outlet>`,
 })
-export class GameMainComponent implements OnInit {
-
-    ngOnInit() {
-
-        console.log('Game initialized');
-    }
-}
+export class GameComponent { }
