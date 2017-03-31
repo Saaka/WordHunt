@@ -5,6 +5,7 @@ import { MainComponent } from './main.component';
 import { MainMenuComponent } from './mainMenu/mainMenu.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
     {
@@ -23,6 +24,10 @@ const routes: Routes = [
                 path: 'settings',
                 component: SettingsComponent,
             },
+            {
+                path: 'login',
+                component: LoginComponent,
+            },
         ]
     },
 ];
@@ -34,5 +39,5 @@ const routes: Routes = [
 export class MainRoutingModule { }
 
 export const routableComponents = [
-    MainComponent, MainMenuComponent, TutorialComponent, SettingsComponent
+    MainComponent, MainMenuComponent, TutorialComponent, SettingsComponent, LoginComponent
 ];
