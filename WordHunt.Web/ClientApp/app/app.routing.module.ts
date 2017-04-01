@@ -7,6 +7,8 @@ import { TutorialComponent } from './main/tutorial/tutorial.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { LoginComponent } from './main/login/login.component';
 
+import { AuthGuard } from './core/guards/auth-guard.service';
+
 const routes: Routes = [
     {
         path: '',
@@ -28,6 +30,7 @@ const routes: Routes = [
             {
                 path: 'settings',
                 component: SettingsComponent,
+                canActivate: [AuthGuard]
             },
             {
                 path: 'login',
@@ -39,7 +42,10 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [
+        AuthGuard
+    ]
 })
 export class AppRoutingModule { }
 

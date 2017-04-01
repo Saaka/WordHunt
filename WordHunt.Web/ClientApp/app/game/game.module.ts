@@ -13,4 +13,5 @@ import { GameSidenavComponent } from './sidenav/gameSidenav.component';
     ]
 })
 export class GameModule {
+    
 }

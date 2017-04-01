@@ -2,6 +2,9 @@
 import { FormsModule } from '@angular/forms';
 import { UniversalModule } from 'angular2-universal';
 import { RouterModule } from '@angular/router';
+import './rxjs.imports';
+
+
 
 @NgModule({
     imports: [
