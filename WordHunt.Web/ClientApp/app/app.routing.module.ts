@@ -7,7 +7,7 @@ import { TutorialComponent } from './main/tutorial/tutorial.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { LoginComponent } from './main/login/login.component';
 
-import { AuthGuard } from './core/guards/auth-guard.service';
+import { AuthGuard } from './core/auth/auth-guard.service';
 
 const routes: Routes = [
     {

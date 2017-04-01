@@ -11,6 +11,11 @@ import './rxjs.imports';
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
         RouterModule
+    ],
+    exports: [
+        UniversalModule, 
+        FormsModule,
+        RouterModule
     ]
 })
 export class CoreModule {

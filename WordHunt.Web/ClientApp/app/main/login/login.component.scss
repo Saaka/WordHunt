@@ -1,1 +1,5 @@
-﻿
+﻿@import '../../styles/wordhunt.colors.scss';
+
+.form-error, label {
+    color: $primary-color-light;
+}
