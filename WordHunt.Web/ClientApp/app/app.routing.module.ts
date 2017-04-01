@@ -3,8 +3,6 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { MainMenuComponent } from './main/main-menu/main-menu.component';
-import { TutorialComponent } from './main/tutorial/tutorial.component';
-import { SettingsComponent } from './main/settings/settings.component';
 
 import { AuthGuard } from './core/auth/auth-guard.service';
 import { UserService } from './core/user.service';
@@ -24,11 +22,11 @@ const routes: Routes = [
             },
             {
                 path: 'tutorial',
-                component: TutorialComponent,
+                loadChildren: './main/tutorial/tutorial.module#TutorialModule',
             },
             {
                 path: 'settings',
-                component: SettingsComponent,
+                loadChildren: './main/settings/settings.module#SettingsModule',
                 canActivate: [AuthGuard]
             },
             {
@@ -59,5 +57,5 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 export const routableComponents = [
-    MainComponent, MainMenuComponent, TutorialComponent, SettingsComponent
+    MainComponent, MainMenuComponent
 ];
