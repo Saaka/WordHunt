@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { MainMenuComponent } from './main/main-menu/main-menu.component';
 
 import { AuthGuard } from './core/auth/auth-guard.service';
+import { LoggedInGuard } from './core/auth/loged-in-guard.service';
 import { UserService } from './core/user.service';
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
             {
                 path: 'tutorial',
                 loadChildren: './main/tutorial/tutorial.module#TutorialModule',
+                canActivate: [AuthGuard]
             },
             {
                 path: 'settings',
@@ -31,13 +33,15 @@ const routes: Routes = [
             },
             {
                 path: 'login',
-                loadChildren: './main/login/login.module#LoginModule'
+                loadChildren: './main/login/login.module#LoginModule',
+                canActivate: [LoggedInGuard]
             },
         ]
     },
     {
         path: 'game',
-        loadChildren: './game/game.module#GameModule'
+        loadChildren: './game/game.module#GameModule',
+        canActivate: [AuthGuard]
     },
     {
         path: '**',
@@ -51,6 +55,7 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: [
         AuthGuard,
+        LoggedInGuard,
         UserService
     ]
 })

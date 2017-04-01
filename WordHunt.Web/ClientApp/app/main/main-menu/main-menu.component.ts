@@ -1,6 +1,7 @@
 ﻿import { Component } from '@angular/core';
 
 import { LoginService } from '../../core/auth/login.service';
+import { UserService } from '../../core/user.service';
 
 @Component({
     selector: 'main-menu',
@@ -10,7 +11,12 @@ import { LoginService } from '../../core/auth/login.service';
 })
 export class MainMenuComponent {
 
-    constructor(private loginService: LoginService) { }
+    constructor(private loginService: LoginService,
+                private userService: UserService) { }
+
+    isLoggedIn() {
+        return this.userService.isLoggedIn;
+    }
 
     logout() {
         this.loginService.logout();
