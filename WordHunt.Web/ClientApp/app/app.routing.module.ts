@@ -5,7 +5,6 @@ import { MainComponent } from './main/main.component';
 import { MainMenuComponent } from './main/main-menu/main-menu.component';
 import { TutorialComponent } from './main/tutorial/tutorial.component';
 import { SettingsComponent } from './main/settings/settings.component';
-import { LoginComponent } from './main/login/login.component';
 
 import { AuthGuard } from './core/auth/auth-guard.service';
 import { UserService } from './core/user.service';
@@ -35,10 +34,10 @@ const routes: Routes = [
             },
             {
                 path: 'login',
-                component: LoginComponent,
+                loadChildren: './main/login/login.module#LoginModule'
             },
         ]
-    },
+    }
 ];
 
 @NgModule({
@@ -52,5 +51,5 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 export const routableComponents = [
-    MainComponent, MainMenuComponent, TutorialComponent, SettingsComponent, LoginComponent
+    MainComponent, MainMenuComponent, TutorialComponent, SettingsComponent
 ];
