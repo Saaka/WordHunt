@@ -4,7 +4,7 @@ import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app.routing.module';
 import { GameModule } from './game/game.module';
-import { MainSharedModule } from './main/shared/mainShared.module';
+import { MainSharedModule } from './main/shared/main-shared.module';
 
 @NgModule({
     imports: [

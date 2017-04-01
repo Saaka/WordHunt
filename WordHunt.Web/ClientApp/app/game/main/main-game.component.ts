@@ -2,8 +2,8 @@
 
 @Component({
     selector: 'main-game',
-    templateUrl: './mainGame.component.html',
-    styleUrls: ['./mainGame.component.scss']
+    templateUrl: './main-game.component.html',
+    styleUrls: ['./main-game.component.scss']
 })
 export class GameMainComponent implements OnInit {
 

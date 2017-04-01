@@ -2,7 +2,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
-import { MainMenuComponent } from './main/mainMenu/mainMenu.component';
+import { MainMenuComponent } from './main/main-menu/main-menu.component';
 import { TutorialComponent } from './main/tutorial/tutorial.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { LoginComponent } from './main/login/login.component';

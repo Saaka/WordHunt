@@ -1,7 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MainBackButtonComponent } from './mainBackButton/mainBackButton.component';
+import { MainBackButtonComponent } from './main-back-button/main-back-button.component';
 
 @NgModule({
     imports: [

@@ -2,8 +2,8 @@
 
 @Component({
     selector: 'main-back-button',
-    templateUrl: './mainBackButton.component.html',
-    styleUrls: ['./mainBackButton.component.scss']
+    templateUrl: './main-back-button.component.html',
+    styleUrls: ['./main-back-button.component.scss']
 })
 export class MainBackButtonComponent {
     
