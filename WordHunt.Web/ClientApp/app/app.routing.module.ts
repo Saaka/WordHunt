@@ -8,6 +8,7 @@ import { SettingsComponent } from './main/settings/settings.component';
 import { LoginComponent } from './main/login/login.component';
 
 import { AuthGuard } from './core/auth/auth-guard.service';
+import { UserService } from './core/user.service';
 
 const routes: Routes = [
     {
@@ -44,7 +45,8 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
     providers: [
-        AuthGuard
+        AuthGuard,
+        UserService
     ]
 })
 export class AppRoutingModule { }
