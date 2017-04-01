@@ -6,7 +6,7 @@ import { GameMainComponent } from './main/main-game.component';
 
 const routes: Routes = [
     {
-        path: 'game',
+        path: '',
         component: GameComponent,
         children: [
             { path: '', component: GameMainComponent }

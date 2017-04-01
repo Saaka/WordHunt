@@ -1,5 +1,5 @@
 ﻿import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { MainMenuComponent } from './main/main-menu/main-menu.component';
@@ -20,8 +20,7 @@ const routes: Routes = [
             },
             {
                 path: 'main',
-                redirectTo: '',
-                pathMatch: 'full'
+                redirectTo: ''
             },
             {
                 path: 'tutorial',
@@ -37,11 +36,20 @@ const routes: Routes = [
                 loadChildren: './main/login/login.module#LoginModule'
             },
         ]
-    }
+    },
+    {
+        path: 'game',
+        loadChildren: './game/game.module#GameModule'
+    },
+    {
+        path: '**',
+        redirectTo: 'main',
+        pathMatch: 'full'
+    },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
     exports: [RouterModule],
     providers: [
         AuthGuard,
