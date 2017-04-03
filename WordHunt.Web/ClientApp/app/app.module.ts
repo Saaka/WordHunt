@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { UniversalModule } from 'angular2-universal';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app.routing.module';
@@ -8,7 +8,7 @@ import './core/rxjs.imports';
 
 @NgModule({
     imports: [
-        UniversalModule,
+        BrowserModule,
         AppRoutingModule,
         GameModule
     ],

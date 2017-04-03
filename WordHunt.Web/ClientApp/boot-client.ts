@@ -1,6 +1,9 @@
-import 'angular2-universal-polyfills/browser';
+import 'es6-shim';
+import 'zone.js';
+import 'reflect-metadata';
+
 import { enableProdMode } from '@angular/core';
-import { platformUniversalDynamic } from 'angular2-universal';
+import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import 'bootstrap';
 require("font-awesome-webpack");
@@ -22,7 +25,7 @@ if (module['hot']) {
 }
 
 // Boot the application, either now or when the DOM content is loaded
-const platform = platformUniversalDynamic();
+const platform = platformBrowserDynamic();
 const bootApplication = () => { platform.bootstrapModule(AppModule); };
 if (document.readyState === 'complete') {
     bootApplication();
