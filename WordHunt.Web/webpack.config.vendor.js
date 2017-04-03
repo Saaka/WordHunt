@@ -30,7 +30,7 @@ module.exports = (env) => {
                 'event-source-polyfill',
                 'jquery',
                 'zone.js',
-                'reflect-metadata.js'
+                'reflect-metadata'
             ]
         },
         output: {
