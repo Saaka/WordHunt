@@ -11,10 +11,10 @@ export class LoginService {
     constructor(private userService: UserService,
         private config: ConfigService) { }
 
-    login(username:string, password:string) {
+    login(username: string, password: string) {
 
         console.log(`Username: ${username} Password: ${password}`);
-        return Observable.of(true).delay(1000).do(function () { });
+        return Observable.of(true).delay(1000).do(function () { console.log('Faked logging in'); });
     }
 
     logout() {
