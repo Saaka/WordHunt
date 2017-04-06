@@ -2,5 +2,8 @@
 
 @Injectable()
 export class UserService {
-    isLoggedIn: boolean = false;
+
+    isLoggedIn() {
+        return false;
+    }
 }

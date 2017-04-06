@@ -3,22 +3,21 @@ import { Observable } from 'rxjs/Observable';
 
 import { UserService } from '../user.service';
 
+import { ConfigService } from '../../config/app.config.service';
+
 @Injectable()
 export class LoginService {
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService,
+        private config: ConfigService) { }
 
-    login() {
-        return Observable.of(true)
-            .delay(1000)
-            .do(this.toggleLogState.bind(this));
+    login(username:string, password:string) {
+
+        console.log(`Username: ${username} Password: ${password}`);
+        return Observable.of(true).delay(1000).do(function () { });
     }
 
     logout() {
-        this.toggleLogState(false);
-    }
 
-    private toggleLogState(val: boolean) {
-        this.userService.isLoggedIn = val;
     }
 }

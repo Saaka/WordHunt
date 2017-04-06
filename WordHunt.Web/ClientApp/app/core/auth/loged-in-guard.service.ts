@@ -12,7 +12,7 @@ export class LoggedInGuard implements CanActivate {
 
     canActivate() {
 
-        if (!this.userService.isLoggedIn) {
+        if (!this.userService.isLoggedIn()) {
             return true;
         }
 

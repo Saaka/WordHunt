@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { LoginService } from '../../core/auth/login.service';
 import { UserService } from '../../core/user.service';
+import { LoginModel } from './login.model';
 
 @Component({
     selector: 'login',
@@ -13,7 +14,7 @@ import { UserService } from '../../core/user.service';
 })
 export class LoginComponent implements OnDestroy {
     private loginSub: Subscription;
-    model: any = {};
+    model: LoginModel = new LoginModel();
     loading = false;
     error = '';
 
@@ -26,13 +27,19 @@ export class LoginComponent implements OnDestroy {
         this.loading = true;
 
         this.loginSub = this.loginService
-            .login()
+            .login(this.model.username, this.model.password)
             .mergeMap(loginResult => this.route.queryParams)
             .map(qp => qp['redirectTo'])
             .subscribe(redirectTo => {
-                console.log('Logged in');
-                if (this.userService.isLoggedIn) {
+                if (this.userService.isLoggedIn()) {
+                    console.log('Logged in');
+
                     let url = redirectTo ? [redirectTo] : ['/main'];
+                    this.router.navigate(url);
+                } else {
+                    console.log('Not logged in');
+
+                    let url = ['/main'];
                     this.router.navigate(url);
                 }
             });

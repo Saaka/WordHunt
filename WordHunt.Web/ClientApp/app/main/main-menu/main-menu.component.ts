@@ -15,7 +15,7 @@ export class MainMenuComponent {
                 private userService: UserService) { }
 
     isLoggedIn() {
-        return this.userService.isLoggedIn;
+        return this.userService.isLoggedIn();
     }
 
     logout() {

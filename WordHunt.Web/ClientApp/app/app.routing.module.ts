@@ -8,6 +8,8 @@ import { AuthGuard } from './core/auth/auth-guard.service';
 import { LoggedInGuard } from './core/auth/loged-in-guard.service';
 import { UserService } from './core/user.service';
 
+import { ConfigService } from './config/app.config.service';
+
 const routes: Routes = [
     {
         path: '',
@@ -56,7 +58,8 @@ const routes: Routes = [
     providers: [
         AuthGuard,
         LoggedInGuard,
-        UserService
+        UserService, 
+        ConfigService
     ]
 })
 export class AppRoutingModule { }
