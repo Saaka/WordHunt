@@ -14,10 +14,8 @@ export class AuthHttpService {
 
     createAuthorizationHeader(headers: Headers) {
         let token = this.tokenStorage.getToken();
-        if (!token)
-            return this.returnNoTokenError();
 
-        headers.append('Authorization', 'Bearer ');
+        headers.append('Authorization', 'Bearer ' + token);
     }
 
     get(url) {
@@ -34,9 +32,5 @@ export class AuthHttpService {
         return this.http.post(this.config.ApiUrl + url, data, {
             headers: headers
         });
-    }
-
-    private returnNoTokenError() {
-        return Observable.throw('Unable to validate user. Auth token missing.');
     }
 }
