@@ -2,22 +2,48 @@
 import { Observable } from 'rxjs/Observable';
 
 import { UserService } from '../user.service';
-
-import { ConfigService } from '../../config/app.config.service';
+import { TokenAuthService, TokenResponse } from './token/token-auth';
 
 @Injectable()
 export class LoginService {
+    private tokenStorageName = 'whAuthToken';
 
     constructor(private userService: UserService,
-        private config: ConfigService) { }
+        private tokenAuth: TokenAuthService) { }
 
-    login(username: string, password: string) {
+    login(email: string, password: string): Observable<LoginResult> {
+        return this.tokenAuth
+            .getToken(email, password)
+            .map(
+            response => {
+                localStorage.setItem(this.tokenStorageName, response.token);
 
-        console.log(`Username: ${username} Password: ${password}`);
-        return Observable.of(true).delay(1000).do(function () { console.log('Faked logging in'); });
+                this.userService.validateLoginState();
+                return new LoginResult();
+            },
+            error => {
+                let result = new LoginResult();
+                result.isError = true;
+                result.message = 'Login failed';
+                return result;
+            })
+            .catch(this.handleError);
+
+    }
+
+    private handleError(error: TokenResponse) {
+        console.log(error);
+
+        return Observable.throw('');
     }
 
     logout() {
-
+        localStorage.removeItem(this.tokenStorageName);
+        this.userService.validateLoginState();
     }
+}
+
+export class LoginResult {
+    isError: boolean;
+    message: string;
 }

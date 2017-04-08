@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+ 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app.routing.module';
 import { GameModule } from './game/game.module';
+import { AuthModule } from './core/auth/auth.module';
 import './core/rxjs.imports';
 
 @NgModule({
     imports: [
         BrowserModule,
         AppRoutingModule,
-        GameModule
+        GameModule,
+        AuthModule
     ],
     declarations: [
         AppComponent,

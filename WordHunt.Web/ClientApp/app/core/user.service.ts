@@ -3,7 +3,13 @@
 @Injectable()
 export class UserService {
 
+    private loggedIn: boolean = false;
+
     isLoggedIn() {
-        return false;
+        return this.loggedIn;
+    }
+
+    validateLoginState() {
+        this.loggedIn = !this.loggedIn;
     }
 }

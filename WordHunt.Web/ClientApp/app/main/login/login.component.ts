@@ -28,20 +28,21 @@ export class LoginComponent implements OnDestroy {
 
         this.loginSub = this.loginService
             .login(this.model.username, this.model.password)
-            .mergeMap(loginResult => this.route.queryParams)
+            .mergeMap(loginResult => {
+
+                return this.route.queryParams;
+            })
             .map(qp => qp['redirectTo'])
             .subscribe(redirectTo => {
+                this.loading = false;
+
                 if (this.userService.isLoggedIn()) {
                     console.log('Logged in');
 
                     let url = redirectTo ? [redirectTo] : ['/main'];
                     this.router.navigate(url);
-                } else {
-                    console.log('Not logged in');
-
-                    let url = ['/main'];
-                    this.router.navigate(url);
                 }
+
             });
     }
 

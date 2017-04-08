@@ -5,7 +5,7 @@ import { IConfig } from './app.iconfig';
 
 @Injectable()
 export class ConfigService {
-    cfg: IConfig;
+    private cfg: IConfig;
     constructor() {
         if (isDevMode())
             this.cfg = new DevConfig();
