@@ -50,6 +50,17 @@ namespace WordHunt.WebAPI.Config
                         .AllowAnyOrigin();
                 });
             }
+            else
+            {
+                app.UseCors(builder =>
+                {
+                    builder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://wordhunt.msakwa.net");
+
+                });
+            }
 
             return app;
         }
