@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app.routing.module';
 import { GameModule } from './game/game.module';
-import { AuthModule } from './core/auth/auth.module';
+import { CoreModule } from './core/core.module';
 import './core/rxjs.imports';
 
 @NgModule({
@@ -14,7 +14,7 @@ import './core/rxjs.imports';
         BrowserAnimationsModule,
         AppRoutingModule,
         GameModule,
-        AuthModule
+        CoreModule
     ],
     declarations: [
         AppComponent,
