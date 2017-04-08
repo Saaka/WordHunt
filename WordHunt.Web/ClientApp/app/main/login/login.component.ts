@@ -28,8 +28,14 @@ export class LoginComponent implements OnDestroy {
 
         this.loginSub = this.loginService
             .login(this.model.username, this.model.password)
-            .mergeMap(loginResult => {
+            .catch((error) => {
+                this.loading = false;
 
+                console.log(error);
+
+                return '';
+            })
+            .mergeMap(loginResult => {
                 return this.route.queryParams;
             })
             .map(qp => qp['redirectTo'])

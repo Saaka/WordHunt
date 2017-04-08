@@ -11,39 +11,24 @@ export class LoginService {
     constructor(private userService: UserService,
         private tokenAuth: TokenAuthService) { }
 
-    login(email: string, password: string): Observable<LoginResult> {
+    login(email: string, password: string) {
         return this.tokenAuth
             .getToken(email, password)
-            .map(
-            response => {
+            .map(response => {
                 localStorage.setItem(this.tokenStorageName, response.token);
 
                 this.userService.validateLoginState();
-                return new LoginResult();
-            },
-            error => {
-                let result = new LoginResult();
-                result.isError = true;
-                result.message = 'Login failed';
-                return result;
             })
             .catch(this.handleError);
 
     }
 
     private handleError(error: TokenResponse) {
-        console.log(error);
-
-        return Observable.throw('');
+        return Observable.throw('Login failed');
     }
 
     logout() {
         localStorage.removeItem(this.tokenStorageName);
         this.userService.validateLoginState();
     }
-}
-
-export class LoginResult {
-    isError: boolean;
-    message: string;
 }
