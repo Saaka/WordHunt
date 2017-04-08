@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
  
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routableComponents } from './app.routing.module';
@@ -14,7 +15,8 @@ import './core/rxjs.imports';
         BrowserAnimationsModule,
         AppRoutingModule,
         GameModule,
-        CoreModule
+        CoreModule,
+        AsyncLocalStorageModule
     ],
     declarations: [
         AppComponent,
