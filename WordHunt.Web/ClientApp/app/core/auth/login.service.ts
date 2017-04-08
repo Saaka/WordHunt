@@ -23,7 +23,7 @@ export class LoginService {
 
     }
 
-    private handleError(error: TokenResponse) {
+    private handleError(error) {
         return Observable.throw('Login failed');
     }
 

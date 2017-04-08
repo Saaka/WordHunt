@@ -31,7 +31,6 @@ export class TokenAuthService {
     }
 
     private handleError(error: Response) {
-        console.log(error);
         let msg = `Error status code ${error.status} at ${error.url}`;
         return Observable.throw(msg);
     }

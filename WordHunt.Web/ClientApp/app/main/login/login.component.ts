@@ -48,7 +48,6 @@ export class LoginComponent implements OnDestroy {
                     let url = redirectTo ? [redirectTo] : ['/main'];
                     this.router.navigate(url);
                 }
-
             });
     }
 
