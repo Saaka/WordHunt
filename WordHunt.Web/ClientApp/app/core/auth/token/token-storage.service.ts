@@ -13,10 +13,16 @@ export class TokenStorageService {
     }
 
     loadToken() {
-        return localStorage.getItem(this.tokenStorageName);
+        //return localStorage.getItem(this.tokenStorageName);
+        return this.storage
+            .getItem(this.tokenStorageName)
+            .map(response => {
+                return <string>response;
+            });
     }
 
     deleteToken() {
-        localStorage.removeItem(this.tokenStorageName);
+        //localStorage.removeItem(this.tokenStorageName);
+        return this.storage.removeItem(this.tokenStorageName);
     }
 }

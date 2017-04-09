@@ -12,25 +12,33 @@ export class AuthHttpService {
         private tokenStorage: TokenStorageService,
         private config: ConfigService) { }
 
-    createAuthorizationHeader(headers: Headers) {
-        let token = this.tokenStorage.loadToken();
-
-        headers.append('Authorization', 'Bearer ' + token);
+    createAuthorizationHeader() {
+        return this.tokenStorage
+            .loadToken()
+            .map(response => {
+                let headers = new Headers();
+                headers.append('Authorization', 'Bearer ' + response);
+                return headers;
+            });
     }
 
     get(url) {
-        let headers = new Headers();
-        this.createAuthorizationHeader(headers);
-        return this.http.get(this.config.ApiUrl + url, {
-            headers: headers
-        });
+        return this.createAuthorizationHeader()
+            .mergeMap(response => {
+                return this.http.get(this.config.ApiUrl + url, {
+                    headers: <Headers>response
+                });
+            })
+            .map(response => {
+                return response;
+            });
     }
 
     post(url, data) {
-        let headers = new Headers();
-        this.createAuthorizationHeader(headers);
-        return this.http.post(this.config.ApiUrl + url, data, {
-            headers: headers
-        });
+        //let headers = new Headers();
+        //this.createAuthorizationHeader(headers);
+        //return this.http.post(this.config.ApiUrl + url, data, {
+        //    headers: headers
+        //});
     }
 }

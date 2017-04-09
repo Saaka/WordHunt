@@ -19,7 +19,10 @@ export class MainMenuComponent {
     }
 
     logout() {
-        this.loginService.logout();
-        console.log('Logged out');
+        this.loginService
+            .logout()
+            .subscribe(response => {
+                console.log('Logged out');
+            });
     }
 }

@@ -18,9 +18,9 @@ export class LoginService {
                 return this.tokenStorage
                     .saveToken(response.token);
             })
-            .map(response => {
-                if (response)
-                    this.userService.validateLoginState();
+            .mergeMap(response => {
+                return this.userService
+                    .validateLoginState();
             })
             .catch(this.handleError);
     }
@@ -31,7 +31,10 @@ export class LoginService {
     }
 
     logout() {
-        this.tokenStorage.deleteToken();
-        this.userService.validateLoginState();
+        return this.tokenStorage
+            .deleteToken()
+            .mergeMap(response => {
+                return this.userService.validateLoginState();
+            });
     }
 }

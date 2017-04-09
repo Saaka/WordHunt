@@ -1,14 +1,17 @@
 ﻿import { Injectable } from '@angular/core';
 
-//import { TokenStorageService } from './auth/token/token-auth';
+import { TokenStorageService } from './auth/token/token-auth';
 
 @Injectable()
 export class UserService {
 
     private loggedIn: boolean = false;
 
-    constructor() {
-        this.validateLoginState();
+    constructor(private storage: TokenStorageService) {
+        this.validateLoginState()
+            .subscribe(response => {
+                console.log(`User is logged in: ${this.loggedIn}`);
+            });
     }
 
     isLoggedIn() {
@@ -16,8 +19,14 @@ export class UserService {
     }
 
     validateLoginState() {
-
-        console.log('login state validated');
-        this.loggedIn = !this.loggedIn;
+        return this.storage.loadToken()
+            .map(response => {
+                if (response)
+                    this.loggedIn = true;
+                else
+                    this.loggedIn = false;
+                console.log('login state validated');
+                return this.loggedIn;
+            });
     }
 }
