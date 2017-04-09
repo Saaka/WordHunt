@@ -3,15 +3,16 @@ import { AsyncLocalStorage } from 'angular-async-local-storage';
 
 @Injectable()
 export class TokenStorageService {
-    private tokenStorageName = 'whAuthToken';
+    private tokenStorageName = 'whauthtoken';
 
     constructor(private storage: AsyncLocalStorage) { }
 
     saveToken(token: string) {
-        localStorage.setItem(this.tokenStorageName, token);
+        //localStorage.setItem(this.tokenStorageName, token);
+        return this.storage.setItem(this.tokenStorageName, token);
     }
 
-    getToken() {
+    loadToken() {
         return localStorage.getItem(this.tokenStorageName);
     }
 

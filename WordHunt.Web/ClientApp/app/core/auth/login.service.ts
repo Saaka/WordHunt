@@ -14,14 +14,19 @@ export class LoginService {
     login(email: string, password: string) {
         return this.tokenAuth
             .getToken(email, password)
+            .mergeMap(response => {
+                return this.tokenStorage
+                    .saveToken(response.token);
+            })
             .map(response => {
-                this.tokenStorage.saveToken(response.token);
-                this.userService.validateLoginState();
+                if (response)
+                    this.userService.validateLoginState();
             })
             .catch(this.handleError);
     }
 
     private handleError(error) {
+        console.log(error);
         return Observable.throw('Login failed');
     }
 

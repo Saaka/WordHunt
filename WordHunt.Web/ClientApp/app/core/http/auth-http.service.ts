@@ -13,7 +13,7 @@ export class AuthHttpService {
         private config: ConfigService) { }
 
     createAuthorizationHeader(headers: Headers) {
-        let token = this.tokenStorage.getToken();
+        let token = this.tokenStorage.loadToken();
 
         headers.append('Authorization', 'Bearer ' + token);
     }
