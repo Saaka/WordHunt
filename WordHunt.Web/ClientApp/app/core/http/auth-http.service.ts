@@ -35,10 +35,14 @@ export class AuthHttpService {
     }
 
     post(url, data) {
-        //let headers = new Headers();
-        //this.createAuthorizationHeader(headers);
-        //return this.http.post(this.config.ApiUrl + url, data, {
-        //    headers: headers
-        //});
+        return this.createAuthorizationHeader()
+            .mergeMap(response => {
+                return this.http.post(this.config.ApiUrl + url, data, {
+                    headers: <Headers>response
+                });
+            })
+            .map(response => {
+                return response;
+            });
     }
 }
