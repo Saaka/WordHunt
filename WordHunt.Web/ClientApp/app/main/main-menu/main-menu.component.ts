@@ -18,6 +18,10 @@ export class MainMenuComponent {
         return this.userService.isLoggedIn();
     }
 
+    isAdmin() {
+        return this.userService.isAdmin();
+    }
+
     logout() {
         this.loginService
             .logout()

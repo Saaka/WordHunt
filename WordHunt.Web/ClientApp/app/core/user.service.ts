@@ -29,6 +29,10 @@ export class UserService {
         return this.user.email;
     }
 
+    isAdmin() {
+        return this.user.admin;
+    }
+
     validateLoginState() {
         return this.storage.loadToken()
             .map(response => {

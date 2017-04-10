@@ -18,6 +18,7 @@ export class JwtTokenUserParser {
         user.name = tokenData.sub;
         user.loggedIn = !isExpired;
         user.tokenExpirationDate = this.jwtHelpter.getTokenExpirationDate(token);
+        user.admin = tokenData.admin == 'True';
 
         return user;
     }

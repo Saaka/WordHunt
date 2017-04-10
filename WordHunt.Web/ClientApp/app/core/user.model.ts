@@ -3,4 +3,5 @@
     email: string;
     loggedIn: boolean;
     tokenExpirationDate: Date;
+    admin: boolean;
 }
