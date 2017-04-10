@@ -7,7 +7,7 @@
         <a class="btn btn-default btn-block" [routerLink]="['/game']">Play</a>
         <!--<a class="btn btn-default btn-block" [routerLink]="['/tutorial']">Tutorial</a>-->
         <a class="btn btn-default btn-block" [routerLink]="['/settings']">Settings</a>
-        <a class="btn btn-default btn-block" [routerLink]="['/settings']" *ngIf="isAdmin()">Admin</a>
+        <a class="btn btn-default btn-block" [routerLink]="['/admin']" *ngIf="isAdmin()">Admin</a>
     </div>
     <div class="logout-button-group" *ngIf="isLoggedIn()">
         <a class="btn btn-default btn-block" (click)="logout()">Logout</a>
