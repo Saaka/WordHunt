@@ -1,7 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import { TokenAuthService, TokenStorageService } from './auth/token/token-auth';
+import { TokenAuthService, TokenStorageService, JwtTokenUserParser } from './auth/token/token-auth';
 import { AuthHttpService } from './http/auth-http.service';
 
 @NgModule({
@@ -9,7 +9,8 @@ import { AuthHttpService } from './http/auth-http.service';
     providers: [
         TokenAuthService,
         TokenStorageService,
-        AuthHttpService
+        AuthHttpService, 
+        JwtTokenUserParser
     ]
 })
 export class CoreModule {

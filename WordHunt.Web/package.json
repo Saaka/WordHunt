@@ -16,6 +16,7 @@
     "@angular/router": "^4.0.0",
     "@types/node": "^6.0.42",
     "angular-async-local-storage": "^1.4.0",
+    "angular2-jwt": "^0.2.0",
     "angular2-template-loader": "^0.6.2",
     "aspnet-prerendering": "^2.0.0",
     "aspnet-webpack": "^1.0.17",
