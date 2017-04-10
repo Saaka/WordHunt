@@ -22,6 +22,10 @@ export class MainMenuComponent {
         return this.userService.isAdmin();
     }
 
+    getUserName() {
+        return this.userService.userName();
+    }
+
     logout() {
         this.loginService
             .logout()

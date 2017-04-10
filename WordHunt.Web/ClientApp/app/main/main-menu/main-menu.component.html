@@ -3,7 +3,8 @@
         <a class="btn btn-default btn-block" [routerLink]="['/login']">Login</a>
     </div>
     <div class="main-button-group" *ngIf="isLoggedIn()">
-        <a class="btn btn-default btn-block" [routerLink]="['/game']" >Play</a>
+        <p class="user-name">{{getUserName()}}</p>
+        <a class="btn btn-default btn-block" [routerLink]="['/game']">Play</a>
         <!--<a class="btn btn-default btn-block" [routerLink]="['/tutorial']">Tutorial</a>-->
         <a class="btn btn-default btn-block" [routerLink]="['/settings']">Settings</a>
         <a class="btn btn-default btn-block" [routerLink]="['/settings']" *ngIf="isAdmin()">Admin</a>
