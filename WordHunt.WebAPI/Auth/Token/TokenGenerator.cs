@@ -41,8 +41,7 @@ namespace WordHunt.WebAPI.Auth.Token
                     {
                         new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                        new Claim("admin", roles.Contains("Admin").ToString())
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email)
                      }.Union(userClaims);
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.TokenKey));

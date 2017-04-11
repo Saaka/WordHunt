@@ -48,20 +48,21 @@ namespace WordHunt.Data
                 if (!await roleManager.RoleExistsAsync("Admin"))
                 {
                     var role = new IdentityRole("Admin");
-                    role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = "IsAdmin", ClaimValue = "True" });
+                    role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = "isAdmin", ClaimValue = "true" });
                     await roleManager.CreateAsync(role);
                 }
 
                 user = new IdentityUser()
                 {
                     UserName = seedConfig.AdminName,
-                    Email = seedConfig.AdminEmail
+                    Email = seedConfig.AdminEmail                    
                 };
 
                 var userResult = await userManager.CreateAsync(user, seedConfig.AdminPassword);
                 var roleResult = await userManager.AddToRoleAsync(user, "Admin");
+                var claimResult = await userManager.AddClaimAsync(user, new System.Security.Claims.Claim("isAdmin", "true", System.Security.Claims.ClaimValueTypes.Boolean));
 
-                if (!userResult.Succeeded || !roleResult.Succeeded)
+                if (!userResult.Succeeded || !roleResult.Succeeded || !claimResult.Succeeded)
                 {
                     throw new InvalidOperationException("Failed to build user and roles");
                 }
