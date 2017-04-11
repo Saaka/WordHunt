@@ -7,7 +7,7 @@ using WordHunt.WebAPI.Controllers;
 using WordHunt.WebAPI.Models;
 using Xunit;
 
-namespace WordHunt.UnitTests.Controllers
+namespace WordHunt.Web.UnitTests.Controllers
 {
     public class AuthControllerTokenTests
     {

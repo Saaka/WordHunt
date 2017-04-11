@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt", "WordHunt\WordHunt.csproj", "{7F42A40A-18CC-4D23-95B4-3F8C5129D338}"
 EndProject
@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.WebAPI", "WordHunt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.Config", "WordHunt.Config\WordHunt.Config.csproj", "{4EB8AEC3-A29A-4848-AF16-79E374912552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.UnitTests", "WordHunt.UnitTests\WordHunt.UnitTests.csproj", "{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{427430A5-F76A-4B61-9920-25776453642D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -21,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Web", "WordHunt.Web\WordHunt.Web.csproj", "{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{22556DE7-A887-4B64-9A73-7563E0057998}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Web.UnitTests", "WordHunt.Web.UnitTests\WordHunt.Web.UnitTests.csproj", "{2D4521A4-26E4-425D-9949-A2E55F9C2634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,16 +46,19 @@ Global
 		{4EB8AEC3-A29A-4848-AF16-79E374912552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EB8AEC3-A29A-4848-AF16-79E374912552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EB8AEC3-A29A-4848-AF16-79E374912552}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDDC1865-5AF7-4A26-9B36-87F3F4A5CA45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D4521A4-26E4-425D-9949-A2E55F9C2634} = {22556DE7-A887-4B64-9A73-7563E0057998}
 	EndGlobalSection
 EndGlobal
