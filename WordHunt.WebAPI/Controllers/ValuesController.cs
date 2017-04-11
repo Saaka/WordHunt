@@ -5,25 +5,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WordHunt.Data;
 using Microsoft.AspNetCore.Authorization;
+using WordHunt.DataInterfaces.Words;
+using WordHunt.DataInterfaces.Words.DTO.Access;
 
 namespace WordHunt.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private AppDbContext dbContext;
+        private IWordProvider wordProvider;
 
-        public ValuesController(Data.AppDbContext ctx)
+        public ValuesController(IWordProvider wordProvider)
         {
-            this.dbContext = ctx;
+            this.wordProvider = wordProvider;
         }
         
         [Authorize]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<Word>> Get()
         {
-            return dbContext.Users.Select(x => x.Email).ToList();
-            //return new string[] { "value1", "value2", "value3" };
+            return await wordProvider.GetWords("PL");
         }
 
         // GET api/values/5

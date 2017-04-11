@@ -12,8 +12,8 @@ namespace WordHunt.Data.Entities
         public long Id { get; set; }
         public string Value { get; set; }
         public long LanguageId { get; set; }
-        public Language Language { get; set; }
+        public virtual Language Language { get; set; }
         public long? CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

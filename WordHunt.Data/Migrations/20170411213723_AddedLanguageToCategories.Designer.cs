@@ -8,9 +8,10 @@ using WordHunt.Data;
 namespace WordHunt.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class WordHuntContextModelSnapshot : ModelSnapshot
+    [Migration("20170411213723_AddedLanguageToCategories")]
+    partial class AddedLanguageToCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

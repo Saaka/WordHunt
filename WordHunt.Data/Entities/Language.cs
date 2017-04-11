@@ -13,5 +13,6 @@ namespace WordHunt.Data.Entities
         public string Name { get; set; }
         public string Code { get; set; }
         public virtual List<Word> Words { get; set; }
+        public virtual List<Category> Categories { get; set; }
     }
 }

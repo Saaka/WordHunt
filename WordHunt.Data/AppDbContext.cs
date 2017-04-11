@@ -35,7 +35,13 @@ namespace WordHunt.Data
                     .WithMany(c => c.Words)
                     .HasForeignKey(fk => fk.CategoryId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired(false);            
+                    .IsRequired(false);
+
+            builder.Entity<Category>()
+                    .HasOne(c => c.Language)
+                    .WithMany(l => l.Categories)
+                    .HasForeignKey(fk => fk.LanguageId)
+                    .OnDelete(DeleteBehavior.Restrict);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

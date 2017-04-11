@@ -11,6 +11,8 @@ namespace WordHunt.Data.Entities
         [Required]
         public long Id { get; set; }
         public string Name { get; set; }
+        public long LanguageId { get; set; }
+        public virtual Language Language { get; set; }
         public virtual List<Word> Words { get; set; }
     }
 }
