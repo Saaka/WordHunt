@@ -7,6 +7,7 @@ using WordHunt.Data;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.DataInterfaces.Words;
 using WordHunt.DataInterfaces.Words.DTO.Access;
+using WordHunt.Config.Auth;
 
 namespace WordHunt.WebAPI.Controllers
 {
@@ -19,8 +20,8 @@ namespace WordHunt.WebAPI.Controllers
         {
             this.wordProvider = wordProvider;
         }
-        
-        [Authorize]
+
+        [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpGet]
         public async Task<IEnumerable<Word>> Get()
         {

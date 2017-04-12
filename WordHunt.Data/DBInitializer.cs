@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Config;
+using WordHunt.Config.Auth;
 using WordHunt.Data.Entities;
 
 namespace WordHunt.Data
@@ -88,10 +89,10 @@ namespace WordHunt.Data
 
             if (user == null)
             {
-                if (!await roleManager.RoleExistsAsync("Admin"))
+                if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
                 {
-                    var role = new IdentityRole("Admin");
-                    role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = "isAdmin", ClaimValue = "true" });
+                    var role = new IdentityRole(SystemRoles.Admin);
+                    role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
                     await roleManager.CreateAsync(role);
                 }
 
@@ -102,8 +103,8 @@ namespace WordHunt.Data
                 };
 
                 var userResult = await userManager.CreateAsync(user, seedConfig.AdminPassword);
-                var roleResult = await userManager.AddToRoleAsync(user, "Admin");
-                var claimResult = await userManager.AddClaimAsync(user, new System.Security.Claims.Claim("isAdmin", "true", System.Security.Claims.ClaimValueTypes.Boolean));
+                var roleResult = await userManager.AddToRoleAsync(user, SystemRoles.Admin);
+                var claimResult = await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(SystemClaims.IsAdmin, "true", System.Security.Claims.ClaimValueTypes.Boolean));
 
                 if (!userResult.Succeeded || !roleResult.Succeeded || !claimResult.Succeeded)
                 {

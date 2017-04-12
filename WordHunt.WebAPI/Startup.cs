@@ -43,6 +43,8 @@ namespace WordHunt.WebAPI
                 .AddEntityFrameworkStores<AppDbContext>();
             services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
             services.AddCors();
+            services.RegisterPolicies();
+
 
             //Add application/business logic services
             services.RegisterWebApiDependencies();

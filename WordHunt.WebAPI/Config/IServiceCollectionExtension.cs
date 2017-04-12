@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WordHunt.Config;
+using WordHunt.Config.Auth;
 using WordHunt.Data;
 using WordHunt.WebAPI.Auth.Token;
 
@@ -23,6 +24,24 @@ namespace WordHunt.WebAPI.Config
             services.AddScoped<ISeedConfiguration, WordHuntConfiguration>();
             services.AddScoped<IDBInitializer, DBInitializer>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Register policies for the system to authorize requests.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection RegisterPolicies(this IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(SystemPolicies.AdminOnly, policy =>
+                {
+                    policy.RequireClaim(SystemClaims.IsAdmin, "true");
+                });
+            });
 
             return services;
         }
