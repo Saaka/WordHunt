@@ -25,7 +25,10 @@ namespace WordHunt.WebAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<Word>> Get()
         {
-            return await wordProvider.GetWords("PL");
+            return await wordProvider.GetWordList(new WordListFilter()
+            {
+                LanguageId = 1
+            });
         }
 
         // GET api/values/5

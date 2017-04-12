@@ -18,25 +18,36 @@ namespace WordHunt.Data.Services.Words
             this.context = context;
         }
 
-        public async Task<IEnumerable<Word>> GetWords(string languageCode, long categoryId = 0)
+        public async Task<IEnumerable<Word>> GetWordList(WordListFilter filter)
         {
             var query = from word in context.Words.AsQueryable()
-
-                        join lang in context.Languages.AsQueryable()
-                            on word.LanguageId equals lang.Id
 
                         join c in context.Categories.AsQueryable()
                             on word.CategoryId equals c.Id into cv
                         from category in cv.DefaultIfEmpty()
 
-                        where lang.Code == languageCode
+                        where word.LanguageId == filter.LanguageId
+                              && (filter.CategoryId == null || word.CategoryId == filter.CategoryId)
+                              && (filter.Value == null || filter.Value == "" || word.Value.Contains(filter.Value) || filter.Value.Contains(word.Value))
+
                         select new Word
                         {
                             Id = word.Id,
-                            Name = word.Value,
+                            Value = word.Value,
                             CategoryId = word.CategoryId,
                             Category = category.Name
                         };
+
+            if (filter.OrderByDesc)
+                query = query.OrderByDescending(x => x.Value);
+            else
+                query = query.OrderBy(x => x.Value);
+
+            if (filter.PageSize > 0)
+            {
+                var skipValue = (filter.Page - 1) * filter.PageSize;
+                query = query.Skip(skipValue).Take(filter.PageSize);
+            }
 
             var words = await query.ToListAsync();
 
