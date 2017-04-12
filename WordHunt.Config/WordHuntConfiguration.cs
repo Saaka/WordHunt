@@ -24,5 +24,9 @@ namespace WordHunt.Config
         public string AdminEmail => config["data:adminEmail"].ToString();
         public string AdminName => config["data:adminName"].ToString();
         public string AdminPassword => config["data:adminPassword"].ToString();
+
+        public string UserEmail => config["data:userEmail"].ToString();
+        public string UserName => config["data:userName"].ToString();
+        public string UserPassword => config["data:userPassword"].ToString();
     }
 }

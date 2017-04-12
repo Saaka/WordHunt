@@ -9,5 +9,9 @@ namespace WordHunt.Config
         string AdminEmail { get; }
         string AdminName { get; }
         string AdminPassword { get; }
+
+        string UserEmail { get; }
+        string UserName { get; }
+        string UserPassword { get; }
     }
 }

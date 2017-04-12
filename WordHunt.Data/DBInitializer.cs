@@ -85,31 +85,47 @@ namespace WordHunt.Data
 
         private async Task CreateUserAndRoles()
         {
-            var user = await userManager.FindByEmailAsync(seedConfig.AdminEmail);
+            await CreateAdminRole();
+            await CreateUser(seedConfig.AdminEmail, seedConfig.AdminName, seedConfig.AdminPassword, true);
+            await CreateUser(seedConfig.UserEmail, seedConfig.UserName, seedConfig.UserPassword, false);
+        }
 
+        private async Task CreateUser(string email, string name, string password, bool isAdmin)
+        {
+            var user = await userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
-                {
-                    var role = new IdentityRole(SystemRoles.Admin);
-                    role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
-                    await roleManager.CreateAsync(role);
-                }
-
                 user = new IdentityUser()
                 {
-                    UserName = seedConfig.AdminName,
-                    Email = seedConfig.AdminEmail
+                    UserName = name,
+                    Email = email
                 };
 
-                var userResult = await userManager.CreateAsync(user, seedConfig.AdminPassword);
-                var roleResult = await userManager.AddToRoleAsync(user, SystemRoles.Admin);
-                var claimResult = await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(SystemClaims.IsAdmin, "true", System.Security.Claims.ClaimValueTypes.Boolean));
-
-                if (!userResult.Succeeded || !roleResult.Succeeded || !claimResult.Succeeded)
+                var userResult = await userManager.CreateAsync(user, password);
+                if (!userResult.Succeeded)
                 {
                     throw new InvalidOperationException("Failed to build user and roles");
                 }
+
+                if (isAdmin)
+                {
+                    var roleResult = await userManager.AddToRoleAsync(user, SystemRoles.Admin);
+                    var claimResult = await userManager.AddClaimAsync(user, new System.Security.Claims.Claim(SystemClaims.IsAdmin, "true", System.Security.Claims.ClaimValueTypes.Boolean));
+                    if (!roleResult.Succeeded || !claimResult.Succeeded)
+                    {
+                        throw new InvalidOperationException("Failed to build user and roles");
+                    }
+                }
+            }
+        }
+
+        private async Task CreateAdminRole()
+        {
+            if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
+            {
+                var role = new IdentityRole(SystemRoles.Admin);
+                role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
+                await roleManager.CreateAsync(role);
             }
         }
     }
