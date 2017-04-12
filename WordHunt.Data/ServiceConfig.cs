@@ -13,6 +13,7 @@ namespace WordHunt.Data
         public static IServiceCollection ConfigureDataServices(this IServiceCollection services)
         {
             services.AddScoped<IWordProvider, WordProvider>();
+            services.AddScoped<IWordProviderValidator, WordProviderValidator>();
 
             return services;
         }

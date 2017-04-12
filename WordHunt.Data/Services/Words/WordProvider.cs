@@ -11,47 +11,70 @@ namespace WordHunt.Data.Services.Words
 {
     public class WordProvider : IWordProvider
     {
-        private AppDbContext context;
+        private readonly AppDbContext context;
+        private readonly IWordProviderValidator wordProviderValidator;
 
-        public WordProvider(AppDbContext context)
+        public WordProvider(AppDbContext context,
+            IWordProviderValidator wordProviderValidator)
         {
             this.context = context;
+            this.wordProviderValidator = wordProviderValidator;
         }
 
-        public async Task<IEnumerable<Word>> GetWordList(WordListFilter filter)
+        public async Task<GetWordListResult> GetWordList(WordListRequest request)
         {
-            var query = from word in context.Words.AsQueryable()
-
-                        join c in context.Categories.AsQueryable()
-                            on word.CategoryId equals c.Id into cv
-                        from category in cv.DefaultIfEmpty()
-
-                        where word.LanguageId == filter.LanguageId
-                              && (filter.CategoryId == null || word.CategoryId == filter.CategoryId)
-                              && (filter.Value == null || filter.Value == "" || word.Value.Contains(filter.Value) || filter.Value.Contains(word.Value))
-
-                        select new Word
-                        {
-                            Id = word.Id,
-                            Value = word.Value,
-                            CategoryId = word.CategoryId,
-                            Category = category.Name
-                        };
-
-            if (filter.OrderByDesc)
-                query = query.OrderByDescending(x => x.Value);
-            else
-                query = query.OrderBy(x => x.Value);
-
-            if (filter.PageSize > 0)
+            try
             {
-                var skipValue = (filter.Page - 1) * filter.PageSize;
-                query = query.Skip(skipValue).Take(filter.PageSize);
+                var validatorResult = wordProviderValidator.ValidateRequest(request);
+                if (!validatorResult.IsSuccess)
+                    return new GetWordListResult(validatorResult.ErrorMessage);
+
+                var query = from word in context.Words
+
+                            join cat in context.Categories
+                                on word.CategoryId equals cat.Id into categories
+                            from category in categories.DefaultIfEmpty()
+
+                            where word.LanguageId == request.LanguageId
+                                  && (request.CategoryId == null || word.CategoryId == request.CategoryId)
+                                  && (request.Value == null || request.Value == "" || word.Value.Contains(request.Value) || request.Value.Contains(word.Value))
+
+                            select new Word
+                            {
+                                Id = word.Id,
+                                Value = word.Value,
+                                CategoryId = word.CategoryId,
+                                Category = category != null ? category.Name : null
+                            };
+
+                var count = await query.CountAsync();
+
+                if (request.OrderByDesc)
+                    query = query.OrderByDescending(x => x.Value);
+                else
+                    query = query.OrderBy(x => x.Value);
+
+                if (request.PageSize > 0)
+                {
+                    var skipValue = (request.Page - 1) * request.PageSize;
+                    query = query.Skip(skipValue).Take(request.PageSize);
+                }
+
+
+                var words = await query.ToListAsync();
+
+                return new GetWordListResult()
+                {
+                    Count = count,
+                    Page = request.Page,
+                    PageCount = (int)Math.Ceiling((decimal)count / (decimal)request.PageSize),
+                    WordList = words
+                };
             }
-
-            var words = await query.ToListAsync();
-
-            return words;
+            catch (Exception ex)
+            {
+                return new GetWordListResult(ex.Message);
+            }
         }
     }
 }

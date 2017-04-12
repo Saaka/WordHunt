@@ -8,6 +8,6 @@ namespace WordHunt.DataInterfaces.Words
 {
     public interface IWordProvider
     {
-        Task<IEnumerable<Word>> GetWordList(WordListFilter filter); 
+        Task<GetWordListResult> GetWordList(WordListRequest request); 
     }
 }

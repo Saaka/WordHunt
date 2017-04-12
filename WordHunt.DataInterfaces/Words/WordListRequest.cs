@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WordHunt.DataInterfaces.Words
 {
-    public class WordListFilter
+    public class WordListRequest
     {
         public long LanguageId { get; set; }
         public long? CategoryId { get; set; }

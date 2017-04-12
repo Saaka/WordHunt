@@ -23,11 +23,13 @@ namespace WordHunt.WebAPI.Controllers
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpGet]
-        public async Task<IEnumerable<Word>> Get()
+        public async Task<GetWordListResult> Get()
         {
-            return await wordProvider.GetWordList(new WordListFilter()
+            return await wordProvider.GetWordList(new WordListRequest()
             {
-                LanguageId = 1
+                LanguageId = 1, 
+                Page = 1,
+                PageSize = 5
             });
         }
 
