@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Words.DTO.Access
+namespace WordHunt.DataInterfaces.Words.DTO
 {
     public class Word
     {

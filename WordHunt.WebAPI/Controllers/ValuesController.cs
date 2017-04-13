@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using WordHunt.Data;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.DataInterfaces.Words;
-using WordHunt.DataInterfaces.Words.DTO.Access;
 using WordHunt.Config.Auth;
+using WordHunt.DataInterfaces.Words.Result;
+using WordHunt.DataInterfaces.Words.Request;
 
 namespace WordHunt.WebAPI.Controllers
 {

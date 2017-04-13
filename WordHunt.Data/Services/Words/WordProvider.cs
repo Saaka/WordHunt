@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.DataInterfaces.Words;
-using WordHunt.DataInterfaces.Words.DTO.Access;
+using WordHunt.DataInterfaces.Words.DTO;
+using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.DataInterfaces.Words.Result;
 
 namespace WordHunt.Data.Services.Words
 {
@@ -19,6 +21,40 @@ namespace WordHunt.Data.Services.Words
         {
             this.context = context;
             this.wordProviderValidator = wordProviderValidator;
+        }
+        
+        public async Task<GetWordResult> GetWord(long wordId)
+        {
+            try
+            {
+                var query = from word in context.Words
+                            join cat in context.Categories
+                                on word.CategoryId equals cat.Id into categories
+                            from category in categories.DefaultIfEmpty()
+
+                            where word.Id == wordId
+
+                            select new Word
+                            {
+                                Id = word.Id,
+                                Value = word.Value,
+                                CategoryId = word.CategoryId,
+                                Category = category != null ? category.Name : null
+                            };
+
+                var wordResult = await query.SingleOrDefaultAsync();
+                if (wordResult == null)
+                    return new GetWordResult($"Can't find word with id {wordId}");
+
+                return new GetWordResult()
+                {
+                    Word = wordResult
+                };
+            }
+            catch(Exception ex)
+            {
+                return new GetWordResult(ex.Message);
+            }
         }
 
         public async Task<GetWordListResult> GetWordList(WordListRequest request)

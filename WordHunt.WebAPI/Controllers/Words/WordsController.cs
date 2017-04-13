@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using WordHunt.DataInterfaces.Words;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.Config.Auth;
+using WordHunt.DataInterfaces.Words.Result;
+using WordHunt.DataInterfaces.Words.Request;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,18 +16,21 @@ namespace WordHunt.WebAPI.Controllers.Words
     [Route("api/[controller]")]
     public class WordsController : Controller
     {
-        private IWordProvider wordProvider;
+        private readonly IWordProvider wordProvider;
+        private readonly IWordCreator wordCreator;
 
-        public WordsController(IWordProvider wordProvider)
+        public WordsController(IWordProvider wordProvider,
+            IWordCreator wordCreator)
         {
             this.wordProvider = wordProvider;
+            this.wordCreator = wordCreator;
         }
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("list")]
-        public Task<GetWordListResult> GetWordList([FromBody]WordListRequest request)
+        public async Task<GetWordListResult> GetWordList([FromBody]WordListRequest request)
         {
-            return wordProvider.GetWordList(request);
+            return await wordProvider.GetWordList(request);
         }
 
         // GET api/values/5
@@ -35,16 +40,11 @@ namespace WordHunt.WebAPI.Controllers.Words
             return "value";
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [Authorize(Policy = SystemPolicies.AdminOnly)]
+        [HttpPost("add")]
+        public async Task<CreateWordResult> CreateWord([FromBody]WordCreateRequest request)
         {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
+            return await wordCreator.CreateWord(request);
         }
 
         // DELETE api/values/5

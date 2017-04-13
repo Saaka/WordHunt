@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Words
+namespace WordHunt.DataInterfaces.Words.Request
 {
     public class WordListRequest
     {

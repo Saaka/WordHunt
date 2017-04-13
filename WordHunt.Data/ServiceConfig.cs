@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WordHunt.Data.Services.Words;
+using WordHunt.Data.Services.Words.Mapper;
 using WordHunt.DataInterfaces.Words;
 
 namespace WordHunt.Data
@@ -14,7 +15,10 @@ namespace WordHunt.Data
         {
             services.AddScoped<IWordProvider, WordProvider>();
             services.AddScoped<IWordProviderValidator, WordProviderValidator>();
-
+            services.AddScoped<IWordCreator, WordCreator>();
+            services.AddScoped<IWordCreatorValidator, WordCreatorValidator>();
+            services.AddScoped<IWordMapper, WordMapper>();
+            
             return services;
         }
     }

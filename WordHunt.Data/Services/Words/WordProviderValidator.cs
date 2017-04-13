@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using WordHunt.Data.Services.Base;
 using WordHunt.DataInterfaces.Words;
+using WordHunt.DataInterfaces.Words.Request;
 
 namespace WordHunt.Data.Services.Words
 {

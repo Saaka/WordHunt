@@ -4,9 +4,8 @@ using WordHunt.DataInterfaces.Words.Result;
 
 namespace WordHunt.DataInterfaces.Words
 {
-    public interface IWordProvider
+    public interface IWordCreator
     {
-        Task<GetWordListResult> GetWordList(WordListRequest request);
-        Task<GetWordResult> GetWord(long wordId);
+        Task<CreateWordResult> CreateWord(WordCreateRequest wordCreate);
     }
 }

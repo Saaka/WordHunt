@@ -4,15 +4,15 @@ using System.Text;
 
 namespace WordHunt.DataInterfaces.Common
 {
-    public class GetListResult
+    public class RequestResult
     {
-        public GetListResult(string error)
+        public RequestResult(string error)
         {
             IsSuccess = false;
             this.Error = error;
         }
 
-        public GetListResult()
+        public RequestResult()
         {
             IsSuccess = true;
         }
