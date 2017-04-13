@@ -18,5 +18,13 @@ namespace WordHunt.Data.Services.Words.Mapper
                 Value = wordCreateRequest.Value
             };
         }
+
+        public Entities.Word MapWord(Entities.Word word, WordUpdateRequest updateRequest)
+        {
+            word.CategoryId = updateRequest.CategoryId;
+            word.Value = updateRequest.Value;
+
+            return word;
+        }
     }
 }

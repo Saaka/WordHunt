@@ -18,7 +18,9 @@ namespace WordHunt.Data
             services.AddScoped<IWordCreator, WordCreator>();
             services.AddScoped<IWordCreatorValidator, WordCreatorValidator>();
             services.AddScoped<IWordMapper, WordMapper>();
-            
+            services.AddScoped<IWordUpdater, WordUpdater>();
+            services.AddScoped<IWordUpdaterValidator, WordUpdaterValidator>();
+
             return services;
         }
     }

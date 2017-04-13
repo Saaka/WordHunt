@@ -21,10 +21,10 @@ namespace WordHunt.Data.Services.Base
         public ValidatorResult(string error)
         {
             IsSuccess = false;
-            ErrorMessage = error;
+            Error = error;
         }
 
         public bool IsSuccess { get; set; }
-        public string ErrorMessage { get; set; }
+        public string Error { get; set; }
     }
 }

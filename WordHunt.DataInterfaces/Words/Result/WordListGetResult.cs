@@ -6,10 +6,10 @@ using WordHunt.DataInterfaces.Words.DTO;
 
 namespace WordHunt.DataInterfaces.Words.Result
 {
-    public class GetWordListResult : RequestResult
+    public class WordListGetResult : RequestResult
     {
-        public GetWordListResult() : base() { }
-        public GetWordListResult(string error) : base(error) { }
+        public WordListGetResult() : base() { }
+        public WordListGetResult(string error) : base(error) { }
 
         public int Count { get; set; }
         public int Page { get; set; }

@@ -24,7 +24,7 @@ namespace WordHunt.WebAPI.Controllers
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpGet]
-        public async Task<GetWordListResult> Get()
+        public async Task<WordListGetResult> Get()
         {
             return await wordProvider.GetWordList(new WordListRequest()
             {

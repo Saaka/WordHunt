@@ -27,13 +27,13 @@ namespace WordHunt.Data.Services.Words
             this.wordProvider = wordProvider;
         }
 
-        public async Task<CreateWordResult> CreateWord(WordCreateRequest createRequest)
+        public async Task<WordCreateResult> CreateWord(WordCreateRequest createRequest)
         {
             try
             {
                 var validatorResult = await validator.ValidateRequest(createRequest);
                 if (!validatorResult.IsSuccess)
-                    return new CreateWordResult(validatorResult.ErrorMessage);
+                    return new WordCreateResult(validatorResult.Error);
 
                 var newWord = mapper.MapCreateRequest(createRequest);
                 await context.AddAsync(newWord);
@@ -42,16 +42,16 @@ namespace WordHunt.Data.Services.Words
                 var getWordResult = await wordProvider.GetWord(newWord.Id);
 
                 if (!getWordResult.IsSuccess)
-                    return new CreateWordResult(getWordResult.Error);
+                    return new WordCreateResult(getWordResult.Error);
 
-                return new CreateWordResult()
+                return new WordCreateResult()
                 {
                     Word = getWordResult.Word
                 };                
             }
             catch(Exception ex)
             {
-                return new CreateWordResult(ex.Message);
+                return new WordCreateResult(ex.Message);
             }
         }
     }

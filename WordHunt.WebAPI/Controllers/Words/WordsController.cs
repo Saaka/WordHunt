@@ -18,17 +18,20 @@ namespace WordHunt.WebAPI.Controllers.Words
     {
         private readonly IWordProvider wordProvider;
         private readonly IWordCreator wordCreator;
+        private readonly IWordUpdater wordUpdater;
 
         public WordsController(IWordProvider wordProvider,
-            IWordCreator wordCreator)
+            IWordCreator wordCreator,
+            IWordUpdater wordUpdater)
         {
             this.wordProvider = wordProvider;
             this.wordCreator = wordCreator;
+            this.wordUpdater = wordUpdater;
         }
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("list")]
-        public async Task<GetWordListResult> GetWordList([FromBody]WordListRequest request)
+        public async Task<WordListGetResult> GetWordList([FromBody]WordListRequest request)
         {
             return await wordProvider.GetWordList(request);
         }
@@ -42,9 +45,16 @@ namespace WordHunt.WebAPI.Controllers.Words
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("add")]
-        public async Task<CreateWordResult> CreateWord([FromBody]WordCreateRequest request)
+        public async Task<WordCreateResult> CreateWord([FromBody]WordCreateRequest request)
         {
             return await wordCreator.CreateWord(request);
+        }
+
+        [Authorize(Policy = SystemPolicies.AdminOnly)]
+        [HttpPost("update")]
+        public async Task<WordUpdateResult> UpdateWord([FromBody]WordUpdateRequest request)
+        {
+            return await wordUpdater.UpdateWord(request);
         }
 
         // DELETE api/values/5

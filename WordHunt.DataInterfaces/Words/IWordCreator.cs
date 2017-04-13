@@ -6,6 +6,6 @@ namespace WordHunt.DataInterfaces.Words
 {
     public interface IWordCreator
     {
-        Task<CreateWordResult> CreateWord(WordCreateRequest wordCreate);
+        Task<WordCreateResult> CreateWord(WordCreateRequest wordCreate);
     }
 }

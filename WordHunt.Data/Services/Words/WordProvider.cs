@@ -23,7 +23,7 @@ namespace WordHunt.Data.Services.Words
             this.wordProviderValidator = wordProviderValidator;
         }
         
-        public async Task<GetWordResult> GetWord(long wordId)
+        public async Task<WordGetResult> GetWord(long wordId)
         {
             try
             {
@@ -44,26 +44,26 @@ namespace WordHunt.Data.Services.Words
 
                 var wordResult = await query.SingleOrDefaultAsync();
                 if (wordResult == null)
-                    return new GetWordResult($"Can't find word with id {wordId}");
+                    return new WordGetResult($"Can't find word with id {wordId}");
 
-                return new GetWordResult()
+                return new WordGetResult()
                 {
                     Word = wordResult
                 };
             }
             catch(Exception ex)
             {
-                return new GetWordResult(ex.Message);
+                return new WordGetResult(ex.Message);
             }
         }
 
-        public async Task<GetWordListResult> GetWordList(WordListRequest request)
+        public async Task<WordListGetResult> GetWordList(WordListRequest request)
         {
             try
             {
                 var validatorResult = wordProviderValidator.ValidateRequest(request);
                 if (!validatorResult.IsSuccess)
-                    return new GetWordListResult(validatorResult.ErrorMessage);
+                    return new WordListGetResult(validatorResult.Error);
 
                 var query = from word in context.Words
 
@@ -99,7 +99,7 @@ namespace WordHunt.Data.Services.Words
 
                 var words = await query.ToListAsync();
 
-                return new GetWordListResult()
+                return new WordListGetResult()
                 {
                     Count = count,
                     Page = request.Page,
@@ -109,7 +109,7 @@ namespace WordHunt.Data.Services.Words
             }
             catch (Exception ex)
             {
-                return new GetWordListResult(ex.Message);
+                return new WordListGetResult(ex.Message);
             }
         }
     }

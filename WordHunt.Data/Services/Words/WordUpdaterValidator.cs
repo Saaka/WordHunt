@@ -1,0 +1,45 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WordHunt.Data.Services.Base;
+using WordHunt.DataInterfaces.Words.Request;
+
+namespace WordHunt.Data.Services.Words
+{
+    public interface IWordUpdaterValidator
+    {
+        Task<ValidatorResult> ValidateRequest(WordUpdateRequest request);
+    }
+
+    public class WordUpdaterValidator : IWordUpdaterValidator
+    {
+        private readonly AppDbContext context;
+
+        public WordUpdaterValidator(AppDbContext context)
+        {
+            this.context = context;
+        }
+
+        public async Task<ValidatorResult> ValidateRequest(WordUpdateRequest request)
+        {
+            if (request.WordId <= 0)
+                return new ValidatorResult("Must specify word id");
+            if (request.LanguageId <= 0)
+                return new ValidatorResult("Must specify word language");
+            if (string.IsNullOrEmpty(request.Value))
+                return new ValidatorResult("Word must have a value");
+            if (await WordValueExists(request.WordId, request.WordId, request.Value))
+                return new ValidatorResult("Word already exists");
+
+            return new ValidatorResult();
+        }
+
+        private async Task<bool> WordValueExists(long languageId, long wordId, string value)
+        {
+            return await context.Words.Where(x => x.Id != wordId && x.LanguageId == languageId && x.Value.ToLower() == value.ToLower()).AnyAsync();
+        }
+    }
+}
