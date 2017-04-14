@@ -9,7 +9,7 @@ namespace WordHunt.DataInterfaces.Categories
 {
     public interface ICategoryProvider
     {
-        Task<CategoryListResult> GetWordList(CategoryListRequest request);
-        Task<WordGetResult> GetWord(long wordId);
+        Task<CategoryListResult> GetCategoryList(CategoryListRequest request);
+        Task<CategoryGetResult> GetCategory(long categoryId);
     }
 }

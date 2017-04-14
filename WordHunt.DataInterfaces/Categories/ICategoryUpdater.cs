@@ -9,6 +9,6 @@ namespace WordHunt.DataInterfaces.Categories
 {
     public interface ICategoryUpdater
     {
-        Task<CategoryUpdateResult> CreateCategory(CategoryUpdateRequest request);
+        Task<CategoryUpdateResult> UpdateCategory(CategoryUpdateRequest request);
     }
 }

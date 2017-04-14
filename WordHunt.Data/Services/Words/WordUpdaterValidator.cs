@@ -27,8 +27,6 @@ namespace WordHunt.Data.Services.Words
         {
             if (request.Id <= 0)
                 return new ValidatorResult("Must specify word id");
-            if (request.LanguageId <= 0)
-                return new ValidatorResult("Must specify word language");
             if (string.IsNullOrEmpty(request.Value))
                 return new ValidatorResult("Word must have a value");
             if (await WordValueExists(request.Id, request.Id, request.Value))

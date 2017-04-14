@@ -6,7 +6,7 @@ namespace WordHunt.DataInterfaces.Words
 {
     public interface IWordProvider
     {
-        Task<WordListGetResult> GetWordList(WordListRequest request);
+        Task<WordListGetResult> GetWordList(WordListGetRequest request);
         Task<WordGetResult> GetWord(long wordId);
     }
 }

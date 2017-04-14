@@ -14,4 +14,3 @@ namespace WordHunt.DataInterfaces.Categories.Result
         public Category Category{ get; set; }
     }
 }
-}

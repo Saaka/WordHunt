@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WordHunt.DataInterfaces.Words;
 using Microsoft.AspNetCore.Authorization;
@@ -31,7 +28,7 @@ namespace WordHunt.WebAPI.Controllers.Words
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("list")]
-        public async Task<WordListGetResult> GetWordList([FromBody]WordListRequest request)
+        public async Task<WordListGetResult> GetWordList([FromBody]WordListGetRequest request)
         {
             return await wordProvider.GetWordList(request);
         }

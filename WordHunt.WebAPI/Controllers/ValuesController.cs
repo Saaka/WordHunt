@@ -26,7 +26,7 @@ namespace WordHunt.WebAPI.Controllers
         [HttpGet]
         public async Task<WordListGetResult> Get()
         {
-            return await wordProvider.GetWordList(new WordListRequest()
+            return await wordProvider.GetWordList(new WordListGetRequest()
             {
                 LanguageId = 1, 
                 Page = 1,

@@ -57,7 +57,7 @@ namespace WordHunt.Data.Services.Words
             }
         }
 
-        public async Task<WordListGetResult> GetWordList(WordListRequest request)
+        public async Task<WordListGetResult> GetWordList(WordListGetRequest request)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace WordHunt.Data.Services.Words
                             from category in categories.DefaultIfEmpty()
 
                             where word.LanguageId == request.LanguageId
-                                  && (request.CategoryId == null || word.CategoryId == request.CategoryId)
+                                  && (request.CategoryId == null || word.CategoryId == request.CategoryId ||(request.CategoryId == 0 && word.CategoryId == null))
                                   && (request.Value == null || request.Value == "" || word.Value.Contains(request.Value) || request.Value.Contains(word.Value))
 
                             select new Word
