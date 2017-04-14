@@ -37,15 +37,15 @@ namespace WordHunt.Data.Services.Words
                 if (!validatorResult.IsSuccess)
                     return new WordUpdateResult(validatorResult.Error);
 
-                var toUpdate = await context.Words.SingleOrDefaultAsync(x => x.Id == request.WordId);
+                var toUpdate = await context.Words.SingleOrDefaultAsync(x => x.Id == request.Id);
                 if (toUpdate == null)
-                    return new WordUpdateResult($"Can't fine word with id {request.WordId}");
+                    return new WordUpdateResult($"Can't fine word with id {request.Id}");
 
                 toUpdate = mapper.MapWord(toUpdate, request);
 
                 await context.SaveChangesAsync();
 
-                var getWordResult = await wordProvider.GetWord(request.WordId);
+                var getWordResult = await wordProvider.GetWord(request.Id);
                 if (!getWordResult.IsSuccess)
                     return new WordUpdateResult(getWordResult.Error);
                 
