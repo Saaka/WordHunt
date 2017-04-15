@@ -6,7 +6,7 @@ import { UserModel } from './user.model';
 @Injectable()
 export class UserService {
 
-    private user: UserModel;
+    private activeUser: UserModel;
 
     constructor(private storage: TokenStorageService,
         private tokenParser: JwtTokenUserParser) {
@@ -18,19 +18,19 @@ export class UserService {
     }
 
     isLoggedIn() {
-        return this.user.loggedIn;
+        return this.activeUser.loggedIn;
     }
 
     userName() {
-        return this.user.name;
+        return this.activeUser.name;
     }
 
     userEmail() {
-        return this.user.email;
+        return this.activeUser.email;
     }
 
     isAdmin() {
-        return this.user.admin;
+        return this.activeUser.admin;
     }
 
     validateLoginState() {
@@ -38,8 +38,8 @@ export class UserService {
             .map(response => {
 
                 if (response) {
-                    this.user = this.tokenParser.getUserFromToken(response);
-                    if (!this.user.loggedIn)
+                    this.activeUser = this.tokenParser.getUserFromToken(response);
+                    if (!this.activeUser.loggedIn)
                         this.loginFailed();
                 }
                 else {
@@ -52,8 +52,8 @@ export class UserService {
     }
 
     initData() {
-        this.user = new UserModel();
-        this.user.loggedIn = false;
+        this.activeUser = new UserModel();
+        this.activeUser.loggedIn = false;
     }
 
     loginFailed() {

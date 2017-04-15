@@ -1,13 +1,13 @@
 ﻿import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import { UserService } from './user.service';
 
 @Injectable()
-export class ContactResolve implements Resolve<boolean> {
+export class StartupGuard implements CanActivate {
 
     constructor(private userService: UserService) { }
 
-    resolve(route: ActivatedRouteSnapshot) {
+    canActivate() {
 
         return this.userService.validateLoginState()
             .map(res => {

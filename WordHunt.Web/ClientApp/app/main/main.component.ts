@@ -1,4 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'main',
@@ -6,8 +7,8 @@
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-    
+
     ngOnInit() {
-        console.log('*** main.component *** INITIALIZED');
+        console.log('main.component OnInit');
     }
 }

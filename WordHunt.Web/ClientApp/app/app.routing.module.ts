@@ -9,10 +9,13 @@ import { UserService } from './core/user.service';
 
 import { ConfigService } from './config/app.config.service';
 
+import { StartupGuard } from './core/startup.service';
+
 const routes: Routes = [
     {
         path: '',
         component: MainComponent,
+        canActivate: [StartupGuard],
         children: [
             {
                 path: '',
@@ -64,7 +67,8 @@ const routes: Routes = [
         LoggedInGuard,
         AdminAuthGuard,
         UserService,
-        ConfigService
+        ConfigService,
+        StartupGuard
     ]
 })
 export class AppRoutingModule { }

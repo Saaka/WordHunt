@@ -15,12 +15,15 @@ export class AdminAuthGuard implements CanActivate {
     canActivate(next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot) {
 
-        if (this.userService.isAdmin()) {
-            return true;
-        }
-        else {
-            this.router.navigate(['/main']);
-        }
-        return false;
+        return this.userService.validateLoginState()
+            .map(res => {
+                if (this.userService.isAdmin()) {
+                    return true;
+                }
+                else {
+                    this.router.navigate(['/main']);
+                }
+                return false;
+            });
     }
 }
