@@ -11,10 +11,10 @@ export class UserService {
     constructor(private storage: TokenStorageService,
         private tokenParser: JwtTokenUserParser) {
         this.initData();
-        this.validateLoginState()
-            .subscribe(response => {
-                console.log(`User is logged in: ${response}`);
-            });
+        //this.validateLoginState()
+        //    .subscribe(response => {
+        //        console.log(`User is logged in: ${response}`);
+        //    });
     }
 
     isLoggedIn() {
