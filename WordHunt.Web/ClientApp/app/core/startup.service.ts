@@ -11,7 +11,7 @@ export class StartupGuard implements CanActivate {
 
         return this.userService.validateLoginState()
             .map(res => {
-                return res;
+                return true;
             });
     }
 }

@@ -14,10 +14,6 @@ export class UserService {
     constructor(private storage: TokenStorageService,
         private tokenParser: JwtTokenUserParser) {
         this.initData();
-        //this.validateLoginState()
-        //    .subscribe(response => {
-        //        console.log(`User is logged in: ${response}`);
-        //    });
     }
 
     isLoggedIn() {
@@ -42,6 +38,7 @@ export class UserService {
             return this.storage.loadToken()
                 .map(response => {
                     if (response) {
+                        this.isLoaded = true;
                         this.activeUser = this.tokenParser.getUserFromToken(response);
                         if (!this.activeUser.loggedIn)
                             this.loginFailed();
@@ -51,7 +48,6 @@ export class UserService {
                     }
 
                     console.log('login state validated');
-                    this.isLoaded = true;
                     return this.isLoggedIn();
                 });
         }
