@@ -16,7 +16,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: MainMenuComponent,
+                component: MainMenuComponent
             },
             {
                 path: 'main',
@@ -63,7 +63,7 @@ const routes: Routes = [
         AuthGuard,
         LoggedInGuard,
         AdminAuthGuard,
-        UserService, 
+        UserService,
         ConfigService
     ]
 })
