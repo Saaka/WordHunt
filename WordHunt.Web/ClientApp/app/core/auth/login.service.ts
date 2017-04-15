@@ -20,7 +20,7 @@ export class LoginService {
             })
             .mergeMap(response => {
                 return this.userService
-                    .validateLoginState();
+                    .validateLoginState(true);
             })
             .catch(this.handleError);
     }
@@ -34,7 +34,7 @@ export class LoginService {
         return this.tokenStorage
             .deleteToken()
             .mergeMap(response => {
-                return this.userService.validateLoginState();
+                return this.userService.validateLoginState(true);
             });
     }
 }
