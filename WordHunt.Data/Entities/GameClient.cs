@@ -5,13 +5,11 @@ using WordHunt.DataInterfaces.Enums.Game;
 
 namespace WordHunt.Data.Entities
 {
-    public class GameMove
+    public class GameClient
     {
         public long Id { get; set; }
         public long GameId { get; set; }
-        public long FieldId { get; set; }
-        public MoveType Type { get; set; }
-        public long TeamId { get; set; }
-        public long ClientId { get; set; }
+        public ClientType Type { get; set; }
+        public long? TeamId { get; set; }
     }
 }
