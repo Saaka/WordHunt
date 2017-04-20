@@ -27,7 +27,7 @@ export class LoginComponent implements OnDestroy {
         this.loading = true;
 
         this.loginSub = this.loginService
-            .login(this.model.username, this.model.password)
+            .login(this.model.userName, this.model.password)
             .catch((error) => {
                 this.loading = false;
 

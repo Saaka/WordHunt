@@ -11,9 +11,9 @@ export class LoginService {
         private tokenAuth: TokenAuthService,
         private tokenStorage: TokenStorageService) { }
 
-    login(email: string, password: string) {
+    login(userName: string, password: string) {
         return this.tokenAuth
-            .getToken(email, password)
+            .getToken(userName, password)
             .mergeMap(response => {
                 return this.tokenStorage
                     .saveToken(response.token);

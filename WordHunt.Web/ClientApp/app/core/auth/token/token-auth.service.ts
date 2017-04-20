@@ -4,6 +4,7 @@ import { Http, Response } from '@angular/http';
 import { ConfigService } from '../../../config/app.config.service';
 import { TokenResponse } from './token-response.model';
 import { Observable } from 'rxjs/Observable';
+import { RequestOptionsArgs } from '@angular/http';
 
 @Injectable()
 export class TokenAuthService {
@@ -11,10 +12,10 @@ export class TokenAuthService {
     constructor(private http: Http,
         private config: ConfigService) { }
 
-    getToken(email: string, password: string): Observable<TokenResponse> {
+    getToken(userName: string, password: string): Observable<TokenResponse> {
 
         return this.http
-            .post(this.config.ApiUrl + 'auth/token', this.createBody(email, password))
+            .post(this.config.ApiUrl + 'auth/token', this.createBody(userName, password))
             .map((response: Response) => {
                 let tokenResponse = <TokenResponse>response.json();
 
@@ -23,9 +24,9 @@ export class TokenAuthService {
             .catch(this.handleError);
     }
 
-    private createBody(email: string, password: string) {
+    private createBody(userName: string, password: string) {
         return {
-            "email": email,
+            "userName": userName,
             "password": password
         };
     }
