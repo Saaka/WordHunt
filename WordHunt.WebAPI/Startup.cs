@@ -8,6 +8,7 @@ using WordHunt.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WordHunt.WebAPI.Config;
 using Swashbuckle.AspNetCore.Swagger;
+using WordHunt.Data.Initializer;
 
 namespace WordHunt.WebAPI
 {

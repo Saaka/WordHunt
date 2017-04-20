@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 using WordHunt.Config;
 using WordHunt.Config.Auth;
 using WordHunt.Data.Entities;
+using WordHunt.Data.Entities.Identity;
+using WordHunt.Data.Identity;
 
-namespace WordHunt.Data
+namespace WordHunt.Data.Initializer
 {
+    public interface IAppDbInitializerContext : IAppDbContext
+    {
+        Task MigrateAsync();
+    }
+
     public interface IDBInitializer
     {
         Task InitDatabase();
@@ -19,14 +26,14 @@ namespace WordHunt.Data
 
     public class DBInitializer : IDBInitializer
     {
-        private AppDbContext context;
-        private RoleManager<IdentityRole> roleManager;
-        private UserManager<IdentityUser> userManager;
+        private IAppDbInitializerContext context;
+        private IAppRoleManager roleManager;
+        private IAppUserManager userManager;
         private ISeedConfiguration seedConfig;
 
-        public DBInitializer(AppDbContext context,
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
+        public DBInitializer(IAppDbInitializerContext context,
+            IAppUserManager userManager,
+            IAppRoleManager roleManager,
             ISeedConfiguration seedConfig)
         {
             this.context = context;
@@ -37,7 +44,7 @@ namespace WordHunt.Data
 
         public async Task InitDatabase()
         {
-            await context.Database.MigrateAsync();
+            await context.MigrateAsync();
 
             await CreateUserAndRoles();
 
@@ -86,16 +93,16 @@ namespace WordHunt.Data
         private async Task CreateUserAndRoles()
         {
             await CreateAdminRole();
-            await CreateUser(seedConfig.AdminEmail, seedConfig.AdminName, seedConfig.AdminPassword, true);
-            await CreateUser(seedConfig.UserEmail, seedConfig.UserName, seedConfig.UserPassword, false);
+            await CreateUser(seedConfig.AdminName, seedConfig.AdminEmail, seedConfig.AdminPassword, true);
+            await CreateUser(seedConfig.UserName, seedConfig.UserEmail, seedConfig.UserPassword, false);
         }
 
-        private async Task CreateUser(string email, string name, string password, bool isAdmin)
+        private async Task CreateUser(string name, string email, string password, bool isAdmin)
         {
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindUserByNameAsync(email);
             if (user == null)
             {
-                user = new IdentityUser()
+                user = new User()
                 {
                     UserName = name,
                     Email = email
@@ -123,8 +130,8 @@ namespace WordHunt.Data
         {
             if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
             {
-                var role = new IdentityRole(SystemRoles.Admin);
-                role.Claims.Add(new IdentityRoleClaim<string>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
+                var role = new Role(SystemRoles.Admin);
+                role.Claims.Add(new RoleClaim() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
                 await roleManager.CreateAsync(role);
             }
         }

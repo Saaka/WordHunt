@@ -7,10 +7,13 @@ using WordHunt.Data.Entities;
 using System;
 using System.Threading.Tasks;
 using WordHunt.Data.Entities.Identity;
+using WordHunt.Data.Initializer;
 
 namespace WordHunt.Data
 {
-    public class AppDbContext : IdentityDbContext<User, Role, long, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, IAppDbContext
+    public class AppDbContext : IdentityDbContext<User, Role, long, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, 
+        IAppDbContext, 
+        IAppDbInitializerContext
     {
         private IAppConfiguration config;
 
@@ -55,6 +58,11 @@ namespace WordHunt.Data
             optionsBuilder.UseSqlServer(config.DbConnectionString,
                 ob => ob.MigrationsHistoryTable("WordHuntMigrations"));
 
+        }
+
+        public Task MigrateAsync()
+        {
+            return Database.MigrateAsync();
         }
     }
 }

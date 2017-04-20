@@ -9,17 +9,19 @@ using WordHunt.Config;
 using WordHunt.WebAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using WordHunt.Data.Identity;
+using WordHunt.Data.Entities;
 
 namespace WordHunt.WebAPI.Auth.Token
 {
     public class TokenGenerator : ITokenGenerator
     {
-        private UserManager<IdentityUser> userManager;
-        private IPasswordHasher<IdentityUser> hasher;
+        private IAppUserManager userManager;
+        private IPasswordHasher<User> hasher;
         private IAuthConfiguration authConfig;
 
-        public TokenGenerator(UserManager<IdentityUser> userManager,
-            IPasswordHasher<IdentityUser> hasher,
+        public TokenGenerator(IAppUserManager userManager,
+            IPasswordHasher<User> hasher,
             IAuthConfiguration authConfig)
         {
             this.userManager = userManager;
@@ -27,15 +29,14 @@ namespace WordHunt.WebAPI.Auth.Token
             this.authConfig = authConfig;
         }
 
-        public async Task<TokenGeneratorResult> GenerateToken(string email, string password)
+        public async Task<TokenGeneratorResult> GenerateToken(string userName, string password)
         {
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindUserByNameAsync(userName);
             if (user != null)
             {
                 if (hasher.VerifyHashedPassword(user, user.PasswordHash, password) == PasswordVerificationResult.Success)
                 {
                     var userClaims = await userManager.GetClaimsAsync(user);
-                    var roles = await userManager.GetRolesAsync(user);
 
                     var claims = new[]
                     {
@@ -66,7 +67,7 @@ namespace WordHunt.WebAPI.Auth.Token
                     return new TokenGeneratorResult
                     {
                         ResultStatus = TokenGeneratorResultStatus.InvalidPassword,
-                        ErrorMessage = $"Password for email {email} is invalid."
+                        ErrorMessage = $"Password for email {userName} is invalid."
                     };
                 }
             }
@@ -75,7 +76,7 @@ namespace WordHunt.WebAPI.Auth.Token
                 return new TokenGeneratorResult
                 {
                     ResultStatus = TokenGeneratorResultStatus.UserNotFound,
-                    ErrorMessage = $"User for email {email} not found"
+                    ErrorMessage = $"User for email {userName} not found"
                 };
             }
         }

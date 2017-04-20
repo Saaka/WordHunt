@@ -16,7 +16,7 @@ namespace WordHunt.Web.UnitTests.Controllers
         {
             CredentialsModel model = new CredentialsModel()
             {
-                Email = "valid@email.com",
+                UserName = "validname",
                 Password = "validpassword"
             };
             Mock<ILogger<AuthController>> logger = new Mock<ILogger<AuthController>>();
@@ -36,14 +36,14 @@ namespace WordHunt.Web.UnitTests.Controllers
         {
             CredentialsModel model = new CredentialsModel()
             {
-                Email = "valid@email.com",
+                UserName = "validname",
                 Password = "validpassword"
             };
 
             Mock<ILogger<AuthController>> logger = new Mock<ILogger<AuthController>>();
             Mock<ITokenGenerator> tokenGenMock = new Mock<ITokenGenerator>();
 
-            tokenGenMock.Setup(x=> x.GenerateToken(model.Email, model.Password))
+            tokenGenMock.Setup(x=> x.GenerateToken(model.UserName, model.Password))
                     .ReturnsAsync(new TokenGeneratorResult() { ResultStatus = TokenGeneratorResultStatus.Success}).Verifiable("GenerateToken was not called");
             
             AuthController controller = new AuthController(tokenGenMock.Object, logger.Object);

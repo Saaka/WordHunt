@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WordHunt.Data.Entities;
+using WordHunt.Data.Identity;
+using WordHunt.Data.Initializer;
 using WordHunt.Data.Services.Categories;
 using WordHunt.Data.Services.Categories.Mapper;
 using WordHunt.Data.Services.Languages;
@@ -51,6 +53,10 @@ namespace WordHunt.Data
             services.AddScoped<ICategoryUpdaterValidator, CategoryUpdaterValidator>();
 
             services.AddScoped<IAppDbContext, AppDbContext>();
+            services.AddScoped<IDBInitializer, DBInitializer>();
+
+            services.AddScoped<IAppUserManager, AppUserManager>();
+            services.AddScoped<IAppRoleManager, AppRoleManager>();
 
             services.AddScoped<ILanguageProvider, LanguageProvider>();
 

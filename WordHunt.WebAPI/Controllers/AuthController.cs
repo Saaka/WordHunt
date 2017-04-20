@@ -36,7 +36,7 @@ namespace WordHunt.WebAPI.Controllers
         {
             try
             {
-                var result = await tokenGenerator.GenerateToken(model.Email, model.Password);
+                var result = await tokenGenerator.GenerateToken(model.UserName, model.Password);
                 if (result.ResultStatus == TokenGeneratorResultStatus.Success)
                     return Ok(result.Token);
                 else

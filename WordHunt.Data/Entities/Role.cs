@@ -8,5 +8,9 @@ namespace WordHunt.Data.Entities
 {
     public class Role : IdentityRole<long, UserRole, RoleClaim>
     {
+        public Role(string roleName) : base()
+        {
+            Name = roleName;
+        }
     }
 }

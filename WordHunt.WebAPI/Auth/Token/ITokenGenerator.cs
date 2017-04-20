@@ -5,7 +5,7 @@ namespace WordHunt.WebAPI.Auth.Token
 {
     public interface ITokenGenerator
     {
-        Task<TokenGeneratorResult> GenerateToken(string email, string password);
+        Task<TokenGeneratorResult> GenerateToken(string userName, string password);
     }
 
 }

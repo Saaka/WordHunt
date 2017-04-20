@@ -6,21 +6,64 @@ using WordHunt.Data.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using WordHunt.Data.Entities.Identity;
+using System.Security.Claims;
 
 namespace WordHunt.Data.Identity
 {
-    public class AppUserManager : UserManager<User>
+    public interface IAppUserManager
     {
-        public AppUserManager(IUserStore<User> store, 
-            IOptions<IdentityOptions> optionsAccessor, 
-            IPasswordHasher<User> passwordHasher, 
-            IEnumerable<IUserValidator<User>> userValidators, 
-            IEnumerable<IPasswordValidator<User>> passwordValidators, 
-            ILookupNormalizer keyNormalizer, 
-            IdentityErrorDescriber errors, 
-            IServiceProvider services, 
-            ILogger<UserManager<User>> logger) : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
+        Task<User> FindUserByNameAsync(string userName);
+        Task<IList<Claim>> GetClaimsAsync(User user);
+        Task<IdentityResult> CreateAsync(User user, string password);
+        Task<IdentityResult> AddToRoleAsync(User user, string role);
+        Task<IdentityResult> AddClaimAsync(User user, Claim claim);
+    }
+
+    public class AppUserManager : IAppUserManager
+    {
+        private readonly IAppDbContext context;
+        private readonly ILookupNormalizer keyNormalizer;
+        private readonly UserManager<User> userManager;
+
+        public AppUserManager(IAppDbContext context,
+            ILookupNormalizer keyNormalizer,
+            UserManager<User> userManager)
         {
+            this.context = context;
+            this.keyNormalizer = keyNormalizer;
+            this.userManager = userManager;
+        }
+
+        public async Task<User> FindUserByNameAsync(string userName)
+        {
+            string normalizedName = keyNormalizer.Normalize(userName);
+
+            return await context.Users.FirstOrDefaultAsync(u => u.NormalizedUserName == normalizedName);
+        }
+
+        public async Task<IList<Claim>> GetClaimsAsync(User user)
+        {
+            return await context.UserClaims.Where(uc => uc.UserId.Equals(user.Id)).Select(c => c.ToClaim()).ToListAsync();
+        }
+
+        public async Task<IdentityResult> CreateAsync(User user, string password)
+        {
+            return await userManager.CreateAsync(user, password);
+        }
+
+        public async Task<IdentityResult> AddToRoleAsync(User user, string role)
+        {
+            return await userManager.AddToRoleAsync(user, role);
+        }
+        
+        public async Task<IdentityResult> AddClaimAsync(User user, Claim claim)
+        {
+            return await userManager.AddClaimAsync(user, claim);
         }
     }
 }
