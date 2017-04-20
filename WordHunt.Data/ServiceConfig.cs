@@ -20,8 +20,10 @@ namespace WordHunt.Data
     {
         public static IServiceCollection RegisterIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<User, Role>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
-                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<AppUser, AppRole>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
+                .AddEntityFrameworkStores<AppDbContext, long>()
+                .AddUserStore<AppUserStore>()
+                .AddRoleStore<AppRoleStore>();
 
             return services;
         }
@@ -53,6 +55,7 @@ namespace WordHunt.Data
             services.AddScoped<ICategoryUpdaterValidator, CategoryUpdaterValidator>();
 
             services.AddScoped<IAppDbContext, AppDbContext>();
+            services.AddScoped<IAppDbInitializerContext, AppDbContext>();
             services.AddScoped<IDBInitializer, DBInitializer>();
 
             services.AddScoped<IAppUserManager, AppUserManager>();

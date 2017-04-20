@@ -10,14 +10,14 @@ namespace WordHunt.Data.Identity
     public interface IAppRoleManager
     {
         Task<bool> RoleExistsAsync(string role);
-        Task<IdentityResult> CreateAsync(Role role);
+        Task<IdentityResult> CreateAsync(AppRole role);
     } 
 
     public class AppRoleManager : IAppRoleManager
     {
-        private readonly RoleManager<Role> roleManager;
+        private readonly RoleManager<AppRole> roleManager;
 
-        public AppRoleManager(RoleManager<Role> roleManager)
+        public AppRoleManager(RoleManager<AppRole> roleManager)
         {
             this.roleManager = roleManager;
         }
@@ -27,7 +27,7 @@ namespace WordHunt.Data.Identity
             return await roleManager.RoleExistsAsync(role);
         }
 
-        public async Task<IdentityResult> CreateAsync(Role role)
+        public async Task<IdentityResult> CreateAsync(AppRole role)
         {
             return await roleManager.CreateAsync(role);
         }

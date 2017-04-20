@@ -2,16 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using WordHunt.Config;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Linq;
 using WordHunt.Data.Entities;
-using System;
 using System.Threading.Tasks;
-using WordHunt.Data.Entities.Identity;
 using WordHunt.Data.Initializer;
 
 namespace WordHunt.Data
 {
-    public class AppDbContext : IdentityDbContext<User, Role, long, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>, 
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole, long>, 
         IAppDbContext, 
         IAppDbInitializerContext
     {

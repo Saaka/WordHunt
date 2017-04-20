@@ -17,11 +17,11 @@ namespace WordHunt.WebAPI.Auth.Token
     public class TokenGenerator : ITokenGenerator
     {
         private IAppUserManager userManager;
-        private IPasswordHasher<User> hasher;
+        private IPasswordHasher<AppUser> hasher;
         private IAuthConfiguration authConfig;
 
         public TokenGenerator(IAppUserManager userManager,
-            IPasswordHasher<User> hasher,
+            IPasswordHasher<AppUser> hasher,
             IAuthConfiguration authConfig)
         {
             this.userManager = userManager;

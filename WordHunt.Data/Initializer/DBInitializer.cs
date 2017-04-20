@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Config;
 using WordHunt.Config.Auth;
 using WordHunt.Data.Entities;
-using WordHunt.Data.Entities.Identity;
+
 using WordHunt.Data.Identity;
 
 namespace WordHunt.Data.Initializer
@@ -102,7 +99,7 @@ namespace WordHunt.Data.Initializer
             var user = await userManager.FindUserByNameAsync(email);
             if (user == null)
             {
-                user = new User()
+                user = new AppUser()
                 {
                     UserName = name,
                     Email = email
@@ -130,8 +127,8 @@ namespace WordHunt.Data.Initializer
         {
             if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
             {
-                var role = new Role(SystemRoles.Admin);
-                role.Claims.Add(new RoleClaim() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
+                var role = new AppRole(SystemRoles.Admin);
+                role.Claims.Add(new IdentityRoleClaim<long>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
                 await roleManager.CreateAsync(role);
             }
         }
