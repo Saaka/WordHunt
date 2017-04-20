@@ -13,12 +13,12 @@ namespace WordHunt.Data.Services.Words
 {
     public class WordUpdater : IWordUpdater
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
         private readonly IWordUpdaterValidator validator;
         private readonly IWordMapper mapper;
         private readonly IWordProvider wordProvider;
 
-        public WordUpdater(AppDbContext context,
+        public WordUpdater(IAppDbContext context,
             IWordUpdaterValidator validator,
             IWordMapper mapper,
             IWordProvider wordProvider)

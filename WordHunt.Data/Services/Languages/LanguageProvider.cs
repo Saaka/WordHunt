@@ -12,9 +12,9 @@ namespace WordHunt.Data.Services.Languages
 {
     public class LanguageProvider : ILanguageProvider
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
 
-        public LanguageProvider(AppDbContext context)
+        public LanguageProvider(IAppDbContext context)
         {
             this.context = context;
         }

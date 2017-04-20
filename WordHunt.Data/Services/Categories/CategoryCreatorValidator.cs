@@ -16,9 +16,9 @@ namespace WordHunt.Data.Services.Categories
 
     public class CategoryCreatorValidator : ICategoryCreatorValidator
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
 
-        public CategoryCreatorValidator(AppDbContext context)
+        public CategoryCreatorValidator(IAppDbContext context)
         {
             this.context = context;
         }

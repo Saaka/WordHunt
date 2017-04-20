@@ -19,12 +19,12 @@ namespace WordHunt.Data
 
     public class DBInitializer : IDBInitializer
     {
-        private AppDbContext context;
+        private IAppDbContext context;
         private RoleManager<IdentityRole> roleManager;
         private UserManager<IdentityUser> userManager;
         private ISeedConfiguration seedConfig;
 
-        public DBInitializer(AppDbContext context,
+        public DBInitializer(IAppDbContext context,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
             ISeedConfiguration seedConfig)

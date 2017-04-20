@@ -16,9 +16,9 @@ namespace WordHunt.Data.Services.Words
 
     public class WordCreatorValidator : IWordCreatorValidator
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
 
-        public WordCreatorValidator(AppDbContext context)
+        public WordCreatorValidator(IAppDbContext context)
         {
             this.context = context;
         }

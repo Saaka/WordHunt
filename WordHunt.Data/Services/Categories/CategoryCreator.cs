@@ -11,12 +11,12 @@ namespace WordHunt.Data.Services.Categories
 {
     public class CategoryCreator : ICategoryCreator
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
         private readonly ICategoryCreatorValidator validator;
         private readonly ICategoryProvider categoryProvider;
         private readonly ICategoryMapper mapper;
 
-        public CategoryCreator(AppDbContext context,
+        public CategoryCreator(IAppDbContext context,
             ICategoryCreatorValidator validator,
             ICategoryMapper mapper,
             ICategoryProvider categoryProvider)
@@ -36,7 +36,7 @@ namespace WordHunt.Data.Services.Categories
                     return new CategoryCreateResult(validatorResult.Error);
 
                 var newCategory = mapper.MapCreateRequest(request);
-                await context.AddAsync(newCategory);
+                await context.Categories.AddAsync(newCategory);
                 await context.SaveChangesAsync();
 
                 var getCategoryResult = await categoryProvider.GetCategory(newCategory.Id);

@@ -13,10 +13,10 @@ namespace WordHunt.Data.Services.Words
 {
     public class WordProvider : IWordProvider
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
         private readonly IWordProviderValidator wordProviderValidator;
 
-        public WordProvider(AppDbContext context,
+        public WordProvider(IAppDbContext context,
             IWordProviderValidator wordProviderValidator)
         {
             this.context = context;

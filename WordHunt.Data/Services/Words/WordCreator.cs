@@ -11,12 +11,12 @@ namespace WordHunt.Data.Services.Words
 {
     public class WordCreator : IWordCreator
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
         private readonly IWordCreatorValidator validator;
         private readonly IWordMapper mapper;
         private readonly IWordProvider wordProvider;
 
-        public WordCreator(AppDbContext context,
+        public WordCreator(IAppDbContext context,
             IWordCreatorValidator validator,
             IWordMapper mapper,
             IWordProvider wordProvider)
@@ -36,7 +36,7 @@ namespace WordHunt.Data.Services.Words
                     return new WordCreateResult(validatorResult.Error);
 
                 var newWord = mapper.MapCreateRequest(createRequest);
-                await context.AddAsync(newWord);
+                await context.Words.AddAsync(newWord);
                 await context.SaveChangesAsync();
 
                 var getWordResult = await wordProvider.GetWord(newWord.Id);

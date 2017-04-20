@@ -34,6 +34,8 @@ namespace WordHunt.Data
             services.AddScoped<ICategoryUpdater, CategoryUpdater>();
             services.AddScoped<ICategoryUpdaterValidator, CategoryUpdaterValidator>();
 
+            services.AddScoped<IAppDbContext, AppDbContext>();
+
             services.AddScoped<ILanguageProvider, LanguageProvider>();
 
             return services;

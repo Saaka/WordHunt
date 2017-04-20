@@ -4,10 +4,12 @@ using WordHunt.Config;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq;
 using WordHunt.Data.Entities;
+using System;
+using System.Threading.Tasks;
 
 namespace WordHunt.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext, IAppDbContext
     {
         private IAppConfiguration config;
 
@@ -51,6 +53,11 @@ namespace WordHunt.Data
             optionsBuilder.UseSqlServer(config.DbConnectionString,
                 ob => ob.MigrationsHistoryTable("WordHuntMigrations"));
 
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

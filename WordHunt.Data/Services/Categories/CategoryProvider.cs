@@ -13,10 +13,10 @@ namespace WordHunt.Data.Services.Categories
 {
     public class CategoryProvider : ICategoryProvider
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
         private readonly ICategoryProviderValidator validator;
 
-        public CategoryProvider(AppDbContext context,
+        public CategoryProvider(IAppDbContext context,
             ICategoryProviderValidator validator)
         {
             this.context = context;

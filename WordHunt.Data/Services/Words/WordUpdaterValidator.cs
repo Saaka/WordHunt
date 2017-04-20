@@ -16,9 +16,9 @@ namespace WordHunt.Data.Services.Words
 
     public class WordUpdaterValidator : IWordUpdaterValidator
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
 
-        public WordUpdaterValidator(AppDbContext context)
+        public WordUpdaterValidator(IAppDbContext context)
         {
             this.context = context;
         }

@@ -16,9 +16,9 @@ namespace WordHunt.Data.Services.Categories.Mapper
 
     public class CategoryUpdaterValidator : ICategoryUpdaterValidator
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
 
-        public CategoryUpdaterValidator(AppDbContext context)
+        public CategoryUpdaterValidator(IAppDbContext context)
         {
             this.context = context;
         }

@@ -12,12 +12,12 @@ namespace WordHunt.Data.Services.Categories
 {
     public class CategoryUpdater : ICategoryUpdater
     {
-        private readonly AppDbContext context;
+        private readonly IAppDbContext context;
         private readonly ICategoryUpdaterValidator validator;
         private readonly ICategoryMapper mapper;
         private readonly ICategoryProvider categoryProvider;
 
-        public CategoryUpdater(AppDbContext context,
+        public CategoryUpdater(IAppDbContext context,
             ICategoryUpdaterValidator validator,
             ICategoryMapper mapper,
             ICategoryProvider categoryProvider)
