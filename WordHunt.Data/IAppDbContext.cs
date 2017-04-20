@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using WordHunt.Data.Entities;
 
@@ -12,6 +13,6 @@ namespace WordHunt.Data
         DbSet<Word> Words { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Language> Languages { get; set; }
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }
