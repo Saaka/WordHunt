@@ -16,4 +16,8 @@
     <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.DataInterfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

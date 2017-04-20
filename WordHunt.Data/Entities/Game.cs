@@ -8,7 +8,7 @@ namespace WordHunt.Data.Entities
     public class Game
     {
         public long Id { get; set; }
-        public Guid UserId { get; set; }
+        public long UserId { get; set; }
         public long CurrentTeamId { get; set; }
         public GameStatus Status { get; set; }
     }

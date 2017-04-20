@@ -39,9 +39,8 @@ namespace WordHunt.WebAPI
             services.AddSwaggerGen(s => s.SwaggerDoc("v1",
                 new Info { Title = "WordHunt WebAPI", Version = "1.0" }));
             services.AddSingleton(configuration);
-            services.AddIdentity<IdentityUser, IdentityRole>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
-                .AddEntityFrameworkStores<AppDbContext>();
-            services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
+            services.RegisterIdentity();
+            services.RegisterContext();
             services.AddCors();
             services.RegisterPolicies();
 

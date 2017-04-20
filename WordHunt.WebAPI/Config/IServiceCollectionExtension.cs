@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WordHunt.Config;
 using WordHunt.Config.Auth;
 using WordHunt.Data;
@@ -42,6 +38,21 @@ namespace WordHunt.WebAPI.Config
                     policy.RequireClaim(SystemClaims.IsAdmin, "true");
                 });
             });
+
+            return services;
+        }
+        
+        public static IServiceCollection RegisterIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
+                .AddEntityFrameworkStores<AppDbContext>();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterContext(this IServiceCollection services)
+        {
+            services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
 
             return services;
         }
