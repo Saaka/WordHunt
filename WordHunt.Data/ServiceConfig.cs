@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WordHunt.Data.Entities;
 using WordHunt.Data.Services.Categories;
 using WordHunt.Data.Services.Categories.Mapper;
 using WordHunt.Data.Services.Languages;
@@ -15,6 +16,21 @@ namespace WordHunt.Data
 {
     public static class ServiceConfig
     {
+        public static IServiceCollection RegisterIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<User, Role>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
+                .AddEntityFrameworkStores<AppDbContext>();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterContext(this IServiceCollection services)
+        {
+            services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
+
+            return services;
+        }
+
         //Configure services from WordHunt.Data library.
         public static IServiceCollection ConfigureDataServices(this IServiceCollection services)
         {

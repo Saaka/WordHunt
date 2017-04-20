@@ -41,20 +41,5 @@ namespace WordHunt.WebAPI.Config
 
             return services;
         }
-        
-        public static IServiceCollection RegisterIdentity(this IServiceCollection services)
-        {
-            services.AddIdentity<Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
-                .AddEntityFrameworkStores<AppDbContext>();
-
-            return services;
-        }
-
-        public static IServiceCollection RegisterContext(this IServiceCollection services)
-        {
-            services.AddDbContext<AppDbContext>(ServiceLifetime.Scoped);
-
-            return services;
-        }
     }
 }

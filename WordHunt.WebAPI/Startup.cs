@@ -40,11 +40,10 @@ namespace WordHunt.WebAPI
                 new Info { Title = "WordHunt WebAPI", Version = "1.0" }));
             services.AddSingleton(configuration);
             services.RegisterIdentity();
-            //services.RegisterContext();
+            services.RegisterContext();
             services.AddCors();
             services.RegisterPolicies();
-
-
+            
             //Add application/business logic services
             services.RegisterWebApiDependencies();
             services.ConfigureDataServices();
