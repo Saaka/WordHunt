@@ -41,7 +41,7 @@ namespace WordHunt.Data.Identity
 
         public async Task<IList<Claim>> GetClaimsAsync(User user)
         {
-            return await context.UserClaims.Where(uc => uc.UserId.Equals(user.Id)).Select(c => c.ToClaim()).ToListAsync();
+            return await userManager.GetClaimsAsync(user);
         }
 
         public async Task<IdentityResult> CreateAsync(User user, string password)

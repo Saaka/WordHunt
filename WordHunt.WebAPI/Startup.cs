@@ -36,7 +36,10 @@ namespace WordHunt.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add(new Filters.SetValidResponseFilter());
+            });
             services.AddSwaggerGen(s => s.SwaggerDoc("v1",
                 new Info { Title = "WordHunt WebAPI", Version = "1.0" }));
             services.AddSingleton(configuration);

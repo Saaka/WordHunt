@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using WordHunt.Config.Auth;
 using WordHunt.DataInterfaces.Languages;
 using WordHunt.DataInterfaces.Languages.Results;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
