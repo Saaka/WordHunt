@@ -33,13 +33,6 @@ namespace WordHunt.WebAPI.Controllers.Words
             return await wordProvider.GetWordList(request);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("add")]
         public async Task<WordCreateResult> CreateWord([FromBody]WordCreateRequest request)
@@ -52,6 +45,13 @@ namespace WordHunt.WebAPI.Controllers.Words
         public async Task<WordUpdateResult> UpdateWord([FromBody]WordUpdateRequest request)
         {
             return await wordUpdater.UpdateWord(request);
+        }
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
         }
 
         // DELETE api/values/5

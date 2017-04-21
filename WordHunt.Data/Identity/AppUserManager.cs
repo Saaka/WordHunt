@@ -10,51 +10,51 @@ namespace WordHunt.Data.Identity
 {
     public interface IAppUserManager
     {
-        Task<AppUser> FindUserByNameAsync(string userName);
-        Task<IList<Claim>> GetClaimsAsync(AppUser user);
-        Task<IdentityResult> CreateAsync(AppUser user, string password);
-        Task<IdentityResult> AddToRoleAsync(AppUser user, string role);
-        Task<IdentityResult> AddClaimAsync(AppUser user, Claim claim);
+        Task<User> FindUserByNameAsync(string userName);
+        Task<IList<Claim>> GetClaimsAsync(User user);
+        Task<IdentityResult> CreateAsync(User user, string password);
+        Task<IdentityResult> AddToRoleAsync(User user, string role);
+        Task<IdentityResult> AddClaimAsync(User user, Claim claim);
     }
 
     public class AppUserManager : IAppUserManager
     {
         private readonly IAppDbContext context;
         private readonly ILookupNormalizer keyNormalizer;
-        private readonly UserManager<AppUser> userManager;
+        private readonly UserManager<User> userManager;
 
         public AppUserManager(IAppDbContext context,
             ILookupNormalizer keyNormalizer,
-            UserManager<AppUser> userManager)
+            UserManager<User> userManager)
         {
             this.context = context;
             this.keyNormalizer = keyNormalizer;
             this.userManager = userManager;
         }
 
-        public async Task<AppUser> FindUserByNameAsync(string userName)
+        public async Task<User> FindUserByNameAsync(string userName)
         {
             string normalizedName = keyNormalizer.Normalize(userName);
 
             return await context.Users.FirstOrDefaultAsync(u => u.NormalizedUserName == normalizedName);
         }
 
-        public async Task<IList<Claim>> GetClaimsAsync(AppUser user)
+        public async Task<IList<Claim>> GetClaimsAsync(User user)
         {
             return await context.UserClaims.Where(uc => uc.UserId.Equals(user.Id)).Select(c => c.ToClaim()).ToListAsync();
         }
 
-        public async Task<IdentityResult> CreateAsync(AppUser user, string password)
+        public async Task<IdentityResult> CreateAsync(User user, string password)
         {
             return await userManager.CreateAsync(user, password);
         }
 
-        public async Task<IdentityResult> AddToRoleAsync(AppUser user, string role)
+        public async Task<IdentityResult> AddToRoleAsync(User user, string role)
         {
             return await userManager.AddToRoleAsync(user, role);
         }
         
-        public async Task<IdentityResult> AddClaimAsync(AppUser user, Claim claim)
+        public async Task<IdentityResult> AddClaimAsync(User user, Claim claim)
         {
             return await userManager.AddClaimAsync(user, claim);
         }

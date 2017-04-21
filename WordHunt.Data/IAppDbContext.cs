@@ -9,7 +9,7 @@ namespace WordHunt.Data
     public interface IAppDbContext
     {
         DbSet<Word> Words { get; set; }
-        DbSet<AppUser> Users { get; set; }
+        DbSet<User> Users { get; set; }
         DbSet<IdentityUserClaim<long>> UserClaims { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Language> Languages { get; set; }

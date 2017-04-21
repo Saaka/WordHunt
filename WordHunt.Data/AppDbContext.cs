@@ -8,7 +8,7 @@ using WordHunt.Data.Initializer;
 
 namespace WordHunt.Data
 {
-    public class AppDbContext : IdentityDbContext<AppUser, AppRole, long>, 
+    public class AppDbContext : IdentityDbContext<User, Role, long>, 
         IAppDbContext, 
         IAppDbInitializerContext
     {

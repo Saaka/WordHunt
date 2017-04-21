@@ -96,10 +96,10 @@ namespace WordHunt.Data.Initializer
 
         private async Task CreateUser(string name, string email, string password, bool isAdmin)
         {
-            var user = await userManager.FindUserByNameAsync(email);
+            var user = await userManager.FindUserByNameAsync(name);
             if (user == null)
             {
-                user = new AppUser()
+                user = new User()
                 {
                     UserName = name,
                     Email = email
@@ -127,7 +127,7 @@ namespace WordHunt.Data.Initializer
         {
             if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
             {
-                var role = new AppRole(SystemRoles.Admin);
+                var role = new Role(SystemRoles.Admin);
                 role.Claims.Add(new IdentityRoleClaim<long>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
                 await roleManager.CreateAsync(role);
             }

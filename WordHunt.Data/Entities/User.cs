@@ -2,7 +2,7 @@
 
 namespace WordHunt.Data.Entities
 {
-    public class AppUser : IdentityUser<long>
+    public class User : IdentityUser<long>
     {
     }
 }

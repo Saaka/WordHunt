@@ -98,7 +98,7 @@ namespace WordHunt.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WordHunt.Data.Entities.AppRole", b =>
+            modelBuilder.Entity("WordHunt.Data.Entities.Role", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
@@ -121,7 +121,7 @@ namespace WordHunt.Data.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("WordHunt.Data.Entities.AppUser", b =>
+            modelBuilder.Entity("WordHunt.Data.Entities.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
@@ -223,7 +223,7 @@ namespace WordHunt.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<long>", b =>
                 {
-                    b.HasOne("WordHunt.Data.Entities.AppRole")
+                    b.HasOne("WordHunt.Data.Entities.Role")
                         .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -231,7 +231,7 @@ namespace WordHunt.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<long>", b =>
                 {
-                    b.HasOne("WordHunt.Data.Entities.AppUser")
+                    b.HasOne("WordHunt.Data.Entities.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -239,7 +239,7 @@ namespace WordHunt.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<long>", b =>
                 {
-                    b.HasOne("WordHunt.Data.Entities.AppUser")
+                    b.HasOne("WordHunt.Data.Entities.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -247,12 +247,12 @@ namespace WordHunt.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<long>", b =>
                 {
-                    b.HasOne("WordHunt.Data.Entities.AppRole")
+                    b.HasOne("WordHunt.Data.Entities.User")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("WordHunt.Data.Entities.AppUser")
+                    b.HasOne("WordHunt.Data.Entities.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

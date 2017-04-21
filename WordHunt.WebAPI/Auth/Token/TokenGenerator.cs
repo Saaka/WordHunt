@@ -14,14 +14,19 @@ using WordHunt.Data.Entities;
 
 namespace WordHunt.WebAPI.Auth.Token
 {
+    public interface ITokenGenerator
+    {
+        Task<TokenGeneratorResult> GenerateToken(string userName, string password);
+    }
+
     public class TokenGenerator : ITokenGenerator
     {
         private IAppUserManager userManager;
-        private IPasswordHasher<AppUser> hasher;
+        private IPasswordHasher<User> hasher;
         private IAuthConfiguration authConfig;
 
         public TokenGenerator(IAppUserManager userManager,
-            IPasswordHasher<AppUser> hasher,
+            IPasswordHasher<User> hasher,
             IAuthConfiguration authConfig)
         {
             this.userManager = userManager;
