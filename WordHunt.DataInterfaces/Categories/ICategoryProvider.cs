@@ -10,6 +10,6 @@ namespace WordHunt.DataInterfaces.Categories
     public interface ICategoryProvider
     {
         Task<CategoryListResult> GetCategoryList(CategoryListRequest request);
-        Task<CategoryGetResult> GetCategory(long categoryId);
+        Task<CategoryGetResult> GetCategory(int categoryId);
     }
 }

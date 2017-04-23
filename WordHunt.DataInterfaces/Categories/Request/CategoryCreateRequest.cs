@@ -6,7 +6,7 @@ namespace WordHunt.DataInterfaces.Categories.Request
 {
     public class CategoryCreateRequest
     {
-        public long LanguageId { get; set; }
+        public int LanguageId { get; set; }
         public string Name { get; set; }
     }
 }

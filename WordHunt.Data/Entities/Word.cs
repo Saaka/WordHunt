@@ -9,11 +9,11 @@ namespace WordHunt.Data.Entities
     {
         [Key]
         [Required]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Value { get; set; }
-        public long LanguageId { get; set; }
+        public int LanguageId { get; set; }
         public virtual Language Language { get; set; }
-        public long? CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public virtual Category Category { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace WordHunt.DataInterfaces.Categories.Request
 {
     public class CategoryUpdateRequest
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

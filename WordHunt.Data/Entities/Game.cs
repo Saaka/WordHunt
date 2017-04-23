@@ -7,9 +7,13 @@ namespace WordHunt.Data.Entities
 {
     public class Game
     {
-        public long Id { get; set; }
-        public long UserId { get; set; }
-        public long CurrentTeamId { get; set; }
-        public GameStatus Status { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string Name { get; set; }
+        public int ColumnsCount { get; set; }
+        public int RowsCount { get; set; }
+        public int TeamCount { get; set; }
+        public int TrapCount { get; set; }
+        public GameType Type { get; set; }
     }
 }

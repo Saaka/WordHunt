@@ -128,7 +128,7 @@ namespace WordHunt.Data.Initializer
             if (!await roleManager.RoleExistsAsync(SystemRoles.Admin))
             {
                 var role = new Role(SystemRoles.Admin);
-                role.Claims.Add(new IdentityRoleClaim<long>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
+                role.Claims.Add(new IdentityRoleClaim<int>() { ClaimType = SystemClaims.IsAdmin, ClaimValue = "true" });
                 await roleManager.CreateAsync(role);
             }
         }

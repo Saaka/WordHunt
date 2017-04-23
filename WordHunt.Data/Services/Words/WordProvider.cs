@@ -23,7 +23,7 @@ namespace WordHunt.Data.Services.Words
             this.wordProviderValidator = wordProviderValidator;
         }
         
-        public async Task<WordGetResult> GetWord(long wordId)
+        public async Task<WordGetResult> GetWord(int wordId)
         {
             try
             {

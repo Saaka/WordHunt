@@ -23,7 +23,7 @@ namespace WordHunt.Data.Services.Categories
             this.validator = validator;
         }
 
-        public async Task<CategoryGetResult> GetCategory(long categoryId)
+        public async Task<CategoryGetResult> GetCategory(int categoryId)
         {
             try
             {

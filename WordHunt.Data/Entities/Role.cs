@@ -2,7 +2,7 @@
 
 namespace WordHunt.Data.Entities
 {
-    public class Role : IdentityRole<long>
+    public class Role : IdentityRole<int>
     {
         public Role(string roleName) : base()
         {

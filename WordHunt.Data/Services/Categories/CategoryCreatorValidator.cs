@@ -35,7 +35,7 @@ namespace WordHunt.Data.Services.Categories
             return new ValidatorResult();
         }
 
-        private async Task<bool> CategoryExists(long languageId, string name)
+        private async Task<bool> CategoryExists(int languageId, string name)
         {
             return await context.Categories.Where(x => x.LanguageId == languageId && x.Name.ToLower() == name.ToLower()).AnyAsync();
         }

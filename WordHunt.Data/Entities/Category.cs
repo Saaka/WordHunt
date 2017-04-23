@@ -9,9 +9,9 @@ namespace WordHunt.Data.Entities
     {
         [Key]
         [Required]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public long LanguageId { get; set; }
+        public int LanguageId { get; set; }
         public virtual Language Language { get; set; }
         public virtual List<Word> Words { get; set; }
     }

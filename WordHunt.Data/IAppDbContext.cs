@@ -10,7 +10,7 @@ namespace WordHunt.Data
     {
         DbSet<Word> Words { get; set; }
         DbSet<User> Users { get; set; }
-        DbSet<IdentityUserClaim<long>> UserClaims { get; set; }
+        DbSet<IdentityUserClaim<int>> UserClaims { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Language> Languages { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));

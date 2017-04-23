@@ -6,9 +6,9 @@ namespace WordHunt.DataInterfaces.Words.DTO
 {
     public class Word
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Value { get; set; }
         public string Category { get; set; }
-        public long? CategoryId { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

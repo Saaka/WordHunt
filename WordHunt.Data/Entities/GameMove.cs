@@ -7,11 +7,12 @@ namespace WordHunt.Data.Entities
 {
     public class GameMove
     {
-        public long Id { get; set; }
-        public long GameId { get; set; }
-        public long FieldId { get; set; }
+        public int Id { get; set; }
+        public int GameId { get; set; }
+        public int FieldId { get; set; }
         public MoveType Type { get; set; }
-        public long TeamId { get; set; }
-        public long ClientId { get; set; }
+        public int TeamId { get; set; }
+        public int ClientId { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

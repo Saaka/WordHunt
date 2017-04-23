@@ -21,7 +21,7 @@ namespace WordHunt.Data
         public static IServiceCollection RegisterIdentity(this IServiceCollection services)
         {
             services.AddIdentity<User, Role>(opt => opt.Cookies.ApplicationCookie.AutomaticChallenge = false)
-                .AddEntityFrameworkStores<AppDbContext, long>();
+                .AddEntityFrameworkStores<AppDbContext, int>();
 
             return services;
         }
