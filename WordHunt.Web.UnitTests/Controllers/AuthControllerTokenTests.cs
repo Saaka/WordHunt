@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using System.Net;
 using WordHunt.WebAPI.Auth.Token;
-using WordHunt.WebAPI.Controllers;
+using WordHunt.WebAPI.Controllers.Auth;
 using WordHunt.WebAPI.Models;
 using Xunit;
 

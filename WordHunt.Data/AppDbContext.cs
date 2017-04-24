@@ -19,7 +19,7 @@ namespace WordHunt.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Game> Games { get; set; }
-        public DbSet<Game> GameTeams { get; set; }
+        public DbSet<GameTeam> GameTeams { get; set; }
 
         public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {

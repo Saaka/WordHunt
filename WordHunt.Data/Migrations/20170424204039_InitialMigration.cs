@@ -24,7 +24,7 @@ namespace WordHunt.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Game",
+                name: "Games",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -39,7 +39,7 @@ namespace WordHunt.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Game", x => x.Id);
+                    table.PrimaryKey("PK_Games", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +98,7 @@ namespace WordHunt.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameTeam",
+                name: "GameTeams",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -114,11 +114,11 @@ namespace WordHunt.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameTeam", x => x.Id);
+                    table.PrimaryKey("PK_GameTeams", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GameTeam_Game_GameId",
+                        name: "FK_GameTeams_Games_GameId",
                         column: x => x.GameId,
-                        principalTable: "Game",
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -282,8 +282,8 @@ namespace WordHunt.Data.Migrations
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameTeam_GameId",
-                table: "GameTeam",
+                name: "IX_GameTeams_GameId",
+                table: "GameTeams",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
@@ -332,7 +332,7 @@ namespace WordHunt.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "GameTeam");
+                name: "GameTeams");
 
             migrationBuilder.DropTable(
                 name: "Words");
@@ -344,7 +344,7 @@ namespace WordHunt.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Game");
+                name: "Games");
 
             migrationBuilder.DropTable(
                 name: "Categories");

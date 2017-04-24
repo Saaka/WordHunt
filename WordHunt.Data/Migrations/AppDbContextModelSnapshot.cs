@@ -137,7 +137,7 @@ namespace WordHunt.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Game");
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.GameTeam", b =>
@@ -166,7 +166,7 @@ namespace WordHunt.Data.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("GameTeam");
+                    b.ToTable("GameTeams");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.Language", b =>
