@@ -32,6 +32,10 @@ export class UserService {
         return this.activeUser.admin;
     }
 
+    userId() {
+        return this.activeUser.id;
+    }
+
     validateLoginState(forceReload: boolean = false) {
 
         if (forceReload || !this.isLoaded) {

@@ -12,7 +12,7 @@ export class AuthHttpService {
         private tokenStorage: TokenStorageService,
         private config: ConfigService) { }
 
-    createAuthorizationHeader() {
+    private createAuthorizationHeader() {
         return this.tokenStorage
             .loadToken()
             .map(response => {

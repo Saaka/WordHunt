@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 import { GameCreate } from './game.models';
+import { UserService } from '../../core/user.service';
 
 @Component({
     selector: 'create-game',
@@ -11,7 +12,7 @@ export class CreateGameComponent {
 
     private game: GameCreate;
 
-    constructor() {
+    constructor(private userService: UserService) {
         this.createDefaultGame();
     }
 
@@ -22,6 +23,7 @@ export class CreateGameComponent {
         this.game.trapCount = 1;
         this.game.teamCount = 2;
         this.game.type = 'SingleDevice';
+        this.game.userId = this.userService.userId();
     }
 
     createGame() {
