@@ -1,0 +1,33 @@
+﻿<div>
+    <h2>Create game</h2>
+    <div class="center-block create-game">
+        <div class="form-group">
+            <label class="create-game-label" >Game name</label>
+            <input type="text" class="form-control" maxlength="50" [(ngModel)]="game.name"/>
+        </div>        
+        <div class="form-group">
+            <label class="create-game-label">Board width</label>
+            <input type="number" class="form-control" min="5" max="8" [(ngModel)]="game.boardWidth"/>
+        </div>        
+        <div class="form-group">
+            <label class="create-game-label">Board height</label>
+            <input type="number" class="form-control" min="5" max="8" [(ngModel)]="game.boardHeight"/>
+        </div>  
+        <div class="form-group">
+            <label class="create-game-label">Team count</label>
+            <input type="number" class="form-control" min="2" max="4" [(ngModel)]="game.teamCount" />
+        </div>      
+        <div class="form-group">
+            <label class="create-game-label">Trap count</label>
+            <input type="number" class="form-control" min="0" max="10" [(ngModel)]="game.trapCount" />
+        </div>  
+        <div class="form-group">
+            <label class="create-game-label">Type</label>
+            <input type="text" class="form-control" [(ngModel)]="game.type" disabled/>
+        </div>    
+    </div>
+    <div class="center-block button-div create-game-button-div">
+        <a class="btn btn-default btn-block" (click)="createGame()">Create game</a>
+    </div>
+    <main-back-button></main-back-button>
+</div>

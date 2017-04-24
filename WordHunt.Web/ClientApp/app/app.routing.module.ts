@@ -31,6 +31,11 @@ const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'creategame',
+                loadChildren: './main/create-game/create-game.module#CreateGameModule',
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'settings',
                 loadChildren: './main/settings/settings.module#SettingsModule',
                 canActivate: [AuthGuard]

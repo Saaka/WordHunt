@@ -14,9 +14,16 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="yarn.lock" />
+    <Compile Remove="ClientApp\dist\**" />
+    <Compile Remove="wwwroot\**" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="ClientApp\dist\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="ClientApp\dist\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
   <ItemGroup>
     <None Update="ClientApp\app\components\app\app.component.scss">
