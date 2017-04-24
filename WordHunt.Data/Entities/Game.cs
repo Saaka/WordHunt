@@ -16,5 +16,7 @@ namespace WordHunt.Data.Entities
         public int TeamCount { get; set; }
         public int TrapCount { get; set; }
         public GameType Type { get; set; }
+
+        public virtual IList<GameTeam> Teams { get; set; }
     }
 }

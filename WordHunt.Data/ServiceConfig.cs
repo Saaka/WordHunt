@@ -8,10 +8,12 @@ using WordHunt.Data.Initializer;
 using WordHunt.Data.Services.Categories;
 using WordHunt.Data.Services.Categories.Mapper;
 using WordHunt.Data.Services.Languages;
+using WordHunt.Data.Services.Users;
 using WordHunt.Data.Services.Words;
 using WordHunt.Data.Services.Words.Mapper;
 using WordHunt.DataInterfaces.Categories;
 using WordHunt.DataInterfaces.Languages;
+using WordHunt.DataInterfaces.Users;
 using WordHunt.DataInterfaces.Words;
 
 namespace WordHunt.Data
@@ -36,6 +38,8 @@ namespace WordHunt.Data
         //Configure services from WordHunt.Data library.
         public static IServiceCollection ConfigureDataServices(this IServiceCollection services)
         {
+            services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<IWordProvider, WordProvider>();
             services.AddScoped<IWordProviderValidator, WordProviderValidator>();
             services.AddScoped<IWordCreator, WordCreator>();
@@ -57,8 +61,9 @@ namespace WordHunt.Data
             services.AddScoped<IDBInitializer, DBInitializer>();
 
             services.AddScoped<IAppUserManager, AppUserManager>();
+            services.AddScoped<IAppUserClaimsProvider, AppUserManager>();
             services.AddScoped<IAppRoleManager, AppRoleManager>();
-
+            
             services.AddScoped<ILanguageProvider, LanguageProvider>();
 
             return services;

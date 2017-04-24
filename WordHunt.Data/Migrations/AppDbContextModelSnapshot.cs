@@ -140,6 +140,35 @@ namespace WordHunt.Data.Migrations
                     b.ToTable("Game");
                 });
 
+            modelBuilder.Entity("WordHunt.Data.Entities.GameTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Color");
+
+                    b.Property<int>("FieldCount");
+
+                    b.Property<int>("GameId");
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("Order");
+
+                    b.Property<int>("RemainingFieldCount");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameTeam");
+                });
+
             modelBuilder.Entity("WordHunt.Data.Entities.Language", b =>
                 {
                     b.Property<int>("Id")
@@ -289,6 +318,13 @@ namespace WordHunt.Data.Migrations
                     b.HasOne("WordHunt.Data.Entities.Language", "Language")
                         .WithMany("Categories")
                         .HasForeignKey("LanguageId");
+                });
+
+            modelBuilder.Entity("WordHunt.Data.Entities.GameTeam", b =>
+                {
+                    b.HasOne("WordHunt.Data.Entities.Game", "Game")
+                        .WithMany("Teams")
+                        .HasForeignKey("GameId");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.Word", b =>

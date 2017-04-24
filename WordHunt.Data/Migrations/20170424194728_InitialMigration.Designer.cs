@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using WordHunt.Data;
+using WordHunt.DataInterfaces.Enums.Game;
 
 namespace WordHunt.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20170423191801_Initial-migration")]
-    partial class Initialmigration
+    [Migration("20170424194728_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,6 +113,61 @@ namespace WordHunt.Data.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("WordHunt.Data.Entities.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ColumnsCount");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("RowsCount");
+
+                    b.Property<int>("TeamCount");
+
+                    b.Property<int>("TrapCount");
+
+                    b.Property<int>("Type");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Game");
+                });
+
+            modelBuilder.Entity("WordHunt.Data.Entities.GameTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Color");
+
+                    b.Property<int>("FieldCount");
+
+                    b.Property<int>("GameId");
+
+                    b.Property<string>("Icon");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("Order");
+
+                    b.Property<int>("RemainingFieldCount");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameTeam");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.Language", b =>
@@ -263,6 +319,13 @@ namespace WordHunt.Data.Migrations
                     b.HasOne("WordHunt.Data.Entities.Language", "Language")
                         .WithMany("Categories")
                         .HasForeignKey("LanguageId");
+                });
+
+            modelBuilder.Entity("WordHunt.Data.Entities.GameTeam", b =>
+                {
+                    b.HasOne("WordHunt.Data.Entities.Game", "Game")
+                        .WithMany("Teams")
+                        .HasForeignKey("GameId");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.Word", b =>

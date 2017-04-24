@@ -1,21 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WordHunt.WebAPI.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using WordHunt.Config;
 using WordHunt.WebAPI.Auth.Token;
 using WordHunt.WebAPI.Filters;
 
-namespace WordHunt.WebAPI.Controllers
+namespace WordHunt.WebAPI.Controllers.Auth
 {
     [Route("api/[controller]")]
     public class AuthController : Controller

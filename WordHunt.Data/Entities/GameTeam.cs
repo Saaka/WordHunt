@@ -13,5 +13,9 @@ namespace WordHunt.Data.Entities
         public string Color { get; set; }
         public string Icon { get; set; }
         public int Order { get; set; }
+        public int FieldCount { get; set; }
+        public int RemainingFieldCount { get; set; }
+
+        public virtual Game Game { get; set; }
     }
 }

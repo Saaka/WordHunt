@@ -7,10 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WordHunt.Config;
 using WordHunt.WebAPI.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using WordHunt.DataInterfaces.Users;
 using WordHunt.Data.Identity;
-using WordHunt.Data.Entities;
 
 namespace WordHunt.WebAPI.Auth.Token
 {
@@ -21,31 +19,31 @@ namespace WordHunt.WebAPI.Auth.Token
 
     public class TokenGenerator : ITokenGenerator
     {
-        private IAppUserManager userManager;
-        private IPasswordHasher<User> hasher;
         private IAuthConfiguration authConfig;
+        private IUserService userService;
+        private IAppUserClaimsProvider claimsProvider;
 
-        public TokenGenerator(IAppUserManager userManager,
-            IPasswordHasher<User> hasher,
-            IAuthConfiguration authConfig)
+        public TokenGenerator(IUserService userService,
+            IAuthConfiguration authConfig,
+            IAppUserClaimsProvider claimsProvider)
         {
-            this.userManager = userManager;
-            this.hasher = hasher;
+            this.userService = userService;
             this.authConfig = authConfig;
+            this.claimsProvider = claimsProvider;
         }
 
         public async Task<TokenGeneratorResult> GenerateToken(string userName, string password)
         {
-            var user = await userManager.FindUserByNameAsync(userName);
+            var user = await userService.LoadUserByName(userName);
             if (user != null)
             {
-                if (hasher.VerifyHashedPassword(user, user.PasswordHash, password) == PasswordVerificationResult.Success)
+                if (await userService.ValidatePasswordForUser(user, password))
                 {
-                    var userClaims = await userManager.GetClaimsAsync(user);
+                    var userClaims = await claimsProvider.GetClaimsAsync(user.Id);
 
                     var claims = new[]
                     {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Name),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim("id", user.Id.ToString())

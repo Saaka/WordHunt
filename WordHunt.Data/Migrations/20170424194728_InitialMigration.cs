@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WordHunt.Data.Migrations
 {
-    public partial class Initialmigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,25 @@ namespace WordHunt.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Game",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ColumnsCount = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    RowsCount = table.Column<int>(nullable: false),
+                    TeamCount = table.Column<int>(nullable: false),
+                    TrapCount = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Game", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,6 +95,32 @@ namespace WordHunt.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GameTeam",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Color = table.Column<string>(nullable: true),
+                    FieldCount = table.Column<int>(nullable: false),
+                    GameId = table.Column<int>(nullable: false),
+                    Icon = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Order = table.Column<int>(nullable: false),
+                    RemainingFieldCount = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameTeam", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GameTeam_Game_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Game",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -237,6 +282,11 @@ namespace WordHunt.Data.Migrations
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GameTeam_GameId",
+                table: "GameTeam",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
@@ -282,6 +332,9 @@ namespace WordHunt.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "GameTeam");
+
+            migrationBuilder.DropTable(
                 name: "Words");
 
             migrationBuilder.DropTable(
@@ -289,6 +342,9 @@ namespace WordHunt.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Game");
 
             migrationBuilder.DropTable(
                 name: "Categories");

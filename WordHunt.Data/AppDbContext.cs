@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using WordHunt.Data.Entities;
 using System.Threading.Tasks;
 using WordHunt.Data.Initializer;
+using System;
 
 namespace WordHunt.Data
 {
@@ -17,7 +18,8 @@ namespace WordHunt.Data
         public DbSet<Word> Words { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<Game> Game { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Game> GameTeams { get; set; }
 
         public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {
@@ -48,6 +50,39 @@ namespace WordHunt.Data
                     .OnDelete(DeleteBehavior.Restrict);
 
             InitGameTable(builder);
+            InitGameTeamsTable(builder);
+        }
+
+        private void InitGameTeamsTable(ModelBuilder builder)
+        {
+            builder.Entity<GameTeam>()
+                .HasKey(x => x.Id);
+
+            builder.Entity<GameTeam>()
+                .HasOne(g => g.Game)
+                .WithMany(g => g.Teams)
+                .HasForeignKey(g => g.GameId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<GameTeam>()
+                .Property(x => x.FieldCount)
+                .IsRequired();
+
+            builder.Entity<GameTeam>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder.Entity<GameTeam>()
+                .Property(x => x.Order)
+                .IsRequired();
+
+            builder.Entity<GameTeam>()
+                .Property(x => x.RemainingFieldCount)
+                .IsRequired();
+
+            builder.Entity<GameTeam>()
+                .Property(x => x.RemainingFieldCount)
+                .IsRequired();
         }
 
         private static void InitGameTable(ModelBuilder builder)
