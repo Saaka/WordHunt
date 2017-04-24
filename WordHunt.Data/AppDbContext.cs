@@ -8,8 +8,8 @@ using WordHunt.Data.Initializer;
 
 namespace WordHunt.Data
 {
-    public class AppDbContext : IdentityDbContext<User, Role, int>, 
-        IAppDbContext, 
+    public class AppDbContext : IdentityDbContext<User, Role, int>,
+        IAppDbContext,
         IAppDbInitializerContext
     {
         private IAppConfiguration config;
@@ -17,6 +17,7 @@ namespace WordHunt.Data
         public DbSet<Word> Words { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
+        public DbSet<Game> Game { get; set; }
 
         public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {
@@ -45,7 +46,43 @@ namespace WordHunt.Data
                     .WithMany(l => l.Categories)
                     .HasForeignKey(fk => fk.LanguageId)
                     .OnDelete(DeleteBehavior.Restrict);
-            
+
+            InitGameTable(builder);
+        }
+
+        private static void InitGameTable(ModelBuilder builder)
+        {
+            builder.Entity<Game>()
+                .HasKey(x => x.Id);
+
+            builder.Entity<Game>()
+                .Property(x => x.Name)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.UserId)
+                .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.TrapCount)
+                .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.ColumnsCount)
+                .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.RowsCount)
+                .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.TeamCount)
+                .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.Type)
+                .IsRequired();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
