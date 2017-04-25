@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordHunt.Data;
 using WordHunt.DataInterfaces.Categories;
 using WordHunt.DataInterfaces.Categories.DTO;
 using WordHunt.DataInterfaces.Categories.Request;
 using WordHunt.DataInterfaces.Categories.Result;
 
-namespace WordHunt.Data.Services.Categories
+namespace WordHunt.Services.Categories
 {
     public class CategoryProvider : ICategoryProvider
     {

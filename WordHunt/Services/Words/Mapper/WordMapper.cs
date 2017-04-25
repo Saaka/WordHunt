@@ -5,13 +5,13 @@ using WordHunt.Data.Entities;
 using WordHunt.DataInterfaces.Words.DTO;
 using WordHunt.DataInterfaces.Words.Request;
 
-namespace WordHunt.Data.Services.Words.Mapper
+namespace WordHunt.Services.Words.Mapper
 {
     public class WordMapper : IWordMapper
     {
-        public Entities.Word MapCreateRequest(WordCreateRequest wordCreateRequest)
+        public Data.Entities.Word MapCreateRequest(WordCreateRequest wordCreateRequest)
         {
-            return new Entities.Word()
+            return new Data.Entities.Word()
             {
                 CategoryId = wordCreateRequest.CategoryId,
                 LanguageId = wordCreateRequest.LanguageId,
@@ -19,7 +19,7 @@ namespace WordHunt.Data.Services.Words.Mapper
             };
         }
 
-        public Entities.Word MapWord(Entities.Word word, WordUpdateRequest updateRequest)
+        public Data.Entities.Word MapWord(Data.Entities.Word word, WordUpdateRequest updateRequest)
         {
             word.CategoryId = updateRequest.CategoryId;
             word.Value = updateRequest.Value;

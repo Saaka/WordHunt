@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.Data.Services.Base;
-using WordHunt.DataInterfaces.Words;
-using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.Services.Base;
+using WordHunt.DataInterfaces.Categories.Request;
 
-namespace WordHunt.Data.Services.Words
+namespace WordHunt.Services.Categories
 {
-    public interface IWordProviderValidator
+    public interface ICategoryProviderValidator
     {
-        ValidatorResult ValidateRequest(WordListGetRequest request);
+        ValidatorResult ValidateRequest(CategoryListRequest request);
     }
 
-    public class WordProviderValidator : IWordProviderValidator
+    public class CategoryProviderValidator : ICategoryProviderValidator
     {
-        public ValidatorResult ValidateRequest(WordListGetRequest request)
+        public ValidatorResult ValidateRequest(CategoryListRequest request)
         {
             if (request.LanguageId == 0)
                 return new ValidatorResult("Must specify language");

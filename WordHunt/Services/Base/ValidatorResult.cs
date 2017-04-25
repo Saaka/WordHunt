@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.Data.Services.Base
+namespace WordHunt.Services.Base
 {
     public class ValidatorResult
     {

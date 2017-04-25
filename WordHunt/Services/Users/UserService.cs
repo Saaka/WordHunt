@@ -8,15 +8,15 @@ using WordHunt.Data.Identity;
 using WordHunt.DataInterfaces.Users;
 using WordHunt.DataInterfaces.Users.DTO;
 
-namespace WordHunt.Data.Services.Users
+namespace WordHunt.Services.Users
 {
     public class UserService : IUserService
     {
         private readonly IAppUserManager userManager;
-        private readonly IPasswordHasher<Entities.User> hasher;
+        private readonly IPasswordHasher<Data.Entities.User> hasher;
 
         public UserService(IAppUserManager userManager,
-            IPasswordHasher<Entities.User> hasher)
+            IPasswordHasher<Data.Entities.User> hasher)
         {
             this.userManager = userManager;
             this.hasher = hasher;

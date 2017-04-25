@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Data.Services.Base;
+using WordHunt.Services.Base;
 using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.Data;
 
-namespace WordHunt.Data.Services.Words
+namespace WordHunt.Services.Words
 {
     public interface IWordCreatorValidator
     {

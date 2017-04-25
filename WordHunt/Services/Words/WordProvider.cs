@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordHunt.Data;
 using WordHunt.DataInterfaces.Words;
 using WordHunt.DataInterfaces.Words.DTO;
 using WordHunt.DataInterfaces.Words.Request;
 using WordHunt.DataInterfaces.Words.Result;
 
-namespace WordHunt.Data.Services.Words
+namespace WordHunt.Services.Words
 {
     public class WordProvider : IWordProvider
     {

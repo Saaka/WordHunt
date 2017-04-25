@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Data.Services.Categories.Mapper;
+using WordHunt.Services.Categories.Mapper;
 using WordHunt.DataInterfaces.Categories;
 using WordHunt.DataInterfaces.Categories.Request;
 using WordHunt.DataInterfaces.Categories.Result;
+using WordHunt.Data;
 
-namespace WordHunt.Data.Services.Categories
+namespace WordHunt.Services.Categories
 {
     public class CategoryUpdater : ICategoryUpdater
     {

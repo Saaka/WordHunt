@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Data.Services.Base;
+using WordHunt.Services.Base;
 using WordHunt.DataInterfaces.Categories.Request;
+using WordHunt.Data;
 
-namespace WordHunt.Data.Services.Categories.Mapper
+namespace WordHunt.Services.Categories.Mapper
 {
     public interface ICategoryUpdaterValidator
     {

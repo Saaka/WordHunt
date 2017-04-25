@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Data.Services.Words.Mapper;
+using WordHunt.Services.Words.Mapper;
 using WordHunt.DataInterfaces.Words;
 using WordHunt.DataInterfaces.Words.Request;
 using WordHunt.DataInterfaces.Words.Result;
+using WordHunt.Data;
 
-namespace WordHunt.Data.Services.Words
+namespace WordHunt.Services.Words
 {
     public class WordCreator : IWordCreator
     {

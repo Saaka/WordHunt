@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordHunt.Data;
 using WordHunt.DataInterfaces.Languages;
 using WordHunt.DataInterfaces.Languages.DTO;
 using WordHunt.DataInterfaces.Languages.Results;
 
-namespace WordHunt.Data.Services.Languages
+namespace WordHunt.Services.Languages
 {
     public class LanguageProvider : ILanguageProvider
     {
