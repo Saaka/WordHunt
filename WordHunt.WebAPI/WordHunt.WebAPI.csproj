@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WordHunt.Config\WordHunt.Config.csproj" />
     <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
+    <ProjectReference Include="..\WordHunt\WordHunt.csproj" />
   </ItemGroup>
 
 </Project>

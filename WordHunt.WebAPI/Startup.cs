@@ -51,6 +51,7 @@ namespace WordHunt.WebAPI
             //Add application/business logic services
             services.RegisterWebApiDependencies();
             services.ConfigureDataServices();
+            services.ConfigureWordHuntServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

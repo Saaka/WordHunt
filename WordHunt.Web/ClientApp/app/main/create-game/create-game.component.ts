@@ -43,7 +43,6 @@ export class CreateGameComponent {
     }
 
     createGame() {
-        console.log(this.game);
         this.createGameService.createGame(this.game);
     }
 

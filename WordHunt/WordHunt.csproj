@@ -1,7 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.DataInterfaces.csproj" />
+    <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
+  </ItemGroup>
 
 </Project>
