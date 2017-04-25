@@ -118,6 +118,10 @@ namespace WordHunt.Data
             builder.Entity<Game>()
                 .Property(x => x.Type)
                 .IsRequired();
+
+            builder.Entity<Game>()
+                .Property(x => x.EndMode)
+                .IsRequired();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

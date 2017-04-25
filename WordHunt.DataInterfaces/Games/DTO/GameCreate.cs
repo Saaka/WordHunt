@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 using WordHunt.DataInterfaces.Enums.Game;
 
-namespace WordHunt.Data.Entities
+namespace WordHunt.DataInterfaces.Games.DTO
 {
-    public class Game
+    public class GameCreate
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
         public string Name { get; set; }
-        public int ColumnsCount { get; set; }
-        public int RowsCount { get; set; }
+        public int BoardWidth { get; set; }
+        public int BoardHeight { get; set; }
         public int TeamCount { get; set; }
         public int TrapCount { get; set; }
         public GameType Type { get; set; }
         public GameEndMode EndMode { get; set; }
-
-        public virtual IList<GameTeam> Teams { get; set; }
+        public int UserId { get; set; }
     }
 }

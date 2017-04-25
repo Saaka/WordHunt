@@ -7,4 +7,5 @@ export class GameCreate {
     teamCount: number;
     trapCount: number;
     type: string;
+    endMode: string;
 }

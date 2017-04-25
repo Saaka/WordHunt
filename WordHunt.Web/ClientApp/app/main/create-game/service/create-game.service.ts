@@ -14,6 +14,11 @@ export class CreateGameService {
     createGame(model: GameCreate) {
 
         return this.http
-            .post('creategame', model);            
+            .post('game', model)
+            .subscribe(res => {
+
+                console.log('GAME CREATED');
+                console.log(res);
+            });            
     }
 }

@@ -2,6 +2,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { CreateGameComponent } from './create-game.component';
+import { CreateGameService } from './service/create-game.service';
 
 const routes: Routes = [
     {
@@ -12,7 +13,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [CreateGameService]
 })
 export class CreateGamesRoutingModule { }
 
