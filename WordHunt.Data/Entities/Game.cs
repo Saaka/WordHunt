@@ -17,6 +17,7 @@ namespace WordHunt.Data.Entities
         public int TrapCount { get; set; }
         public GameType Type { get; set; }
         public GameEndMode EndMode { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public virtual IList<GameTeam> Teams { get; set; }
     }

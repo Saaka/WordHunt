@@ -20,7 +20,7 @@ namespace WordHunt.Games.Create
             if (game.TeamCount != game.Teams.Count())
                 return new ValidatorResult("Wrong team count");
 
-            if (game.BoardHeight <= 5 || game.BoardWidth <= 5 
+            if (game.BoardHeight < 5 || game.BoardWidth < 5 
                 || game.BoardHeight > 8 || game.BoardWidth > 8)
                 return new ValidatorResult("Wrong board size");
 
