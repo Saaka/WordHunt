@@ -21,8 +21,9 @@ namespace WordHunt
     {
         //Configure services from WordHunt library.
         public static IServiceCollection ConfigureWordHuntServices(this IServiceCollection services)
-        {
+        {            
             services.AddScoped<IGameCreator, GameCreator>();
+            services.AddScoped<IGameCreatorValidator, GameCreatorValidator>();
 
             services.AddScoped<IUserService, UserService>();
 

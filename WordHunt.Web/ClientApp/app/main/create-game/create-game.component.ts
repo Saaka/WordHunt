@@ -43,7 +43,15 @@ export class CreateGameComponent {
     }
 
     createGame() {
-        this.createGameService.createGame(this.game);
+        this.createGameService
+            .createGame(this.game)
+            .subscribe(res => {
+
+                console.log('GAME CREATED');
+                console.log(res);
+            }, err => {
+                console.log(err);
+            });
     }
 
 }

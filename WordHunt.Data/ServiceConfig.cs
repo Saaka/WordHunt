@@ -33,13 +33,13 @@ namespace WordHunt.Data
         public static IServiceCollection ConfigureDataServices(this IServiceCollection services)
         {
             services.AddScoped<IAppDbContext, AppDbContext>();
+
             services.AddScoped<IAppDbInitializerContext, AppDbContext>();
             services.AddScoped<IDBInitializer, DBInitializer>();
 
             services.AddScoped<IAppUserManager, AppUserManager>();
             services.AddScoped<IAppUserClaimsProvider, AppUserManager>();
-            services.AddScoped<IAppRoleManager, AppRoleManager>();
-            
+            services.AddScoped<IAppRoleManager, AppRoleManager>();            
 
             return services;
         }
