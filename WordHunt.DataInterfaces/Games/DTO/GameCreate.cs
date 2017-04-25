@@ -13,7 +13,7 @@ namespace WordHunt.DataInterfaces.Games.DTO
         public int TeamCount { get; set; }
         public int TrapCount { get; set; }
         public GameType Type { get; set; }
-        public GameEndMode EndMode { get; set; }
+        public EndMode EndMode { get; set; }
         public int UserId { get; set; }
 
         public IEnumerable<GameTeamCreate> Teams { get; set; }

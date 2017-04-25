@@ -10,6 +10,9 @@ namespace WordHunt.Data.Entities
         public int Id { get; set; }
         public int GameId { get; set; }
         public int CurrentTeamId { get; set; }
-        public GameStatus Status { get; set; }
+        public Status Status { get; set; }
+        public bool Latest { get; set; }
+
+        public virtual Game Game { get; set; }
     }
 }

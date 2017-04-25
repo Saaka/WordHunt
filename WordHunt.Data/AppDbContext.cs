@@ -20,6 +20,7 @@ namespace WordHunt.Data
         public DbSet<Language> Languages { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameTeam> GameTeams { get; set; }
+        public DbSet<GameStatus> GameStatuses { get; set; }
 
         public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {
@@ -51,6 +52,19 @@ namespace WordHunt.Data
 
             InitGameTable(builder);
             InitGameTeamsTable(builder);
+            InitGameStatusesTable(builder);
+        }
+
+        private void InitGameStatusesTable(ModelBuilder builder)
+        {
+            builder.Entity<GameStatus>()
+                .HasKey(x => x.Id);
+
+            builder.Entity<GameStatus>()
+                .HasOne(x => x.Game)
+                .WithMany(x => x.Statuses)
+                .HasForeignKey(x => x.GameId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         private void InitGameTeamsTable(ModelBuilder builder)

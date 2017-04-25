@@ -4,11 +4,9 @@ using System.Text;
 
 namespace WordHunt.DataInterfaces.Enums.Game
 {
-    public enum GameStatus
+    public enum EndMode
     {
-        Created,
-        Ongoing,
-        Finished,
-        Canceled
+        EndTurn,
+        SuddenDeath
     }
 }
