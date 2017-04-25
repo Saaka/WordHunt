@@ -17,6 +17,9 @@ namespace WordHunt.Games.Create
     {
         public async Task<ValidatorResult> Validate(GameCreate game)
         {
+            if (game == null)
+                return new ValidatorResult("No data to create the game");
+
             if (game.TeamCount != game.Teams.Count())
                 return new ValidatorResult("Wrong team count");
 

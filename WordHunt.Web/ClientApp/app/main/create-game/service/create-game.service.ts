@@ -14,6 +14,7 @@ export class CreateGameService {
     createGame(model: GameCreate) {
 
         return this.http
-            .post('game/create', model);            
+            .post('game/create', model)
+            .map(res => res.json());            
     }
 }

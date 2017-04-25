@@ -25,9 +25,9 @@ namespace WordHunt.WebAPI.Controllers.Game
 
         // POST api/values
         [HttpPost("create")]
-        public Task<GameCreateResult> Post([FromBody]GameCreate model)
+        public async Task<GameCreateResult> Post([FromBody]GameCreate model)
         {
-            return gameCreator.CreateGame(model);
+            return await gameCreator.CreateGame(model);
         }
     }
 }
