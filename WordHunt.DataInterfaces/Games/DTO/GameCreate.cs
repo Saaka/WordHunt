@@ -15,5 +15,7 @@ namespace WordHunt.DataInterfaces.Games.DTO
         public GameType Type { get; set; }
         public GameEndMode EndMode { get; set; }
         public int UserId { get; set; }
+
+        public IEnumerable<GameTeamCreate> Teams { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { GameCreate } from './game.models';
+import { GameCreate, GameTeamCreate } from './game.models';
 import { CreateGameService } from './service/create-game.service';
 import { UserService } from '../../core/user.service';
 
@@ -27,6 +27,19 @@ export class CreateGameComponent {
         this.game.type = 'SingleDevice';
         this.game.endMode = 'EndTurn';
         this.game.userId = this.userService.userId();
+
+        this.createDefaultGameTeams(this.game);
+    }
+
+    private createDefaultGameTeams(game: GameCreate) {
+
+        game.teams = [];
+        for (let i = 0; i < game.teamCount; i++) {
+            game.teams.push({
+                fieldCount: 9,
+                name: 'Team' + (i+1)
+            });
+        }
     }
 
     createGame() {
