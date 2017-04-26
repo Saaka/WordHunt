@@ -5,10 +5,10 @@ using System.Text;
 using WordHunt.Data.Entities;
 using WordHunt.Data.Identity;
 using WordHunt.Data.Initializer;
-using WordHunt.DataInterfaces.Categories;
-using WordHunt.DataInterfaces.Languages;
-using WordHunt.DataInterfaces.Users;
-using WordHunt.DataInterfaces.Words;
+using WordHunt.Interfaces.Categories;
+using WordHunt.Interfaces.Languages;
+using WordHunt.Interfaces.Users;
+using WordHunt.Interfaces.Words;
 
 namespace WordHunt.Data
 {

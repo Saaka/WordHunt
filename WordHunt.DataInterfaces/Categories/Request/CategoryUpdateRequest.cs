@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Categories.Request
+namespace WordHunt.Interfaces.Categories.Request
 {
     public class CategoryUpdateRequest
     {

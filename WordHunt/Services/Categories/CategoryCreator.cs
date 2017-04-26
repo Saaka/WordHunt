@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Services.Categories.Mapper;
-using WordHunt.DataInterfaces.Categories;
-using WordHunt.DataInterfaces.Categories.Request;
-using WordHunt.DataInterfaces.Categories.Result;
+using WordHunt.Interfaces.Categories;
+using WordHunt.Interfaces.Categories.Request;
+using WordHunt.Interfaces.Categories.Result;
 using WordHunt.Data;
 
 namespace WordHunt.Services.Categories

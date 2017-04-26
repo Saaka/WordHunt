@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.DataInterfaces.Categories.DTO;
-using WordHunt.DataInterfaces.Common;
+using WordHunt.Interfaces.Categories.DTO;
+using WordHunt.Interfaces.Common;
 
-namespace WordHunt.DataInterfaces.Categories.Result
+namespace WordHunt.Interfaces.Categories.Result
 {
     public class CategoryUpdateResult : RequestResult
     {

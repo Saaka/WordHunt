@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WordHunt.Services.Base;
-using WordHunt.DataInterfaces.Categories.Request;
+using WordHunt.Interfaces.Categories.Request;
 
 namespace WordHunt.Services.Categories
 {

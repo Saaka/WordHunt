@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Users.DTO
+namespace WordHunt.Interfaces.Users.DTO
 {
     public class User
     {

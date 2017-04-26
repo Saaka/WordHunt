@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Services.Base;
-using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.Interfaces.Words.Request;
 using WordHunt.Data;
 
 namespace WordHunt.Services.Words

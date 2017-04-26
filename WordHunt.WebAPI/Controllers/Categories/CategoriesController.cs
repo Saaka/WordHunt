@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WordHunt.Config.Auth;
-using WordHunt.DataInterfaces.Categories;
-using WordHunt.DataInterfaces.Categories.Request;
-using WordHunt.DataInterfaces.Categories.Result;
+using WordHunt.Interfaces.Categories;
+using WordHunt.Interfaces.Categories.Request;
+using WordHunt.Interfaces.Categories.Result;
 
 namespace WordHunt.WebAPI.Controllers.Categories
 {

@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.DataInterfaces.Categories;
-using WordHunt.DataInterfaces.Games;
-using WordHunt.DataInterfaces.Languages;
-using WordHunt.DataInterfaces.Users;
-using WordHunt.DataInterfaces.Words;
+using WordHunt.Interfaces.Categories;
+using WordHunt.Interfaces.Games;
+using WordHunt.Interfaces.Languages;
+using WordHunt.Interfaces.Users;
+using WordHunt.Interfaces.Words;
 using WordHunt.Games.Create;
 using WordHunt.Services.Categories;
 using WordHunt.Services.Categories.Mapper;

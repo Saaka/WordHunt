@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.DataInterfaces.Games;
-using WordHunt.DataInterfaces.Games.DTO;
-using WordHunt.DataInterfaces.Games.Result;
+using WordHunt.Interfaces.Games;
+using WordHunt.Interfaces.Games.DTO;
+using WordHunt.Interfaces.Games.Result;
 
 namespace WordHunt.Games.Create
 {

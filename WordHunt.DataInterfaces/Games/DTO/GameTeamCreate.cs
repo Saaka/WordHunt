@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Games.DTO
+namespace WordHunt.Interfaces.Games.DTO
 {
     public class GameTeamCreate
     {

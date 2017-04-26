@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.DataInterfaces.Common;
+using WordHunt.Interfaces.Common;
 
-namespace WordHunt.DataInterfaces.Games.Result
+namespace WordHunt.Interfaces.Games.Result
 {
     public class GameCreateResult : RequestResult
     {

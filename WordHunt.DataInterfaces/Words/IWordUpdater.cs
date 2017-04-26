@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.DataInterfaces.Words.Request;
-using WordHunt.DataInterfaces.Words.Result;
+using WordHunt.Interfaces.Words.Request;
+using WordHunt.Interfaces.Words.Result;
 
-namespace WordHunt.DataInterfaces.Words
+namespace WordHunt.Interfaces.Words
 {
     public interface IWordUpdater
     {

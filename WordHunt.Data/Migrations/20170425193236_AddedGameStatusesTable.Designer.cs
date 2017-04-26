@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using WordHunt.Data;
-using WordHunt.DataInterfaces.Enums.Game;
+using WordHunt.Interfaces.Enums.Game;
 
 namespace WordHunt.Data.Migrations
 {

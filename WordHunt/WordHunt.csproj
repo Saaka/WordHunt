@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.DataInterfaces.csproj" />
+    <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.Interfaces.csproj" />
     <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
   </ItemGroup>
 

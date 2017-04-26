@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.DataInterfaces.Categories.Request;
-using WordHunt.DataInterfaces.Categories.Result;
+using WordHunt.Interfaces.Categories.Request;
+using WordHunt.Interfaces.Categories.Result;
 
-namespace WordHunt.DataInterfaces.Categories
+namespace WordHunt.Interfaces.Categories
 {
     public interface ICategoryCreator
     {

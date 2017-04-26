@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.DataInterfaces.Common;
-using WordHunt.DataInterfaces.Languages.DTO;
+using WordHunt.Interfaces.Common;
+using WordHunt.Interfaces.Languages.DTO;
 
-namespace WordHunt.DataInterfaces.Languages.Results
+namespace WordHunt.Interfaces.Languages.Results
 {
     public class LanguageListGetResult : RequestResult
     {

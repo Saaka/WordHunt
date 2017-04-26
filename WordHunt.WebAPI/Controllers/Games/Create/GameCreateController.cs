@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WordHunt.DataInterfaces.Games.DTO;
-using WordHunt.DataInterfaces.Games.Result;
+using WordHunt.Interfaces.Games.DTO;
+using WordHunt.Interfaces.Games.Result;
 using Microsoft.AspNetCore.Authorization;
-using WordHunt.DataInterfaces.Games;
+using WordHunt.Interfaces.Games;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

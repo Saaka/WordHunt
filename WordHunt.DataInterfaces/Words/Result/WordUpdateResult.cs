@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.DataInterfaces.Common;
-using WordHunt.DataInterfaces.Words.DTO;
+using WordHunt.Interfaces.Common;
+using WordHunt.Interfaces.Words.DTO;
 
-namespace WordHunt.DataInterfaces.Words.Result
+namespace WordHunt.Interfaces.Words.Result
 {
     public class WordUpdateResult : RequestResult
     {

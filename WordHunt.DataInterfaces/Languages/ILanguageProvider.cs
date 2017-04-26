@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.DataInterfaces.Languages.Results;
+using WordHunt.Interfaces.Languages.Results;
 
-namespace WordHunt.DataInterfaces.Languages
+namespace WordHunt.Interfaces.Languages
 {
     public interface ILanguageProvider
     {

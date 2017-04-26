@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using WordHunt.Data.Entities;
-using WordHunt.DataInterfaces.Words.DTO;
-using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.Interfaces.Words.DTO;
+using WordHunt.Interfaces.Words.Request;
 
 namespace WordHunt.Services.Words.Mapper
 {

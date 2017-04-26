@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WordHunt.DataInterfaces.Words;
+using WordHunt.Interfaces.Words;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.Config.Auth;
-using WordHunt.DataInterfaces.Words.Result;
-using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.Interfaces.Words.Result;
+using WordHunt.Interfaces.Words.Request;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

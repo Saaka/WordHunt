@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Data;
-using WordHunt.DataInterfaces.Languages;
-using WordHunt.DataInterfaces.Languages.DTO;
-using WordHunt.DataInterfaces.Languages.Results;
+using WordHunt.Interfaces.Languages;
+using WordHunt.Interfaces.Languages.DTO;
+using WordHunt.Interfaces.Languages.Results;
 
 namespace WordHunt.Services.Languages
 {

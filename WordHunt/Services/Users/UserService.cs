@@ -5,8 +5,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Data.Identity;
-using WordHunt.DataInterfaces.Users;
-using WordHunt.DataInterfaces.Users.DTO;
+using WordHunt.Interfaces.Users;
+using WordHunt.Interfaces.Users.DTO;
 
 namespace WordHunt.Services.Users
 {

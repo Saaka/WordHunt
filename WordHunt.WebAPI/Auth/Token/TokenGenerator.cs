@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WordHunt.Config;
 using WordHunt.WebAPI.Models;
-using WordHunt.DataInterfaces.Users;
+using WordHunt.Interfaces.Users;
 using WordHunt.Data.Identity;
 
 namespace WordHunt.WebAPI.Auth.Token

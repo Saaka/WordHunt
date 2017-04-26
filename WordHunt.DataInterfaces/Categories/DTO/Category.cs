@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Categories.DTO
+namespace WordHunt.Interfaces.Categories.DTO
 {
     public class Category
     {

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Data;
-using WordHunt.DataInterfaces.Categories;
-using WordHunt.DataInterfaces.Categories.DTO;
-using WordHunt.DataInterfaces.Categories.Request;
-using WordHunt.DataInterfaces.Categories.Result;
+using WordHunt.Interfaces.Categories;
+using WordHunt.Interfaces.Categories.DTO;
+using WordHunt.Interfaces.Categories.Request;
+using WordHunt.Interfaces.Categories.Result;
 
 namespace WordHunt.Services.Categories
 {

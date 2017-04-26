@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WordHunt.DataInterfaces.Categories.Request;
+using WordHunt.Interfaces.Categories.Request;
 
 namespace WordHunt.Services.Categories.Mapper
 {

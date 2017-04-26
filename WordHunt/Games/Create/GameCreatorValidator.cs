@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.DataInterfaces.Games.DTO;
+using WordHunt.Interfaces.Games.DTO;
 using WordHunt.Services.Base;
 
 namespace WordHunt.Games.Create

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WordHunt.DataInterfaces.Languages.DTO
+namespace WordHunt.Interfaces.Languages.DTO
 {
     public class Language
     {

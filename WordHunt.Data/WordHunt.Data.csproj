@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WordHunt.Config\WordHunt.Config.csproj" />
-    <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.DataInterfaces.csproj" />
+    <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

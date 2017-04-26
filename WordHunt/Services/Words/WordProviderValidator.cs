@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using WordHunt.Services.Base;
-using WordHunt.DataInterfaces.Words;
-using WordHunt.DataInterfaces.Words.Request;
+using WordHunt.Interfaces.Words;
+using WordHunt.Interfaces.Words.Request;
 
 namespace WordHunt.Services.Words
 {

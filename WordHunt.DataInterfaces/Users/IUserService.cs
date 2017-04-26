@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WordHunt.DataInterfaces.Users.DTO;
+using WordHunt.Interfaces.Users.DTO;
 
-namespace WordHunt.DataInterfaces.Users
+namespace WordHunt.Interfaces.Users
 {
     public interface IUserService
     {
