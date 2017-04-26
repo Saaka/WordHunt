@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WordHunt.DataInterfaces\WordHunt.Interfaces.csproj" />
     <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
+    <ProjectReference Include="..\WordHunt.Interfaces\WordHunt.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
