@@ -22,9 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Web", "WordHunt.We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{22556DE7-A887-4B64-9A73-7563E0057998}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.WebAPI.UnitTests", "WordHunt.Web.UnitTests\WordHunt.WebAPI.UnitTests.csproj", "{2D4521A4-26E4-425D-9949-A2E55F9C2634}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Interfaces", "WordHunt.Interfaces\WordHunt.Interfaces.csproj", "{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.WebAPI.UnitTests", "WordHunt.WebAPI.UnitTests\WordHunt.WebAPI.UnitTests.csproj", "{B12A0565-F6EB-4C80-AE24-F650176CA1C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,19 +52,19 @@ Global
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D4521A4-26E4-425D-9949-A2E55F9C2634}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2D4521A4-26E4-425D-9949-A2E55F9C2634} = {22556DE7-A887-4B64-9A73-7563E0057998}
+		{B12A0565-F6EB-4C80-AE24-F650176CA1C8} = {22556DE7-A887-4B64-9A73-7563E0057998}
 	EndGlobalSection
 EndGlobal
