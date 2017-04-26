@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WordHunt.WebAPI.Config;
 using Swashbuckle.AspNetCore.Swagger;
 using WordHunt.Data.Initializer;
+using WordHunt.WebAPI.Filters;
 
 namespace WordHunt.WebAPI
 {
@@ -64,6 +65,7 @@ namespace WordHunt.WebAPI
             app.UseCorsConfig(env)
                 .UseIdentity()
                 .UseJwtBearerTokenAuthentication(authConfig)
+                .UseMiddleware<ExceptionHandlingMiddleware>()
                 .UseMvc()
                 .UseSwagger()
                 .UseSwaggerUI(s => s.SwaggerEndpoint("/swagger/v1/swagger.json", "WordHunt WebAPI"));
