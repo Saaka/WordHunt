@@ -1,18 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Services.Base;
-using WordHunt.Interfaces.Categories.Request;
 using WordHunt.Data;
+using WordHunt.Services.Exceptions;
+using WordHunt.Models.Categories.Creation;
 
 namespace WordHunt.Services.Categories
 {
     public interface ICategoryCreatorValidator
     {
-        Task<ValidatorResult> ValidateRequest(CategoryCreateRequest request);
+        Task ValidateModel(CategoryCreate request);
     }
 
     public class CategoryCreatorValidator : ICategoryCreatorValidator
@@ -24,16 +21,14 @@ namespace WordHunt.Services.Categories
             this.context = context;
         }
 
-        public async Task<ValidatorResult> ValidateRequest(CategoryCreateRequest request)
+        public async Task ValidateModel(CategoryCreate request)
         {
             if (request.LanguageId <= 0)
-                return new ValidatorResult("Category must have specified language");
+                throw new ValidationFailedException("Category must have specified language");
             if (string.IsNullOrEmpty(request.Name))
-                return new ValidatorResult("Category must have a name");
+                throw new ValidationFailedException("Category must have a name");
             if (await CategoryExists(request.LanguageId, request.Name))
-                return new ValidatorResult("Category already exists");
-
-            return new ValidatorResult();
+                throw new ValidationFailedException("Category already exists");
         }
 
         private async Task<bool> CategoryExists(int languageId, string name)

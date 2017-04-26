@@ -1,18 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Services.Base;
-using WordHunt.Interfaces.Words.Request;
 using WordHunt.Data;
+using WordHunt.Models.Words.Modification;
+using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Services.Words
 {
     public interface IWordUpdaterValidator
     {
-        Task<ValidatorResult> ValidateRequest(WordUpdateRequest request);
+        Task ValidateRequest(WordUpdate model);
     }
 
     public class WordUpdaterValidator : IWordUpdaterValidator
@@ -24,16 +21,14 @@ namespace WordHunt.Services.Words
             this.context = context;
         }
 
-        public async Task<ValidatorResult> ValidateRequest(WordUpdateRequest request)
+        public async Task ValidateRequest(WordUpdate model)
         {
-            if (request.Id <= 0)
-                return new ValidatorResult("Must specify word id");
-            if (string.IsNullOrEmpty(request.Value))
-                return new ValidatorResult("Word must have a value");
-            if (await WordValueExists(request.Id, request.Id, request.Value))
-                return new ValidatorResult("Word already exists");
-
-            return new ValidatorResult();
+            if (model.Id <= 0)
+                throw new ValidationFailedException("Must specify word id");
+            if (string.IsNullOrEmpty(model.Value))
+                throw new ValidationFailedException("Word must have a value");
+            if (await WordValueExists(model.Id, model.Id, model.Value))
+                throw new ValidationFailedException("Word already exists");
         }
 
         private async Task<bool> WordValueExists(long languageId, long wordId, string value)

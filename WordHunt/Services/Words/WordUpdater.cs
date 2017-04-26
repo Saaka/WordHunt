@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Services.Words.Mapper;
-using WordHunt.Interfaces.Words;
-using WordHunt.Interfaces.Words.Request;
-using WordHunt.Interfaces.Words.Result;
 using WordHunt.Data;
+using WordHunt.Models.Words.Modification;
 
 namespace WordHunt.Services.Words
 {
+    public interface IWordUpdater
+    {
+        Task<WordUpdateResult> UpdateWord(WordUpdate model);
+    }
+
     public class WordUpdater : IWordUpdater
     {
         private readonly IAppDbContext context;
@@ -30,35 +30,24 @@ namespace WordHunt.Services.Words
             this.wordProvider = wordProvider;
         }
 
-        public async  Task<WordUpdateResult> UpdateWord(WordUpdateRequest request)
+        public async Task<WordUpdateResult> UpdateWord(WordUpdate model)
         {
-            try
+            await validator.ValidateRequest(model);
+
+            var toUpdate = await context.Words.SingleOrDefaultAsync(x => x.Id == model.Id);
+            if (toUpdate == null)
+                throw new ArgumentException($"Can't fine word with id {model.Id}");
+
+            toUpdate = mapper.MapWord(toUpdate, model);
+
+            await context.SaveChangesAsync();
+
+            var wordModel = await wordProvider.GetWord(model.Id);
+
+            return new WordUpdateResult()
             {
-                var validatorResult = await validator.ValidateRequest(request);
-                if (!validatorResult.IsSuccess)
-                    return new WordUpdateResult(validatorResult.Error);
-
-                var toUpdate = await context.Words.SingleOrDefaultAsync(x => x.Id == request.Id);
-                if (toUpdate == null)
-                    return new WordUpdateResult($"Can't fine word with id {request.Id}");
-
-                toUpdate = mapper.MapWord(toUpdate, request);
-
-                await context.SaveChangesAsync();
-
-                var getWordResult = await wordProvider.GetWord(request.Id);
-                if (!getWordResult.IsSuccess)
-                    return new WordUpdateResult(getWordResult.Error);
-                
-                return new WordUpdateResult()
-                {
-                    Word = getWordResult.Word
-                };
-            }
-            catch(Exception ex)
-            {
-                return new WordUpdateResult(ex.Message);
-            }
+                Word = wordModel
+            };
         }
     }
 }

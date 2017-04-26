@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WordHunt.Data.Entities;
-using WordHunt.Interfaces.Words.DTO;
-using WordHunt.Interfaces.Words.Request;
+﻿using WordHunt.Data.Entities;
+using WordHunt.Models.Words.Creation;
+using WordHunt.Models.Words.Modification;
 
 namespace WordHunt.Services.Words.Mapper
 {
+    public interface IWordMapper
+    {
+        Word MapWord(WordCreate wordCreateRequest);
+        Word MapWord(Word word, WordUpdate updateRequest);
+    }
+
     public class WordMapper : IWordMapper
     {
-        public Data.Entities.Word MapCreateRequest(WordCreateRequest wordCreateRequest)
+        public Word MapWord(WordCreate wordCreateRequest)
         {
-            return new Data.Entities.Word()
+            return new Word()
             {
                 CategoryId = wordCreateRequest.CategoryId,
                 LanguageId = wordCreateRequest.LanguageId,
@@ -19,7 +22,7 @@ namespace WordHunt.Services.Words.Mapper
             };
         }
 
-        public Data.Entities.Word MapWord(Data.Entities.Word word, WordUpdateRequest updateRequest)
+        public Word MapWord(Word word, WordUpdate updateRequest)
         {
             word.CategoryId = updateRequest.CategoryId;
             word.Value = updateRequest.Value;

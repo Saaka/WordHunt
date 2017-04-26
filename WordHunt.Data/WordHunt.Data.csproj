@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WordHunt.Base\WordHunt.Base.csproj" />
     <ProjectReference Include="..\WordHunt.Config\WordHunt.Config.csproj" />
-    <ProjectReference Include="..\WordHunt.Interfaces\WordHunt.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

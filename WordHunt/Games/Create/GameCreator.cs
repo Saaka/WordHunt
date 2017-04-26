@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Interfaces.Games;
-using WordHunt.Interfaces.Games.DTO;
-using WordHunt.Interfaces.Games.Result;
+using WordHunt.Models.Games.Creation;
 
 namespace WordHunt.Games.Create
 {
+    public interface IGameCreator
+    {
+        Task<GameCreateResult> CreateGame(GameCreate game);
+    }
+
     public class GameCreator : IGameCreator
     {
         private readonly IGameCreatorValidator validator;
@@ -18,19 +19,9 @@ namespace WordHunt.Games.Create
 
         public async Task<GameCreateResult> CreateGame(GameCreate game)
         {
-            try
-            {
-                var result = await validator.Validate(game);
-                if (!result.IsSuccess) return new GameCreateResult(result.Error);
+            await validator.Validate(game);
 
-
-                
-                return new GameCreateResult();
-            }
-            catch(Exception ex)
-            {
-                return new GameCreateResult(ex.ToString());
-            }
+            return new GameCreateResult();
         }
     }
 }

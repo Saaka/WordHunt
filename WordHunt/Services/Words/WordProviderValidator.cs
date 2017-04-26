@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WordHunt.Services.Base;
-using WordHunt.Interfaces.Words;
-using WordHunt.Interfaces.Words.Request;
+﻿using System.Threading.Tasks;
+using WordHunt.Models.Words.Access;
+using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Services.Words
 {
     public interface IWordProviderValidator
     {
-        ValidatorResult ValidateRequest(WordListGetRequest request);
+        Task Validate(WordListGet model);
     }
 
     public class WordProviderValidator : IWordProviderValidator
     {
-        public ValidatorResult ValidateRequest(WordListGetRequest request)
+        public async Task Validate(WordListGet model)
         {
-            if (request.LanguageId == 0)
-                return new ValidatorResult("Must specify language");
-            if (request.Page <= 0)
-                return new ValidatorResult("Page must be greater than zero");
-            if (request.PageSize <= 0)
-                return new ValidatorResult("Page size must be greater than zero");
-
-            return new ValidatorResult();
+            if (model.LanguageId == 0)
+                throw new ValidationFailedException("Must specify language");
+            if (model.Page <= 0)
+                throw new ValidationFailedException("Page must be greater than zero");
+            if (model.PageSize <= 0)
+                throw new ValidationFailedException("Page size must be greater than zero");
         }
     }
 }

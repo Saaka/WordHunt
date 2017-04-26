@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WordHunt.Interfaces.Enums.Game;
+using WordHunt.Base.Enums.Game;
 
 namespace WordHunt.Data.Entities
 {

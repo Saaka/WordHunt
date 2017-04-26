@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Data.Identity;
-using WordHunt.Interfaces.Users;
-using WordHunt.Interfaces.Users.DTO;
+using WordHunt.Models.Users;
 
 namespace WordHunt.Services.Users
 {
+    public interface IUserService
+    {
+        Task<UserModel> LoadUserByName(string userName);
+        Task<bool> ValidatePasswordForUser(UserModel user, string password);
+    }
+
     public class UserService : IUserService
     {
         private readonly IAppUserManager userManager;
@@ -22,12 +24,12 @@ namespace WordHunt.Services.Users
             this.hasher = hasher;
         }
 
-        public async Task<User> LoadUserByName(string userName)
+        public async Task<UserModel> LoadUserByName(string userName)
         {
             var entity = await userManager.FindUserByNameAsync(userName);
             if (entity == null) return null;
 
-            return new User()
+            return new UserModel()
             {
                 Id = entity.Id,
                 Email = entity.Email,
@@ -35,7 +37,7 @@ namespace WordHunt.Services.Users
             };
         }
 
-        public async Task<bool> ValidatePasswordForUser(User user, string password)
+        public async Task<bool> ValidatePasswordForUser(UserModel user, string password)
         {
             var entity = await userManager.GetUserByIdAsync(user.Id);
             if (entity == null) throw new ArgumentException($"User not found for id {user.Id}");

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WordHunt.Interfaces.Games.DTO;
-using WordHunt.Interfaces.Games.Result;
 using Microsoft.AspNetCore.Authorization;
-using WordHunt.Interfaces.Games;
+using WordHunt.Games.Create;
+using WordHunt.Models.Games.Creation;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WordHunt.Config.Auth;
-using WordHunt.Interfaces.Categories;
-using WordHunt.Interfaces.Categories.Request;
-using WordHunt.Interfaces.Categories.Result;
+using WordHunt.Models.Categories.Access;
+using WordHunt.Models.Categories.Creation;
+using WordHunt.Models.Categories.Modification;
+using WordHunt.Services.Categories;
 
 namespace WordHunt.WebAPI.Controllers.Categories
 {
@@ -26,21 +27,21 @@ namespace WordHunt.WebAPI.Controllers.Categories
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("list")]
-        public async Task<CategoryListResult> GetCategoryList([FromBody]CategoryListRequest request)
+        public async Task<CategoryListGetResult> GetCategoryList([FromBody]CategoryListGet request)
         {
             return await categoryProvider.GetCategoryList(request);
         }
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("add")]
-        public async Task<CategoryCreateResult> CreateCategory([FromBody]CategoryCreateRequest request)
+        public async Task<CategoryCreateResult> CreateCategory([FromBody]CategoryCreate request)
         {
             return await categoryCreator.CreateCategory(request);
         }
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpPost("update")]
-        public async Task<CategoryUpdateResult> UpdateCategory([FromBody]CategoryUpdateRequest request)
+        public async Task<CategoryUpdateResult> UpdateCategory([FromBody]CategoryUpdate request)
         {
             return await categoryUpdater.UpdateCategory(request);
         }

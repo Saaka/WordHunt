@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.Config.Auth;
-using WordHunt.Interfaces.Languages;
-using WordHunt.Interfaces.Languages.Results;
-using Microsoft.AspNetCore.Mvc.Filters;
+using WordHunt.Services.Languages;
+using System.Collections.Generic;
+using WordHunt.Models.Languages;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +22,7 @@ namespace WordHunt.WebAPI.Controllers.Languages
 
         [Authorize(Policy = SystemPolicies.AdminOnly)]
         [HttpGet("list")]
-        public async Task<LanguageListGetResult> Get()
+        public async Task<IEnumerable<LanguageModel>> Get()
         {
             return await languageProvider.GetLanguageList();
         }

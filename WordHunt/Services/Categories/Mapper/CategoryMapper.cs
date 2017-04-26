@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WordHunt.Interfaces.Categories.Request;
+﻿using WordHunt.Data.Entities;
+using WordHunt.Models.Categories.Creation;
+using WordHunt.Models.Categories.Modification;
 
 namespace WordHunt.Services.Categories.Mapper
 {
     public interface ICategoryMapper
     {
-        Data.Entities.Category MapCreateRequest(CategoryCreateRequest request);
-        Data.Entities.Category MapCategory(Data.Entities.Category category, CategoryUpdateRequest request);
+        Category MapCategory(CategoryCreate model);
+        Category MapCategory(Data.Entities.Category category, CategoryUpdate model);
     }
     class CategoryMapper : ICategoryMapper
     {
-        public Data.Entities.Category MapCreateRequest(CategoryCreateRequest request)
+        public Category MapCategory(CategoryCreate model)
         {
-            return new Data.Entities.Category()
+            return new Category()
             {
-                LanguageId = request.LanguageId,
-                Name = request.Name
+                LanguageId = model.LanguageId,
+                Name = model.Name
             };
         }
 
-        public Data.Entities.Category MapCategory(Data.Entities.Category category, CategoryUpdateRequest request)
+        public Category MapCategory(Category category, CategoryUpdate model)
         {
-            category.Name = request.Name;
+            category.Name = model.Name;
 
             return category;
         }

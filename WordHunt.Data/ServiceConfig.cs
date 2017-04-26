@@ -1,14 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using WordHunt.Data.Entities;
 using WordHunt.Data.Identity;
 using WordHunt.Data.Initializer;
-using WordHunt.Interfaces.Categories;
-using WordHunt.Interfaces.Languages;
-using WordHunt.Interfaces.Users;
-using WordHunt.Interfaces.Words;
 
 namespace WordHunt.Data
 {

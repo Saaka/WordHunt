@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Services.Categories.Mapper;
-using WordHunt.Interfaces.Categories;
-using WordHunt.Interfaces.Categories.Request;
-using WordHunt.Interfaces.Categories.Result;
 using WordHunt.Data;
+using WordHunt.Models.Categories.Modification;
 
 namespace WordHunt.Services.Categories
 {
+    public interface ICategoryUpdater
+    {
+        Task<CategoryUpdateResult> UpdateCategory(CategoryUpdate model);
+    }
+
     public class CategoryUpdater : ICategoryUpdater
     {
         private readonly IAppDbContext context;
@@ -29,35 +30,24 @@ namespace WordHunt.Services.Categories
             this.categoryProvider = categoryProvider;
         }
 
-        public async Task<CategoryUpdateResult> UpdateCategory(CategoryUpdateRequest request)
+        public async Task<CategoryUpdateResult> UpdateCategory(CategoryUpdate model)
         {
-            try
+            await validator.ValidateRequest(model);
+
+            var toUpdate = await context.Categories.SingleOrDefaultAsync(x => x.Id == model.Id);
+            if (toUpdate == null)
+                throw new ArgumentException($"Can't fine category with id {model.Id}");
+
+            toUpdate = mapper.MapCategory(toUpdate, model);
+
+            await context.SaveChangesAsync();
+
+            var categoryModel = await categoryProvider.GetCategory(model.Id);
+
+            return new CategoryUpdateResult()
             {
-                var validatorResult = await validator.ValidateRequest(request);
-                if (!validatorResult.IsSuccess)
-                    return new CategoryUpdateResult(validatorResult.Error);
-
-                var toUpdate = await context.Categories.SingleOrDefaultAsync(x => x.Id == request.Id);
-                if (toUpdate == null)
-                    return new CategoryUpdateResult($"Can't fine category with id {request.Id}");
-
-                toUpdate = mapper.MapCategory(toUpdate, request);
-
-                await context.SaveChangesAsync();
-
-                var getCategoryResult = await categoryProvider.GetCategory(request.Id);
-                if (!getCategoryResult.IsSuccess)
-                    return new CategoryUpdateResult(getCategoryResult.Error);
-
-                return new CategoryUpdateResult()
-                {
-                    Category = getCategoryResult.Category
-                };
-            }
-            catch (Exception ex)
-            {
-                return new CategoryUpdateResult(ex.Message);
-            }
+                Category = categoryModel
+            };
         }
     }
 }

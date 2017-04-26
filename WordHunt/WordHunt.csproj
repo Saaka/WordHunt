@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
-    <ProjectReference Include="..\WordHunt.Interfaces\WordHunt.Interfaces.csproj" />
+    <ProjectReference Include="..\WordHunt.Models\WordHunt.Models.csproj" />
   </ItemGroup>
 
 </Project>

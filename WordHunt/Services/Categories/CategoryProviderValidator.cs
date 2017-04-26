@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WordHunt.Services.Base;
-using WordHunt.Interfaces.Categories.Request;
+﻿using System.Threading.Tasks;
+using WordHunt.Models.Categories.Access;
+using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Services.Categories
 {
     public interface ICategoryProviderValidator
     {
-        ValidatorResult ValidateRequest(CategoryListRequest request);
+        Task ValidateRequest(CategoryListGet model);
     }
 
     public class CategoryProviderValidator : ICategoryProviderValidator
     {
-        public ValidatorResult ValidateRequest(CategoryListRequest request)
+        public async Task ValidateRequest(CategoryListGet model)
         {
-            if (request.LanguageId == 0)
-                return new ValidatorResult("Must specify language");
-            if (request.Page <= 0)
-                return new ValidatorResult("Page must be greater than zero");
-            if (request.PageSize <= 0)
-                return new ValidatorResult("Page size must be greater than zero");
-
-            return new ValidatorResult();
+            if (model.LanguageId == 0)
+                throw new ValidationFailedException("Must specify language");
+            if (model.Page <= 0)
+                throw new ValidationFailedException("Page must be greater than zero");
+            if (model.PageSize <= 0)
+                throw new ValidationFailedException("Page size must be greater than zero");
         }
     }
 }

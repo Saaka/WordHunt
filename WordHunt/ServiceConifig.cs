@@ -1,12 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using WordHunt.Interfaces.Categories;
-using WordHunt.Interfaces.Games;
-using WordHunt.Interfaces.Languages;
-using WordHunt.Interfaces.Users;
-using WordHunt.Interfaces.Words;
 using WordHunt.Games.Create;
 using WordHunt.Services.Categories;
 using WordHunt.Services.Categories.Mapper;

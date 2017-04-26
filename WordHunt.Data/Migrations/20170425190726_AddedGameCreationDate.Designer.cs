@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using WordHunt.Data;
-using WordHunt.Interfaces.Enums.Game;
 
 namespace WordHunt.Data.Migrations
 {

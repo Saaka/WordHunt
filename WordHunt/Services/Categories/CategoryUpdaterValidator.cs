@@ -1,18 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using WordHunt.Services.Base;
-using WordHunt.Interfaces.Categories.Request;
 using WordHunt.Data;
+using WordHunt.Models.Categories.Modification;
+using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Services.Categories.Mapper
 {
     public interface ICategoryUpdaterValidator
     {
-        Task<ValidatorResult> ValidateRequest(CategoryUpdateRequest request);
+        Task ValidateRequest(CategoryUpdate request);
     }
 
     public class CategoryUpdaterValidator : ICategoryUpdaterValidator
@@ -24,16 +21,14 @@ namespace WordHunt.Services.Categories.Mapper
             this.context = context;
         }
 
-        public async Task<ValidatorResult> ValidateRequest(CategoryUpdateRequest request)
+        public async Task ValidateRequest(CategoryUpdate request)
         {
             if (request.Id <= 0)
-                return new ValidatorResult("Must specify word id");
+                throw new ValidationFailedException("Must specify word id");
             if (string.IsNullOrEmpty(request.Name))
-                return new ValidatorResult("Word must have a value");
+                throw new ValidationFailedException("Word must have a value");
             if (await WordValueExists(request.Id, request.Id, request.Name))
-                return new ValidatorResult("Word already exists");
-
-            return new ValidatorResult();
+                throw new ValidationFailedException("Word already exists");
         }
 
         private async Task<bool> WordValueExists(long languageId, long categoryId, string name)

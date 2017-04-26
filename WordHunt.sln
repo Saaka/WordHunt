@@ -22,9 +22,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Web", "WordHunt.We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{22556DE7-A887-4B64-9A73-7563E0057998}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.Interfaces", "WordHunt.Interfaces\WordHunt.Interfaces.csproj", "{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordHunt.WebAPI.UnitTests", "WordHunt.WebAPI.UnitTests\WordHunt.WebAPI.UnitTests.csproj", "{B12A0565-F6EB-4C80-AE24-F650176CA1C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.Models", "WordHunt.Models\WordHunt.Models.csproj", "{D6B4ADAC-B54F-471B-AB66-0B590D3777B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordHunt.Base", "WordHunt.Base\WordHunt.Base.csproj", "{70B26F59-C348-4F49-9196-352BA0576D64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,14 +54,18 @@ Global
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBDFD4B-4407-45EC-8DC2-21084E68FFA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84AAE9B4-00D5-4F09-AFD7-F98B1B18BE9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B12A0565-F6EB-4C80-AE24-F650176CA1C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B4ADAC-B54F-471B-AB66-0B590D3777B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B4ADAC-B54F-471B-AB66-0B590D3777B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B4ADAC-B54F-471B-AB66-0B590D3777B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B4ADAC-B54F-471B-AB66-0B590D3777B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B26F59-C348-4F49-9196-352BA0576D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B26F59-C348-4F49-9196-352BA0576D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B26F59-C348-4F49-9196-352BA0576D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B26F59-C348-4F49-9196-352BA0576D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
