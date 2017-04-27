@@ -9,7 +9,7 @@ namespace WordHunt.Games.Create.Repository
 {
     public interface IGameRepository
     {
-        void SaveGame(string name, DbTransaction transaction = null);
+        void SaveGame(string name);
     }
 
     public class GameRepository : IGameRepository
@@ -20,12 +20,12 @@ namespace WordHunt.Games.Create.Repository
             this.connectionProvider = connectionProvider;
         }
 
-        public void SaveGame(string name, DbTransaction transaction = null)
+        public void SaveGame(string name)
         {
             var connection = connectionProvider.GetConnection();
 
             connection.Execute(@"INSERT INTO Words(LanguageId, Value) VALUES (@LanguageId, @Value)",
-                new { LanguageId = 1, Value = name }, transaction?.GetTransaction());
+                new { LanguageId = 1, Value = name });
         }
     }
 }

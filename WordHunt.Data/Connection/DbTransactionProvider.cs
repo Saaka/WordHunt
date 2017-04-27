@@ -5,23 +5,25 @@ using System.Text;
 
 namespace WordHunt.Data.Connection
 {
-    public interface IDbTransactionFactory
+    public interface IDbTransactionProvider
     {
         DbTransaction CreateTransaction();
     }
 
-    public class DbTransactionFactory : IDbTransactionFactory
+    public class DbTransactionProvider : IDbTransactionProvider
     {
         private IDbConnectionProvider connectionProvider;
 
-        public DbTransactionFactory(IDbConnectionProvider connectionProvider)
+        public DbTransactionProvider(IDbConnectionProvider connectionProvider)
         {
             this.connectionProvider = connectionProvider;
         }
 
         public DbTransaction CreateTransaction()
         {
-            return new DbTransaction(connectionProvider.GetConnection());
+            var transaction = new DbTransaction(connectionProvider.GetConnection());
+
+            return transaction;
         }
     }
 

@@ -14,15 +14,15 @@ namespace WordHunt.Games.Create
     public class GameCreator : IGameCreator
     {
         private readonly IGameCreatorValidator validator;
-        private readonly IDbTransactionFactory transactionFactory;
+        private readonly IDbTransactionProvider transactionProvider;
         private readonly IGameRepository gameRepository;
 
         public GameCreator(IGameCreatorValidator validator,
-            IDbTransactionFactory transactionFactory,
+            IDbTransactionProvider transactionProvider,
             IGameRepository gameRepository)
         {
             this.validator = validator;
-            this.transactionFactory = transactionFactory;
+            this.transactionProvider = transactionProvider;
             this.gameRepository = gameRepository;
         }
 

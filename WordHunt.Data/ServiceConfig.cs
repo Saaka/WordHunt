@@ -35,9 +35,10 @@ namespace WordHunt.Data
             services.AddScoped<IIdentityUserClaimsProvider, IdentityUserManager>();
             services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();
             
-            services.AddScoped<IDbTransactionFactory, DbTransactionFactory>();
+            services.AddScoped<IDbTransactionProvider, DbTransactionProvider>();
             services.AddScoped<IDbConnectionProvider, DbConnectionProvider>();
-
+            services.AddScoped<IDbConnectionFactory, DbConnectionProvider>();
+            
             return services;
         }
     }

@@ -7,16 +7,25 @@ using WordHunt.Config;
 
 namespace WordHunt.Data.Connection
 {
+    public interface IDbConnectionFactory
+    {
+        /// <summary>
+        /// Creates new instance of IDbConnection. This instance is not scoped and have to be managed manually. Connection is opened by default.
+        /// </summary>
+        /// <returns></returns>
+        IDbConnection CreateConnection();
+    }
+
     public interface IDbConnectionProvider : IDisposable
     {
         /// <summary>
-        /// Gets instance of IDbConnection. This instance will be disposed after the lifespan of the scope. Dont dispose it manually. 
+        /// Gets instance of IDbConnection. This instance will be disposed after the lifespan of the provider scope. Dont dispose it manually. 
         /// </summary>
         /// <returns></returns>
         IDbConnection GetConnection();
     }
 
-    public class DbConnectionProvider : IDbConnectionProvider
+    public class DbConnectionProvider : IDbConnectionProvider, IDbConnectionFactory
     {
         private readonly IAppConfiguration appConfig;
         private IDbConnection connection;
@@ -30,10 +39,18 @@ namespace WordHunt.Data.Connection
 
         public IDbConnection GetConnection()
         {
-            CreateConnection();
+            CreateScopedConnection();
             OpenConnection();
 
             return connection;
+        }
+
+        public IDbConnection CreateConnection()
+        {
+            var conn = new SqlConnection(appConfig.DbConnectionString);
+            conn.Open();
+
+            return conn;
         }
 
         private void OpenConnection()
@@ -48,7 +65,7 @@ namespace WordHunt.Data.Connection
             }
         }
 
-        private void CreateConnection()
+        private void CreateScopedConnection()
         {
             if (connection == null)
             {
@@ -56,8 +73,7 @@ namespace WordHunt.Data.Connection
                 {
                     if (connection == null)
                     {
-                        connection = new SqlConnection(appConfig.DbConnectionString);
-                        connection.Open();
+                        connection = CreateConnection();
                     }
                 }
             }
