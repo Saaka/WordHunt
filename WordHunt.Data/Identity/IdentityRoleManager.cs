@@ -7,17 +7,17 @@ using WordHunt.Data.Entities;
 
 namespace WordHunt.Data.Identity
 {
-    public interface IAppRoleManager
+    public interface IIdentityRoleManager
     {
         Task<bool> RoleExistsAsync(string role);
         Task<IdentityResult> CreateAsync(Role role);
     } 
 
-    public class AppRoleManager : IAppRoleManager
+    public class IdentityRoleManager : IIdentityRoleManager
     {
         private readonly RoleManager<Role> roleManager;
 
-        public AppRoleManager(RoleManager<Role> roleManager)
+        public IdentityRoleManager(RoleManager<Role> roleManager)
         {
             this.roleManager = roleManager;
         }

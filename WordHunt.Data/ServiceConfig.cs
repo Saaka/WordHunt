@@ -30,9 +30,9 @@ namespace WordHunt.Data
             services.AddScoped<IAppDbInitializerContext, AppDbContext>();
             services.AddScoped<IDBInitializer, DBInitializer>();
 
-            services.AddScoped<IAppUserManager, AppUserManager>();
-            services.AddScoped<IAppUserClaimsProvider, AppUserManager>();
-            services.AddScoped<IAppRoleManager, AppRoleManager>();            
+            services.AddScoped<IIdentityUserManager, IdentityUserManager>();
+            services.AddScoped<IIdentityUserClaimsProvider, IdentityUserManager>();
+            services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();            
 
             return services;
         }

@@ -8,7 +8,6 @@ using System.Text;
 using WordHunt.Config;
 using WordHunt.WebAPI.Models;
 using WordHunt.Data.Identity;
-using WordHunt.Services.Users;
 
 namespace WordHunt.WebAPI.Auth.Token
 {
@@ -20,30 +19,30 @@ namespace WordHunt.WebAPI.Auth.Token
     public class TokenGenerator : ITokenGenerator
     {
         private IAuthConfiguration authConfig;
-        private IUserService userService;
-        private IAppUserClaimsProvider claimsProvider;
+        private IIdentityUserManager userManager;
+        private IIdentityUserClaimsProvider claimsProvider;
 
-        public TokenGenerator(IUserService userService,
+        public TokenGenerator(IIdentityUserManager userManager,
             IAuthConfiguration authConfig,
-            IAppUserClaimsProvider claimsProvider)
+            IIdentityUserClaimsProvider claimsProvider)
         {
-            this.userService = userService;
+            this.userManager = userManager;
             this.authConfig = authConfig;
             this.claimsProvider = claimsProvider;
         }
 
         public async Task<TokenGeneratorResult> GenerateToken(string userName, string password)
         {
-            var user = await userService.LoadUserByName(userName);
+            var user = await userManager.FindUserByNameAsync(userName);
             if (user != null)
             {
-                if (await userService.ValidatePasswordForUser(user, password))
+                if (await userManager.ValidatePasswordForUser(user, password))
                 {
                     var userClaims = await claimsProvider.GetClaimsAsync(user.Id);
 
                     var claims = new[]
                     {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim("id", user.Id.ToString())
@@ -62,26 +61,17 @@ namespace WordHunt.WebAPI.Auth.Token
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
                     return new TokenGeneratorResult
                     {
-                        ResultStatus = TokenGeneratorResultStatus.Success,
                         Token = new TokenModel(tokenString, token.ValidTo)
                     };
                 }
                 else
                 {
-                    return new TokenGeneratorResult
-                    {
-                        ResultStatus = TokenGeneratorResultStatus.InvalidPassword,
-                        ErrorMessage = $"Password for email {userName} is invalid."
-                    };
+                    throw new ArgumentException($"Password for email {userName} is invalid.");
                 }
             }
             else
             {
-                return new TokenGeneratorResult
-                {
-                    ResultStatus = TokenGeneratorResultStatus.UserNotFound,
-                    ErrorMessage = $"User for email {userName} not found"
-                };
+                throw new ArgumentException($"User for email {userName} not found");
             }
         }
     }

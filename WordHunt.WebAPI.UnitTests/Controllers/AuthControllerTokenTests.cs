@@ -22,7 +22,7 @@ namespace WordHunt.Web.UnitTests.Controllers
             Mock<ILogger<AuthController>> logger = new Mock<ILogger<AuthController>>();
             Mock<ITokenGenerator> tokenGenMock = new Mock<ITokenGenerator>();
             tokenGenMock.Setup(x => x.GenerateToken(It.IsAny<string>(), It.IsAny<string>()))
-                            .ReturnsAsync(new TokenGeneratorResult() { ResultStatus = TokenGeneratorResultStatus.Success }).Verifiable();
+                            .ReturnsAsync(new TokenGeneratorResult()).Verifiable("GenerateToken was not called");
 
             AuthController controller = new AuthController(tokenGenMock.Object, logger.Object);
 
@@ -44,7 +44,7 @@ namespace WordHunt.Web.UnitTests.Controllers
             Mock<ITokenGenerator> tokenGenMock = new Mock<ITokenGenerator>();
 
             tokenGenMock.Setup(x=> x.GenerateToken(model.UserName, model.Password))
-                    .ReturnsAsync(new TokenGeneratorResult() { ResultStatus = TokenGeneratorResultStatus.Success}).Verifiable("GenerateToken was not called");
+                    .ReturnsAsync(new TokenGeneratorResult()).Verifiable("GenerateToken was not called");
             
             AuthController controller = new AuthController(tokenGenMock.Object, logger.Object);
 

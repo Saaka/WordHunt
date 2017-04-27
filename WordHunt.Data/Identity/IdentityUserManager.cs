@@ -9,33 +9,45 @@ using System;
 
 namespace WordHunt.Data.Identity
 {
-    public interface IAppUserClaimsProvider
+    public interface IIdentityUserClaimsProvider
     {
         Task<IList<Claim>> GetClaimsAsync(int userId);
     }
 
-    public interface IAppUserManager : IAppUserClaimsProvider
+    public interface IIdentityUserManager : IIdentityUserClaimsProvider
     {
         Task<User> FindUserByNameAsync(string userName);        
         Task<IdentityResult> CreateAsync(User user, string password);
         Task<IdentityResult> AddToRoleAsync(User user, string role);
         Task<IdentityResult> AddClaimAsync(User user, Claim claim);
         Task<User> GetUserByIdAsync(int id);
+        Task<bool> ValidatePasswordForUser(User user, string password);
     }
 
-    public class AppUserManager : IAppUserManager
+    public class IdentityUserManager : IIdentityUserManager
     {
         private readonly IAppDbContext context;
         private readonly ILookupNormalizer keyNormalizer;
         private readonly UserManager<User> userManager;
+        private readonly IPasswordHasher<Data.Entities.User> hasher;
 
-        public AppUserManager(IAppDbContext context,
+        public IdentityUserManager(IAppDbContext context,
             ILookupNormalizer keyNormalizer,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IPasswordHasher<Data.Entities.User> hasher)
         {
             this.context = context;
             this.keyNormalizer = keyNormalizer;
             this.userManager = userManager;
+            this.hasher = hasher;
+        }
+
+        public async Task<bool> ValidatePasswordForUser(User user, string password)
+        {
+            if (user == null)
+                throw new ArgumentException("No user provided");
+
+            return hasher.VerifyHashedPassword(user, user.PasswordHash, password) == PasswordVerificationResult.Success;
         }
 
         public async Task<User> FindUserByNameAsync(string userName)
