@@ -14,18 +14,19 @@ namespace WordHunt.Games.Create.Repository
 
     public class GameRepository : IGameRepository
     {
-        private readonly IDbConnectionProvider connectionProvider;
-        public GameRepository(IDbConnectionProvider connectionProvider)
+        private readonly IDbConnectionFactory connectionFactory;
+        public GameRepository(IDbConnectionFactory connectionFactory)
         {
-            this.connectionProvider = connectionProvider;
+            this.connectionFactory = connectionFactory;
         }
 
         public void SaveGame(string name)
         {
-            var connection = connectionProvider.GetConnection();
-
-            connection.Execute(@"INSERT INTO Words(LanguageId, Value) VALUES (@LanguageId, @Value)",
-                new { LanguageId = 1, Value = name });
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                connection.Execute(@"INSERT INTO Words(LanguageId, Value) VALUES (@LanguageId, @Value)",
+                    new { LanguageId = 1, Value = name });
+            }
         }
     }
 }
