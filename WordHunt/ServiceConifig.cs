@@ -21,6 +21,7 @@ namespace WordHunt
             services.AddScoped<IGameMapper, GameMapper>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IGameTeamRepository, GameTeamRepository>();
+            services.AddScoped<IGameStatusRepository, GameStatusRepository>();
             
 
             services.AddScoped<IUserService, UserService>();

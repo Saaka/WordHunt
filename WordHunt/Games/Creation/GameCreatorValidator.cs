@@ -8,12 +8,13 @@ namespace WordHunt.Games.Creation
 {
     public interface IGameCreatorValidator
     {
-        Task Validate(GameCreate game);
+        Task ValidateGame(GameCreate game);
+        Task ValidateTeams(IEnumerable<GameTeamCreate> teams);
     }
     
     public class GameCreatorValidator : IGameCreatorValidator
     {
-        public async Task Validate(GameCreate gameModel)
+        public async Task ValidateGame(GameCreate gameModel)
         {
             if (gameModel == null)
                 throw new ValidationFailedException("No data to create the game");
@@ -33,9 +34,18 @@ namespace WordHunt.Games.Creation
 
             if (gameModel.Teams == null || !gameModel.Teams.Any())
                 throw new ValidationFailedException("Game must have teams");
+        }
 
-            if (gameModel.Teams.Select(x => x.Name.Trim()).Distinct().Count() != gameModel.Teams.Count())
+        public async Task ValidateTeams(IEnumerable<GameTeamCreate> teams)
+        {
+            if (teams.Select(x => x.Name.Trim()).Distinct().Count() != teams.Count())
                 throw new ValidationFailedException("Teams must have different names");
+
+            if (teams.Any(x => x.FieldCount == 0))
+                throw new ValidationFailedException("Teams must have assigned field count");
+
+            if (teams.Any(x => x.Order == 0))
+                throw new ValidationFailedException("Teams must have assigned order");
         }
     }
 }

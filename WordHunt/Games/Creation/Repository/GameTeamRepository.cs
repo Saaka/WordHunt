@@ -13,12 +13,15 @@ namespace WordHunt.Games.Creation.Repository
     public interface IGameTeamRepository
     {
         Task CreateGameTeams(IEnumerable<GameTeamCreate> model);
+        Task<int> GetFirstTeamId(int gameId);
     }
 
     public class GameTeamRepository : IGameTeamRepository
     {
         private const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount])
                                     VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount)";
+
+        private const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
 
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
@@ -40,6 +43,14 @@ namespace WordHunt.Games.Creation.Repository
             using (var connection = connectionFactory.CreateConnection())
             {
                 await connection.ExecuteAsync(CreateGameTeamQuery, entities);
+            }
+        }
+
+        public async Task<int> GetFirstTeamId(int gameId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.QueryFirstAsync<int>(GetFirstTeamIdQuery, new { GameId = gameId });
             }
         }
     }

@@ -10,6 +10,7 @@ namespace WordHunt.Games.Creation.Mappings
     {
         Game MapGame(GameCreate model);
         GameTeam MapGameTeam(GameTeamCreate model);
+        GameStatus MapStatus(int gameId, int firstTeamId);
     }
 
     public class GameMapper : IGameMapper
@@ -39,6 +40,17 @@ namespace WordHunt.Games.Creation.Mappings
                TrapCount = model.TrapCount,
                Type = model.Type,
                UserId = model.UserId
+            };
+        }
+
+        public GameStatus MapStatus(int gameId, int firstTeamId)
+        {
+            return new GameStatus()
+            {
+                CurrentTeamId = firstTeamId,
+                GameId = gameId,
+                Latest = true,
+                Status = Base.Enums.Game.Status.Created
             };
         }
     }
