@@ -10,6 +10,7 @@ using WordHunt.WebAPI.Config;
 using Swashbuckle.AspNetCore.Swagger;
 using WordHunt.Data.Initializer;
 using WordHunt.WebAPI.Filters;
+using WordHunt.Base;
 
 namespace WordHunt.WebAPI
 {
@@ -45,8 +46,9 @@ namespace WordHunt.WebAPI
             services.RegisterContext();
             services.AddCors();
             services.RegisterPolicies();
-            
+
             //Add application/business logic services
+            services.ConfigureBaseServices();
             services.RegisterWebApiDependencies();
             services.ConfigureDataServices();
             services.ConfigureWordHuntServices();

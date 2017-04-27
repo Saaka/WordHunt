@@ -9,9 +9,10 @@ using WordHunt.Base.Enums.Game;
 namespace WordHunt.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170427213857_RenamedGameColumns")]
+    partial class RenamedGameColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -184,7 +185,7 @@ namespace WordHunt.Data.Migrations
 
                     b.Property<int>("RemainingFieldCount");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 

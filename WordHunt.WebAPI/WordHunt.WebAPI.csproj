@@ -28,6 +28,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WordHunt.Base\WordHunt.Base.csproj" />
     <ProjectReference Include="..\WordHunt.Config\WordHunt.Config.csproj" />
     <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
     <ProjectReference Include="..\WordHunt\WordHunt.csproj" />

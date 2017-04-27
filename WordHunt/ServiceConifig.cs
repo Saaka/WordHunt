@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using WordHunt.Games.Create;
-using WordHunt.Games.Create.Repository;
+using WordHunt.Games.Creation;
+using WordHunt.Games.Creation.Mappings;
+using WordHunt.Games.Creation.Repository;
 using WordHunt.Services.Categories;
 using WordHunt.Services.Categories.Mapper;
 using WordHunt.Services.Languages;
@@ -17,6 +18,10 @@ namespace WordHunt
         {            
             services.AddScoped<IGameCreator, GameCreator>();
             services.AddScoped<IGameCreatorValidator, GameCreatorValidator>();
+            services.AddScoped<IGameMapper, GameMapper>();
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<IGameTeamRepository, GameTeamRepository>();
+            
 
             services.AddScoped<IUserService, UserService>();
 
@@ -38,7 +43,6 @@ namespace WordHunt
 
             services.AddScoped<ILanguageProvider, LanguageProvider>();
 
-            services.AddScoped<IGameRepository, GameRepository>();
 
             return services;
         }

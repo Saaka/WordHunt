@@ -118,11 +118,11 @@ namespace WordHunt.Data
                 .IsRequired();
 
             builder.Entity<Game>()
-                .Property(x => x.ColumnsCount)
+                .Property(x => x.BoardWidth)
                 .IsRequired();
 
             builder.Entity<Game>()
-                .Property(x => x.RowsCount)
+                .Property(x => x.BoardHeight)
                 .IsRequired();
 
             builder.Entity<Game>()

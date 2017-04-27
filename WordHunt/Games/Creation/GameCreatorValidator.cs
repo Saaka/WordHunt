@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using WordHunt.Models.Games.Creation;
 using WordHunt.Services.Exceptions;
 
-namespace WordHunt.Games.Create
+namespace WordHunt.Games.Creation
 {
     public interface IGameCreatorValidator
     {

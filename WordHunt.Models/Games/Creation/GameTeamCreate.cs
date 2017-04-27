@@ -9,5 +9,7 @@ namespace WordHunt.Models.Games.Creation
         public string Name { get; set; }
         public int FieldCount { get; set; }
         public int? UserId { get; set; }
+        public int Order { get; set; }
+        public int GameId { get; set; }
     }
 }

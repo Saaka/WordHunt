@@ -9,7 +9,7 @@ namespace WordHunt.Data.Entities
         public int Id { get; set; }
         public int GameId { get; set; }
         public string Name { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public string Color { get; set; }
         public string Icon { get; set; }
         public int Order { get; set; }
