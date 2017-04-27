@@ -9,7 +9,7 @@ namespace WordHunt.Services.Words
 {
     public interface IWordUpdaterValidator
     {
-        Task ValidateRequest(WordUpdate model);
+        Task ValidateUpdateModel(WordUpdate model);
     }
 
     public class WordUpdaterValidator : IWordUpdaterValidator
@@ -21,8 +21,10 @@ namespace WordHunt.Services.Words
             this.context = context;
         }
 
-        public async Task ValidateRequest(WordUpdate model)
+        public async Task ValidateUpdateModel(WordUpdate model)
         {
+            if (model == null)
+                throw new ValidationFailedException("No data provided to perform update");
             if (model.Id <= 0)
                 throw new ValidationFailedException("Must specify word id");
             if (string.IsNullOrEmpty(model.Value))

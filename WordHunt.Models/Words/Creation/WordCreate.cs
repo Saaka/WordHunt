@@ -13,6 +13,6 @@ namespace WordHunt.Models.Words.Creation
 
     public class WordCreateResult
     {
-        public WordModel Word { get; set; }
+        public int WordId { get; set; }
     }
 }

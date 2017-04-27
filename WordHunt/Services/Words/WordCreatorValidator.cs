@@ -9,7 +9,7 @@ namespace WordHunt.Services.Words
 {
     public interface IWordCreatorValidator
     {
-        Task ValidateRequest(WordCreate model);
+        Task ValidateCreateModel(WordCreate model);
     }
 
     public class WordCreatorValidator : IWordCreatorValidator
@@ -21,8 +21,10 @@ namespace WordHunt.Services.Words
             this.context = context;
         }
 
-        public async Task ValidateRequest(WordCreate model)
+        public async Task ValidateCreateModel(WordCreate model)
         {
+            if(model == null)
+                throw new ValidationFailedException("No data to create word");
             if (model.LanguageId <= 0)
                 throw new ValidationFailedException("Must specify word language");
             if (string.IsNullOrEmpty(model.Value))

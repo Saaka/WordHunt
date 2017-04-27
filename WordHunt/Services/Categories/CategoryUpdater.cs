@@ -32,7 +32,7 @@ namespace WordHunt.Services.Categories
 
         public async Task<CategoryUpdateResult> UpdateCategory(CategoryUpdate model)
         {
-            await validator.ValidateRequest(model);
+            await validator.ValidateUpdateModel(model);
 
             var toUpdate = await context.Categories.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (toUpdate == null)

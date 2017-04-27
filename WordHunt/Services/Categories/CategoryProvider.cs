@@ -45,7 +45,7 @@ namespace WordHunt.Services.Categories
 
         public async Task<CategoryListGetResult> GetCategoryList(CategoryListGet model)
         {
-            var validatorResult = validator.ValidateRequest(model);
+            var validatorResult = validator.ValidateListGetModel(model);
 
             var query = from cat in context.Categories
 

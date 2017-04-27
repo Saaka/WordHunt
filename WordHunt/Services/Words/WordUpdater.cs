@@ -32,11 +32,11 @@ namespace WordHunt.Services.Words
 
         public async Task<WordUpdateResult> UpdateWord(WordUpdate model)
         {
-            await validator.ValidateRequest(model);
+            await validator.ValidateUpdateModel(model);
 
             var toUpdate = await context.Words.SingleOrDefaultAsync(x => x.Id == model.Id);
             if (toUpdate == null)
-                throw new ArgumentException($"Can't fine word with id {model.Id}");
+                throw new ArgumentException($"Can't find word with id {model.Id}");
 
             toUpdate = mapper.MapWord(toUpdate, model);
 

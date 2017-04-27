@@ -15,33 +15,28 @@ namespace WordHunt.Services.Categories
     {
         private readonly IAppDbContext context;
         private readonly ICategoryCreatorValidator validator;
-        private readonly ICategoryProvider categoryProvider;
         private readonly ICategoryMapper mapper;
 
         public CategoryCreator(IAppDbContext context,
             ICategoryCreatorValidator validator,
-            ICategoryMapper mapper,
-            ICategoryProvider categoryProvider)
+            ICategoryMapper mapper)
         {
             this.context = context;
             this.validator = validator;
             this.mapper = mapper;
-            this.categoryProvider = categoryProvider;
         }
 
         public async Task<CategoryCreateResult> CreateCategory(CategoryCreate request)
         {
-            await validator.ValidateModel(request);
+            await validator.ValidateCreateModel(request);
 
             var newCategory = mapper.MapCategory(request);
             await context.Categories.AddAsync(newCategory);
             await context.SaveChangesAsync();
-
-            var categoryModel = await categoryProvider.GetCategory(newCategory.Id);
             
             return new CategoryCreateResult()
             {
-                Category = categoryModel
+                CategoryId = newCategory.Id
             };
         }
     }

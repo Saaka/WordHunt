@@ -9,7 +9,7 @@ namespace WordHunt.Services.Categories.Mapper
 {
     public interface ICategoryUpdaterValidator
     {
-        Task ValidateRequest(CategoryUpdate request);
+        Task ValidateUpdateModel(CategoryUpdate model);
     }
 
     public class CategoryUpdaterValidator : ICategoryUpdaterValidator
@@ -21,13 +21,15 @@ namespace WordHunt.Services.Categories.Mapper
             this.context = context;
         }
 
-        public async Task ValidateRequest(CategoryUpdate request)
+        public async Task ValidateUpdateModel(CategoryUpdate model)
         {
-            if (request.Id <= 0)
+            if (model == null)
+                throw new ValidationFailedException("No data provided to perform update");
+            if (model.Id <= 0)
                 throw new ValidationFailedException("Must specify word id");
-            if (string.IsNullOrEmpty(request.Name))
+            if (string.IsNullOrEmpty(model.Name))
                 throw new ValidationFailedException("Word must have a value");
-            if (await WordValueExists(request.Id, request.Id, request.Name))
+            if (await WordValueExists(model.Id, model.Id, model.Name))
                 throw new ValidationFailedException("Word already exists");
         }
 

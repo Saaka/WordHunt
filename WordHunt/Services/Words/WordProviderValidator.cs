@@ -6,13 +6,15 @@ namespace WordHunt.Services.Words
 {
     public interface IWordProviderValidator
     {
-        Task Validate(WordListGet model);
+        Task ValidateListGetModel(WordListGet model);
     }
 
     public class WordProviderValidator : IWordProviderValidator
     {
-        public async Task Validate(WordListGet model)
+        public async Task ValidateListGetModel(WordListGet model)
         {
+            if (model == null)
+                throw new ValidationFailedException("No query data provided");
             if (model.LanguageId == 0)
                 throw new ValidationFailedException("Must specify language");
             if (model.Page <= 0)

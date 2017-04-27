@@ -9,7 +9,7 @@ namespace WordHunt.Services.Categories
 {
     public interface ICategoryCreatorValidator
     {
-        Task ValidateModel(CategoryCreate request);
+        Task ValidateCreateModel(CategoryCreate model);
     }
 
     public class CategoryCreatorValidator : ICategoryCreatorValidator
@@ -21,13 +21,15 @@ namespace WordHunt.Services.Categories
             this.context = context;
         }
 
-        public async Task ValidateModel(CategoryCreate request)
+        public async Task ValidateCreateModel(CategoryCreate model)
         {
-            if (request.LanguageId <= 0)
+            if (model== null)
+                throw new ValidationFailedException("No data provided to create category");
+            if (model.LanguageId <= 0)
                 throw new ValidationFailedException("Category must have specified language");
-            if (string.IsNullOrEmpty(request.Name))
+            if (string.IsNullOrEmpty(model.Name))
                 throw new ValidationFailedException("Category must have a name");
-            if (await CategoryExists(request.LanguageId, request.Name))
+            if (await CategoryExists(model.LanguageId, model.Name))
                 throw new ValidationFailedException("Category already exists");
         }
 

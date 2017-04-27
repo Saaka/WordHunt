@@ -12,6 +12,6 @@ namespace WordHunt.Models.Categories.Creation
 
     public class CategoryCreateResult
     { 
-        public CategoryModel Category { get; set; }
+        public int CategoryId { get; set; }
     }
 }

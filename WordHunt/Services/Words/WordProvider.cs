@@ -50,7 +50,7 @@ namespace WordHunt.Services.Words
 
         public async Task<WordListGetResult> GetWordList(WordListGet request)
         {
-            await wordProviderValidator.Validate(request);
+            await wordProviderValidator.ValidateListGetModel(request);
 
             var query = from word in context.Words
 
