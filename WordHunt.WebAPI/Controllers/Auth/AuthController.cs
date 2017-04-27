@@ -23,11 +23,11 @@ namespace WordHunt.WebAPI.Controllers.Auth
 
         [ValidateModel]
         [HttpPost("token")]
-        public async Task<IActionResult> CreateToken([FromBody] CredentialsModel model)
+        public async Task<TokenGeneratorResult> CreateToken([FromBody] CredentialsModel model)
         {
             var result = await tokenGenerator.GenerateToken(model.UserName, model.Password);
 
-            return Ok(result);
+            return result;
         }
     }
 }

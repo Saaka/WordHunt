@@ -26,32 +26,9 @@ namespace WordHunt.Web.UnitTests.Controllers
 
             AuthController controller = new AuthController(tokenGenMock.Object, logger.Object);
 
-            var result = await controller.CreateToken(model) as ObjectResult;
+            var result = await controller.CreateToken(model) as TokenGeneratorResult;
 
             tokenGenMock.Verify();
-        }
-
-        [Fact]
-        public async void Returns_OkStatusCode_For_ValidRequest()
-        {
-            CredentialsModel model = new CredentialsModel()
-            {
-                UserName = "validname",
-                Password = "validpassword"
-            };
-
-            Mock<ILogger<AuthController>> logger = new Mock<ILogger<AuthController>>();
-            Mock<ITokenGenerator> tokenGenMock = new Mock<ITokenGenerator>();
-
-            tokenGenMock.Setup(x=> x.GenerateToken(model.UserName, model.Password))
-                    .ReturnsAsync(new TokenGeneratorResult()).Verifiable("GenerateToken was not called");
-            
-            AuthController controller = new AuthController(tokenGenMock.Object, logger.Object);
-
-            var result = await controller.CreateToken(model) as ObjectResult;
-            
-            tokenGenMock.Verify();
-            Assert.Equal(result.StatusCode, (int?)HttpStatusCode.OK);
         }
     }
 }

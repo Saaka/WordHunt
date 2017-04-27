@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WordHunt.Games.Create;
+using WordHunt.Games.Create.Repository;
 using WordHunt.Services.Categories;
 using WordHunt.Services.Categories.Mapper;
 using WordHunt.Services.Languages;
@@ -26,7 +27,7 @@ namespace WordHunt
             services.AddScoped<IWordMapper, WordMapper>();
             services.AddScoped<IWordUpdater, WordUpdater>();
             services.AddScoped<IWordUpdaterValidator, WordUpdaterValidator>();
-
+            
             services.AddScoped<ICategoryProvider, CategoryProvider>();
             services.AddScoped<ICategoryProviderValidator, CategoryProviderValidator>();
             services.AddScoped<ICategoryCreator, CategoryCreator>();
@@ -36,6 +37,8 @@ namespace WordHunt
             services.AddScoped<ICategoryUpdaterValidator, CategoryUpdaterValidator>();
 
             services.AddScoped<ILanguageProvider, LanguageProvider>();
+
+            services.AddScoped<IGameRepository, GameRepository>();
 
             return services;
         }

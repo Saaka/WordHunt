@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using WordHunt.Data.Connection;
 using WordHunt.Data.Entities;
 using WordHunt.Data.Identity;
 using WordHunt.Data.Initializer;
@@ -32,7 +33,10 @@ namespace WordHunt.Data
 
             services.AddScoped<IIdentityUserManager, IdentityUserManager>();
             services.AddScoped<IIdentityUserClaimsProvider, IdentityUserManager>();
-            services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();            
+            services.AddScoped<IIdentityRoleManager, IdentityRoleManager>();
+            
+            services.AddScoped<IDbTransactionFactory, DbTransactionFactory>();
+            services.AddScoped<IDbConnectionProvider, DbConnectionProvider>();
 
             return services;
         }
