@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
-using WordHunt.Games.Creation.Mappings;
+using WordHunt.Games.Mappings;
 using WordHunt.Models.Games.Creation;
 
-namespace WordHunt.Games.Creation.Repository
+namespace WordHunt.Games.Repository
 {
     public interface IGameRepository
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WordHunt.Data.Connection;
-using WordHunt.Games.Creation.Repository;
+using WordHunt.Games.Repository;
 using WordHunt.Models.Games.Creation;
 
 namespace WordHunt.Games.Creation

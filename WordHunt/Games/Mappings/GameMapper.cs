@@ -4,7 +4,7 @@ using System.Text;
 using WordHunt.Data.Entities;
 using WordHunt.Models.Games.Creation;
 
-namespace WordHunt.Games.Creation.Mappings
+namespace WordHunt.Games.Mappings
 {
     public interface IGameMapper
     {

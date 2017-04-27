@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
 using WordHunt.Data.Entities;
-using WordHunt.Games.Creation.Mappings;
+using WordHunt.Games.Mappings;
 
-namespace WordHunt.Games.Creation.Repository
+namespace WordHunt.Games.Repository
 {
     public interface IGameStatusRepository
     {
