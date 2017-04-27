@@ -20,6 +20,7 @@ namespace WordHunt.Games.Create
         public async Task<GameCreateResult> CreateGame(GameCreate game)
         {
             await validator.Validate(game);
+            
 
             return new GameCreateResult();
         }

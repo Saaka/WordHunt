@@ -13,28 +13,28 @@ namespace WordHunt.Games.Create
     
     public class GameCreatorValidator : IGameCreatorValidator
     {
-        public async Task Validate(GameCreate game)
+        public async Task Validate(GameCreate gameModel)
         {
-            if (game == null)
+            if (gameModel == null)
                 throw new ValidationFailedException("No data to create the game");
 
-            if (game.TeamCount != game.Teams.Count())
+            if (gameModel.TeamCount != gameModel.Teams.Count())
                 throw new ValidationFailedException("Wrong team count");
 
-            if (game.BoardHeight < 5 || game.BoardWidth < 5 
-                || game.BoardHeight > 8 || game.BoardWidth > 8)
+            if (gameModel.BoardHeight < 5 || gameModel.BoardWidth < 5 
+                || gameModel.BoardHeight > 8 || gameModel.BoardWidth > 8)
                 throw new ValidationFailedException("Wrong board size");
 
-            if (game.UserId <= 0)
+            if (gameModel.UserId <= 0)
                 throw new ValidationFailedException("Game must be assigned to user");
 
-            if (string.IsNullOrEmpty(game.Name))
+            if (string.IsNullOrEmpty(gameModel.Name))
                 throw new ValidationFailedException("Game must have a name");
 
-            if (game.Teams == null || !game.Teams.Any())
+            if (gameModel.Teams == null || !gameModel.Teams.Any())
                 throw new ValidationFailedException("Game must have teams");
 
-            if (game.Teams.Select(x => x.Name.Trim()).Distinct().Count() != game.Teams.Count())
+            if (gameModel.Teams.Select(x => x.Name.Trim()).Distinct().Count() != gameModel.Teams.Count())
                 throw new ValidationFailedException("Teams must have different names");
         }
     }
