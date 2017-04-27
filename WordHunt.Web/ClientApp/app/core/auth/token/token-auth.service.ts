@@ -19,7 +19,7 @@ export class TokenAuthService {
             .map((response: Response) => {
                 let tokenResponse = <TokenResponse>response.json();
 
-                return tokenResponse;
+                return tokenResponse.token;
             })
             .catch(this.handleError);
     }

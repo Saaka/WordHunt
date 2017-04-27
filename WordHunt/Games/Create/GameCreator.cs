@@ -30,13 +30,6 @@ namespace WordHunt.Games.Create
         {
             await validator.Validate(game);
 
-            using (var transaction = transactionFactory.CreateTransaction())
-            {
-                gameRepository.SaveGame("Saved", transaction);
-                transaction.CommitTransaction();
-            }
-            gameRepository.SaveGame("Saved2");
-
             return new GameCreateResult();
         }
     }
