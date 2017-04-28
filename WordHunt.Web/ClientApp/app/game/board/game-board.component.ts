@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'game-board',
@@ -6,4 +6,7 @@
     styleUrls: ['./game-board.component.scss']
 })
 export class GameBoardComponent {
+
+    @Input() gameId: number;
+
 }

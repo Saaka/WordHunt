@@ -4,7 +4,7 @@
     </div>
     <div class="main-button-group" *ngIf="isLoggedIn()">
         <p class="user-name">{{getUserName()}}</p>
-        <a class="btn btn-default btn-block" [routerLink]="['/game']">Play</a>
+        <a class="btn btn-default btn-block disabled" [routerLink]="['/game', 1]">Play</a>
         <a class="btn btn-default btn-block" [routerLink]="['/creategame']">Create game</a>
         <!--<a class="btn btn-default btn-block" [routerLink]="['/tutorial']">Tutorial</a>-->
         <a class="btn btn-default btn-block" [routerLink]="['/settings']">Settings</a>

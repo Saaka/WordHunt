@@ -13,3 +13,8 @@ html, body, main {
 h1, h2, h3 {
     color: $primary-color-text;
 }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}

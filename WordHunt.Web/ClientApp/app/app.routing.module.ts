@@ -53,7 +53,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'game',
+        path: 'game/:id',
         loadChildren: './game/game.module#GameModule',
         canActivate: [AuthGuard]
     },

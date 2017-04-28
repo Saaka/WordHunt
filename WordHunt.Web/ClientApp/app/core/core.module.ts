@@ -3,6 +3,8 @@ import { HttpModule } from '@angular/http';
 
 import { TokenAuthService, TokenStorageService, JwtTokenUserParser } from './auth/token/token-auth';
 import { AuthHttpService } from './http/auth-http.service';
+import { GameNavigation } from './navigation/navigation.module';
+
 
 @NgModule({
     imports: [HttpModule],
@@ -10,7 +12,8 @@ import { AuthHttpService } from './http/auth-http.service';
         TokenAuthService,
         TokenStorageService,
         AuthHttpService, 
-        JwtTokenUserParser
+        JwtTokenUserParser,
+        GameNavigation
     ]
 })
 export class CoreModule {

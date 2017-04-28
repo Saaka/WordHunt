@@ -31,7 +31,7 @@
         </div>    
     </div>
     <div class="center-block button-div create-game-button-div">
-        <a class="btn btn-default btn-block" (click)="createGame()">Create game</a>
+        <button [disabled]="loading" class="btn btn-default btn-block" (click)="createGame()">Create game <i *ngIf="loading" aria-hidden="true" class="fa fa-circle-o-notch fa-spin"></i></button>
     </div>
     <main-back-button></main-back-button>
 </div>

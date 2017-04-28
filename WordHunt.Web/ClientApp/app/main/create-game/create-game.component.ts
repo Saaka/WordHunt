@@ -3,6 +3,7 @@
 import { GameCreate, GameTeamCreate } from './game.models';
 import { CreateGameService } from './service/create-game.service';
 import { UserService } from '../../core/user.service';
+import { GameNavigation } from '../../core/navigation/game-navigation.service';
 
 @Component({
     selector: 'create-game',
@@ -12,9 +13,11 @@ import { UserService } from '../../core/user.service';
 export class CreateGameComponent {
 
     private game: GameCreate;
+    private loading: boolean = false;
 
     constructor(private userService: UserService,
-        private createGameService: CreateGameService) {
+        private createGameService: CreateGameService,
+        private gameNavService: GameNavigation) {
         this.createDefaultGame();
     }
 
@@ -43,14 +46,14 @@ export class CreateGameComponent {
     }
 
     createGame() {
+        this.loading = true;
         this.createGameService
             .createGame(this.game)
             .subscribe(res => {
-
-                console.log('GAME CREATED');
-                console.log(res);
+                this.gameNavService.goToGame(res.gameId);
             }, err => {
                 console.log(err);
+                this.loading = false;
             });
     }
 

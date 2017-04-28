@@ -26,10 +26,10 @@ namespace WordHunt.Data
         //Configure services from WordHunt.Data library.
         public static IServiceCollection ConfigureDataServices(this IServiceCollection services)
         {
-            services.AddScoped<IAppDbContext, AppDbContext>();
+            services.AddTransient<IAppDbContext, AppDbContext>();
 
-            services.AddScoped<IAppDbInitializerContext, AppDbContext>();
-            services.AddScoped<IDBInitializer, DBInitializer>();
+            services.AddTransient<IAppDbInitializerContext, AppDbContext>();
+            services.AddTransient<IDBInitializer, DBInitializer>();
 
             services.AddScoped<IIdentityUserManager, IdentityUserManager>();
             services.AddScoped<IIdentityUserClaimsProvider, IdentityUserManager>();
