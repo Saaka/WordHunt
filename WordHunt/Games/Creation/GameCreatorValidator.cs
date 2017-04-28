@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WordHunt.Base.Exceptions;
 using WordHunt.Models.Games.Creation;
-using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Games.Creation
 {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using WordHunt.Base.Exceptions;
 using WordHunt.Models.Words.Access;
-using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Services.Words
 {

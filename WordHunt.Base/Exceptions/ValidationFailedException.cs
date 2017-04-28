@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace WordHunt.Services.Exceptions
+namespace WordHunt.Base.Exceptions
 {
     public class ValidationFailedException : ArgumentException
     {

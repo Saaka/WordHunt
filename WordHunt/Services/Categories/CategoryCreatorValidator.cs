@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using WordHunt.Base.Exceptions;
 using WordHunt.Data;
-using WordHunt.Services.Exceptions;
 using WordHunt.Models.Categories.Creation;
 
 namespace WordHunt.Services.Categories

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using WordHunt.Base.Exceptions;
 using WordHunt.Data;
 using WordHunt.Models.Categories.Modification;
-using WordHunt.Services.Exceptions;
 
 namespace WordHunt.Services.Categories.Mapper
 {
