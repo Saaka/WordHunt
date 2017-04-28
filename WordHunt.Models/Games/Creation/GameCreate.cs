@@ -13,6 +13,7 @@ namespace WordHunt.Models.Games.Creation
         public GameType Type { get; set; }
         public EndMode EndMode { get; set; }
         public int UserId { get; set; }
+        public int LanguageId { get; set; }
 
         public IEnumerable<GameTeamCreate> Teams { get; set; }
     }

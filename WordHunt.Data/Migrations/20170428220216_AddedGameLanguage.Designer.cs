@@ -9,9 +9,10 @@ using WordHunt.Base.Enums.Game;
 namespace WordHunt.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170428220216_AddedGameLanguage")]
+    partial class AddedGameLanguage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -146,34 +147,6 @@ namespace WordHunt.Data.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("Games");
-                });
-
-            modelBuilder.Entity("WordHunt.Data.Entities.GameField", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Checked");
-
-                    b.Property<int?>("CheckedByTeamId");
-
-                    b.Property<int>("ColumnIndex");
-
-                    b.Property<int>("GameId");
-
-                    b.Property<int>("RowIndex");
-
-                    b.Property<int?>("TeamId");
-
-                    b.Property<int>("Type");
-
-                    b.Property<string>("Word");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("GameFields");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.GameStatus", b =>
@@ -381,13 +354,6 @@ namespace WordHunt.Data.Migrations
                     b.HasOne("WordHunt.Data.Entities.Language", "Language")
                         .WithMany("Games")
                         .HasForeignKey("LanguageId");
-                });
-
-            modelBuilder.Entity("WordHunt.Data.Entities.GameField", b =>
-                {
-                    b.HasOne("WordHunt.Data.Entities.Game", "Game")
-                        .WithMany("Fields")
-                        .HasForeignKey("GameId");
                 });
 
             modelBuilder.Entity("WordHunt.Data.Entities.GameStatus", b =>

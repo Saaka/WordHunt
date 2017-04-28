@@ -39,7 +39,8 @@ namespace WordHunt.Games.Mappings
                TeamCount = model.TeamCount,
                TrapCount = model.TrapCount,
                Type = model.Type,
-               UserId = model.UserId
+               UserId = model.UserId,
+               LanguageId = model.LanguageId
             };
         }
 

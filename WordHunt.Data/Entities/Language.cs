@@ -14,5 +14,6 @@ namespace WordHunt.Data.Entities
         public string Code { get; set; }
         public virtual List<Word> Words { get; set; }
         public virtual List<Category> Categories { get; set; }
+        public virtual List<Game> Games { get; set; }
     }
 }

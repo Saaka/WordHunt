@@ -29,6 +29,9 @@ namespace WordHunt.Games.Creation
             if (gameModel.UserId <= 0)
                 throw new ValidationFailedException("Game must be assigned to user");
 
+            if (gameModel.LanguageId <= 0)
+                throw new ValidationFailedException("Game must have selected language");
+
             if (string.IsNullOrEmpty(gameModel.Name))
                 throw new ValidationFailedException("Game must have a name");
 

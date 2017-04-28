@@ -12,13 +12,14 @@ namespace WordHunt.Games.Repository
 {
     public interface IGameTeamRepository
     {
-        Task CreateGameTeams(IEnumerable<GameTeamCreate> model);
+        Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> model);
         Task<int> GetFirstTeamId(int gameId);
     }
 
     public class GameTeamRepository : IGameTeamRepository
     {
         private const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount])
+                                    OUTPUT INSERTED.[Id], INSERTED.[Order], INSERTED.[FieldCount]
                                     VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount)";
 
         private const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
@@ -36,14 +37,21 @@ namespace WordHunt.Games.Repository
             this.gameMapper = gameMapper;
         }
 
-        public async Task CreateGameTeams(IEnumerable<GameTeamCreate> models)
+        public async Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> models)
         {
-            var entities = models.Select(x => gameMapper.MapGameTeam(x));
+            var entities = models.Select(x => gameMapper.MapGameTeam(x)).ToArray();
 
+            List<GameTeamCreated> outputList = new List<GameTeamCreated>();
             using (var connection = connectionFactory.CreateConnection())
             {
-                await connection.ExecuteAsync(CreateGameTeamQuery, entities);
+                for (int i = 0; i < entities.Length; i++)
+                {
+                    var created = await connection.QueryFirstAsync<GameTeamCreated>(CreateGameTeamQuery, entities[i]);
+                    outputList.Add(created);
+                }
             }
+
+            return outputList;
         }
 
         public async Task<int> GetFirstTeamId(int gameId)

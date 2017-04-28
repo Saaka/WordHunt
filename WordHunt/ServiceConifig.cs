@@ -16,15 +16,20 @@ namespace WordHunt
         //Configure services from WordHunt library.
         public static IServiceCollection ConfigureWordHuntServices(this IServiceCollection services)
         {            
-            //Game related classes
+            //GAME CREATION related classes
             services.AddScoped<IGameMapper, GameMapper>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IGameTeamRepository, GameTeamRepository>();
             services.AddScoped<IGameStatusRepository, GameStatusRepository>();
+            services.AddScoped<IGameFieldRepository, GameFieldRepository>();
             
             services.AddScoped<IGameCreator, GameCreator>();
             services.AddScoped<IGameCreatorValidator, GameCreatorValidator>();
 
+            services.AddScoped<IGameFieldsCreator, GameFieldsCreator>();
+
+            services.AddScoped<IRandomWordRepository, RandomWordRepository>();
+                        
             //User related classes
             services.AddScoped<IUserService, UserService>();
 

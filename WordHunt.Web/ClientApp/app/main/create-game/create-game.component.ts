@@ -30,6 +30,7 @@ export class CreateGameComponent {
         this.game.type = 'SingleDevice';
         this.game.endMode = 'EndTurn';
         this.game.userId = this.userService.userId();
+        this.game.languageId = 1;
 
         this.createDefaultGameTeams(this.game);
     }

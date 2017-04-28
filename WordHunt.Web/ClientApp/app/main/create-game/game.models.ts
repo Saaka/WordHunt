@@ -8,6 +8,7 @@ export class GameCreate {
     trapCount: number;
     type: string;
     endMode: string;
+    languageId: number;
 
     teams: GameTeamCreate[];
 }

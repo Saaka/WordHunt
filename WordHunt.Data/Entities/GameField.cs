@@ -13,5 +13,7 @@ namespace WordHunt.Data.Entities
         public int? CheckedByTeamId { get; set; }
         public int ColumnIndex { get; set; }
         public int RowIndex { get; set; }
+
+        public virtual Game Game { get; set; }
     }
 }
