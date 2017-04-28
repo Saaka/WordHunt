@@ -1,12 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <OutputType>Library</OutputType>
-  </PropertyGroup>
-
-  <PropertyGroup>    
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PackageTargetFallback>portable-net45+win8</PackageTargetFallback>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
@@ -14,13 +10,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-    <PackageReference Include="Moq" Version="4.7.1" />
+    <PackageReference Include="Moq" Version="4.7.8" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WordHunt.WebAPI\WordHunt.WebAPI.csproj" />
+    <ProjectReference Include="..\WordHunt.Base\WordHunt.Base.csproj" />
+    <ProjectReference Include="..\WordHunt.Data\WordHunt.Data.csproj" />
+    <ProjectReference Include="..\WordHunt.Models\WordHunt.Models.csproj" />
+    <ProjectReference Include="..\WordHunt\WordHunt.csproj" />
   </ItemGroup>
 
   <ItemGroup>
