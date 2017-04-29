@@ -26,7 +26,8 @@ namespace WordHunt
             services.AddScoped<IGameCreator, GameCreator>();
             services.AddScoped<IGameCreatorValidator, GameCreatorValidator>();
 
-            services.AddScoped<IGameFieldsCreator, GameFieldsCreator>();
+            services.AddScoped<IGameFieldsGenerator, GameFieldsGenerator>();
+            services.AddScoped<IGameTeamsGenerator, GameTeamsGenerator>();
 
             services.AddScoped<IRandomWordRepository, RandomWordRepository>();
                         

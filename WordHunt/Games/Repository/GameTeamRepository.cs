@@ -58,7 +58,9 @@ namespace WordHunt.Games.Repository
         {
             using (var connection = connectionFactory.CreateConnection())
             {
-                return await connection.QueryFirstAsync<int>(GetFirstTeamIdQuery, new { GameId = gameId });
+                var firstTeamId = await connection.QueryFirstAsync<int>(GetFirstTeamIdQuery, new { GameId = gameId });
+
+                return firstTeamId;
             }
         }
     }

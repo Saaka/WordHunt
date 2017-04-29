@@ -20,21 +20,30 @@ namespace WordHunt.Games.Creation
         private readonly IGameRepository gameRepository;
         private readonly IGameTeamRepository gameTeamRepository;
         private readonly IGameStatusRepository gameStatusRepository;
-        private readonly IGameFieldsCreator gameFieldsCreator;
-
+        private readonly IGameFieldsGenerator gameFieldsGenerator;
+        private readonly IRandomWordRepository randomWordRepository;
+        private readonly IGameFieldRepository gameFieldRepository;
+        private readonly IGameTeamsGenerator gameTeamsGenerator;
+        
         public GameCreator(IGameCreatorValidator validator,
             IDbTransactionProvider transactionProvider,
             IGameRepository gameRepository,
             IGameTeamRepository gameTeamRepository,
             IGameStatusRepository gameStatusRepository,
-            IGameFieldsCreator gameFieldsCreator)
+            IGameFieldsGenerator gameFieldsGenerator,
+            IRandomWordRepository randomWordRepository,
+            IGameFieldRepository gameFieldRepository,
+            IGameTeamsGenerator gameTeamsGenerator)
         {
             this.validator = validator;
             this.transactionProvider = transactionProvider;
             this.gameRepository = gameRepository;
             this.gameTeamRepository = gameTeamRepository;
             this.gameStatusRepository = gameStatusRepository;
-            this.gameFieldsCreator = gameFieldsCreator;
+            this.gameFieldsGenerator = gameFieldsGenerator;
+            this.randomWordRepository = randomWordRepository;
+            this.gameFieldRepository = gameFieldRepository;
+            this.gameTeamsGenerator = gameTeamsGenerator;
         }
 
         public async Task<GameCreateResult> CreateGame(GameCreate game)
@@ -42,31 +51,23 @@ namespace WordHunt.Games.Creation
             await validator.ValidateGame(game);
             var createdGame = await gameRepository.SaveNewGame(game);
 
-            UpdateGameTeams(createdGame.Id, game.Teams);
-            await validator.ValidateTeams(game.Teams);
-            var teams = await gameTeamRepository.CreateGameTeams(game.Teams);
+            var teamsToCreate = await gameTeamsGenerator.GenerateTeams(createdGame.Id, game.Teams);
+            await validator.ValidateTeams(teamsToCreate);
+            var teams = await gameTeamRepository.CreateGameTeams(teamsToCreate);
 
             var firstTeamId = await gameTeamRepository.GetFirstTeamId(createdGame.Id);
-
             await gameStatusRepository.CreateInitialGameStatus(createdGame.Id, firstTeamId);
-
-            await gameFieldsCreator.CreateFields(createdGame, teams);
+            
+            var fieldCount = createdGame.BoardHeight * createdGame.BoardWidth;
+            var words = await randomWordRepository.GetRandomWords(createdGame.LanguageId, fieldCount);
+            var fields =  gameFieldsGenerator.GenerateFields(createdGame, teams, words);
+            await validator.ValidateFields(fields);
+            await gameFieldRepository.SaveGameFields(fields);
 
             return new GameCreateResult()
             {
                 GameId = createdGame.Id
             };
-        }
-
-        private void UpdateGameTeams(int gameId, IEnumerable<GameTeamCreate> teams)
-        {
-            int order = 1;
-            teams.ForEach(x =>
-            {
-                x.GameId = gameId;
-                x.Order = order;
-                order++;
-            });
         }
     }
 }

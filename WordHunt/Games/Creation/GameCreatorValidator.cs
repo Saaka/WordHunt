@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WordHunt.Base.Exceptions;
@@ -10,10 +11,19 @@ namespace WordHunt.Games.Creation
     {
         Task ValidateGame(GameCreate game);
         Task ValidateTeams(IEnumerable<GameTeamCreate> teams);
+        Task ValidateFields(IEnumerable<GameFieldCreate> fields);
     }
     
     public class GameCreatorValidator : IGameCreatorValidator
     {
+        public async Task ValidateFields(IEnumerable<GameFieldCreate> fields)
+        {
+            if (fields == null || !fields.Any())
+                throw new ValidationFailedException("No fields provided for the game");
+            if (fields.Any(x => string.IsNullOrEmpty(x.Word)))
+                throw new ValidationFailedException("No word provided for the field");
+        }
+
         public async Task ValidateGame(GameCreate gameModel)
         {
             if (gameModel == null)
@@ -37,6 +47,9 @@ namespace WordHunt.Games.Creation
 
             if (gameModel.Teams == null || !gameModel.Teams.Any())
                 throw new ValidationFailedException("Game must have teams");
+
+            if ((gameModel.Teams.Sum(x => x.FieldCount) + gameModel.TrapCount) > (gameModel.BoardHeight * gameModel.BoardWidth))
+                throw new ValidationFailedException("Team and trap fields count exceeeded total number of fields");
         }
 
         public async Task ValidateTeams(IEnumerable<GameTeamCreate> teams)
