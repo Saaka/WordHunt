@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using WordHunt.Games.Creation;
-using WordHunt.Games.Mappings;
 using WordHunt.Games.Repository;
+using WordHunt.Mappings;
 using WordHunt.Services.Categories;
 using WordHunt.Services.Categories.Mapper;
 using WordHunt.Services.Languages;
@@ -13,11 +14,26 @@ namespace WordHunt
 {
     public static class ServiceConifig
     {
+        public static IServiceCollection ConfigureMappings(this IServiceCollection services)
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfiles(new[]
+                {
+                    typeof(WordHuntMapperProfile)
+                });
+            });
+
+            services.AddSingleton(Mapper.Configuration);
+            services.AddScoped<IMapper>(s => new Mapper(s.GetRequiredService<IConfigurationProvider>(), s.GetService));
+
+            return services;
+        }
+
         //Configure services from WordHunt library.
         public static IServiceCollection ConfigureWordHuntServices(this IServiceCollection services)
         {            
             //GAME CREATION related classes
-            services.AddScoped<IGameMapper, GameMapper>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IGameTeamRepository, GameTeamRepository>();
             services.AddScoped<IGameStatusRepository, GameStatusRepository>();

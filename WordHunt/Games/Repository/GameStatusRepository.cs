@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
 using WordHunt.Data.Entities;
-using WordHunt.Games.Mappings;
 
 namespace WordHunt.Games.Repository
 {
@@ -22,24 +21,33 @@ namespace WordHunt.Games.Repository
         
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
-        private readonly IGameMapper gameMapper;
 
         public GameStatusRepository(IDbConnectionFactory connectionFactory,
-            ITimeProvider timeProvider,
-            IGameMapper gameMapper)
+            ITimeProvider timeProvider)
         {
             this.connectionFactory = connectionFactory;
             this.timeProvider = timeProvider;
-            this.gameMapper = gameMapper;
         }
+
         public async Task CreateInitialGameStatus(int gameId, int firstTeamId)
         {
-            var entity = gameMapper.MapStatus(gameId, firstTeamId);
+            var entity = CreateStatus(gameId, firstTeamId);
 
             using (var connection = connectionFactory.CreateConnection())
             {
                 await connection.ExecuteAsync(CreateGameStatusQuery, entity);
             }
+        }
+
+        public GameStatus CreateStatus(int gameId, int firstTeamId)
+        {
+            return new GameStatus()
+            {
+                CurrentTeamId = firstTeamId,
+                GameId = gameId,
+                Latest = true,
+                Status = Base.Enums.Game.Status.Created
+            };
         }
     }
 }

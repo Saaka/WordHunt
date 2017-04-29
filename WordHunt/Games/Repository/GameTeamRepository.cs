@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
-using WordHunt.Games.Mappings;
 using WordHunt.Models.Games.Creation;
+using AutoMapper;
+using WordHunt.Data.Entities;
 
 namespace WordHunt.Games.Repository
 {
@@ -26,20 +27,20 @@ namespace WordHunt.Games.Repository
 
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
-        private readonly IGameMapper gameMapper;
+        private readonly IMapper mapper;
 
         public GameTeamRepository(IDbConnectionFactory connectionFactory,
             ITimeProvider timeProvider,
-            IGameMapper gameMapper)
+            IMapper mapper)
         {
             this.connectionFactory = connectionFactory;
             this.timeProvider = timeProvider;
-            this.gameMapper = gameMapper;
+            this.mapper = mapper;
         }
 
         public async Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> models)
         {
-            var entities = models.Select(x => gameMapper.MapGameTeam(x)).ToArray();
+            var entities = models.Select(x => mapper.Map<GameTeam>(x)).ToArray();
 
             List<GameTeamCreated> outputList = new List<GameTeamCreated>();
             using (var connection = connectionFactory.CreateConnection())

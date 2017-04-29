@@ -48,6 +48,7 @@ namespace WordHunt.WebAPI
             services.RegisterPolicies();
 
             //Add application/business logic services
+            services.ConfigureMappings();
             services.ConfigureBaseServices();
             services.RegisterWebApiDependencies();
             services.ConfigureDataServices();
