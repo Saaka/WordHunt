@@ -46,7 +46,6 @@ namespace WordHunt.WebAPI
             services.RegisterContext();
             services.AddCors();
             services.RegisterPolicies();
-            services.AddSignalR(opt => opt.Hubs.EnableDetailedErrors = true);
 
             //Add application/business logic services
             services.ConfigureMappings();
@@ -71,7 +70,6 @@ namespace WordHunt.WebAPI
                 .UseJwtBearerTokenAuthentication(authConfig)
                 .UseMiddleware<ExceptionHandlingMiddleware>()
                 .UseMvc()
-                .UseSignalR()
                 .UseSwagger()
                 .UseSwaggerUI(s => s.SwaggerEndpoint("/swagger/v1/swagger.json", "WordHunt WebAPI"));
 
