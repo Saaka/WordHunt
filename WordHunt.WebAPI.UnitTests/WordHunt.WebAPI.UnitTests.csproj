@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <PropertyGroup>    
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PackageTargetFallback>portable-net45+win8</PackageTargetFallback>
+	<TargetFramework>net462</TargetFramework>
+	<!-- <TargetFramework>netcoreapp1.1</TargetFramework> -->
+    <!-- <PackageTargetFallback>portable-net45+win8</PackageTargetFallback> -->
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
