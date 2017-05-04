@@ -6,18 +6,20 @@ import { SignalRConfiguration } from 'ng2-signalr';
 
 export function CreateSignalRConfig() {
 
-    var cfg: IConfig;
-    if (isDevMode())
-        cfg = new DevConfig();
-    else
-        cfg = new ProdConfig();
-
     let signalrConfiguration: SignalRConfiguration = new SignalRConfiguration();
-
     signalrConfiguration.hubName = "broadcaster";
-    signalrConfiguration.logging = true;
+
+    var cfg: IConfig;
+    if (isDevMode()) {
+        cfg = new DevConfig();
+        signalrConfiguration.logging = true;
+    }
+    else {
+        cfg = new ProdConfig();
+        signalrConfiguration.logging = false;
+    }
+
     signalrConfiguration.url = cfg.API_URL + 'signalr';
-
-
+    
     return signalrConfiguration;
 }

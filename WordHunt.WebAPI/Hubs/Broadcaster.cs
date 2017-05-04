@@ -9,7 +9,7 @@ namespace WordHunt.WebAPI.Hubs
 {
     public interface IBroadcaster
     {
-        void handleMessage(string message);
+        void HandleMessage(string message);
     }
 
     [HubName("broadcaster")]
@@ -18,7 +18,7 @@ namespace WordHunt.WebAPI.Hubs
         public void HandleMessage(string message)
         {
 
-            Clients.All.handleMessage("Joined: " + message);
+            Clients.All.HandleMessage("Joined: " + message);
         }
     }
 }
