@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin.Builder;
 using Owin;
+using Owin.Security.AesDataProtectorProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +90,11 @@ namespace WordHunt.WebAPI.Config
 
         public static IApplicationBuilder UseSignalR2(this IApplicationBuilder app)
         {
-            app.UseAppBuilder(appBuilder => appBuilder.MapSignalR("/api/signalr", new Microsoft.AspNet.SignalR.HubConfiguration()));
+            app.UseAppBuilder(appBuilder => 
+            {
+                appBuilder.UseAesDataProtectorProvider();
+                appBuilder.MapSignalR("/api/signalr", new Microsoft.AspNet.SignalR.HubConfiguration());
+            });
 
             return app;
         }
