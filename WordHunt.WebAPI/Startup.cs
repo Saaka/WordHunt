@@ -69,6 +69,7 @@ namespace WordHunt.WebAPI
                 .UseIdentity()
                 .UseJwtBearerTokenAuthentication(authConfig)
                 .UseMiddleware<ExceptionHandlingMiddleware>()
+                .UseSignalR2()
                 .UseMvc()
                 .UseSwagger()
                 .UseSwaggerUI(s => s.SwaggerEndpoint("/swagger/v1/swagger.json", "WordHunt WebAPI"));

@@ -29,6 +29,7 @@ module.exports = (env) => {
                 'core-js/es7/reflect',
                 'event-source-polyfill',
                 'jquery',
+                'signalr',
                 'zone.js',
                 'reflect-metadata'
             ]

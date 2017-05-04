@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin.Builder;
+using Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ using WordHunt.Config;
 
 namespace WordHunt.WebAPI.Config
 {
+    using AppFunc = Func<IDictionary<string, object>, Task>;
+
     public static class ApplicationBuilderExtension
     {
         /// <summary>
@@ -61,6 +65,31 @@ namespace WordHunt.WebAPI.Config
 
                 });
             }
+
+            return app;
+        }
+        
+        public static IApplicationBuilder UseAppBuilder(this IApplicationBuilder app, Action<IAppBuilder> configure)
+        {
+            app.UseOwin(addToPipeline =>
+            {
+                addToPipeline(next =>
+                {
+                    var appBuilder = new AppBuilder();
+                    appBuilder.Properties["builder.DefaultApp"] = next;
+
+                    configure(appBuilder);
+
+                    return appBuilder.Build<AppFunc>();
+                });
+            });
+
+            return app;
+        }
+
+        public static IApplicationBuilder UseSignalR2(this IApplicationBuilder app)
+        {
+            app.UseAppBuilder(appBuilder => appBuilder.MapSignalR("/api/signalr", new Microsoft.AspNet.SignalR.HubConfiguration()));
 
             return app;
         }

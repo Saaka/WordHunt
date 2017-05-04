@@ -27,7 +27,8 @@ module.exports = (env) => {
                 { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, use: "file-loader" }
             ]
         },
-        plugins: [new CheckerPlugin()]
+        plugins: [new CheckerPlugin(),
+            new webpack.ProvidePlugin({ jQuery: 'jquery', $: 'jquery', jquery: 'jquery' })]
     };
 
     // Configuration for client-side bundle suitable for running in browsers

@@ -11,6 +11,8 @@ import { ConfigService } from './config/app.config.service';
 
 import { StartupGuard } from './core/startup.service';
 
+import { SignalRConnectionResolver } from './core/signalr/signalr-connection.resolver';
+
 const routes: Routes = [
     {
         path: '',
@@ -55,7 +57,8 @@ const routes: Routes = [
     {
         path: 'game/:id',
         loadChildren: './game/game.module#GameModule',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        resolve: { connection: SignalRConnectionResolver }
     },
     {
         path: '**',
@@ -73,7 +76,8 @@ const routes: Routes = [
         AdminAuthGuard,
         UserService,
         ConfigService,
-        StartupGuard
+        StartupGuard,
+        SignalRConnectionResolver
     ]
 })
 export class AppRoutingModule { }

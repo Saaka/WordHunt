@@ -9,6 +9,10 @@ import { GameModule } from './game/game.module';
 import { CoreModule } from './core/core.module';
 import './core/rxjs.imports';
 
+import 'expose-loader?jQuery!jquery';
+import 'signalr';
+import { CreateSignalRConfig } from './config/signalr.config';
+import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 
 @NgModule({
     imports: [
@@ -17,7 +21,8 @@ import './core/rxjs.imports';
         AppRoutingModule,
         GameModule,
         CoreModule,
-        AsyncLocalStorageModule
+        AsyncLocalStorageModule,
+        SignalRModule.forRoot(CreateSignalRConfig)
     ],
     declarations: [
         AppComponent,

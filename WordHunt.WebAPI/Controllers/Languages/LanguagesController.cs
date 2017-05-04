@@ -6,8 +6,6 @@ using WordHunt.Services.Languages;
 using System.Collections.Generic;
 using WordHunt.Models.Languages;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WordHunt.WebAPI.Controllers.Languages
 {
     [Route("api/[controller]")]
