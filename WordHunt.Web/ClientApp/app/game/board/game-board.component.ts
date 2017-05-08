@@ -1,39 +1,32 @@
 ﻿import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ISignalRConnection, BroadcastEventListener  } from 'ng2-signalr';
+import { GameHubService } from '../services/game-services.imports';
 
 @Component({
     selector: 'game-board',
     templateUrl: './game-board.component.html',
     styleUrls: ['./game-board.component.scss']
 })
-export class GameBoardComponent implements OnInit, OnDestroy {
+export class GameBoardComponent{
 
     @Input() gameId: number;
 
-    connection: ISignalRConnection;
-
-    onMessageSent$: BroadcastEventListener<string>;
-
-    constructor(private route: ActivatedRoute) {
-        console.log('ctor');
+    constructor(private route: ActivatedRoute,
+        private gameHub: GameHubService) {
     }
 
-    listen(message: string) {
-        console.log(message);
+    initialize() {
+        var connected = 'Client connected to GameId: ' + this.gameId + ' Time: ' + new Date().toString();
+
+        this.gameHub.messageReceived(this.messageReceived);
+        this.gameHub.sendMessage(connected);
     }
 
-    ngOnInit() {
-        console.log('ngOnInit');
-        this.connection = this.route.snapshot.data['connection'];
-        var connected = 'GameId: ' + this.gameId + ' Time: ' + new Date().toString();
-
-        this.onMessageSent$ = this.connection.listenFor('HandleMessage');
-        this.onMessageSent$.subscribe(this.listen);
-        this.connection.invoke('HandleMessage', connected);
+    invoke() {
+        this.gameHub.sendMessage('** BOARD Client Clicked **');
     }
 
-    ngOnDestroy() {
-        this.onMessageSent$.unsubscribe();
+    private messageReceived(message: string) {
+        console.log('** BOARD RECEIVED ** ' + message);
     }
 }

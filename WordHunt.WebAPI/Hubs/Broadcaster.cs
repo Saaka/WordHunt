@@ -10,11 +10,17 @@ namespace WordHunt.WebAPI.Hubs
     public interface IBroadcaster
     {
         void HandleMessage(string message);
+        void ClientSubscribed();
     }
 
     [HubName("broadcaster")]
     public class Broadcaster : Hub<IBroadcaster>
     {
+        public void Subscibe(int gameId)
+        {
+            Groups.Add(Context.ConnectionId, gameId.ToString());
+        }
+
         public void HandleMessage(string message)
         {
 

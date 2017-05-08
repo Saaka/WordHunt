@@ -12,6 +12,7 @@ import { ConfigService } from './config/app.config.service';
 import { StartupGuard } from './core/startup.service';
 
 import { SignalRConnectionResolver } from './core/signalr/signalr-connection.resolver';
+import { SignalRConnectionFactory } from './core/signalr/signalr-connection.factory';
 
 const routes: Routes = [
     {
@@ -58,7 +59,7 @@ const routes: Routes = [
         path: 'game/:id',
         loadChildren: './game/game.module#GameModule',
         canActivate: [AuthGuard],
-        resolve: { connection: SignalRConnectionResolver }
+        //resolve: { connection: SignalRConnectionResolver }
     },
     {
         path: '**',
@@ -77,7 +78,8 @@ const routes: Routes = [
         UserService,
         ConfigService,
         StartupGuard,
-        SignalRConnectionResolver
+        SignalRConnectionResolver,
+        SignalRConnectionFactory
     ]
 })
 export class AppRoutingModule { }

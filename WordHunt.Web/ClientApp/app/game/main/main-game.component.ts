@@ -1,5 +1,7 @@
-﻿import { Component, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GameBoardComponent, GameSidenavComponent } from '../game.imports';
+import { GameHubService } from '../services/game-services.imports';
 
 @Component({
     selector: 'main-game',
@@ -9,21 +11,33 @@ import { ActivatedRoute } from '@angular/router';
 export class GameMainComponent implements OnInit, OnDestroy {
 
     gameId: number;
-    private sub: any;
+    private paramsSub: any;
 
-    constructor(private route: ActivatedRoute) { }
+    @ViewChild(GameBoardComponent)
+    private board: GameBoardComponent;
+    @ViewChild(GameSidenavComponent)
+    private sideNav: GameSidenavComponent;
+
+    constructor(private route: ActivatedRoute,
+        private gameHub: GameHubService) { }
 
     ngOnInit() {
 
-        this.sub = this.route.params
+        this.paramsSub = this.route.params
             .subscribe(params => {
                 this.gameId = +params['id'];
+                this.gameHub.connect()
+                    .subscribe((connected) => {
+                        this.board.initialize();
+                        this.sideNav.initialize();
+                });
             });
-
-        console.log(`Game with id ${this.gameId} initializing.`);
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        if (this.paramsSub)
+            this.paramsSub.unsubscribe();
+        if (this.gameHub)
+            this.gameHub.disconnect();
     }
 }
