@@ -14,6 +14,7 @@ namespace WordHunt.Mappings
             CreateMap<GameCreate, Game>();
             CreateMap<GameTeamCreate, GameTeam>()
                 .ForMember(d=> d.RemainingFieldCount, opt => opt.MapFrom(s => s.FieldCount));
+            CreateMap<GameField, Models.Games.Access.Field>();
         }
     }
 }
