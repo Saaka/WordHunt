@@ -13,6 +13,6 @@ export class GameService {
 
         return this.http
             .get('game/' + gameId)
-            .map(res => res.json());
+            .map(res => <Game>res.json());
     }
 }

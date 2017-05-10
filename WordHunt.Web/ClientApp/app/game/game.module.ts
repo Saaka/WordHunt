@@ -3,7 +3,7 @@
 import { GameRoutingModule, routableComponents } from './game.routing.module';
 import { GameBoardComponent } from './board/game-board.component';
 import { GameSidenavComponent } from './sidenav/game-sidenav.component';
-import { GameHubService } from './services/game-services.imports';
+import { GameHubService, GameService } from './services/game-services.imports';
 
 @NgModule({
     imports: [GameRoutingModule],
@@ -12,7 +12,8 @@ import { GameHubService } from './services/game-services.imports';
         GameSidenavComponent,
         routableComponents
     ],
-    providers: [GameHubService]
+    providers: [GameHubService,
+        GameService]
 })
 export class GameModule {
     

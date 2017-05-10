@@ -1,6 +1,7 @@
 ﻿import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameHubService } from '../services/game-services.imports';
+import { Game } from '../game.models';
 
 @Component({
     selector: 'game-board',
@@ -9,14 +10,14 @@ import { GameHubService } from '../services/game-services.imports';
 })
 export class GameBoardComponent{
 
-    @Input() gameId: number;
+    @Input() game: Game;
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService) {
     }
 
     initialize() {
-        var connected = 'Client connected to GameId: ' + this.gameId + ' Time: ' + new Date().toString();
+        var connected = 'Client connected to game: ' + this.game.name + ' Time: ' + new Date().toString();
 
         this.gameHub.messageReceived(this.messageReceived);
         this.gameHub.sendMessage(connected);

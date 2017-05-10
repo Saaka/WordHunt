@@ -1,6 +1,7 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 
 import { GameHubService } from '../services/game-services.imports';
+import { Game } from '../game.models';
 
 @Component({
     selector: 'game-sidenav',
@@ -8,6 +9,8 @@ import { GameHubService } from '../services/game-services.imports';
     styleUrls: ['./game-sidenav.component.scss']
 })
 export class GameSidenavComponent {
+
+    @Input() game: Game;
 
     constructor(private gameHub: GameHubService) { }
 
