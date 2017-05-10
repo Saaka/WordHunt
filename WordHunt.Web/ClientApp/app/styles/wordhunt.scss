@@ -18,3 +18,27 @@ a.disabled {
     pointer-events: none;
     cursor: default;
 }
+
+@mixin when-xs() {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin when-sm() {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin when-md() {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin when-lg() {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
