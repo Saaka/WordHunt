@@ -1,4 +1,7 @@
 ﻿<div class="game-board">
-    <h1>WordHunt gameboard for game {{game?.name}}</h1>
-    <button class="btn btn-default" (click)="invoke()">INVOKE</button>
+    <div class="wrapper"*ngFor="let row of rows">
+        <div class="wrapper-inner">
+            <game-field class="game-field" *ngFor="let field of row" [field]="field"></game-field>
+        </div>
+    </div>
 </div>

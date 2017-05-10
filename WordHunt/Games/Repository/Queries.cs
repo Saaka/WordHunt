@@ -14,7 +14,8 @@ namespace WordHunt.Games.Repository
         public const string GetGameFieldsQuery = @"SELECT [Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
                                                     CASE WHEN [CheckedByTeamId] = [TeamId] AND [Checked] = 1 THEN 1 ELSE 0 END AS [CheckedByRightTeam]
                                                     FROM GameFields
-                                                    WHERE [GameId] = @GameId";
+                                                    WHERE [GameId] = @GameId
+                                                    ORDER BY [RowIndex], [ColumnIndex]";
 
         public const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
     }
