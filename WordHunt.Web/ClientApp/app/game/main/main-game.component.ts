@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GameBoardComponent, GameSidenavComponent } from '../game.imports';
 import { GameHubService, GameService } from '../services/game-services.imports';
 import { Game } from '../game.models';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'main-game',
@@ -28,14 +29,17 @@ export class GameMainComponent implements OnInit, OnDestroy {
         this.paramsSub = this.route.params
             .subscribe(params => {
                 this.gameId = +params['id'];
-                this.gameService
-                    .getGame(this.gameId)
-                    .mergeMap(response => {
-                        this.game = response;
-                        return this.gameHub
-                            .connect();
+                this.gameHub
+                    .connect()
+                    .mergeMap(connected => {
+                        return this.gameService
+                            .getGame(this.gameId);
                     })
-                    .subscribe(() => {
+                    .mergeMap(result => {
+                        this.game = result;
+                        return Observable.of(true).delay(50);
+                    })
+                    .subscribe(() => {                        
                         this.board.initialize();
                         this.sideNav.initialize();
                     });
