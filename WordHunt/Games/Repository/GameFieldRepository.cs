@@ -18,14 +18,7 @@ namespace WordHunt.Games.Repository
 
     public class GameFieldRepository : IGameFieldRepository
     {
-        private const string CreateGameFieldQuery = @"INSERT INTO GameFields ([GameId], [Word], [Type], [TeamId], [ColumnIndex], [RowIndex], [Checked])
-                                            VALUES (@GameId, @Word, @FieldType, @TeamId, @ColumnIndex, @RowIndex, 0)";
-
-        private const string GetGameFieldsQuery = @"SELECT [Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
-                                                    CASE WHEN [CheckedByTeamId] = [TeamId] AND [Checked] = 1 THEN 1 ELSE 0 END AS [CheckedByRightTeam]
-                                                    FROM GameFields
-                                                    WHERE [GameId] = @GameId";
-
+        
         private readonly IDbConnectionFactory connectionFactory;
 
         public GameFieldRepository(IDbConnectionFactory connectionFactory)
@@ -37,7 +30,7 @@ namespace WordHunt.Games.Repository
         {
             using (var connection = connectionFactory.CreateConnection())
             {
-                await connection.ExecuteAsync(CreateGameFieldQuery, fields);
+                await connection.ExecuteAsync(CreationQueries.CreateGameFieldQuery, fields);
             }
         }
 
@@ -45,7 +38,7 @@ namespace WordHunt.Games.Repository
         {
             using (var connection = connectionFactory.CreateConnection())
             {
-                return await connection.QueryAsync<Field>(GetGameFieldsQuery, new { GameId = gameId } );
+                return await connection.QueryAsync<Field>(AccessQueries.GetGameFieldsQuery, new { GameId = gameId });
             }
         }
     }

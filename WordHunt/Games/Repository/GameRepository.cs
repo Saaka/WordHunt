@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
-using WordHunt.Data.Entities;
 using WordHunt.Models.Games.Creation;
 
 namespace WordHunt.Games.Repository
@@ -15,15 +14,11 @@ namespace WordHunt.Games.Repository
     public interface IGameRepository
     {
         Task<GameCreated> SaveNewGame(GameCreate game);
+        Task<Models.Games.Access.Game> GetGameFull(int gameId);
     }
 
     public class GameRepository : IGameRepository
     {
-        private const string CreateGameQuery = @"INSERT INTO GAMES (Name, BoardWidth, BoardHeight, TeamCount, TrapCount, Type, EndMode, UserId, CreationDate, LanguageId)
-                                    OUTPUT INSERTED.[Id], INSERTED.[BoardWidth], INSERTED.[BoardHeight], INSERTED.[TrapCount], INSERTED.[LanguageId]
-                                    VALUES (@Name, @BoardWidth, @BoardHeight, @TeamCount, @TrapCount, @Type, @EndMode, @UserId, @CreationDate, @LanguageId)";
-
-        
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
         private readonly IMapper mapper;
@@ -39,14 +34,33 @@ namespace WordHunt.Games.Repository
 
         public async Task<GameCreated> SaveNewGame(GameCreate model)
         {
-            var entity = mapper.Map<Game>(model);
+            var entity = mapper.Map<Data.Entities.Game>(model);
             entity.CreationDate = timeProvider.GetCurrentTime();
 
             using (var connection = connectionFactory.CreateConnection())
             {
-                var game = await connection.QueryFirstAsync<GameCreated>(CreateGameQuery, entity);
+                var game = await connection.QueryFirstAsync<GameCreated>(CreationQueries.CreateGameQuery, entity);
 
                 return game;
+            }
+        }
+
+        public async Task<Models.Games.Access.Game> GetGameFull(int gameId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                StringBuilder query = new StringBuilder();
+                query.AppendLine(AccessQueries.GetGameQuery);
+                query.AppendLine(AccessQueries.GetGameFieldsQuery);
+                query.AppendLine(AccessQueries.GetGameTeamsQuery);
+                using (var multiQuery = await connection.QueryMultipleAsync(query.ToString(), new { GameId = gameId }))
+                {
+                    var game = await multiQuery.ReadFirstAsync<Models.Games.Access.Game>();
+                    game.Fields = await multiQuery.ReadAsync<Models.Games.Access.Field>();
+                    game.Teams = await multiQuery.ReadAsync<Models.Games.Access.Team>();
+
+                    return game;
+                }
             }
         }
     }

@@ -19,12 +19,6 @@ namespace WordHunt.Games.Repository
 
     public class GameTeamRepository : IGameTeamRepository
     {
-        private const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount])
-                                    OUTPUT INSERTED.[Id], INSERTED.[Order], INSERTED.[FieldCount]
-                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount)";
-
-        private const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
-
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
         private readonly IMapper mapper;
@@ -47,7 +41,7 @@ namespace WordHunt.Games.Repository
             {
                 for (int i = 0; i < entities.Length; i++)
                 {
-                    var created = await connection.QueryFirstAsync<GameTeamCreated>(CreateGameTeamQuery, entities[i]);
+                    var created = await connection.QueryFirstAsync<GameTeamCreated>(CreationQueries.CreateGameTeamQuery, entities[i]);
                     outputList.Add(created);
                 }
             }
@@ -59,7 +53,7 @@ namespace WordHunt.Games.Repository
         {
             using (var connection = connectionFactory.CreateConnection())
             {
-                var firstTeamId = await connection.QueryFirstAsync<int>(GetFirstTeamIdQuery, new { GameId = gameId });
+                var firstTeamId = await connection.QueryFirstAsync<int>(AccessQueries.GetFirstTeamIdQuery, new { GameId = gameId });
 
                 return firstTeamId;
             }

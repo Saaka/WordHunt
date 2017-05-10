@@ -15,10 +15,7 @@ namespace WordHunt.Games.Repository
     }
 
     public class GameStatusRepository : IGameStatusRepository
-    {
-        private const string CreateGameStatusQuery = @"INSERT INTO GameStatuses ([CurrentTeamId], [GameId], [Latest], [Status])
-                                    VALUES (@CurrentTeamId, @GameId, @Latest, @Status)";
-        
+    {        
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
 
@@ -35,7 +32,7 @@ namespace WordHunt.Games.Repository
 
             using (var connection = connectionFactory.CreateConnection())
             {
-                await connection.ExecuteAsync(CreateGameStatusQuery, entity);
+                await connection.ExecuteAsync(CreationQueries.CreateGameStatusQuery, entity);
             }
         }
 
