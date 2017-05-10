@@ -8,8 +8,4 @@
     float: left;
     margin: 0;
     border: 0;
-
-    @include when-xs {
-        float: none;
-    }
 }
