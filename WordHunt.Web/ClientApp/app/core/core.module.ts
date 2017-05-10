@@ -3,6 +3,7 @@ import { HttpModule } from '@angular/http';
 
 import { TokenAuthService, TokenStorageService, JwtTokenUserParser } from './auth/token/token-auth';
 import { AuthHttpService } from './http/auth-http.service';
+import { HttpService } from './http/http.service';
 import { GameNavigation } from './navigation/navigation.module';
 
 
@@ -11,7 +12,8 @@ import { GameNavigation } from './navigation/navigation.module';
     providers: [
         TokenAuthService,
         TokenStorageService,
-        AuthHttpService, 
+        AuthHttpService,
+        HttpService, 
         JwtTokenUserParser,
         GameNavigation
     ]
