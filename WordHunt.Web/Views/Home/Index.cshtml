@@ -5,44 +5,40 @@
 @*<app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>*@
 <app-comp>
     <style type="text/css">
-        #pre-bootstrap {
+        #loading-page {
             background-color: #262626;
             bottom: 0px;
             left: 0px;
-            position: fixed;
             right: 0px;
             top: 0px;
+            position: fixed;
             z-index: 999999;
         }
-        #pre-bootstrap div.messaging {
+        #loading-page div.loading-content {
             color: #FFFFFF;
-            font-family: monospace;
-            left: 0px;
-            margin-top: -37px;
-            position: absolute;
-            right: 0px;
             text-align: center;
+            font-family: monospace;
+            margin-top: -37px;
+            left: 0px;
+            right: 0px;
+            position: absolute;
             top: 50%;
         }
-        #pre-bootstrap h1 {
+        #loading-page h1 {
             font-size: 26px;
             line-height: 35px;
             margin: 0px 0px 20px 0px;
         }
-        #pre-bootstrap p {
+        #loading-page p {
             font-size: 18px;
             line-height: 14px;
             margin: 0px 0px 0px 0px;
         }
     </style>
-    <div id="pre-bootstrap">
-        <div class="messaging">
-            <h1>
-                WordHunt is loading!
-            </h1>
-            <p>
-                Please stand by...
-            </p>
+    <div id="loading-page">
+        <div class="loading-content">
+            <h1>WordHunt is loading!</h1>
+            <p>Please stand by...</p>
         </div>
     </div>
 </app-comp>
