@@ -22,7 +22,8 @@ namespace WordHunt.Data
         public DbSet<GameTeam> GameTeams { get; set; }
         public DbSet<GameStatus> GameStatuses { get; set; }
         public DbSet<GameField> GameFields { get; set; }
-
+        public DbSet<GameClient> GameClients { get; set; }
+        
         public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {
             this.config = config;
@@ -32,29 +33,18 @@ namespace WordHunt.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Word>()
-                    .HasOne(w => w.Language)
-                    .WithMany(l => l.Words)
-                    .HasForeignKey(fk => fk.LanguageId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Word>()
-                    .HasOne(w => w.Category)
-                    .WithMany(c => c.Words)
-                    .HasForeignKey(fk => fk.CategoryId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired(false);
-
-            builder.Entity<Category>()
-                    .HasOne(c => c.Language)
-                    .WithMany(l => l.Categories)
-                    .HasForeignKey(fk => fk.LanguageId)
-                    .OnDelete(DeleteBehavior.Restrict);
+            InitWordTables(builder);
 
             InitGameTable(builder);
             InitGameTeamsTable(builder);
             InitGameStatusesTable(builder);
             InitGameFieldsTable(builder);
+            InitGameClientsTable(builder);
+        }
+
+        private void InitGameClientsTable(ModelBuilder builder)
+        {
+            throw new NotImplementedException();
         }
 
         private void InitGameFieldsTable(ModelBuilder builder)
@@ -160,6 +150,28 @@ namespace WordHunt.Data
             builder.Entity<Game>()
                 .Property(x => x.CreationDate)
                 .IsRequired();
+        }
+
+        private static void InitWordTables(ModelBuilder builder)
+        {
+            builder.Entity<Word>()
+                    .HasOne(w => w.Language)
+                    .WithMany(l => l.Words)
+                    .HasForeignKey(fk => fk.LanguageId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Word>()
+                    .HasOne(w => w.Category)
+                    .WithMany(c => c.Words)
+                    .HasForeignKey(fk => fk.CategoryId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired(false);
+
+            builder.Entity<Category>()
+                    .HasOne(c => c.Language)
+                    .WithMany(l => l.Categories)
+                    .HasForeignKey(fk => fk.LanguageId)
+                    .OnDelete(DeleteBehavior.Restrict);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-comp',
@@ -8,4 +9,7 @@ import { ViewEncapsulation } from '@angular/core';
     styleUrls: ['./styles/wordhunt.scss','./app.component.scss']
 })
 export class AppComponent {
+    constructor(private title: Title) {
+        this.title.setTitle("WordHunt!");
+    }
 }

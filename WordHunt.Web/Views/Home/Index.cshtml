@@ -1,9 +1,52 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "WordHunt! Loading, please wait.";
 }
 
 @*<app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>*@
-<app-comp>Loading...</app-comp>
+<app-comp>
+    <style type="text/css">
+        #pre-bootstrap {
+            background-color: #262626;
+            bottom: 0px;
+            left: 0px;
+            position: fixed;
+            right: 0px;
+            top: 0px;
+            z-index: 999999;
+        }
+        #pre-bootstrap div.messaging {
+            color: #FFFFFF;
+            font-family: monospace;
+            left: 0px;
+            margin-top: -37px;
+            position: absolute;
+            right: 0px;
+            text-align: center;
+            top: 50%;
+        }
+        #pre-bootstrap h1 {
+            font-size: 26px;
+            line-height: 35px;
+            margin: 0px 0px 20px 0px;
+        }
+        #pre-bootstrap p {
+            font-size: 18px;
+            line-height: 14px;
+            margin: 0px 0px 0px 0px;
+        }
+    </style>
+    <div id="pre-bootstrap">
+        <div class="messaging">
+            <h1>
+                WordHunt is loading!
+            </h1>
+            <p>
+                Please stand by...
+            </p>
+        </div>
+    </div>
+</app-comp>
+
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>
