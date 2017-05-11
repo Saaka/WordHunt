@@ -1,6 +1,43 @@
 ﻿@import '../../styles/wordhunt.colors.scss';
+@import '../../styles/wordhunt.scss';
 
 .field {
     height: 100%;
     color: $primary-color-text;
+}
+
+.long-field {
+    @extend .field;
+
+    font-size: 1em;
+
+    @include when-xs {
+        font-size: 0.5em;
+    }
+
+    @include when-sm {
+        font-size: 0.6em;
+    }
+
+    @include when-md {
+        font-size: 0.8em;
+    }
+}
+
+.short-field {
+    @extend .field;
+
+    font-size: 1.4em;
+
+    @include when-xs {
+        font-size: 0.8em;
+    }
+
+    @include when-sm {
+        font-size: 1em;
+    }
+
+    @include when-md {
+        font-size: 1.2em;
+    }
 }

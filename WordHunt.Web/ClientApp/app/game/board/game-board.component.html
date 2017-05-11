@@ -1,6 +1,6 @@
 ﻿<div class="game-board">
-    <div class="wrapper"*ngFor="let row of rows">
-        <div class="wrapper-inner">
+    <div class="wrapper">
+        <div class="wrapper-inner" *ngFor="let row of rows">
             <game-field class="game-field" *ngFor="let field of row" [field]="field"></game-field>
         </div>
     </div>

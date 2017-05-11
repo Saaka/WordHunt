@@ -21,7 +21,7 @@ export class GameBoardComponent{
     initialize() {
 
         this.createRows();
-        this.gameHub.messageReceived(this.messageReceived);
+        //this.gameHub.messageReceived(this.messageReceived);
     }
 
     private createRows() {

@@ -16,7 +16,7 @@ export class GameSidenavComponent {
 
     initialize() {
 
-        this.gameHub.messageReceived(this.messageReceived);
+        //this.gameHub.messageReceived(this.messageReceived);
     }
 
     private messageReceived(message: string) {
