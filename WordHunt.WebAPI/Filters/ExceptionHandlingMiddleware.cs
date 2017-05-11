@@ -15,7 +15,7 @@ namespace WordHunt.WebAPI.Filters
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context /* other scoped dependencies */)
+        public async Task Invoke(HttpContext context)
         {
             try
             {

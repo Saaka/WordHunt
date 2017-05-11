@@ -18,7 +18,7 @@ namespace WordHunt.WebAPI.Controllers.Games.Access
         [HttpGet("{gameId}")]
         public async Task<WordHunt.Models.Games.Access.Game> GetGameFull(int gameId)
         {
-            return await gameProvider.GetGameFull(gameId);
+            return await gameProvider.GetCompleteGameInfo(gameId);
         }
     }
 }

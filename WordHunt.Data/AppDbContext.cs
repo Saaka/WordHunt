@@ -22,7 +22,6 @@ namespace WordHunt.Data
         public DbSet<GameTeam> GameTeams { get; set; }
         public DbSet<GameStatus> GameStatuses { get; set; }
         public DbSet<GameField> GameFields { get; set; }
-        public DbSet<GameClient> GameClients { get; set; }
         
         public AppDbContext(DbContextOptions options, IAppConfiguration config) : base(options)
         {
@@ -39,12 +38,6 @@ namespace WordHunt.Data
             InitGameTeamsTable(builder);
             InitGameStatusesTable(builder);
             InitGameFieldsTable(builder);
-            InitGameClientsTable(builder);
-        }
-
-        private void InitGameClientsTable(ModelBuilder builder)
-        {
-            throw new NotImplementedException();
         }
 
         private void InitGameFieldsTable(ModelBuilder builder)

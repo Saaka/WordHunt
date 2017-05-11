@@ -14,7 +14,7 @@ namespace WordHunt.Games.Repository
     public interface IGameRepository
     {
         Task<GameCreated> SaveNewGame(GameCreate game);
-        Task<Models.Games.Access.Game> GetGameFull(int gameId);
+        Task<Models.Games.Access.Game> GetCompleteGameInfo(int gameId);
     }
 
     public class GameRepository : IGameRepository
@@ -45,7 +45,7 @@ namespace WordHunt.Games.Repository
             }
         }
 
-        public async Task<Models.Games.Access.Game> GetGameFull(int gameId)
+        public async Task<Models.Games.Access.Game> GetCompleteGameInfo(int gameId)
         {
             using (var connection = connectionFactory.CreateConnection())
             {
