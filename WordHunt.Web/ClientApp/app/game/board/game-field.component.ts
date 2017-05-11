@@ -21,6 +21,7 @@ export class GameFieldComponent implements OnChanges {
         }
     }
 
+    //Set font size when Field is set.
     private fieldChanged(field: SimpleChange) {
         if (field.firstChange) {
             var current = <Field>field.currentValue;

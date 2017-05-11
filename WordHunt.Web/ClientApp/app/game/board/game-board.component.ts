@@ -19,9 +19,7 @@ export class GameBoardComponent{
     }
 
     initialize() {
-
         this.createRows();
-        //this.gameHub.messageReceived(this.messageReceived);
     }
 
     private createRows() {
@@ -31,9 +29,5 @@ export class GameBoardComponent{
             this.rows[index] = tempArray.splice(0, this.game.boardWidth);
             index++;
         }
-    }
-
-    private messageReceived(message: string) {
-        console.log('** BOARD RECEIVED ** ' + message);
     }
 }

@@ -29,9 +29,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
         this.paramsSub = this.route.params
             .subscribe(params => {
                 this.gameId = +params['id'];
-                //this.gameHub
-                //    .connect()
-                Observable.of(true).delay(0)
+                this.gameHub.connect()
+                //Observable.of(true).delay(0) //Uncomment to debug sizing of fields
                     .mergeMap(connected => {
                         return this.gameService
                             .getGame(this.gameId);
