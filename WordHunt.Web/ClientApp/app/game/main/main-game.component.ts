@@ -30,8 +30,18 @@ export class GameMainComponent implements OnInit, OnDestroy {
             .subscribe(params => {
                 this.gameId = +params['id'];
                 this.gameHub.connect()
-                //Uncomment line below to debug sizing of fields. Comment one above!
-                //Observable.of(true).delay(0) 
+                    //Uncomment line below to debug sizing of fields. Comment one above!
+                    //Observable.of(true).delay(0) 
+                    .mergeMap(connected => {
+                        if (connected) {
+                            this.gameHub.subscribed(this.handleMessage);
+                            this.gameHub.messageReceived(this.handleMessage);
+
+                            this.gameHub
+                                .subscribeToGame(this.gameId)
+                        }
+                        return Observable.of(connected).delay(0);
+                    })
                     .mergeMap(connected => {
                         return this.gameService
                             .getGame(this.gameId);
@@ -40,13 +50,17 @@ export class GameMainComponent implements OnInit, OnDestroy {
                         this.game = result;
 
                         //Make sure variables are set in the components
-                        return Observable.of(true).delay(50); 
+                        return Observable.of(true).delay(50);
                     })
-                    .subscribe(() => {                        
+                    .subscribe(() => {
                         this.board.initialize();
                         this.sideNav.initialize();
                     });
             });
+    }
+
+    private handleMessage(message: string) {
+        console.log(message);
     }
 
     ngOnDestroy() {
