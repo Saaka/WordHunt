@@ -21,6 +21,10 @@ namespace WordHunt.WebAPI.Config
             services.AddScoped<ISeedConfiguration, WordHuntConfiguration>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
 
+            services.AddTransient<ITokenUserContextProvider, TokenUserContextProvider>();
+            services.AddTransient<System.Security.Claims.ClaimsPrincipal>(
+                s => s.GetService<Microsoft.AspNetCore.Http.IHttpContextAccessor>().HttpContext.User);
+
             return services;
         }
 

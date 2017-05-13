@@ -21,10 +21,13 @@ namespace WordHunt.Web.UnitTests.Controllers
             };
             Mock<ILogger<AuthController>> logger = new Mock<ILogger<AuthController>>();
             Mock<ITokenGenerator> tokenGenMock = new Mock<ITokenGenerator>();
+            Mock<ITokenUserContextProvider> contextUserMock = new Mock<ITokenUserContextProvider>();
+
+
             tokenGenMock.Setup(x => x.GenerateToken(It.IsAny<string>(), It.IsAny<string>()))
                             .ReturnsAsync(new TokenGeneratorResult()).Verifiable("GenerateToken was not called");
 
-            AuthController controller = new AuthController(tokenGenMock.Object, logger.Object);
+            AuthController controller = new AuthController(tokenGenMock.Object, logger.Object, contextUserMock.Object);
 
             var result = await controller.CreateToken(model) as TokenGeneratorResult;
 
