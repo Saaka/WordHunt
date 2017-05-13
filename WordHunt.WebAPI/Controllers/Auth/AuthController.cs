@@ -35,7 +35,7 @@ namespace WordHunt.WebAPI.Controllers.Auth
             return result;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("check")]
         public IActionResult Get()
         {

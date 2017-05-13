@@ -23,15 +23,15 @@ namespace WordHunt.WebAPI.Auth.Token
         public UserInfo GetContextUserInfo()
         {
             if (caller == null || caller.Identity == null)
-                throw new InvalidOperationException("No user specified information");
+                throw new UnauthorizedAccessException("No user specified information");
             
             var identity = caller.Identity as ClaimsIdentity;
             if (identity == null || !caller.Identity.IsAuthenticated)
-                throw new ArgumentException("User is not properly authenticated");
+                throw new UnauthorizedAccessException("User is not properly authenticated");
 
             var idClaim = identity.Claims.FirstOrDefault(x => x.Type == "id");
             if (idClaim == null)
-                throw new ArgumentException("No User information provided white authenticating");
+                throw new UnauthorizedAccessException("No User information provided white authenticating");
             
             return new UserInfo()
             {

@@ -34,6 +34,9 @@ namespace WordHunt.WebAPI.Filters
             if (exception is ArgumentException)
                 code = HttpStatusCode.BadRequest;
 
+            if (exception is UnauthorizedAccessException)
+                code = HttpStatusCode.Unauthorized;
+
             var result = JsonConvert.SerializeObject(new { error = exception.Message });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
