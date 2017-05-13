@@ -21,6 +21,7 @@ namespace WordHunt.Data.Entities
         public virtual IList<GameTeam> Teams { get; set; }
         public virtual IList<GameStatus> Statuses { get; set; }
         public virtual IList<GameField> Fields { get; set; }
+        public virtual IList<GameMove> Moves { get; set; }
 
         public virtual Language Language { get; set; }
     }
