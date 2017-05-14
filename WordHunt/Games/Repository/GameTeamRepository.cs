@@ -15,6 +15,7 @@ namespace WordHunt.Games.Repository
     {
         Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> model);
         Task<int> GetFirstTeamId(int gameId);
+        Task<Models.Games.Access.NextTeam> GetNextTeam(int gameId);
     }
 
     public class GameTeamRepository : IGameTeamRepository
@@ -56,6 +57,14 @@ namespace WordHunt.Games.Repository
                 var firstTeamId = await connection.QueryFirstAsync<int>(AccessQueries.GetFirstTeamIdQuery, new { GameId = gameId });
 
                 return firstTeamId;
+            }
+        }
+
+        public async Task<Models.Games.Access.NextTeam> GetNextTeam(int gameId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.QueryFirstAsync<Models.Games.Access.NextTeam>(AccessQueries.GetNextTeamQuery, new { GameId = gameId });
             }
         }
     }

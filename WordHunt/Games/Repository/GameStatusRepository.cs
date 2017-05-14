@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Threading.Tasks;
+using WordHunt.Base.Enums.Game;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
 using WordHunt.Data.Entities;
@@ -10,10 +11,11 @@ namespace WordHunt.Games.Repository
     public interface IGameStatusRepository
     {
         Task CreateInitialGameStatus(int gameId, int firstTeamId);
+        Task<Models.Games.Access.LatestStatus> UpdateCurrentStatus(int gameId, int teamId, Status gameStatus);
     }
 
     public class GameStatusRepository : IGameStatusRepository
-    {        
+    {
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;
 
@@ -22,6 +24,14 @@ namespace WordHunt.Games.Repository
         {
             this.connectionFactory = connectionFactory;
             this.timeProvider = timeProvider;
+        }
+
+        public async Task<Models.Games.Access.LatestStatus> UpdateCurrentStatus(int gameId, int teamId, Status gameStatus)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.QueryFirstAsync<Models.Games.Access.LatestStatus>(CreationQueries.CreateAndUpdateGameStatus, new { GameId = gameId, CurrentTeamId = teamId, Status = (int)gameStatus });
+            }
         }
 
         public async Task CreateInitialGameStatus(int gameId, int firstTeamId)

@@ -16,4 +16,10 @@ namespace WordHunt.Models.Games.Access
         public int FieldCount { get; set; }
         public int RemainingFieldCount { get; set; }
     }
+
+    public class NextTeam
+    {
+        public int Id { get; set; }
+        public int Order { get; set; }
+    }
 }
