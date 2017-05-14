@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using WordHunt.Games.Creation;
 using WordHunt.Models.Games.Creation;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace WordHunt.WebAPI.Controllers.Game
+namespace WordHunt.WebAPI.Controllers.Game.Creation
 {
     [Authorize]
     [Route("api/game")]

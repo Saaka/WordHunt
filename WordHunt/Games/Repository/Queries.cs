@@ -8,16 +8,24 @@ namespace WordHunt.Games.Repository
 {
     public static class AccessQueries
     {
+        //GAME
         public const string GetGameQuery = @"SELECT [Id], [UserId], [Name], [BoardWidth], [BoardHeight], [TeamCount], [Type] FROM Games WHERE Id = @GameId";
-        public const string GetGameTeamsQuery = @"SELECT [Id], [UserId], [Name], [Color], [Icon], [FieldCount], [RemainingFieldCount] FROM GameTeams WHERE GameId = @GameId";
 
+        //GAME FIELD
         public const string GetGameFieldsQuery = @"SELECT [Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
                                                     CASE WHEN [CheckedByTeamId] = [TeamId] AND [Checked] = 1 THEN 1 ELSE 0 END AS [CheckedByRightTeam]
                                                     FROM GameFields
                                                     WHERE [GameId] = @GameId
                                                     ORDER BY [RowIndex], [ColumnIndex]";
 
+        //GAME TEAM
+        public const string GetGameTeamsQuery = @"SELECT [Id], [UserId], [Name], [Color], [Icon], [FieldCount], [RemainingFieldCount] FROM GameTeams WHERE GameId = @GameId";
         public const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
+
+        //GAME STATUS
+        public const string GetCurrentGameState = @"SELECT	G.[UserId], G.[EndMode], G.[Type], S.[CurrentTeamId], [Status] "
+                                                    + "FROM	Games G INNER JOIN GameStatuses S ON G.Id = S.GameId "
+                                                    + "WHERE	G.[Id] = @GameId AND S.[Latest] = 1";
     }
 
     public static class CreationQueries

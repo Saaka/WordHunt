@@ -15,6 +15,7 @@ namespace WordHunt.Games.Repository
     {
         Task<GameCreated> SaveNewGame(GameCreate game);
         Task<Models.Games.Access.Game> GetCompleteGameInfo(int gameId);
+        Task<Models.Games.Access.CurrentGameState> GetCurrentGameState(int gameId);
     }
 
     public class GameRepository : IGameRepository
@@ -61,6 +62,14 @@ namespace WordHunt.Games.Repository
 
                     return game;
                 }
+            }
+        }
+
+        public async Task<Models.Games.Access.CurrentGameState> GetCurrentGameState(int gameId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.QueryFirstAsync<Models.Games.Access.CurrentGameState>(AccessQueries.GetCurrentGameState, new { GameId = gameId });
             }
         }
     }

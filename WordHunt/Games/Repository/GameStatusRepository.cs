@@ -1,11 +1,9 @@
 ﻿using Dapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
 using WordHunt.Data.Entities;
+using WordHunt.Models.Games.Access;
 
 namespace WordHunt.Games.Repository
 {

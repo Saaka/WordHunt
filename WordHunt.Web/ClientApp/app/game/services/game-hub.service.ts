@@ -6,9 +6,7 @@ import { ISignalRConnection, BroadcastEventListener } from 'ng2-signalr';
 @Injectable()
 export class GameHubService {
 
-    private connection: ISignalRConnection;
-
-    private onMessageSent$: BroadcastEventListener<string>;
+    private connection: ISignalRConnection;    
     private onSubscribed$: BroadcastEventListener<string>;
 
     constructor(private connectionFactory: SignalRConnectionFactory) { }
@@ -23,31 +21,21 @@ export class GameHubService {
             });
     }
 
-    public subscribeToGame(gameId: number) {
-        this.connection.invoke("Subscribe", gameId);
+    public subscribeToGame(gameId: number) : Promise<string> {
+        return this.connection
+            .invoke("Subscribe", gameId);
     }
 
     public subscribed(onSubscribed: (message: string) => void) {
         if (!this.onSubscribed$)
             this.onSubscribed$ = this.connection.listenFor('Subscribed');
 
+
         this.onSubscribed$.subscribe(onSubscribed);
     }
 
-    public messageReceived(onMessageReceived: (message: string) => void) {
-        if (!this.onMessageSent$)
-            this.onMessageSent$ = this.connection.listenFor('HandleMessage');
-
-        this.onMessageSent$.subscribe(onMessageReceived);
-    }
-
-    sendMessage(message: string) {
-
-        this.connection.invoke('HandleMessage', message + ' ConnectionId: ' + this.connection.id);
-    }
-
     disconnect() {
-        if (this.onMessageSent$)
-            this.onMessageSent$.unsubscribe();
+        if (this.onSubscribed$)
+            this.onSubscribed$.unsubscribe();
     }
 }

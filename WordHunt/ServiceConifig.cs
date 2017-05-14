@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using WordHunt.Games.Creation;
+using WordHunt.Games.Moves.Validation;
 using WordHunt.Games.Repository;
 using WordHunt.Mappings;
 using WordHunt.Services.Categories;
@@ -33,6 +34,9 @@ namespace WordHunt
         //Configure services from WordHunt library.
         public static IServiceCollection ConfigureWordHuntServices(this IServiceCollection services)
         {
+            //Game move
+            services.AddScoped<IMoveValidatorFactory, MoveValidatorFactory>();
+
             //Game access
 
             //GAME CREATION related classes

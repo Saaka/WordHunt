@@ -11,8 +11,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./main-game.component.scss']
 })
 export class GameMainComponent implements OnInit, OnDestroy {
-
-    gameId: number;
+    
     game: Game;
     private paramsSub: any;
 
@@ -28,34 +27,35 @@ export class GameMainComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.paramsSub = this.route.params
             .subscribe(params => {
-                this.gameId = +params['id'];
-                this.gameHub.connect()
-                    //Uncomment line below to debug sizing of fields. Comment one above!
-                    //Observable.of(true).delay(0) 
-                    .mergeMap(connected => {
-                        if (connected) {
-                            this.gameHub.subscribed(this.handleMessage);
-                            this.gameHub.messageReceived(this.handleMessage);
+                var gameId = +params["id"];
+                this.connectToGame(gameId);
+            });
+    }
 
-                            this.gameHub
-                                .subscribeToGame(this.gameId)
-                        }
-                        return Observable.of(connected).delay(0);
-                    })
-                    .mergeMap(connected => {
-                        return this.gameService
-                            .getGame(this.gameId);
-                    })
-                    .mergeMap(result => {
-                        this.game = result;
+    private connectToGame(gameId: number) {
+        this.gameHub.connect()
+            //Uncomment line below to debug sizing of fields. Comment one above!
+            //Observable.of(true).delay(0) 
+            .mergeMap(connected => {
+                if (connected) {
+                    return this.gameHub
+                        .subscribeToGame(gameId)
+                }
+                Observable.throw("Could not connect to game hub");
+            })
+            .mergeMap(connectionId => {
+                return this.gameService
+                    .getGame(gameId);
+            })
+            .mergeMap(result => {
+                this.game = result;
 
-                        //Make sure variables are set in the components
-                        return Observable.of(true).delay(50);
-                    })
-                    .subscribe(() => {
-                        this.board.initialize();
-                        this.sideNav.initialize();
-                    });
+                //Make sure variables are set in the components
+                return Observable.of(true).delay(50);
+            })
+            .subscribe(() => {
+                this.board.initialize();
+                this.sideNav.initialize();
             });
     }
 
