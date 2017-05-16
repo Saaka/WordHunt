@@ -27,7 +27,7 @@ namespace WordHunt.Games.Repository
                                                 + "INNER JOIN GameTeams GT ON G.Id = GT.GameId "
                                                 + "INNER JOIN GameStatuses GS ON G.Id = GS.GameId "
                                                 + "INNER JOIN GameTeams CT ON GS.CurrentTeamId = CT.Id "
-                                            + "WHERE G.Id = 71 "
+                                            + "WHERE G.Id = @GameId "
                                                 + "AND GS.Latest = 1 "
                                                 + "AND GT.[Order] = CASE WHEN (CT.[Order]) = G.[TeamCount] THEN 1 ELSE CT.[Order] + 1 END";
 
