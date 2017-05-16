@@ -12,7 +12,7 @@ import './core/rxjs.imports';
 import 'expose-loader?jQuery!jquery';
 import 'signalr';
 import { CreateSignalRConfig } from './config/signalr.config';
-import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
+import { SignalRModule, SignalRConfiguration } from './lib/ng2-signalr';
 
 @NgModule({
     imports: [

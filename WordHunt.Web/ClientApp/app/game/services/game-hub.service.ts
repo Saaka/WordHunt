@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { SignalRConnectionFactory } from '../../core/signalr/signalr-connection.factory';
-import { ISignalRConnection, BroadcastEventListener } from 'ng2-signalr';
+import { ISignalRConnection, BroadcastEventListener } from '../../lib/ng2-signalr';
 import { TeamChanged } from "../game.models";
 
 @Injectable()
