@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using WordHunt.Config;
 using WordHunt.Config.Auth;
 using WordHunt.Data;
@@ -20,6 +21,8 @@ namespace WordHunt.WebAPI.Config
             services.AddScoped<IAuthConfiguration, WordHuntConfiguration>();
             services.AddScoped<ISeedConfiguration, WordHuntConfiguration>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            services.AddSingleton<Games.Broadcaster.IEventBroadcaster, Hubs.EventBroadcaster>();
 
             services.AddTransient<ITokenUserContextProvider, TokenUserContextProvider>();
             services.AddTransient<System.Security.Claims.ClaimsPrincipal>(

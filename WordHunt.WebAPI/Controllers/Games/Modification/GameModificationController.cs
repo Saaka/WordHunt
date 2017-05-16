@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.WebAPI.Auth.Token;
+using WordHunt.Games.Moves;
+using WordHunt.Data.Events;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,19 +14,24 @@ namespace WordHunt.WebAPI.Controllers.Game.Creation
     public class GameModificationController : Controller
     {
         private readonly ITokenUserContextProvider userProvider;
-        public GameModificationController(ITokenUserContextProvider userProvider)
+        private readonly IGameMoveManager gameMoveManager;
+
+        public GameModificationController(ITokenUserContextProvider userProvider,
+            IGameMoveManager gameMoveManager)
         {
             this.userProvider = userProvider;
+            this.gameMoveManager = gameMoveManager;
         }
 
         [Authorize]
-        [HttpPost("passturn")]
+        [HttpGet("{gameId}/passturn")]
         public async Task<IActionResult> PassTurn(int gameId)
         {
             var currentUser = userProvider.GetContextUserInfo();
 
+            var result = await gameMoveManager.PassTurn(gameId, currentUser.Id);
 
-            return Ok();
+            return Ok(result);
         }
     }
 }

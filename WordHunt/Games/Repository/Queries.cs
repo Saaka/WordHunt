@@ -22,13 +22,13 @@ namespace WordHunt.Games.Repository
         public const string GetGameTeamsQuery = @"SELECT [Id], [UserId], [Name], [Color], [Icon], [FieldCount], [RemainingFieldCount] FROM GameTeams WHERE GameId = @GameId";
         public const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
 
-        public const string GetNextTeamQuery = @"SELECT	GT.Id, GT.[Order]"
-                                            + "FROM	Games G"
-                                                + "INNER JOIN GameTeams GT ON G.Id = GT.GameId"
-                                                + "INNER JOIN GameStatuses GS ON G.Id = GS.GameId"
-                                                + "INNER JOIN GameTeams CT ON GS.CurrentTeamId = CT.Id"
-                                            + "WHERE G.Id = 71"
-                                                + "AND GS.Latest = 1"
+        public const string GetNextTeamQuery = @"SELECT	GT.Id, GT.[Order] "
+                                            + "FROM	Games G "
+                                                + "INNER JOIN GameTeams GT ON G.Id = GT.GameId "
+                                                + "INNER JOIN GameStatuses GS ON G.Id = GS.GameId "
+                                                + "INNER JOIN GameTeams CT ON GS.CurrentTeamId = CT.Id "
+                                            + "WHERE G.Id = 71 "
+                                                + "AND GS.Latest = 1 "
                                                 + "AND GT.[Order] = CASE WHEN (CT.[Order]) = G.[TeamCount] THEN 1 ELSE CT.[Order] + 1 END";
 
         //GAME STATUS
@@ -49,12 +49,12 @@ namespace WordHunt.Games.Repository
         public const string CreateGameStatusQuery = @"INSERT INTO GameStatuses ([CurrentTeamId], [GameId], [Latest], [Status])
                                     VALUES (@CurrentTeamId, @GameId, @Latest, @Status)";
 
-        public const string CreateAndUpdateGameStatus = "UPDATE GameStatuses"
-                                            + "SET[Latest] = 0"
-                                            + "WHERE[GameId] = @GameId"
-                                            + "AND[Latest] = 1"
-                                            + "INSERT INTO GameStatuses([CurrentTeamId], [GameId], [Latest], [Status])"
-                                            + "OUTPUT inserted.[Id], inserted.[GameId], inserted.[CurrentTeamId], inserted.[Latest], inserted.[Status]"
+        public const string CreateAndUpdateGameStatus = "UPDATE GameStatuses "
+                                            + "SET[Latest] = 0 "
+                                            + "WHERE[GameId] = @GameId "
+                                            + "AND[Latest] = 1 "
+                                            + "INSERT INTO GameStatuses([CurrentTeamId], [GameId], [Latest], [Status]) "
+                                            + "OUTPUT inserted.[Id], inserted.[GameId], inserted.[CurrentTeamId], inserted.[Latest], inserted.[Status] "
                                             + "VALUES (@CurrentTeamId, @GameId, 1, @Status)";
 
         public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount])

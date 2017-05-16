@@ -4,16 +4,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WordHunt.Games.Broadcaster;
+using WordHunt.Data.Events;
 
 namespace WordHunt.WebAPI.Hubs
 {
-    public interface IBroadcaster
+    /// <summary>
+    /// Actions that can be invoke on the client from server/.
+    /// </summary>
+    public interface IEventClient
     {
-        //void Subscribed(string message);
+        void TeamChanged(TeamChanged args);
     }
 
+    /// <summary>
+    /// Action than client side can invoke.
+    /// </summary>
+    public interface IEventServer
+    {
+        string Subscribe(int gameId);
+    }
+    
     [HubName("broadcaster")]
-    public class Broadcaster : Hub<IBroadcaster>
+    public class Broadcaster : Hub<IEventClient>, IEventServer
     {
         public string Subscribe(int gameId)
         {
@@ -21,5 +34,10 @@ namespace WordHunt.WebAPI.Hubs
 
             return Context.ConnectionId;
         }
+
+        //public void TeamChanged(TeamChanged args)
+        //{
+        //    Clients.Group(args.GameId.ToString()).TeamChanged(args);
+        //}
     }
 }

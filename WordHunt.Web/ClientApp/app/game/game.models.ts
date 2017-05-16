@@ -31,3 +31,10 @@ export class Field {
     columnIndex: number;
     rowIndex: number;
 }
+
+export class TeamChanged {
+    gameId: number;
+    newTeamId: number;
+    lastTeamId: number;
+    changeReason: number;
+}

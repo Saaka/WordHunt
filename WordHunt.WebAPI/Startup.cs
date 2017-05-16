@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using WordHunt.Data.Initializer;
 using WordHunt.WebAPI.Filters;
 using WordHunt.Base;
+using Newtonsoft.Json;
 
 namespace WordHunt.WebAPI
 {
@@ -37,6 +38,8 @@ namespace WordHunt.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            SignalRContractResolver.RegisterSerializer();
+
             // Add framework services.
             services.AddMvc();
             services.AddSwaggerGen(s => s.SwaggerDoc("v1",
