@@ -9,6 +9,6 @@ namespace WordHunt.Games.Moves.Validation
 {
     public interface IMoveValidator
     {
-        void ValidatePassTurn(CurrentGameState gameState, int userId);
+        void ValidateRoundSkip(CurrentGameState gameState, int userId);
     }
 }

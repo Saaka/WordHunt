@@ -24,12 +24,12 @@ namespace WordHunt.WebAPI.Controllers.Game.Creation
         }
 
         [Authorize]
-        [HttpGet("{gameId}/passturn")]
-        public async Task<IActionResult> PassTurn(int gameId)
+        [HttpGet("{gameId}/skipround")]
+        public async Task<IActionResult> SkipRound(int gameId)
         {
             var currentUser = userProvider.GetContextUserInfo();
 
-            var result = await gameMoveManager.PassTurn(gameId, currentUser.Id);
+            var result = await gameMoveManager.SkipRound(gameId, currentUser.Id);
 
             return Ok(result);
         }

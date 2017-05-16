@@ -8,7 +8,7 @@ namespace WordHunt.Games.Moves
 {
     public interface IGameMoveManager
     {
-        Task<TeamChanged> PassTurn(int gameId, int userId);
+        Task<TeamChanged> SkipRound(int gameId, int userId);
     }
 
     public class GameMoveManager : IGameMoveManager
@@ -32,18 +32,18 @@ namespace WordHunt.Games.Moves
             this.eventBroadcaster = eventBroadcaster;
         }
 
-        public async Task<TeamChanged> PassTurn(int gameId, int userId)
+        public async Task<TeamChanged> SkipRound(int gameId, int userId)
         {
             var currentState = await gameRepository.GetCurrentGameState(gameId);
 
             var validator = validationFactory.GetMoveValidator(Base.Enums.Game.GameType.SingleDevice);
-            validator.ValidatePassTurn(currentState, userId);
+            validator.ValidateRoundSkip(currentState, userId);
 
             var nextTeam = await gameTeamRepository.GetNextTeam(gameId);
             var newStatus = await gameStatusRepository.UpdateCurrentStatus(gameId, nextTeam.Id, Base.Enums.Game.Status.Ongoing);
 
             var teamChanged = new TeamChanged();
-            teamChanged.ChangeReason = Base.Enums.Events.TeamChangeReason.PassTurn;
+            teamChanged.ChangeReason = Base.Enums.Events.TeamChangeReason.SkipRound;
             teamChanged.GameId = gameId;
             teamChanged.LastTeamId = currentState.CurrentTeamId;
             teamChanged.NewTeamId = newStatus.CurrentTeamId;

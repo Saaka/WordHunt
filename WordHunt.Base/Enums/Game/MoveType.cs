@@ -7,6 +7,6 @@ namespace WordHunt.Base.Enums.Game
     public enum MoveType
     {
         CheckField,
-        PassTurn
+        SkipRound
     }
 }

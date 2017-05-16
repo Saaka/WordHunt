@@ -18,10 +18,10 @@ export class GameService {
             .map(res => <Game>res.json());
     }
 
-    passTurn(gameId: number) {
+    skipRound(gameId: number) {
 
         return this.authHttp
-            .get('game/' + gameId + "/passturn");
+            .get('game/' + gameId + "/skipround");
             //.map(res => <TeamChanged>res.json());
     }
 }

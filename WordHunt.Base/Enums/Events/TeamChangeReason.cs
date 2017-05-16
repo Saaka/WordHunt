@@ -8,7 +8,7 @@ namespace WordHunt.Base.Enums.Events
 {
     public enum TeamChangeReason
     {
-        PassTurn,
+        SkipRound,
         WrongGuess
     }
 }

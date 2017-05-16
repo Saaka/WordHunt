@@ -10,7 +10,7 @@ namespace WordHunt.Games.Moves.Validation
 {
     public class SingleDeviceMoveValidator : IMoveValidator
     {
-        public void ValidatePassTurn(CurrentGameState gameState, int userId)
+        public void ValidateRoundSkip(CurrentGameState gameState, int userId)
         {
             if (gameState.UserId != userId)
                 throw new ValidationException("Current user can't pass this turn");

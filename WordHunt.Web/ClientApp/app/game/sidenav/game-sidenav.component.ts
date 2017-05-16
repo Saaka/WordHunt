@@ -15,9 +15,9 @@ export class GameSidenavComponent {
     constructor(private gameHub: GameHubService,
         private gameService: GameService) { }
 
-    private passTurn() {
+    private skipRound() {
         this.gameService
-            .passTurn(this.game.id)
+            .skipRound(this.game.id)
             .subscribe();
     }
 
