@@ -2,7 +2,7 @@
 
 import { DevConfig, ProdConfig } from './app.config';
 import { IConfig } from './app.iconfig';
-import { SignalRConfiguration } from '../lib/ng2-signalr';
+import { SignalRConfiguration, ConnectionTransport } from '../lib/ng2-signalr';
 
 export function CreateSignalRConfig() {
 
@@ -18,6 +18,7 @@ export function CreateSignalRConfig() {
         cfg = new ProdConfig();
         signalrConfiguration.logging = false;
     }
+    signalrConfiguration.transport = [ConnectionTransport.WEB_SOCKETS, ConnectionTransport.LONG_POLLING];
 
     signalrConfiguration.url = cfg.API_URL + 'signalr';
     
