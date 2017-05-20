@@ -28,7 +28,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
         this.paramsSub = this.route.params
             .subscribe(params => {
                 var gameId = +params["id"];
-                this.connectToGame(gameId);
+                //this.connectToGame(gameId);
             });
     }
 
