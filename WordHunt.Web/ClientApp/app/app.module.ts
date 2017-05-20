@@ -20,8 +20,8 @@ import { CustomMaterialModule } from './core/material/custom-material.module';
 @NgModule({
     imports: [
         BrowserModule,
-        CustomMaterialModule,
         BrowserAnimationsModule,
+        CustomMaterialModule,
         AppRoutingModule,
         GameModule,
         CoreModule,

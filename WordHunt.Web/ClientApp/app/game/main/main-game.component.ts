@@ -15,10 +15,10 @@ export class GameMainComponent implements OnInit, OnDestroy {
     game: Game;
     private paramsSub: any;
 
-    @ViewChild(GameBoardComponent)
-    private board: GameBoardComponent;
-    @ViewChild(GameSidenavComponent)
-    private sideNav: GameSidenavComponent;
+    //@ViewChild(GameBoardComponent)
+    //private board: GameBoardComponent;
+    //@ViewChild(GameSidenavComponent)
+    //private sideNav: GameSidenavComponent;
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
@@ -54,8 +54,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
                 return Observable.of(true).delay(50);
             })
             .subscribe(() => {
-                this.board.initialize();
-                this.sideNav.initialize();
+                //this.board.initialize();
+                //this.sideNav.initialize();
             });
     }
 

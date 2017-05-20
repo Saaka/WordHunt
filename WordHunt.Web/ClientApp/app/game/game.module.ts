@@ -6,9 +6,14 @@ import { GameBoardComponent, GameFieldComponent } from './board/board-components
 import { GameSidenavComponent } from './sidenav/game-sidenav.component';
 import { GameNavigationComponent } from './navigation/game-navigation.component';
 import { GameHubService, GameService } from './services/game-services.imports';
+import { CustomMaterialModule } from '../core/material/custom-material.module';
 
 @NgModule({
-    imports: [GameRoutingModule, CommonModule],
+    imports: [
+        GameRoutingModule,
+        CommonModule,
+        CustomMaterialModule
+    ],
     declarations: [
         GameBoardComponent,
         GameSidenavComponent,

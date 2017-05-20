@@ -1,10 +1,17 @@
-﻿<div class="container-fluid full-main-screen">
-    <div class='row full-main-screen'>
-        <div class="col-sm-2 col-xs-12 game-main-nav" id="">
-            <game-sidenav [game]="game"></game-sidenav>
-        </div>
-        <div class="col-sm-10 col-xs-12 game-main-board" id="">
-            <game-board [game]="game"></game-board>
-        </div>
-    </div>
-</div>
+﻿<md-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+    <md-sidenav #sidenav mode="side" class="app-sidenav">
+        Sidenav
+    </md-sidenav>
+
+    <md-toolbar color="primary">
+        <button class="app-icon-button" (click)="sidenav.toggle()">
+            <i class="material-icons app-toolbar-menu">menu</i>
+        </button>
+
+        Angular Material2 Example App
+
+        <span class="app-toolbar-filler"></span>
+        <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+    </md-toolbar>
+</md-sidenav-container>
