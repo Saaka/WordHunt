@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
 import { WordsComponent } from './words/word.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const routes: Routes = [
     {
@@ -16,6 +17,10 @@ const routes: Routes = [
             {
                 path: 'words',
                 component: WordsComponent
+            },
+            {
+                path: 'categories',
+                component: CategoriesComponent
             }
         ]
     },
@@ -29,5 +34,6 @@ export class AdminRoutingModule { }
 
 export const routableComponents = [
     AdminComponent,
-    WordsComponent
+    WordsComponent,
+    CategoriesComponent
 ];
