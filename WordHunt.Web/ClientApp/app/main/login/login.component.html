@@ -1,23 +1,21 @@
-﻿<div>
-    <h2>Login</h2>
-    <div class="center-block button-div">
+﻿<div class="main-content-container">
+    <md-card>
         <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" [(ngModel)]="model.userName" #username="ngModel" required />
-                <div *ngIf="f.submitted && !username.valid" class="form-error">Name is required</div>
-            </div>
-            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-                <div *ngIf="f.submitted && !password.valid" class="form-error">Password is required</div>
-            </div>
-            <div class="form-group">
-                <button [disabled]="loading" class="btn btn-success btn-block">Login <i *ngIf="loading" aria-hidden="true" class="fa fa-circle-o-notch fa-spin"></i></button>
-                
-            </div>
-            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+            <md-card-title>Login</md-card-title>
+            <md-card-content>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="Login" type="text" [(ngModel)]="model.userName" name="username" #username="ngModel" required />
+                    <md-error *ngIf="f.submitted && !username.valid" class="form-error">Name is required</md-error>
+                </md-input-container>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="Password" type="password" [(ngModel)]="model.password" name="password" #password="ngModel" required />
+                    <md-error *ngIf="f.submitted && !password.valid">Password is required</md-error>
+                </md-input-container>
+            </md-card-content>
+            <md-card-actions>
+                <button md-raised-button color="primary">Login</button>
+                <button md-raised-button [routerLink]="['/main']">Back</button>
+            </md-card-actions>
         </form>
-    </div>        
-
+    </md-card>
 </div>
