@@ -1,15 +1,1 @@
-﻿@import '../../styles/wordhunt.colors.scss';
-
-.main-button-group,
-.login-button-group {
-    margin: 10px;
-}
-
-.logout-button-group {
-    @extend .main-button-group;
-    margin-top: 50px;
-}
-
-.user-name {
-    color:$primary-color-text;
-}
+﻿

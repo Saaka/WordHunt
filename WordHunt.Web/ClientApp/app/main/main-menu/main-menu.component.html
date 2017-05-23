@@ -1,4 +1,4 @@
-﻿<div class="center-block button-div">
+﻿<!--<div class="center-block button-div">
     <div class="login-button-group" *ngIf="!isLoggedIn()">
         <a class="btn btn-default btn-block" [routerLink]="['/login']">Login</a>
     </div>
@@ -6,11 +6,35 @@
         <p class="user-name">{{getUserName()}}</p>
         <a class="btn btn-default btn-block disabled" [routerLink]="['/game', 1]">Play</a>
         <a class="btn btn-default btn-block" [routerLink]="['/creategame']">Create game</a>
-        <!--<a class="btn btn-default btn-block" [routerLink]="['/tutorial']">Tutorial</a>-->
         <a class="btn btn-default btn-block" [routerLink]="['/settings']">Settings</a>
         <a class="btn btn-default btn-block" [routerLink]="['/admin']" *ngIf="isAdmin()">Admin</a>
     </div>
     <div class="logout-button-group" *ngIf="isLoggedIn()">
         <a class="btn btn-default btn-block" (click)="logout()">Logout</a>
     </div>
-</div>
+</div>-->
+
+<md-nav-list>
+    <div *ngIf="!isLoggedIn()">
+        <md-list-item>
+            <a md-line [routerLink]="['/login']">Login</a>
+        </md-list-item>
+    </div>
+    <div *ngIf="isLoggedIn()">
+        <md-list-item>
+            <a md-line class="disabled" [routerLink]="['/game', 1]">Play</a>
+        </md-list-item>
+        <md-list-item>
+            <a md-line [routerLink]="['/creategame']">Create game</a>
+        </md-list-item>
+        <md-list-item>
+            <a md-line [routerLink]="['/settings']">Settings</a>
+        </md-list-item>
+        <md-list-item *ngIf="isAdmin()">
+            <a md-line [routerLink]="['/admin']">Admin</a>
+        </md-list-item>
+        <md-list-item *ngIf="isLoggedIn()">
+            <a md-line (click)="logout()">Logout</a>
+        </md-list-item>
+    </div>
+</md-nav-list>
