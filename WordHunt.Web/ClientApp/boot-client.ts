@@ -5,7 +5,6 @@ import 'reflect-metadata';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
-import 'bootstrap';
 require("font-awesome-webpack");
 
 const rootElemTagName = 'app-comp'; // Update this if you change your root component selector

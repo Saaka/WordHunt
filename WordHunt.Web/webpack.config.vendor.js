@@ -24,8 +24,6 @@ module.exports = (env) => {
                 '@angular/platform-browser',
                 '@angular/platform-browser-dynamic',
                 '@angular/router',
-                'bootstrap',
-                'bootstrap/dist/css/bootstrap.css',
                 'core-js/es6',
                 'core-js/es7/reflect',
                 'event-source-polyfill',
