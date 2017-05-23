@@ -10,23 +10,23 @@ import { Game, Field } from '../game.models';
 })
 export class GameBoardComponent{
 
-    @Input() game: Game;
-
+    game: Game;
     rows: Field[][] = [];
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService) {
     }
 
-    initialize() {
-        this.createRows();
+    initialize(game: Game) {
+        this.game = game;
+        this.createRows(this.game);
     }
 
-    private createRows() {
-        var tempArray = this.game.fields;
+    private createRows(game: Game) {
+        var tempArray = game.fields;
         var index = 0;
         while (tempArray.length) {
-            this.rows[index] = tempArray.splice(0, this.game.boardWidth);
+            this.rows[index] = tempArray.splice(0, game.boardWidth);
             index++;
         }
     }

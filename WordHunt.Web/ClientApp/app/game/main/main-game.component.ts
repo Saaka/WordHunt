@@ -34,6 +34,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     private connectToGame(gameId: number) {
         this.gameHub.connect()
+            //TODO Uncomment after changing theme.
             //Uncomment line below to debug sizing of fields. Comment one above!
             //Observable.of(true).delay(0) 
             .mergeMap(connected => {
@@ -47,15 +48,11 @@ export class GameMainComponent implements OnInit, OnDestroy {
                 return this.gameService
                     .getGame(gameId);
             })
-            .mergeMap(result => {
+            .subscribe(result => {
                 this.game = result;
 
-                //Make sure variables are set in the components
-                return Observable.of(true).delay(50);
-            })
-            .subscribe(() => {
-                //this.board.initialize();
-                //this.sideNav.initialize();
+                //this.board.initialize(this.game);
+                //this.sideNav.initialize(this.game);
             });
     }
 
