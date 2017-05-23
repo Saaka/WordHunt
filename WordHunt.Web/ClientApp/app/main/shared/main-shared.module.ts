@@ -3,22 +3,20 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-
-import { MainBackButtonComponent } from './main-back-button/main-back-button.component';
+import { CustomMaterialModule } from '../../core/material/custom-material.module';
 
 @NgModule({
     imports: [
         RouterModule,
         FormsModule,
-        CommonModule
+        CommonModule,
+        CustomMaterialModule
     ],
     exports: [
-        MainBackButtonComponent,
+        RouterModule,
         FormsModule,
-        CommonModule
-    ],
-    declarations: [
-        MainBackButtonComponent
+        CommonModule,
+        CustomMaterialModule
     ]
 })
 export class MainSharedModule {
