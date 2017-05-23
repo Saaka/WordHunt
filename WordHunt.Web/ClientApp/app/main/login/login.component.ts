@@ -16,7 +16,6 @@ export class LoginComponent implements OnDestroy {
     private loginSub: Subscription;
     model: LoginModel = new LoginModel();
     loading = false;
-    error = '';
 
     constructor(private router: Router,
         private route: ActivatedRoute,

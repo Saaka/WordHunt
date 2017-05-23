@@ -10,7 +10,7 @@ import { Game, TeamChanged } from '../game.models';
 })
 export class GameSidenavComponent {
 
-    @Input() game: Game;
+    game: Game;
 
     constructor(private gameHub: GameHubService,
         private gameService: GameService) { }
@@ -25,7 +25,8 @@ export class GameSidenavComponent {
         console.log(`Team changed. New team: ${event.newTeamId}. Previous team: ${event.lastTeamId}.`);
     }
 
-    initialize() {
+    initialize(game: Game) {
+        this.game = game;
         this.gameHub.teamChanged(this.onTeamChanged);
     }
 }

@@ -1,12 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './word.component.html',
-    styleUrls: ['./word.component.scss']
+    templateUrl: './word.component.html'
 })
-export class WordsComponent implements OnInit {
-
-    ngOnInit() {
-        console.log('*** word.component *** INITIALIZED');
-    }
+export class WordsComponent {
 }

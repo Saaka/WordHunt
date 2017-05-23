@@ -17,8 +17,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     @ViewChild(GameBoardComponent)
     private board: GameBoardComponent;
-    @ViewChild(GameSidenavComponent)
-    private sideNav: GameSidenavComponent;
+    //@ViewChild(GameSidenavComponent)
+    //private sideNav: GameSidenavComponent;
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
@@ -47,15 +47,11 @@ export class GameMainComponent implements OnInit, OnDestroy {
                 return this.gameService
                     .getGame(gameId);
             })
-            .mergeMap(result => {
+            .subscribe(result => {
                 this.game = result;
 
-                //Make sure variables are set in the components
-                return Observable.of(true).delay(50);
-            })
-            .subscribe(() => {
-                this.board.initialize();
-                this.sideNav.initialize();
+                this.board.initialize(this.game);
+                //this.sideNav.initialize(this.game);
             });
     }
 

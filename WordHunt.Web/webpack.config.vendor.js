@@ -18,6 +18,7 @@ module.exports = (env) => {
             vendor: [
                 '@angular/common',
                 '@angular/compiler',
+                '@angular/material',
                 '@angular/core',
                 '@angular/http',
                 '@angular/platform-browser',
