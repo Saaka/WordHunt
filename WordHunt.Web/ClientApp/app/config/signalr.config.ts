@@ -2,7 +2,7 @@
 
 import { DevConfig, ProdConfig } from './app.config';
 import { IConfig } from './app.iconfig';
-import { SignalRConfiguration, ConnectionTransports } from '../lib/ng2-signalr';
+import { SignalRConfiguration, ConnectionTransports } from 'ng2-signalr';
 
 export function CreateSignalRConfig() {
 

@@ -13,7 +13,7 @@ import 'expose-loader?jQuery!jquery';
 import 'signalr';
 import 'hammerjs';
 import { CreateSignalRConfig } from './config/signalr.config';
-import { SignalRModule, SignalRConfiguration } from './lib/ng2-signalr';
+import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 
 import { CustomMaterialModule } from './core/material/custom-material.module';
 

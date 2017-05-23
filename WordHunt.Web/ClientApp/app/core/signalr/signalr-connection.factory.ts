@@ -1,4 +1,4 @@
-﻿import { SignalR, ISignalRConnection } from '../../lib/ng2-signalr';
+﻿import { SignalR, ISignalRConnection } from 'ng2-signalr';
 import { Injectable } from '@angular/core';
 
 @Injectable()
