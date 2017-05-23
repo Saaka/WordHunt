@@ -15,8 +15,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
     game: Game;
     private paramsSub: any;
 
-    //@ViewChild(GameBoardComponent)
-    //private board: GameBoardComponent;
+    @ViewChild(GameBoardComponent)
+    private board: GameBoardComponent;
     //@ViewChild(GameSidenavComponent)
     //private sideNav: GameSidenavComponent;
 
@@ -28,13 +28,12 @@ export class GameMainComponent implements OnInit, OnDestroy {
         this.paramsSub = this.route.params
             .subscribe(params => {
                 var gameId = +params["id"];
-                //this.connectToGame(gameId);
+                this.connectToGame(gameId);
             });
     }
 
     private connectToGame(gameId: number) {
         this.gameHub.connect()
-            //TODO Uncomment after changing theme.
             //Uncomment line below to debug sizing of fields. Comment one above!
             //Observable.of(true).delay(0) 
             .mergeMap(connected => {
@@ -51,7 +50,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
             .subscribe(result => {
                 this.game = result;
 
-                //this.board.initialize(this.game);
+                this.board.initialize(this.game);
                 //this.sideNav.initialize(this.game);
             });
     }

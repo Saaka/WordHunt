@@ -20,7 +20,7 @@ div.container > div.two {
 }
 
 div.container > div.three {
-    flex: 3 3 calc(15em + 20px); /** 20px is the missing margin of the two missing boxes */
+    flex: 3 3 calc(20em + 20px); /** 20px is the missing margin of the two missing boxes */
 }
 
 a.disabled {

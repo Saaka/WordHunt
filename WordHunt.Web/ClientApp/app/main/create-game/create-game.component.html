@@ -1,37 +1,92 @@
-﻿<div>
+﻿<!--<div>
     <h2>Create game</h2>
     <div class="center-block create-game">
         <div class="form-group">
             <label class="create-game-label" >Game name</label>
             <input type="text" class="form-control" maxlength="50" [(ngModel)]="game.name"/>
-        </div>        
+        </div>
         <div class="form-group">
             <label class="create-game-label">Board width</label>
             <input type="number" class="form-control" min="5" max="8" [(ngModel)]="game.boardWidth"/>
-        </div>        
+        </div>
         <div class="form-group">
             <label class="create-game-label">Board height</label>
             <input type="number" class="form-control" min="5" max="8" [(ngModel)]="game.boardHeight"/>
-        </div>  
+        </div>
         <div class="form-group">
             <label class="create-game-label">Team count</label>
             <input type="number" class="form-control" min="2" max="4" [(ngModel)]="game.teamCount" />
-        </div>      
+        </div>
         <div class="form-group">
             <label class="create-game-label">Trap count</label>
             <input type="number" class="form-control" min="0" max="10" [(ngModel)]="game.trapCount" />
-        </div>  
+        </div>
         <div class="form-group">
             <label class="create-game-label">Type</label>
             <input type="text" class="form-control" [(ngModel)]="game.type" disabled/>
-        </div>    
+        </div>
         <div class="form-group">
             <label class="create-game-label">End mode</label>
             <input type="text" class="form-control" [(ngModel)]="game.endMode" disabled />
-        </div>    
+        </div>
     </div>
     <div class="center-block button-div create-game-button-div">
         <button [disabled]="loading" class="btn btn-default btn-block" (click)="createGame()">Create game <i *ngIf="loading" aria-hidden="true" class="fa fa-circle-o-notch fa-spin"></i></button>
     </div>
+</div>-->
+<div class="main-content-container">
+    <md-card>
+        <form name="form" (ngSubmit)="f.form.valid && createGame()" #f="ngForm" novalidate>
+            <md-card-title>Create game</md-card-title>
+            <md-card-content>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="Game name" type="text" [(ngModel)]="game.name" name="gamename" #gamename="ngModel" maxlength="50" required />
+                    <md-error *ngIf="f.submitted && !gamename.valid" class="form-error">Game name is required</md-error>
+                </md-input-container>
+                <div>
+                    <div class="full-width">
+                        Board width: {{game.boardWidth}}
+                    </div>
+                    <div class="full-width">
+                        <md-slider [min]="5" [max]="8" [step]="1" [thumb-label]="true" [(ngModel)]="game.boardWidth" [value]="5" name="boardwidth" #boardwidth="ngModel"></md-slider>
+                    </div>
+                </div>
+                <div>
+                    <div class="full-width">
+                        Board height: {{game.boardHeight}}
+                    </div>
+                    <div class="full-width">
+                        <md-slider [min]="5" [max]="8" [step]="1" [thumb-label]="true" [(ngModel)]="game.boardHeight" [value]="5" name="boardheight" #boardheight="ngModel"></md-slider>
+                    </div>
+                </div>
+                <div>
+                    <div class="full-width">
+                        Team count: {{game.teamCount}}
+                    </div>
+                    <div class="full-width">
+                        <md-slider [min]="2" [max]="4" [step]="1" [thumb-label]="true" [(ngModel)]="game.teamCount" [value]="5" name="teamcount" #teamcount="ngModel"></md-slider>
+                    </div>
+                </div>
+                <div>
+                    <div class="full-width">
+                        Trap count: {{game.trapCount}}
+                    </div>
+                    <div class="full-width">
+                        <md-slider [min]="0" [max]="10" [step]="1" [thumb-label]="true" [(ngModel)]="game.trapCount" [value]="5" name="trapcount" #trapcount="ngModel"></md-slider>
+                    </div>
+                </div>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="Game type" type="text" [(ngModel)]="game.type" name="gametype" #gametype="ngModel" disabled required />
+                </md-input-container>
+                <md-input-container class="full-width">
+                    <input mdInput placeholder="End mode" type="text" [(ngModel)]="game.endMode" name="endmode" #endmode="ngModel" disabled required />
+                </md-input-container>
 
+            </md-card-content>
+            <md-card-actions>
+                <button md-raised-button color="accent">Create game</button>
+                <button md-raised-button [routerLink]="['/main']">Back</button>
+            </md-card-actions>
+        </form>
+    </md-card>
 </div>
