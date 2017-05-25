@@ -1,4 +1,4 @@
-﻿<md-sidenav-container>
+﻿<md-sidenav-container class="game-container">
 
     <md-sidenav #sidenav mode="over" class="app-sidenav">
         <game-sidenav></game-sidenav>
@@ -8,9 +8,7 @@
         <button md-button (click)="sidenav.toggle()">
             <i class="material-icons app-toolbar-menu">menu</i>
         </button>
-
-        Angular Material2 Example App
-
+        WordHunt!
     </md-toolbar>
+    <game-board></game-board>
 </md-sidenav-container>
-<game-board></game-board>

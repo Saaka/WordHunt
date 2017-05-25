@@ -1,6 +1,11 @@
 ﻿/*@import 'deeppurple-amber.scss';*/
 @import 'wh-theme.scss';
 
+html, body, main {
+    height: 100%;
+    margin: 0;
+}
+
 div.container {
     display: flex;
     margin-bottom: 10px;
