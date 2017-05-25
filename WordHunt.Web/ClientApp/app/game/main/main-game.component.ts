@@ -17,8 +17,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     @ViewChild(GameBoardComponent)
     private board: GameBoardComponent;
-    //@ViewChild(GameSidenavComponent)
-    //private sideNav: GameSidenavComponent;
+    @ViewChild(GameSidenavComponent)
+    private sideNav: GameSidenavComponent;
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
@@ -51,7 +51,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
                 this.game = result;
 
                 this.board.initialize(this.game);
-                //this.sideNav.initialize(this.game);
+                this.sideNav.initialize(this.game);
             });
     }
 

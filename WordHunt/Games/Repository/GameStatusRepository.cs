@@ -14,7 +14,7 @@ namespace WordHunt.Games.Repository
         Task<Models.Games.Access.LatestStatus> UpdateCurrentStatus(int gameId, int teamId, Status gameStatus);
     }
 
-    public class GameStatusRepository : IGameStatusRepository
+    class GameStatusRepository : IGameStatusRepository
     {
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;

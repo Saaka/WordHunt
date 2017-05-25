@@ -18,7 +18,7 @@ namespace WordHunt.Games.Repository
         Task<Models.Games.Access.CurrentGameState> GetCurrentGameState(int gameId);
     }
 
-    public class GameRepository : IGameRepository
+    class GameRepository : IGameRepository
     {
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;

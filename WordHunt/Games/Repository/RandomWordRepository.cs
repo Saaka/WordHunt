@@ -13,7 +13,7 @@ namespace WordHunt.Games.Repository
         Task<IEnumerable<string>> GetRandomWords(int languageId, int count);
     }
 
-    public class RandomWordRepository : IRandomWordRepository
+    class RandomWordRepository : IRandomWordRepository
     {
         private const string RandomWordsQuery = @"SELECT TOP (@Count)  [Value] FROM Words WHERE [LanguageId] = @LanguageId ORDER BY NEWID()";
 

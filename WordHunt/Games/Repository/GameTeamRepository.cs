@@ -18,7 +18,7 @@ namespace WordHunt.Games.Repository
         Task<Models.Games.Access.NextTeam> GetNextTeam(int gameId);
     }
 
-    public class GameTeamRepository : IGameTeamRepository
+    class GameTeamRepository : IGameTeamRepository
     {
         private readonly IDbConnectionFactory connectionFactory;
         private readonly ITimeProvider timeProvider;

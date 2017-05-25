@@ -18,25 +18,28 @@ namespace WordHunt.Games.Moves
         private readonly IGameTeamRepository gameTeamRepository;
         private readonly IGameStatusRepository gameStatusRepository;
         private readonly IEventBroadcaster eventBroadcaster;
+        private readonly IGameMoveRepository gameMoveRepository;
 
         public GameMoveManager(IGameRepository gameRepository,
             IGameTeamRepository gameTeamRepository,
             IGameStatusRepository gameStatusRepository,
             IMoveValidatorFactory validationFactory,
-            IEventBroadcaster eventBroadcaster)
+            IEventBroadcaster eventBroadcaster,
+            IGameMoveRepository gameMoveRepository)
         {
             this.gameRepository = gameRepository;
             this.validationFactory = validationFactory;
             this.gameTeamRepository = gameTeamRepository;
             this.gameStatusRepository = gameStatusRepository;
             this.eventBroadcaster = eventBroadcaster;
+            this.gameMoveRepository = gameMoveRepository;
         }
 
         public async Task<TeamChanged> SkipRound(int gameId, int userId)
         {
             var currentState = await gameRepository.GetCurrentGameState(gameId);
 
-            var validator = validationFactory.GetMoveValidator(Base.Enums.Game.GameType.SingleDevice);
+            var validator = validationFactory.GetMoveValidator(currentState.Type);
             validator.ValidateRoundSkip(currentState, userId);
 
             var nextTeam = await gameTeamRepository.GetNextTeam(gameId);
@@ -47,6 +50,8 @@ namespace WordHunt.Games.Moves
             teamChanged.GameId = gameId;
             teamChanged.LastTeamId = currentState.CurrentTeamId;
             teamChanged.NewTeamId = newStatus.CurrentTeamId;
+
+            await gameMoveRepository.SaveMove(gameId, Base.Enums.Game.MoveType.SkipRound, currentState.CurrentTeamId);
 
             eventBroadcaster.TeamChanged(teamChanged);
 

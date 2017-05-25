@@ -16,9 +16,8 @@ namespace WordHunt.Games.Repository
         Task<IEnumerable<Field>> GetSimplifiedGameFields(int gameId);
     }
 
-    public class GameFieldRepository : IGameFieldRepository
-    {
-        
+    class GameFieldRepository : IGameFieldRepository
+    {        
         private readonly IDbConnectionFactory connectionFactory;
 
         public GameFieldRepository(IDbConnectionFactory connectionFactory)

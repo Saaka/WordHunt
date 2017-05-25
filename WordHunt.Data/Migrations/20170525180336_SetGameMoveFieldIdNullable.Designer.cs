@@ -9,9 +9,10 @@ using WordHunt.Base.Enums.Game;
 namespace WordHunt.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170525180336_SetGameMoveFieldIdNullable")]
+    partial class SetGameMoveFieldIdNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

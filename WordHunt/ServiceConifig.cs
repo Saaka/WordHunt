@@ -38,6 +38,7 @@ namespace WordHunt
             //Game move
             services.AddScoped<IMoveValidatorFactory, MoveValidatorFactory>();
             services.AddScoped<IGameMoveManager, GameMoveManager>();
+            services.AddScoped<IGameMoveRepository, GameMoveRepository>();
             
             //Game access
 
