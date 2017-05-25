@@ -5,6 +5,11 @@
 }
 
 .fixed-toolbar {
-    height: 64px;
-    min-height: 64px;
+    @include when-xs {
+        height: $toolbar-height-xs;
+    }
+
+    @include when-sm {
+        height: $toolbar-height-sm;
+    }
 }

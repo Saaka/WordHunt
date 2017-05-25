@@ -1,1 +1,14 @@
-﻿$toolbar-height: 58px;
+﻿$toolbar-height-xs: 56px;
+$toolbar-height-sm: 64px;
+
+@mixin when-xs() {
+    @media (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin when-sm() {
+    @media (min-width: 601px) {
+        @content;
+    }
+}

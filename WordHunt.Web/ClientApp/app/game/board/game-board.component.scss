@@ -5,8 +5,15 @@
 }
 
 .board-container {
-    /*height: 100%;*/
-    height: -webkit-calc(100% - 64px);
-    height: -moz-calc(100% - 64px);
-    height: calc(100% - 64px);
+    @include when-xs {
+        height: -webkit-calc(100% - #{$toolbar-height-xs});
+        height: -moz-calc(100% - #{$toolbar-height-xs});
+        height: calc(100% - #{$toolbar-height-xs});
+    }
+
+    @include when-sm {
+        height: -webkit-calc(100% - #{$toolbar-height-sm});
+        height: -moz-calc(100% - #{$toolbar-height-sm});
+        height: calc(100% - #{$toolbar-height-sm});
+    }
 }
