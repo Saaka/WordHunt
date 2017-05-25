@@ -1,6 +1,6 @@
 ﻿<div class="board-container">
-    <div class="game-board" fxLayout="column">
-        <div fxLayout="row" *ngFor="let row of rows" [fxFlex]="colFlex">
+    <div fxFlexFill  fxLayout="column" fxLayoutAlign="space-around none">
+        <div fxLayout="row" *ngFor="let row of rows" [fxFlex]="colFlex" fxLayoutAlign="space-around none">
             <game-field *ngFor="let field of row" [field]="field" [fxFlex]="rowFlex"></game-field>
         </div>
     </div>
