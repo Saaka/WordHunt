@@ -1,10 +1,10 @@
-﻿<md-sidenav-container class="game-container">
+﻿<md-sidenav-container fullscreen>
 
     <md-sidenav #sidenav mode="over" class="app-sidenav">
         <game-sidenav></game-sidenav>
     </md-sidenav>
 
-    <md-toolbar color="primary">
+    <md-toolbar color="primary" class="fixed-toolbar">
         <button md-button (click)="sidenav.toggle()">
             <i class="material-icons app-toolbar-menu">menu</i>
         </button>
