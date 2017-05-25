@@ -1,3 +1,16 @@
-﻿.game-container {
+﻿@import '../styles/game.scss';
+
+.game-container {
     height: 100%;
+    background-color:gold;
+}
+
+.fixed-toolbar {
+    min-height: $toolbar-height;
+    height: $toolbar-height;
+}
+
+.game-container-content {
+    height: 100%;
+    background-color:blueviolet;
 }

@@ -4,11 +4,15 @@
         <game-sidenav></game-sidenav>
     </md-sidenav>
 
-    <md-toolbar color="primary">
+    <md-toolbar color="primary" >
         <button md-button (click)="sidenav.toggle()">
             <i class="material-icons app-toolbar-menu">menu</i>
         </button>
         WordHunt!
     </md-toolbar>
-    <game-board></game-board>
+
+    <div class="game-container-content">
+        <game-board></game-board>
+    </div>    
+
 </md-sidenav-container>

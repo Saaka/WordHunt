@@ -8,10 +8,12 @@ import { Game, Field } from '../game.models';
     templateUrl: './game-board.component.html',
     styleUrls: ['./game-board.component.scss']
 })
-export class GameBoardComponent{
+export class GameBoardComponent {
 
     game: Game;
     rows: Field[][] = [];
+    rowFlex: number;
+    colFlex: number;
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService) {
@@ -19,14 +21,20 @@ export class GameBoardComponent{
 
     initialize(game: Game) {
         this.game = game;
-        this.createRows(this.game);
+        this.createRows();
+        this.calculateFlex();
     }
 
-    private createRows(game: Game) {
-        var tempArray = game.fields;
+    private calculateFlex() {
+        this.colFlex = 100 / this.game.boardHeight;
+        this.rowFlex = 100 / this.game.boardWidth;
+    }
+
+    private createRows() {
+        var tempArray = this.game.fields;
         var index = 0;
         while (tempArray.length) {
-            this.rows[index] = tempArray.splice(0, game.boardWidth);
+            this.rows[index] = tempArray.splice(0, this.game.boardWidth);
             index++;
         }
     }

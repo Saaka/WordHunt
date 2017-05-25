@@ -1,5 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { GameRoutingModule, routableComponents } from './game.routing.module';
 import { GameBoardComponent, GameFieldComponent } from './board/board-components';
@@ -10,6 +11,7 @@ import { CustomMaterialModule } from '../core/material/custom-material.module';
 
 @NgModule({
     imports: [
+        FlexLayoutModule,
         GameRoutingModule,
         CommonModule,
         CustomMaterialModule

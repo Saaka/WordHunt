@@ -1,1 +1,14 @@
-﻿
+﻿.field {
+    height: 100%;
+    border: 1px solid #000;
+}
+
+.long-field {
+    @extend .field;
+    background-color: darkred;
+}
+
+.short-field {
+    @extend .field;
+    background-color: forestgreen;
+}

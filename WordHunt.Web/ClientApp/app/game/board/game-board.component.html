@@ -1,7 +1,7 @@
-﻿<div class="game-board">
-    <div class="wrapper">
-        <div class="wrapper-inner" *ngFor="let row of rows">
-            <game-field class="game-field" *ngFor="let field of row" [field]="field"></game-field>
+﻿<div class="board-container">
+    <div class="game-board" fxLayout="column">
+        <div fxLayout="row" *ngFor="let row of rows" [fxFlex]="colFlex">
+            <game-field *ngFor="let field of row" [field]="field" [fxFlex]="rowFlex"></game-field>
         </div>
     </div>
 </div>

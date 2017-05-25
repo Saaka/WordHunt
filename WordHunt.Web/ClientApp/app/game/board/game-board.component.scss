@@ -1,1 +1,10 @@
-﻿
+﻿@import '../styles/game.scss';
+
+.game-board {
+    height: 100%;
+}
+
+.board-container {
+    height: 100%;
+    background-color: aqua;
+}
