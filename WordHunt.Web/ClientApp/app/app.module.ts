@@ -16,12 +16,14 @@ import { CreateSignalRConfig } from './config/signalr.config';
 import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 
 import { CustomMaterialModule } from './core/material/custom-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         CustomMaterialModule,
+        FlexLayoutModule,
         AppRoutingModule,
         GameModule,
         CoreModule,

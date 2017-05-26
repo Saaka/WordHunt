@@ -1,6 +1,5 @@
 ﻿<div class="game-nav">
-    <h2 class="hidden-xs">SideNav</h2>
-    <h2 class="visible-xs">SN</h2>
-    <h3>{{game?.name}}</h3>
-    <button class="btn btn-default" (click)="skipRound()">Skip round</button>
+    <h2 color="primary">{{game?.name}}</h2>
+    <button md-raised-button (click)="skipRound()" color="primary" class="sidenav-button-strech">Skip round</button>
+    <button md-raised-button [routerLink]="['/main']" color="accent" class="sidenav-button-strech">Main menu</button>
 </div>
