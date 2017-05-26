@@ -1,9 +1,5 @@
 ﻿@import '../styles/game.scss';
 
-.game-container {
-    height: 100%;
-}
-
 .fixed-toolbar {
     @include when-xs {
         height: $toolbar-height-xs;

@@ -26,8 +26,10 @@ export class GameBoardComponent {
     }
 
     private calculateFlex() {
-        this.colFlex = 95 / this.game.boardHeight;
-        this.rowFlex = 95 / this.game.boardWidth;
+        const baseFlexValue: number = 95;
+
+        this.colFlex = baseFlexValue / this.game.boardHeight;
+        this.rowFlex = baseFlexValue / this.game.boardWidth;
     }
 
     private createRows() {
