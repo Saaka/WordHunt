@@ -35,6 +35,12 @@ namespace WordHunt.Games.Moves
             this.gameMoveRepository = gameMoveRepository;
         }
 
+        public async Task CheckField(int gameId, int userId, int fieldId)
+        {
+            var currentState = await gameRepository.GetCurrentGameState(gameId);
+            var validator = validationFactory.GetMoveValidator(currentState.Type);
+        }
+
         public async Task<TeamChanged> SkipRound(int gameId, int userId)
         {
             var currentState = await gameRepository.GetCurrentGameState(gameId);

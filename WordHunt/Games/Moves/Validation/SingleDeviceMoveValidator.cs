@@ -19,7 +19,12 @@ namespace WordHunt.Games.Moves.Validation
                 throw new InvalidOperationException("Wrong validator seleceted for game type");
 
             if (gameState.Status == Base.Enums.Game.Status.Canceled || gameState.Status == Base.Enums.Game.Status.Finished)
-                throw new ValidationException("Game has ended");            
+                throw new ValidationException("Game has ended");
+        }
+
+
+        public void ValidateFieldCheck(CurrentGameState gameState, int userId)
+        {
         }
     }
 }
