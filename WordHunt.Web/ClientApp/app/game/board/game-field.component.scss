@@ -21,6 +21,7 @@
 
 .red {
     background: map_get($mat-red, 300);
+    color: white;
 
     &:hover {
         background: map_get($mat-red, 200);
