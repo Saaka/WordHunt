@@ -9,9 +9,15 @@ import { Field } from '../game.models';
 export class GameFieldComponent implements OnChanges {
 
     @Input() field: Field;
-    fontClass: string;
+    fieldClass: string;
+    colorClass: string = "";
 
     constructor() { }
+
+    private clickWord() {
+        console.log(this.field.word);
+        this.colorClass = "red";
+    }
 
     ngOnChanges(changes: SimpleChanges) {
         for (let propName in changes) {
@@ -26,9 +32,9 @@ export class GameFieldComponent implements OnChanges {
         if (field.firstChange) {
             var current = <Field>field.currentValue;
             if (current.word.length > 10)
-                this.fontClass = 'long-field';
+                this.fieldClass = 'long-field';
             else
-                this.fontClass = 'short-field';
+                this.fieldClass = 'short-field';
         }
     }
 }
