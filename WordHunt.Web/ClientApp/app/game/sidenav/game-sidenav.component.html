@@ -1,5 +1,5 @@
 ﻿<div class="game-nav">
     <h2 color="primary">{{game?.name}}</h2>
-    <button md-raised-button (click)="skipRound()" color="accent" class="sidenav-button-strech">End round</button>
+    <button md-raised-button [disabled]="skippingTurn" (click)="skipRound()" color="accent" class="sidenav-button-strech">End round</button>
     <button md-raised-button [routerLink]="['/main']" color="primary" class="sidenav-button-strech">Main menu</button>
 </div>

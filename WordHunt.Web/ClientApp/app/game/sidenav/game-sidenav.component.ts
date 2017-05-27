@@ -11,14 +11,20 @@ import { Game, TeamChanged } from '../game.models';
 export class GameSidenavComponent {
 
     game: Game;
+    skippingTurn: boolean = false;
 
     constructor(private gameHub: GameHubService,
         private gameService: GameService) { }
 
     private skipRound() {
+        this.isSkippingTurn(true);
         this.gameService
             .skipRound(this.game.id)
-            .subscribe();
+            .subscribe(() => this.isSkippingTurn(false));
+    }
+
+    private isSkippingTurn(value: boolean) {
+        this.skippingTurn = value;
     }
 
     onTeamChanged(event: TeamChanged) {

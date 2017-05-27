@@ -3,6 +3,7 @@
 @Injectable()
 export class GuidService {
 
+    //TODO ADD REQUESTER TO REQUEST AND RESPONSES
     public create() {
         return this.createSegment() + this.createSegment() + '-' + this.createSegment() + '-' + this.createSegment() + '-' +
             this.createSegment() + '-' + this.createSegment() + this.createSegment() + this.createSegment();
