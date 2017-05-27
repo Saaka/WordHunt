@@ -27,7 +27,7 @@ export class GameSidenavComponent {
         this.skippingTurn = value;
     }
 
-    onTeamChanged(event: TeamChanged) {
+    onTeamChanged = (event: TeamChanged) => {
         console.log(`Team changed. New team: ${event.newTeamId}. Previous team: ${event.lastTeamId}.`);
     }
 
