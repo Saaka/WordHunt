@@ -18,7 +18,9 @@ export class GameNavigationComponent {
     private skipRound() {
         this.gameService
             .skipRound(this.game.id)
-            .subscribe();
+            .subscribe(tc => {
+                console.log(tc);
+            });
     }
 
     onTeamChanged(event: TeamChanged) {

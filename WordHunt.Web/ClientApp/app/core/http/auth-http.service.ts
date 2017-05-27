@@ -4,29 +4,34 @@ import { Observable } from 'rxjs/Observable';
 
 import { ConfigService } from '../../config/app.config.service';
 import { TokenStorageService } from '../auth/token/token-auth';
+import { GuidService } from '../guid.service';
 
 @Injectable()
 export class AuthHttpService {
 
     constructor(private http: Http,
         private tokenStorage: TokenStorageService,
-        private config: ConfigService) { }
+        private config: ConfigService,
+        private guidService: GuidService) { }
 
-    private createAuthorizationHeader() {
+    private createHeaders() {
+
+        let headers = new Headers();
+        headers.append('x-requester-id', this.guidService.create());
+
         return this.tokenStorage
             .loadToken()
             .map(response => {
-                let headers = new Headers();
                 headers.append('Authorization', 'Bearer ' + response);
                 return headers;
             });
     }
 
     get(url) {
-        return this.createAuthorizationHeader()
+        return this.createHeaders()
             .mergeMap(response => {
                 return this.http.get(this.config.ApiUrl + url, {
-                    headers: <Headers>response
+                    headers: response
                 });
             })
             .map(response => {
@@ -36,10 +41,10 @@ export class AuthHttpService {
     }
 
     post(url, data) {
-        return this.createAuthorizationHeader()
+        return this.createHeaders()
             .mergeMap(response => {
                 return this.http.post(this.config.ApiUrl + url, data, {
-                    headers: <Headers>response
+                    headers: response
                 });
             })
             .map(response => {

@@ -5,7 +5,7 @@ import { TokenAuthService, TokenStorageService, JwtTokenUserParser } from './aut
 import { AuthHttpService } from './http/auth-http.service';
 import { HttpService } from './http/http.service';
 import { GameNavigation } from './navigation/navigation.module';
-
+import { GuidService } from './guid.service';
 
 @NgModule({
     imports: [HttpModule],
@@ -14,6 +14,7 @@ import { GameNavigation } from './navigation/navigation.module';
         TokenStorageService,
         AuthHttpService,
         HttpService, 
+        GuidService,
         JwtTokenUserParser,
         GameNavigation
     ]

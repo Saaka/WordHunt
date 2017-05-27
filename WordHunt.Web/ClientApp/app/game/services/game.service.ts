@@ -21,7 +21,7 @@ export class GameService {
     skipRound(gameId: number) {
 
         return this.authHttp
-            .get('game/' + gameId + "/skipround");
-            //.map(res => <TeamChanged>res.json());
+            .get('game/' + gameId + "/skipround")
+            .map(res => <TeamChanged>res.json());
     }
 }
