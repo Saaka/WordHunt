@@ -26,7 +26,6 @@ export class LoginService {
     }
 
     private handleError(error) {
-        console.log(error);
         return Observable.throw('Login failed');
     }
 

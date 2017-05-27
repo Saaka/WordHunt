@@ -8,7 +8,6 @@ export class SignalRConnectionResolver implements Resolve<SignalRConnection> {
     constructor(private _signalR: SignalR) { }
 
     resolve() {
-        console.log('ConnectionResolver. Resolving...');
         return this._signalR.connect();
     }
 }

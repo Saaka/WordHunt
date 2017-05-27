@@ -4,6 +4,7 @@ import { GameBoardComponent, GameSidenavComponent } from '../game.imports';
 import { GameHubService, GameService } from '../services/game-services.imports';
 import { Game } from '../game.models';
 import { Observable } from 'rxjs';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'main-game',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./main-game.component.scss']
 })
 export class GameMainComponent implements OnInit, OnDestroy {
-    
+
     game: Game;
     private paramsSub: any;
 
@@ -22,7 +23,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
-        private gameService: GameService) { }
+        private gameService: GameService,
+        private snackbar: SnackbarService) { }
 
     ngOnInit() {
         this.paramsSub = this.route.params
@@ -52,11 +54,9 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
                 this.board.initialize(this.game);
                 this.sideNav.initialize(this.game);
+            }, err => {
+                this.snackbar.openSnackbar(err);
             });
-    }
-
-    private handleMessage(message: string) {
-        console.log(message);
     }
 
     ngOnDestroy() {

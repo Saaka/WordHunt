@@ -2,6 +2,7 @@
 
 import { LoginService } from '../../core/auth/login.service';
 import { UserService } from '../../core/user.service';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'main-menu',
@@ -12,7 +13,8 @@ import { UserService } from '../../core/user.service';
 export class MainMenuComponent {
 
     constructor(private loginService: LoginService,
-                private userService: UserService) { }
+        private userService: UserService,
+        private snackbar: SnackbarService) { }
 
     isLoggedIn() {
         return this.userService.isLoggedIn();
@@ -30,7 +32,7 @@ export class MainMenuComponent {
         this.loginService
             .logout()
             .subscribe(response => {
-                console.log('Logged out');
+                this.snackbar.openSnackbar('Logged out');
             });
     }
 }

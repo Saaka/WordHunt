@@ -5,7 +5,7 @@ import { MdSnackBar, MdSnackBarConfig } from "@angular/material";
 export class SnackbarService {
 
     private baseConfig: MdSnackBarConfig = {
-        duration: 2000
+        duration: 3000
     };
     private baseAction: string = "Ok";
     constructor(private snackbar: MdSnackBar) { }

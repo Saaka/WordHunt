@@ -4,6 +4,7 @@ import { GameCreate, GameTeamCreate } from './game.models';
 import { CreateGameService } from './service/create-game.service';
 import { UserService } from '../../core/user.service';
 import { GameNavigation } from '../../core/navigation/game-navigation.service';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'create-game',
@@ -17,7 +18,8 @@ export class CreateGameComponent {
 
     constructor(private userService: UserService,
         private createGameService: CreateGameService,
-        private gameNavService: GameNavigation) {
+        private gameNavService: GameNavigation,
+        private snackbar: SnackbarService) {
         this.createDefaultGame();
     }
 
@@ -41,7 +43,7 @@ export class CreateGameComponent {
         for (let i = 0; i < game.teamCount; i++) {
             game.teams.push({
                 fieldCount: 9,
-                name: 'Team' + (i+1)
+                name: 'Team' + (i + 1)
             });
         }
     }
@@ -53,7 +55,7 @@ export class CreateGameComponent {
             .subscribe(res => {
                 this.gameNavService.goToGame(res.gameId);
             }, err => {
-                console.log(err);
+                this.snackbar.openSnackbar(err);
                 this.loading = false;
             });
     }

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from '../../core/auth/login.service';
 import { UserService } from '../../core/user.service';
 import { LoginModel } from './login.model';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnDestroy {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private loginService: LoginService,
-        private userService: UserService) { }
+        private userService: UserService,
+        private snackbar: SnackbarService) { }
 
     login() {
         this.loading = true;
@@ -30,7 +32,7 @@ export class LoginComponent implements OnDestroy {
             .catch((error) => {
                 this.loading = false;
 
-                console.log(error);
+                this.snackbar.openSnackbar(error);
 
                 return '';
             })
@@ -42,7 +44,7 @@ export class LoginComponent implements OnDestroy {
                 this.loading = false;
 
                 if (this.userService.isLoggedIn()) {
-                    console.log('Logged in');
+                    this.snackbar.openSnackbar(`Logged in. Welcome ${this.userService.userName()}!`)
 
                     let url = redirectTo ? [redirectTo] : ['/main'];
                     this.router.navigate(url);
