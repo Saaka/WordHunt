@@ -63,5 +63,8 @@ export class GameHubService {
             this.onTeamChanged$.unsubscribe();
             this.onTeamChanged$ = null;
         }
+        if (this.connection) {
+            this.connection.stop();
+        }
     }
 }

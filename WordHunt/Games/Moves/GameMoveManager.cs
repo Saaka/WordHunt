@@ -50,10 +50,8 @@ namespace WordHunt.Games.Moves
             var validator = validationFactory.GetMoveValidator(gameState.Type);
             validator.ValidateFieldCheck(gameState, fieldState, userId);
 
-            var fieldChecked = CreateFieldCheckedEvent(gameId, fieldId, fieldState.Type);
+            var fieldChecked = CreateFieldCheckedEvent(gameId, fieldId, fieldState);
 
-            if (fieldState.Type == FieldType.Team)
-                fieldChecked.TeamId = fieldState.TeamId;
 
 
             eventBroadcaster.FieldChecked(fieldChecked);
@@ -61,13 +59,15 @@ namespace WordHunt.Games.Moves
             return fieldChecked;
         }
 
-        private FieldChecked CreateFieldCheckedEvent(int gameId, int fieldId, FieldType type)
+        private FieldChecked CreateFieldCheckedEvent(int gameId, int fieldId, CurrentFieldState state)
         {
             FieldChecked fieldChecked = new FieldChecked();
             fieldChecked.FieldId = fieldId;
             fieldChecked.GameId = gameId;
             fieldChecked.Checked = true;
-            fieldChecked.Type = type;
+            fieldChecked.Type = state.Type;
+            if (state.Type == FieldType.Team)
+                fieldChecked.TeamId = state.TeamId.Value;
 
             return fieldChecked;
         }
