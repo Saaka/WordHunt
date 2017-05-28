@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using WordHunt.Data.Events;
+using WordHunt.Models.Events;
 using WordHunt.Games.Broadcaster;
 using WordHunt.Games.Moves.Validation;
 using WordHunt.Games.Repository;
@@ -45,6 +45,8 @@ namespace WordHunt.Games.Moves
 
             var validator = validationFactory.GetMoveValidator(gameState.Type);
             validator.ValidateFieldCheck(gameState, fieldState, userId);
+            
+
 
         }
 
@@ -58,16 +60,22 @@ namespace WordHunt.Games.Moves
             var nextTeam = await gameTeamRepository.GetNextTeam(gameId);
             var newStatus = await gameStatusRepository.UpdateCurrentStatus(gameId, nextTeam.Id, Base.Enums.Game.Status.Ongoing);
 
-            var teamChanged = new TeamChanged();
-            teamChanged.ChangeReason = Base.Enums.Events.TeamChangeReason.SkipRound;
-            teamChanged.GameId = gameId;
-            teamChanged.LastTeamId = currentState.CurrentTeamId;
-            teamChanged.NewTeamId = newStatus.CurrentTeamId;
+            var teamChanged = CreateTeamChangedEvent(gameId, currentState.CurrentTeamId, newStatus.CurrentTeamId, Base.Enums.Events.TeamChangeReason.SkipRound);
 
             await gameMoveRepository.SaveMove(gameId, Base.Enums.Game.MoveType.SkipRound, currentState.CurrentTeamId);
 
             eventBroadcaster.TeamChanged(teamChanged);
 
+            return teamChanged;
+        }
+
+        private static TeamChanged CreateTeamChangedEvent(int gameId, int currentTeamId, int newTeamId, Base.Enums.Events.TeamChangeReason changeReason)
+        {
+            var teamChanged = new TeamChanged();
+            teamChanged.ChangeReason = changeReason;
+            teamChanged.GameId = gameId;
+            teamChanged.LastTeamId = currentTeamId;
+            teamChanged.NewTeamId = newTeamId;
             return teamChanged;
         }
     }

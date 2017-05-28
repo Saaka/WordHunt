@@ -1,4 +1,4 @@
-﻿using WordHunt.Data.Events;
+﻿using WordHunt.Models.Events;
 
 namespace WordHunt.WebAPI.Hubs
 {

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using WordHunt.WebAPI.Auth.Token;
 using WordHunt.Games.Moves;
-using WordHunt.Data.Events;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using WordHunt.Data.Events;
+using WordHunt.Models.Events;
 
 namespace WordHunt.WebAPI.Hubs
 {    

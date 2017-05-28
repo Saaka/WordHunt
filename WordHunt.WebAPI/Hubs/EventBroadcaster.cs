@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
-using WordHunt.Data.Events;
+using WordHunt.Models.Events;
 using WordHunt.Games.Broadcaster;
 
 namespace WordHunt.WebAPI.Hubs
