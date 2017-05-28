@@ -10,5 +10,6 @@ namespace WordHunt.Games.Moves.Validation
     public interface IMoveValidator
     {
         void ValidateRoundSkip(CurrentGameState gameState, int userId);
+        void ValidateFieldCheck(CurrentGameState gameState, CurrentFieldState fieldState, int userId);
     }
 }

@@ -57,7 +57,7 @@ namespace WordHunt.Games.Repository
                 using (var multiQuery = await connection.QueryMultipleAsync(query.ToString(), new { GameId = gameId }))
                 {
                     var game = await multiQuery.ReadFirstAsync<Models.Games.Access.Game>();
-                    game.Fields = await multiQuery.ReadAsync<Models.Games.Access.Field>();
+                    game.Fields = await multiQuery.ReadAsync<Models.Games.Access.BoardField>();
                     game.Teams = await multiQuery.ReadAsync<Models.Games.Access.Team>();
 
                     return game;

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordHunt.Base.Enums.Game;
 
 namespace WordHunt.Models.Games.Access
 {
-    public class BoardField
+    public class CurrentFieldState
     {
-        public int Id { get; set; }
-        public string Word { get; set; }
+        public int TeamId { get; set; }
         public bool Checked { get; set; }
-        public bool CheckedByRightTeam { get; set; }
         public int? CheckedByTeamId { get; set; }
-        public int ColumnIndex { get; set; }
-        public int RowIndex { get; set; }
+        public FieldType Type { get; set; }
     }
 }

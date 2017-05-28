@@ -14,9 +14,13 @@ export class GameFieldComponent implements OnChanges {
 
     constructor() { }
 
+    clicks: number = 0;
+    colors = ["red-team", "blue-team", "green-team", "orange-team", "purple-team", "yellow-team", "brown-team", "pink-team", "teal-team"];
+
     private clickWord() {
         console.log(this.field.word);
-        this.colorClass = "red";
+        this.colorClass = this.colors[this.clicks % this.colors.length];
+        this.clicks++;
     }
 
     ngOnChanges(changes: SimpleChanges) {

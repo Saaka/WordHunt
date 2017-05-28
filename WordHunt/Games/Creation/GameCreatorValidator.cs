@@ -57,6 +57,9 @@ namespace WordHunt.Games.Creation
             if (teams.Select(x => x.Name.Trim()).Distinct().Count() != teams.Count())
                 throw new ValidationFailedException("Teams must have different names");
 
+            if (teams.Select(x => x.Color.Trim()).Distinct().Count() != teams.Count())
+                throw new ValidationFailedException("Teams must have different colors");
+
             if (teams.Any(x => x.FieldCount == 0))
                 throw new ValidationFailedException("Teams must have assigned field count");
 

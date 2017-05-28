@@ -19,13 +19,15 @@ namespace WordHunt.Games.Moves
         private readonly IGameStatusRepository gameStatusRepository;
         private readonly IEventBroadcaster eventBroadcaster;
         private readonly IGameMoveRepository gameMoveRepository;
+        private readonly IGameFieldRepository gameFieldRepository;
 
         public GameMoveManager(IGameRepository gameRepository,
             IGameTeamRepository gameTeamRepository,
             IGameStatusRepository gameStatusRepository,
             IMoveValidatorFactory validationFactory,
             IEventBroadcaster eventBroadcaster,
-            IGameMoveRepository gameMoveRepository)
+            IGameMoveRepository gameMoveRepository,
+            IGameFieldRepository gameFieldRepository)
         {
             this.gameRepository = gameRepository;
             this.validationFactory = validationFactory;
@@ -33,12 +35,17 @@ namespace WordHunt.Games.Moves
             this.gameStatusRepository = gameStatusRepository;
             this.eventBroadcaster = eventBroadcaster;
             this.gameMoveRepository = gameMoveRepository;
+            this.gameFieldRepository = gameFieldRepository;
         }
 
         public async Task CheckField(int gameId, int userId, int fieldId)
         {
-            var currentState = await gameRepository.GetCurrentGameState(gameId);
-            var validator = validationFactory.GetMoveValidator(currentState.Type);
+            var gameState = await gameRepository.GetCurrentGameState(gameId);
+            var fieldState = await gameFieldRepository.GetFieldState(fieldId);
+
+            var validator = validationFactory.GetMoveValidator(gameState.Type);
+            validator.ValidateFieldCheck(gameState, fieldState, userId);
+
         }
 
         public async Task<TeamChanged> SkipRound(int gameId, int userId)

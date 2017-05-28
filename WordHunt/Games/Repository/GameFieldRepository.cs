@@ -13,7 +13,8 @@ namespace WordHunt.Games.Repository
     public interface IGameFieldRepository
     {
         Task SaveGameFields(IEnumerable<GameFieldCreate> fields);
-        Task<IEnumerable<Field>> GetSimplifiedGameFields(int gameId);
+        Task<IEnumerable<BoardField>> GetBoardGameFields(int gameId);
+        Task<CurrentFieldState> GetFieldState(int fieldId);
     }
 
     class GameFieldRepository : IGameFieldRepository
@@ -33,11 +34,19 @@ namespace WordHunt.Games.Repository
             }
         }
 
-        public async Task<IEnumerable<Field>> GetSimplifiedGameFields(int gameId)
+        public async Task<IEnumerable<BoardField>> GetBoardGameFields(int gameId)
         {
             using (var connection = connectionFactory.CreateConnection())
             {
-                return await connection.QueryAsync<Field>(AccessQueries.GetGameFieldsQuery, new { GameId = gameId });
+                return await connection.QueryAsync<BoardField>(AccessQueries.GetGameFieldsQuery, new { GameId = gameId });
+            }
+        }
+
+        public async Task<CurrentFieldState> GetFieldState(int fieldId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.QueryFirstAsync<CurrentFieldState>(AccessQueries.GetFieldStateQuery, new { FieldId = fieldId });
             }
         }
     }

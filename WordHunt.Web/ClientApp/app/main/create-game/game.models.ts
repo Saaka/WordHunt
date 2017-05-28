@@ -16,4 +16,5 @@ export class GameCreate {
 export class GameTeamCreate {
     name: string;
     fieldCount: number;
+    color: string;
 }

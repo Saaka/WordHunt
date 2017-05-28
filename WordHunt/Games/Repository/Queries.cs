@@ -18,6 +18,8 @@ namespace WordHunt.Games.Repository
                                                     WHERE [GameId] = @GameId
                                                     ORDER BY [RowIndex], [ColumnIndex]";
 
+        public const string GetFieldStateQuery = @"SELECT [TeamId], [Type], [Checked], [CheckedByTeamId] FROM GameFields WHERE [Id] = @FieldId ";
+
         //GAME TEAM
         public const string GetGameTeamsQuery = @"SELECT [Id], [UserId], [Name], [Color], [Icon], [FieldCount], [RemainingFieldCount] FROM GameTeams WHERE GameId = @GameId";
         public const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
@@ -57,9 +59,9 @@ namespace WordHunt.Games.Repository
                                             + "OUTPUT inserted.[Id], inserted.[GameId], inserted.[CurrentTeamId], inserted.[Latest], inserted.[Status] "
                                             + "VALUES (@CurrentTeamId, @GameId, 1, @Status)";
 
-        public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount])
+        public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount], [Color])
                                     OUTPUT INSERTED.[Id], INSERTED.[Order], INSERTED.[FieldCount]
-                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount)";
+                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount, @Color)";
 
         public const string CreateGameMoveQuery = @"INSERT INTO [GameMoves] ([FieldId], [GameId], [TeamId], [Timestamp], [Type]) 
                                                     OUTPUT INSERTED.[Id]

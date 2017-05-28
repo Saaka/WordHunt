@@ -39,11 +39,14 @@ export class CreateGameComponent {
 
     private createDefaultGameTeams(game: GameCreate) {
 
+        var colors = ["red", "blue", "green", "orange"];
+
         game.teams = [];
         for (let i = 0; i < game.teamCount; i++) {
             game.teams.push({
                 fieldCount: 9,
-                name: 'Team' + (i + 1)
+                name: 'Team' + (i + 1),
+                color: colors[i]
             });
         }
     }
