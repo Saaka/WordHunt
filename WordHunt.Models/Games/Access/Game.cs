@@ -15,6 +15,7 @@ namespace WordHunt.Models.Games.Access
         public int BoardWidth { get; set; }
         public int BoardHeight { get; set; }
         public int TeamCount { get; set; }
+        public int? WinningTeamId { get; set; }
         public GameType Type { get; set; }
 
         public IEnumerable<BoardField> Fields { get; set; }
