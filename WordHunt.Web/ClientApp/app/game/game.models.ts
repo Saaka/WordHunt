@@ -26,10 +26,12 @@ export class Field {
     id: number;
     word: string;
     checked: boolean;
-    checkedByRightTeam: boolean;
+    teamId: number;
     checkedByTeamId: number;
+    type: number;
     columnIndex: number;
     rowIndex: number;
+    color: string;
 }
 
 export class TeamChanged {
@@ -37,4 +39,12 @@ export class TeamChanged {
     newTeamId: number;
     lastTeamId: number;
     changeReason: number;
+}
+
+export class FieldChecked {
+    gameId: number;
+    fieldId: number;
+    teamId: number;
+    type: number;
+    checked: boolean;
 }

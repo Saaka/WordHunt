@@ -57,7 +57,6 @@
 
 .yellow-team {
     background: map_get($mat-yellow, 300);
-    color: white;
 
     &:hover {
         background: map_get($mat-yellow, 200);
@@ -97,6 +96,24 @@
 
     &:hover {
         background: map_get($mat-teal, 200);
+    }
+}
+
+.empty-field {
+    background: map_get($mat-grey, 500);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-grey, 400);
+    }
+}
+
+.trap-field {
+    background: map_get($mat-grey, 800);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-grey, 700);
     }
 }
 

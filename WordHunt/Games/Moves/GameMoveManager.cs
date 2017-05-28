@@ -3,12 +3,16 @@ using WordHunt.Models.Events;
 using WordHunt.Games.Broadcaster;
 using WordHunt.Games.Moves.Validation;
 using WordHunt.Games.Repository;
+using System;
+using WordHunt.Base.Enums.Game;
+using WordHunt.Models.Games.Access;
 
 namespace WordHunt.Games.Moves
 {
     public interface IGameMoveManager
     {
         Task<TeamChanged> SkipRound(int gameId, int userId);
+        Task<FieldChecked> CheckField(int gameId, int userId, int fieldId);
     }
 
     public class GameMoveManager : IGameMoveManager
@@ -38,16 +42,34 @@ namespace WordHunt.Games.Moves
             this.gameFieldRepository = gameFieldRepository;
         }
 
-        public async Task CheckField(int gameId, int userId, int fieldId)
+        public async Task<FieldChecked> CheckField(int gameId, int userId, int fieldId)
         {
             var gameState = await gameRepository.GetCurrentGameState(gameId);
             var fieldState = await gameFieldRepository.GetFieldState(fieldId);
 
             var validator = validationFactory.GetMoveValidator(gameState.Type);
             validator.ValidateFieldCheck(gameState, fieldState, userId);
-            
+
+            var fieldChecked = CreateFieldCheckedEvent(gameId, fieldId, fieldState.Type);
+
+            if (fieldState.Type == FieldType.Team)
+                fieldChecked.TeamId = fieldState.TeamId;
 
 
+            eventBroadcaster.FieldChecked(fieldChecked);
+
+            return fieldChecked;
+        }
+
+        private FieldChecked CreateFieldCheckedEvent(int gameId, int fieldId, FieldType type)
+        {
+            FieldChecked fieldChecked = new FieldChecked();
+            fieldChecked.FieldId = fieldId;
+            fieldChecked.GameId = gameId;
+            fieldChecked.Checked = true;
+            fieldChecked.Type = type;
+
+            return fieldChecked;
         }
 
         public async Task<TeamChanged> SkipRound(int gameId, int userId)
@@ -58,7 +80,7 @@ namespace WordHunt.Games.Moves
             validator.ValidateRoundSkip(currentState, userId);
 
             var nextTeam = await gameTeamRepository.GetNextTeam(gameId);
-            var newStatus = await gameStatusRepository.UpdateCurrentStatus(gameId, nextTeam.Id, Base.Enums.Game.Status.Ongoing);
+            var newStatus = await gameStatusRepository.UpdateCurrentStatus(gameId, nextTeam.Id, Status.Ongoing);
 
             var teamChanged = CreateTeamChangedEvent(gameId, currentState.CurrentTeamId, newStatus.CurrentTeamId, Base.Enums.Events.TeamChangeReason.SkipRound);
 

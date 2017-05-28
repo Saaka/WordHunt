@@ -12,11 +12,22 @@ namespace WordHunt.Games.Repository
         public const string GetGameQuery = @"SELECT [Id], [UserId], [Name], [BoardWidth], [BoardHeight], [TeamCount], [Type] FROM Games WHERE Id = @GameId";
 
         //GAME FIELD
-        public const string GetGameFieldsQuery = @"SELECT [Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
-                                                    CASE WHEN [CheckedByTeamId] = [TeamId] AND [Checked] = 1 THEN 1 ELSE 0 END AS [CheckedByRightTeam]
+        public const string GetGameFieldsQuery = @"SELECT GameFields.[Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
+                                                    CASE WHEN [Checked] = 1 THEN [TeamId] ELSE null END AS [TeamId],
+                                                    CASE WHEN [Checked] = 1 THEN [Type] ELSE null END AS [Type],
+                                                    CASE WHEN [Checked] = 1 THEN GameTeams.[Color] ELSE null END AS [Color]													
                                                     FROM GameFields
-                                                    WHERE [GameId] = @GameId
+													LEFT JOIN GameTeams ON GameFields.[TeamId] = GameTeams.[Id]
+                                                    WHERE GameFields.[GameId] = @GameId
                                                     ORDER BY [RowIndex], [ColumnIndex]";
+
+        public const string GetSingleGameFieldQuery = @"SELECT [Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
+                                                    CASE WHEN [Checked] = 1 THEN [TeamId] ELSE null END AS [TeamId],
+                                                    CASE WHEN [Checked] = 1 THEN [Type] ELSE null END AS [Type],
+                                                    CASE WHEN [Checked] = 1 THEN GameTeams.[Color] ELSE null END AS [Color]	
+                                                    FROM GameFields
+													LEFT JOIN GameTeams ON GameFields.[TeamId] = GameTeams.[Id]
+                                                    WHERE GameFields.[Id] = @FieldId";
 
         public const string GetFieldStateQuery = @"SELECT [TeamId], [Type], [Checked], [CheckedByTeamId] FROM GameFields WHERE [Id] = @FieldId ";
 

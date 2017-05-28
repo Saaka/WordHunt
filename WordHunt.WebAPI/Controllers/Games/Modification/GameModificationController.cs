@@ -32,5 +32,16 @@ namespace WordHunt.WebAPI.Controllers.Game.Creation
 
             return Ok(result);
         }
+
+        [Authorize]
+        [HttpGet("{gameId}/field/{fieldId}/check")]
+        public async Task<IActionResult> CheckField(int gameId, int fieldId)
+        {
+            var currentUser = userProvider.GetContextUserInfo();
+
+            var result = await gameMoveManager.CheckField(gameId, currentUser.Id, fieldId);
+
+            return Ok(result);
+        }
     }
 }

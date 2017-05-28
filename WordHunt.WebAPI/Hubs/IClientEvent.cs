@@ -8,5 +8,6 @@ namespace WordHunt.WebAPI.Hubs
     public interface IEventClient
     {
         void TeamChanged(TeamChanged args);
+        void FieldChecked(FieldChecked args);
     }
 }

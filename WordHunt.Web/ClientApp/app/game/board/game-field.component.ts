@@ -1,5 +1,7 @@
 ﻿import { Component, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
-import { Field } from '../game.models';
+
+import { GameService } from '../services/game-services.imports';
+import { Game, Field, FieldChecked } from '../game.models';
 
 @Component({
     selector: 'game-field',
@@ -9,18 +11,21 @@ import { Field } from '../game.models';
 export class GameFieldComponent implements OnChanges {
 
     @Input() field: Field;
-    fieldClass: string;
+    @Input() game: Game;
+    fieldClass: string = "";
     colorClass: string = "";
+    disableClick: boolean = false;
+    isChecking: boolean = false;
 
-    constructor() { }
-
-    clicks: number = 0;
-    colors = ["red-team", "blue-team", "green-team", "orange-team", "purple-team", "yellow-team", "brown-team", "pink-team", "teal-team"];
+    constructor(private gameService: GameService) { }
 
     private clickWord() {
-        console.log(this.field.word);
-        this.colorClass = this.colors[this.clicks % this.colors.length];
-        this.clicks++;
+        if (!this.disableClick) {
+            this.isChecking = true;
+            this.gameService
+                .checkField(this.game.id, this.field.id)
+                .subscribe(() => this.isChecking = false);
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -28,6 +33,31 @@ export class GameFieldComponent implements OnChanges {
             if (propName === 'field') {
                 this.fieldChanged(changes[propName]);
             }
+        }
+    }
+
+    onFieldChecked(args: FieldChecked, color?: string) {
+        this.disableClick = true;
+        this.updateField(args, color);
+        this.setColor(this.field);
+    }
+
+    updateField(updated: FieldChecked, color?: string) {
+        this.field.checked = updated.checked;
+        this.field.teamId = updated.teamId;
+        this.field.type = updated.type;
+        this.field.color = color;
+    }
+
+    //Set color
+    setColor(field: Field) {
+        if (field.checked) {
+            if (field.type == 0)
+                this.colorClass = "empty-field";
+            else if (field.type == 1)
+                this.colorClass = this.field.color + "-team";
+            else if (field.type == 2)
+                this.colorClass = "trap-field";
         }
     }
 
@@ -39,6 +69,9 @@ export class GameFieldComponent implements OnChanges {
                 this.fieldClass = 'long-field';
             else
                 this.fieldClass = 'short-field';
+
+            this.disableClick = current.checked;
+            this.setColor(current);
         }
     }
 }

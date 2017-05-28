@@ -1,7 +1,8 @@
-﻿import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, Input, OnInit, OnDestroy, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameHubService } from '../services/game-services.imports';
-import { Game, Field } from '../game.models';
+import { Game, Field, FieldChecked } from '../game.models';
+import { GameFieldComponent } from './board-components';
 
 @Component({
     selector: 'game-board',
@@ -15,6 +16,9 @@ export class GameBoardComponent {
     rowFlex: number;
     colFlex: number;
 
+    @ViewChildren('gameField')
+    gameFields: QueryList<GameFieldComponent>;
+
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService) {
     }
@@ -23,6 +27,18 @@ export class GameBoardComponent {
         this.game = game;
         this.createRows();
         this.calculateFlex();
+
+        this.gameHub.fieldChecked(this.onFieldChecked);
+    }
+
+    onFieldChecked = (args: FieldChecked) => {
+
+        var component = this.gameFields.filter(f => f.field.id == args.fieldId)[0];
+        var team = this.game.teams.filter(t => t.id == args.teamId)[0];
+        if (team)
+            component.onFieldChecked(args, team.color);
+        else
+            component.onFieldChecked(args);
     }
 
     private calculateFlex() {

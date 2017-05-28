@@ -1,4 +1,4 @@
-﻿<button md-raised-button [ngClass]="[fieldClass, colorClass]" (click)="clickWord()">
+﻿<button md-raised-button [ngClass]="[fieldClass, colorClass]" (click)="clickWord()" [disabled]="isChecking">
     <div class="flex-container">
         <div fxLayout="column" fxFlexFill>
             <div fxFlex="30"></div>
