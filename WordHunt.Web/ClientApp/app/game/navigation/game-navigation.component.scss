@@ -16,3 +16,9 @@
     background: map_get($mat-grey, 500);
     color: white;
 }
+
+button.title {
+    color: white !important;
+    padding: 0px 5px 0px 5px;
+    font-weight: bold;
+}

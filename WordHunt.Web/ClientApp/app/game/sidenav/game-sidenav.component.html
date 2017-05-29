@@ -3,6 +3,7 @@
 </div>
 <div class="game-nav">
     <h2 color="primary">{{game?.name}}</h2>
-    <button *ngIf="showSkip" md-raised-button [disabled]="skippingTurn" (click)="skipRound()" color="accent" class="sidenav-button-strech">End turn</button>
+    <h3 color="primary" *ngIf="isMap">Game map</h3>
+    <button *ngIf="!isMap" md-raised-button [disabled]="skippingTurn" (click)="skipRound()" color="accent" class="sidenav-button-strech">End turn</button>
     <button md-raised-button [routerLink]="['/main']" color="primary" class="sidenav-button-strech">Main menu</button>
 </div>

@@ -17,7 +17,7 @@ export class GameNavigationComponent {
     skippingTurn: boolean = false;
 
     @Input()
-    showSkip: boolean = true;
+    isMap: boolean = false;
 
     constructor(private gameHub: GameHubService,
         private gameService: GameService,
