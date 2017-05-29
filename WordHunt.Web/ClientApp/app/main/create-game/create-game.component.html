@@ -28,7 +28,7 @@
                         Team count: {{game.teamCount}}
                     </div>
                     <div class="full-width">
-                        <md-slider [disabled]="true" [min]="2" [max]="4" [step]="1" [thumb-label]="true" [(ngModel)]="game.teamCount" [value]="5" name="teamcount" #teamcount="ngModel"></md-slider>
+                        <md-slider [disabled]="true" [min]="2" [max]="4" [step]="1" [thumb-label]="true" [(ngModel)]="game.teamCount" [value]="5" name="teamcount" #teamcount="ngModel" disabled></md-slider>
                     </div>
                 </div>
                 <div>
@@ -36,7 +36,7 @@
                         Trap count: {{game.trapCount}}
                     </div>
                     <div class="full-width">
-                        <md-slider [min]="0" [max]="10" [step]="1" [thumb-label]="true" [(ngModel)]="game.trapCount" [value]="5" name="trapcount" #trapcount="ngModel"></md-slider>
+                        <md-slider [min]="0" [max]="8" [step]="1" [thumb-label]="true" [(ngModel)]="game.trapCount" [value]="5" name="trapcount" #trapcount="ngModel"></md-slider>
                     </div>
                 </div>
                 <md-input-container class="full-width">

@@ -30,7 +30,7 @@ export class CreateGameComponent {
         this.game.trapCount = 1;
         this.game.teamCount = 2;
         this.game.type = 'SingleDevice';
-        this.game.endMode = 'EndTurn';
+        this.game.endMode = 'SuddenDeath';
         this.game.userId = this.userService.userId();
         this.game.languageId = 1;
 
@@ -44,7 +44,7 @@ export class CreateGameComponent {
         game.teams = [];
         for (let i = 0; i < game.teamCount; i++) {
             game.teams.push({
-                fieldCount: 9,
+                fieldCount: 8 + i,
                 name: 'Team' + (i + 1),
                 color: colors[i]
             });
