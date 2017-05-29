@@ -63,43 +63,56 @@ namespace WordHunt.Games.Moves
 
             if(endGame.GameEnded)
             {
-                await gameRepository.EndGame(gameId, endGame.WinningTeamId.Value);
-                if (endGame.WinningTeamId.Value == gameState.CurrentTeamId)
-                    await gameTeamRepository.DecrementRemainingFieldCount(endGame.WinningTeamId.Value);
-                else
-                {
-                    var teamChanged = CreateTeamChangedEvent(gameId, gameState.CurrentTeamId, endGame.WinningTeamId.Value, Base.Enums.Events.TeamChangeReason.WonGame);
-                    eventBroadcaster.TeamChanged(teamChanged);
-                }
-
-                eventBroadcaster.EndGame(new GameEnded()
-                {
-                    GameId = gameId,
-                    WinningTeamId = endGame.WinningTeamId.Value
-                });
+                await ProcessEndGame(gameId, gameState.CurrentTeamId, endGame.WinningTeamId.Value);
             }
             else
             {
-                if(fieldChecked.Type == FieldType.Team && fieldChecked.TeamId == gameState.CurrentTeamId)
-                {
-                    await gameTeamRepository.DecrementRemainingFieldCount(fieldChecked.TeamId);
-                }
-                else
-                {
-                    if (fieldChecked.Type == FieldType.Team)
-                        await gameTeamRepository.DecrementRemainingFieldCount(fieldChecked.TeamId);
-                    var nextTeam = await nextTeamProvider.GetNextTeam(gameId, gameState.EndMode);
-                    var newStatus = await gameStatusRepository.UpdateCurrentStatus(gameId, nextTeam.Id, Status.Ongoing);
-
-                    var teamChanged = CreateTeamChangedEvent(gameId, gameState.CurrentTeamId, nextTeam.Id, Base.Enums.Events.TeamChangeReason.WrongGuess);
-                    eventBroadcaster.TeamChanged(teamChanged);
-                }
+                await ProcesCheckedField(gameId, gameState, fieldChecked);
             }
 
             await gameFieldRepository.CheckField(fieldChecked.FieldId, gameState.CurrentTeamId);
             eventBroadcaster.FieldChecked(fieldChecked);
 
             return fieldChecked;
+        }
+
+        private async Task ProcesCheckedField(int gameId, CurrentGameState gameState, FieldChecked fieldChecked)
+        {
+            if (fieldChecked.Type == FieldType.Team && fieldChecked.TeamId == gameState.CurrentTeamId)
+            {
+                await gameTeamRepository.DecrementRemainingFieldCount(fieldChecked.TeamId);
+            }
+            else
+            {
+                if (fieldChecked.Type == FieldType.Team)
+                    await gameTeamRepository.DecrementRemainingFieldCount(fieldChecked.TeamId);
+
+                var nextTeam = await nextTeamProvider.GetNextTeam(gameId, gameState.EndMode);
+                var newStatus = await gameStatusRepository.UpdateCurrentStatus(gameId, nextTeam.Id, Status.Ongoing);
+
+                var teamChanged = CreateTeamChangedEvent(gameId, gameState.CurrentTeamId, nextTeam.Id, Base.Enums.Events.TeamChangeReason.WrongGuess);
+                eventBroadcaster.TeamChanged(teamChanged);
+            }
+        }
+
+        private async Task ProcessEndGame(int gameId, int currentTeamId, int winningTeamId)
+        {
+            await gameRepository.EndGame(gameId, winningTeamId);
+            if (winningTeamId == currentTeamId)
+            {
+                await gameTeamRepository.DecrementRemainingFieldCount(winningTeamId);
+            }
+            else
+            {
+                var teamChanged = CreateTeamChangedEvent(gameId, currentTeamId, winningTeamId, Base.Enums.Events.TeamChangeReason.WonGame);
+                eventBroadcaster.TeamChanged(teamChanged);
+            }
+
+            eventBroadcaster.EndGame(new GameEnded()
+            {
+                GameId = gameId,
+                WinningTeamId = winningTeamId
+            });
         }
 
         private FieldChecked CreateFieldCheckedEvent(int gameId, int fieldId, CurrentFieldState state)
