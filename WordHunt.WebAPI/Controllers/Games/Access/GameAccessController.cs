@@ -20,5 +20,11 @@ namespace WordHunt.WebAPI.Controllers.Games.Access
         {
             return await gameProvider.GetCompleteGameInfo(gameId);
         }
+
+        [HttpGet("{gameId}/map")]
+        public async Task<WordHunt.Models.Games.Access.Game> GetGameMap(int gameId)
+        {
+            return await gameProvider.GetCompleteGameMap(gameId);
+        }
     }
 }

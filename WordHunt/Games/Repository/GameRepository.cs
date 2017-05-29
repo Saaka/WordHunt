@@ -17,6 +17,7 @@ namespace WordHunt.Games.Repository
         Task<Models.Games.Access.Game> GetCompleteGameInfo(int gameId);
         Task<Models.Games.Access.CurrentGameState> GetCurrentGameState(int gameId);
         Task EndGame(int gameId, int winningTeamId);
+        Task<Models.Games.Access.Game> GetCompleteGameMap(int gameId);
     }
 
     class GameRepository : IGameRepository
@@ -44,6 +45,25 @@ namespace WordHunt.Games.Repository
                 var game = await connection.QueryFirstAsync<GameCreated>(CreationQueries.CreateGameQuery, entity);
 
                 return game;
+            }
+        }
+
+        public async Task<Models.Games.Access.Game> GetCompleteGameMap(int gameId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                StringBuilder query = new StringBuilder();
+                query.AppendLine(AccessQueries.GetGameQuery);
+                query.AppendLine(AccessQueries.GetGameMapFieldsQuery);
+                query.AppendLine(AccessQueries.GetGameTeamsQuery);
+                using (var multiQuery = await connection.QueryMultipleAsync(query.ToString(), new { GameId = gameId }))
+                {
+                    var game = await multiQuery.ReadFirstAsync<Models.Games.Access.Game>();
+                    game.Fields = await multiQuery.ReadAsync<Models.Games.Access.BoardField>();
+                    game.Teams = await multiQuery.ReadAsync<Models.Games.Access.Team>();
+
+                    return game;
+                }
             }
         }
 

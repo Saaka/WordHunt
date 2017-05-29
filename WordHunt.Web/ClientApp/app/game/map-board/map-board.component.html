@@ -1,0 +1,7 @@
+﻿<div class="board-container">
+    <div fxFlexFill fxLayout="column" fxLayoutAlign="space-around none">
+        <div fxLayout="row" *ngFor="let row of rows" [fxFlex]="colFlex" fxLayoutAlign="space-around none">
+            <map-field #mapField *ngFor="let field of row" [game]="game" [field]="field" [fxFlex]="rowFlex"></map-field>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿<button md-raised-button [ngClass]="[fieldClass, colorClass]">
+    <div class="flex-container">
+        <div fxLayout="column" fxFlexFill>
+            <div fxFlex="30"></div>
+            <div fxFlex="40">
+                {{field?.word}}
+            </div>
+            <div fxFlex="30"></div>
+        </div>
+    </div>
+</button>

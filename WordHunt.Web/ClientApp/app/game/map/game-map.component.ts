@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
+import { MapBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
 import { GameHubService, GameService } from '../services/game-services.imports';
 import { Game } from '../game.models';
 import { Observable } from 'rxjs';
@@ -16,6 +16,8 @@ export class GameMapComponent implements OnInit, OnDestroy {
     game: Game;
     private paramsSub: any;
 
+    @ViewChild(MapBoardComponent)
+    private board: MapBoardComponent;
     @ViewChild(GameSidenavComponent)
     private sideNav: GameSidenavComponent;
     @ViewChild(GameNavigationComponent)
@@ -45,11 +47,12 @@ export class GameMapComponent implements OnInit, OnDestroy {
             })
             .mergeMap(connectionId => {
                 return this.gameService
-                    .getGame(gameId);
+                    .getGameMap(gameId);
             })
             .subscribe(result => {
                 this.game = result;
 
+                this.board.initialize(this.game);
                 this.sideNav.initialize(this.game);
                 this.gameNavigation.initialize(this.game);
                 

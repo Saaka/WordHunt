@@ -18,6 +18,13 @@ export class GameService {
             .map(res => <Game>res.json());
     }
 
+    getGameMap(gameId: number) {
+
+        return this.http
+            .get('game/' + gameId + '/map')
+            .map(res => <Game>res.json());
+    }
+
     skipRound(gameId: number) {
 
         return this.authHttp

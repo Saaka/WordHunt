@@ -15,6 +15,15 @@ namespace WordHunt.Games.Repository
                                             WHERE G.Id = @GameId AND GS.[Latest] = 1";
 
         //GAME FIELD
+        public const string GetGameMapFieldsQuery = @"SELECT GameFields.[Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
+                                                    [TeamId],
+                                                    [Type],
+                                                    GameTeams.[Color]													
+                                                    FROM GameFields
+													LEFT JOIN GameTeams ON GameFields.[TeamId] = GameTeams.[Id]
+                                                    WHERE GameFields.[GameId] = @GameId
+                                                    ORDER BY [RowIndex], [ColumnIndex]";
+
         public const string GetGameFieldsQuery = @"SELECT GameFields.[Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],
                                                     CASE WHEN [Checked] = 1 THEN [TeamId] ELSE null END AS [TeamId],
                                                     CASE WHEN [Checked] = 1 THEN [Type] ELSE null END AS [Type],
