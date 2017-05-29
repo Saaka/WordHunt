@@ -15,6 +15,7 @@ namespace WordHunt.Models.Games.Access
         public string Icon { get; set; }
         public int FieldCount { get; set; }
         public int RemainingFieldCount { get; set; }
+        public bool Active { get; set; }
     }
 
     public class NextTeam

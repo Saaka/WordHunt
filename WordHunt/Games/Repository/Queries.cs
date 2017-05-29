@@ -73,9 +73,9 @@ namespace WordHunt.Games.Repository
                                             + "OUTPUT inserted.[Id], inserted.[GameId], inserted.[CurrentTeamId], inserted.[Latest], inserted.[Status] "
                                             + "VALUES (@CurrentTeamId, @GameId, 1, @Status)";
 
-        public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount], [Color])
+        public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount], [Color], [Active])
                                     OUTPUT INSERTED.[Id], INSERTED.[Order], INSERTED.[FieldCount]
-                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount, @Color)";
+                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount, @Color, 1)";
 
         public const string CreateGameMoveQuery = @"INSERT INTO [GameMoves] ([FieldId], [GameId], [TeamId], [Timestamp], [Type]) 
                                                     OUTPUT INSERTED.[Id]
