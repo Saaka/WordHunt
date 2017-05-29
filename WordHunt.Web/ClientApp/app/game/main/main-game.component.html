@@ -5,10 +5,10 @@
     </md-sidenav>
 
     <md-toolbar color="primary" class="fixed-toolbar">
-        <button md-button (click)="sidenav.toggle()">
+        <button md-button (click)="sidenav.toggle()" class="toggle-menu-button">
             <i class="material-icons app-toolbar-menu">menu</i>
         </button>
-        WordHunt!
+        <game-navigation></game-navigation>
     </md-toolbar>
 
     <game-board></game-board>

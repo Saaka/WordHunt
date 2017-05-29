@@ -1,0 +1,83 @@
+﻿@import "_theming.scss";
+
+/** TEAM COLORS*/
+
+.red-team {
+    background: map_get($mat-red, 400);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-red, 300);
+    }
+}
+
+.blue-team {
+    background: map_get($mat-blue, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-blue, 200);
+    }
+}
+
+.green-team {
+    background: map_get($mat-green, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-green, 200);
+    }
+}
+
+.orange-team {
+    background: map_get($mat-orange, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-orange, 200);
+    }
+}
+
+.yellow-team {
+    background: map_get($mat-yellow, 300);
+
+    &:hover {
+        background: map_get($mat-yellow, 200);
+    }
+}
+
+.brown-team {
+    background: map_get($mat-brown, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-brown, 200);
+    }
+}
+
+.purple-team {
+    background: map_get($mat-purple, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-purple, 200);
+    }
+}
+
+.pink-team {
+    background: map_get($mat-pink, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-pink, 200);
+    }
+}
+
+.teal-team {
+    background: map_get($mat-teal, 300);
+    color: white;
+
+    &:hover {
+        background: map_get($mat-teal, 200);
+    }
+}

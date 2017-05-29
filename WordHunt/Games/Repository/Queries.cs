@@ -9,7 +9,10 @@ namespace WordHunt.Games.Repository
     public static class AccessQueries
     {
         //GAME
-        public const string GetGameQuery = @"SELECT [Id], [UserId], [Name], [BoardWidth], [BoardHeight], [TeamCount], [Type], [WinningTeamId] FROM Games WHERE Id = @GameId";
+        public const string GetGameQuery = @"SELECT G.[Id], G.[UserId], G.[Name], G.[BoardWidth], G.[BoardHeight], G.[TeamCount], G.[Type], G.[WinningTeamId], GS.[CurrentTeamId]
+                                            FROM Games G INNER JOIN
+                                                    GameStatuses GS ON G.[Id] = GS.[GameId]       
+                                            WHERE G.Id = @GameId AND GS.[Latest] = 1";
 
         //GAME FIELD
         public const string GetGameFieldsQuery = @"SELECT GameFields.[Id], [Word], [Checked], [CheckedByTeamId], [ColumnIndex], [RowIndex],

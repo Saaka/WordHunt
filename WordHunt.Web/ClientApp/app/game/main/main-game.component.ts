@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameBoardComponent, GameSidenavComponent } from '../game.imports';
+import { GameBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
 import { GameHubService, GameService } from '../services/game-services.imports';
 import { Game } from '../game.models';
 import { Observable } from 'rxjs';
@@ -20,6 +20,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
     private board: GameBoardComponent;
     @ViewChild(GameSidenavComponent)
     private sideNav: GameSidenavComponent;
+    @ViewChild(GameNavigationComponent)
+    private gameNavigation: GameNavigationComponent;
 
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
@@ -54,6 +56,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
                 this.board.initialize(this.game);
                 this.sideNav.initialize(this.game);
+                this.gameNavigation.initialize(this.game);
             }, err => {
                 this.snackbar.openSnackbar(err);
             });

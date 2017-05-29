@@ -7,6 +7,7 @@ export class Game {
     boardHeight: number;
     teamCount: number;
     type: string;
+    currentTeamId: number;
 
     teams: Team[];
     fields: Field[];

@@ -1,7 +1,7 @@
 ﻿import { Component, Input } from '@angular/core';
 
 import { GameHubService, GameService } from '../services/game-services.imports';
-import { Game, TeamChanged } from '../game.models';
+import { Game, Team, TeamChanged } from '../game.models';
 
 @Component({
     selector: 'game-navigation',
@@ -10,7 +10,9 @@ import { Game, TeamChanged } from '../game.models';
 })
 export class GameNavigationComponent {
 
-    @Input() game: Game;
+    game: Game;
+    teamName: string = "Current Team";
+    colorClass: string = "team-not-selected";
 
     constructor(private gameHub: GameHubService,
         private gameService: GameService) { }
@@ -18,16 +20,22 @@ export class GameNavigationComponent {
     private skipRound() {
         this.gameService
             .skipRound(this.game.id)
-            .subscribe(tc => {
-                console.log(tc);
-            });
+            .subscribe();
     }
 
-    onTeamChanged(event: TeamChanged) {
-        console.log(`Team changed. New team: ${event.newTeamId}. Previous team: ${event.lastTeamId}.`);
+    public setCurrentTeam(teamId: number) {
+        let team = this.game.teams.filter(t => t.id == teamId)[0];
+        this.teamName = team.name;
+        this.colorClass = team.color + "-team";
     }
 
-    initialize() {
+    onTeamChanged = (event: TeamChanged) => {
+        this.setCurrentTeam(event.newTeamId);
+    }
+
+    initialize(game: Game) {
+        this.game = game;
+        this.setCurrentTeam(this.game.currentTeamId);
         this.gameHub.teamChanged(this.onTeamChanged);
     }
 }

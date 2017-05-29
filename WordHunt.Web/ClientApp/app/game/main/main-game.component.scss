@@ -1,5 +1,9 @@
 ﻿@import '../styles/game.scss';
 
+.toggle-menu-button  {
+
+}
+
 .fixed-toolbar {
     @include when-xs {
         height: $toolbar-height-xs;

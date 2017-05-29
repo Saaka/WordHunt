@@ -1,1 +1,18 @@
 ﻿
+@import "../../styles/team-colors.scss";
+
+.current-team {
+    width: 125px;
+    text-overflow: clip;
+    padding: 3px;
+}
+
+.end-turn {
+    width: 75px;
+    padding: 3px;
+}
+
+.team-not-selected {
+    background: map_get($mat-grey, 500);
+    color: white;
+}
