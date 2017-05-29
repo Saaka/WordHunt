@@ -1,10 +1,13 @@
 ﻿@import '../styles/game.scss';
 
 .toggle-menu-button  {
-
+    margin: 0px 3px 0px 3px;
 }
 
 .fixed-toolbar {
+
+    padding-left: 0px;
+
     @include when-xs {
         height: $toolbar-height-xs;
     }
