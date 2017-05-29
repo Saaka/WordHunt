@@ -22,5 +22,6 @@ namespace WordHunt.Models.Games.Access
     {
         public int Id { get; set; }
         public int Order { get; set; }
+        public int RemainingFieldCount { get; set; }
     }
 }

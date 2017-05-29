@@ -2,6 +2,7 @@
 
 import { GameHubService, GameService } from '../services/game-services.imports';
 import { Game, TeamChanged } from '../game.models';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'game-sidenav',
@@ -14,13 +15,18 @@ export class GameSidenavComponent {
     skippingTurn: boolean = false;
 
     constructor(private gameHub: GameHubService,
-        private gameService: GameService) { }
+        private gameService: GameService,
+        private snackbar: SnackbarService) { }
 
     private skipRound() {
         this.isSkippingTurn(true);
         this.gameService
             .skipRound(this.game.id)
-            .subscribe(() => this.isSkippingTurn(false));
+            .subscribe(() => this.isSkippingTurn(false),
+            (e) => {
+                this.isSkippingTurn(false);
+                this.snackbar.openSnackbar(e.error);
+            });
     }
 
     private isSkippingTurn(value: boolean) {

@@ -2,6 +2,7 @@
 
 import { GameHubService, GameService } from '../services/game-services.imports';
 import { Game, Team, TeamChanged } from '../game.models';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'game-navigation',
@@ -13,14 +14,25 @@ export class GameNavigationComponent {
     game: Game;
     teamName: string = "Current Team";
     colorClass: string = "team-not-selected";
+    skippingTurn: boolean = false;
 
     constructor(private gameHub: GameHubService,
-        private gameService: GameService) { }
+        private gameService: GameService,
+        private snackbar: SnackbarService) { }
 
     private skipRound() {
+        this.isSkippingTurn(true);
         this.gameService
             .skipRound(this.game.id)
-            .subscribe();
+            .subscribe(() => this.isSkippingTurn(true),
+            (e) => {
+                this.isSkippingTurn(false);
+                this.snackbar.openSnackbar(e.error);
+            });
+    }
+
+    private isSkippingTurn(isSkipping: boolean) {
+        this.skippingTurn = isSkipping;
     }
 
     public setCurrentTeam(teamId: number) {

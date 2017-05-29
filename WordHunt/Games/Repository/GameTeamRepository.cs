@@ -16,6 +16,8 @@ namespace WordHunt.Games.Repository
         Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> model);
         Task<int> GetFirstTeamId(int gameId);
         Task<Models.Games.Access.NextTeam> GetNextTeam(int gameId);
+        Task<int> GetRemainingFieldCount(int teamId);
+        Task<int> DecrementRemainingFieldCount(int teamId);
     }
 
     class GameTeamRepository : IGameTeamRepository
@@ -65,6 +67,22 @@ namespace WordHunt.Games.Repository
             using (var connection = connectionFactory.CreateConnection())
             {
                 return await connection.QueryFirstAsync<Models.Games.Access.NextTeam>(AccessQueries.GetNextTeamQuery, new { GameId = gameId });
+            }
+        }
+
+        public async Task<int> GetRemainingFieldCount(int teamId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.ExecuteScalarAsync<int>(AccessQueries.GetRemainingFieldCount, new { TeamId = teamId });
+            }
+        }
+
+        public async Task<int> DecrementRemainingFieldCount(int teamId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.ExecuteScalarAsync<int>(ModificationQueries.DecrementRemainingFieldCount, new { TeamId = teamId });
             }
         }
     }

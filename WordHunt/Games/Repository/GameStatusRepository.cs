@@ -51,7 +51,7 @@ namespace WordHunt.Games.Repository
                 CurrentTeamId = firstTeamId,
                 GameId = gameId,
                 Latest = true,
-                Status = Base.Enums.Game.Status.Created
+                Status = Base.Enums.Game.Status.Ongoing
             };
         }
     }

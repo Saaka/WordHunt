@@ -8,5 +8,6 @@ namespace WordHunt.Models.Events
         public int NewTeamId { get; set; }
         public int LastTeamId { get; set; }
         public TeamChangeReason ChangeReason { get; set; }
+        public int RemainingFieldCount { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace WordHunt.Models.Games.Access
 {
     public class CurrentGameState
     {
+        public int GameId { get; set; }
         public int UserId { get; set; }
         public EndMode EndMode { get; set; }
         public GameType Type { get; set; }

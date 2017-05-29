@@ -40,6 +40,7 @@ export class TeamChanged {
     newTeamId: number;
     lastTeamId: number;
     changeReason: number;
+    remainingFieldCount: number;
 }
 
 export class FieldChecked {
@@ -48,4 +49,9 @@ export class FieldChecked {
     teamId: number;
     type: number;
     checked: boolean;
+}
+
+export class GameEnded {
+    gameId: number;
+    winningTeamId: number;
 }

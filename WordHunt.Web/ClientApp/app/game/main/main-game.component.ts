@@ -2,7 +2,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { GameBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
 import { GameHubService, GameService } from '../services/game-services.imports';
-import { Game } from '../game.models';
+import { Game, GameEnded } from '../game.models';
 import { Observable } from 'rxjs';
 import { SnackbarService } from '../../core/core.imports';
 
@@ -57,9 +57,19 @@ export class GameMainComponent implements OnInit, OnDestroy {
                 this.board.initialize(this.game);
                 this.sideNav.initialize(this.game);
                 this.gameNavigation.initialize(this.game);
+
+                this.init();
             }, err => {
                 this.snackbar.openSnackbar(err);
             });
+    }
+
+    private init() {
+        this.gameHub.gameEnded(this.onGameEnded);
+    }
+
+    onGameEnded = (args: GameEnded) => {
+        console.log(args.winningTeamId);
     }
 
     ngOnDestroy() {

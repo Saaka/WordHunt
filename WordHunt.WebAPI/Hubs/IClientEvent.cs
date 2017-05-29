@@ -9,5 +9,6 @@ namespace WordHunt.WebAPI.Hubs
     {
         void TeamChanged(TeamChanged args);
         void FieldChecked(FieldChecked args);
+        void GameEnded(GameEnded args);
     }
 }

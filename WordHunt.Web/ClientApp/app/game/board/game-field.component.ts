@@ -2,6 +2,7 @@
 
 import { GameService } from '../services/game-services.imports';
 import { Game, Field, FieldChecked } from '../game.models';
+import { SnackbarService } from '../../core/core.imports';
 
 @Component({
     selector: 'game-field',
@@ -17,14 +18,19 @@ export class GameFieldComponent implements OnChanges {
     disableClick: boolean = false;
     isChecking: boolean = false;
 
-    constructor(private gameService: GameService) { }
+    constructor(private gameService: GameService,
+        private snackbar: SnackbarService) { }
 
     private clickWord() {
         if (!this.disableClick) {
             this.isChecking = true;
             this.gameService
                 .checkField(this.game.id, this.field.id)
-                .subscribe(() => this.isChecking = false);
+                .subscribe(() => this.isChecking = false,
+                (e) => {
+                    this.isChecking = false;
+                    this.snackbar.openSnackbar(e.error);
+                });
         }
     }
 

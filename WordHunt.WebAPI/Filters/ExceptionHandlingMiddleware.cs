@@ -32,7 +32,7 @@ namespace WordHunt.WebAPI.Filters
             var code = HttpStatusCode.InternalServerError; // 500 if unexpected
 
             if (exception is ArgumentException)
-                code = HttpStatusCode.BadRequest;
+                code = HttpStatusCode.Forbidden;
 
             if (exception is UnauthorizedAccessException)
                 code = HttpStatusCode.Unauthorized;

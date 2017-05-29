@@ -7,6 +7,7 @@ namespace WordHunt.Base.Enums.Game
     public enum EndMode
     {
         EndTurn,
+        //ONLY FOR TWO PLAYERS
         SuddenDeath
     }
 }

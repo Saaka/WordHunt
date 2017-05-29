@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using WordHunt.Games.Creation;
 using WordHunt.Games.Moves;
+using WordHunt.Games.Moves.Helpers;
 using WordHunt.Games.Moves.Validation;
 using WordHunt.Games.Repository;
 using WordHunt.Mappings;
@@ -55,7 +56,10 @@ namespace WordHunt
             services.AddScoped<IGameTeamsGenerator, GameTeamsGenerator>();
 
             services.AddScoped<IRandomWordRepository, RandomWordRepository>();
-                        
+
+            services.AddScoped<INextTeamProvider, NextTeamProvider>();
+            services.AddScoped<IEndGameChecker, EndGameChecker>();
+
             //User related classes
             services.AddScoped<IUserService, UserService>();
 

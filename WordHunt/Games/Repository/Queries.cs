@@ -34,11 +34,13 @@ namespace WordHunt.Games.Repository
 
         public const string GetFieldStateQuery = @"SELECT [TeamId], [Type], [Checked], [CheckedByTeamId] FROM GameFields WHERE [Id] = @FieldId ";
 
+        public const string GetRemainingFieldCount = @"SELECT [RemainingFieldCount] FROM GameTeams WHERE [Id] = @TeamId";
+
         //GAME TEAM
         public const string GetGameTeamsQuery = @"SELECT [Id], [UserId], [Name], [Color], [Icon], [FieldCount], [RemainingFieldCount] FROM GameTeams WHERE GameId = @GameId";
         public const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
 
-        public const string GetNextTeamQuery = @"SELECT	GT.Id, GT.[Order] "
+        public const string GetNextTeamQuery = @"SELECT	GT.Id, GT.[Order], GT.[RemainingFieldCount] "
                                             + "FROM	Games G "
                                                 + "INNER JOIN GameTeams GT ON G.Id = GT.GameId "
                                                 + "INNER JOIN GameStatuses GS ON G.Id = GS.GameId "
@@ -48,9 +50,23 @@ namespace WordHunt.Games.Repository
                                                 + "AND GT.[Order] = CASE WHEN (CT.[Order]) = G.[TeamCount] THEN 1 ELSE CT.[Order] + 1 END";
 
         //GAME STATUS
-        public const string GetCurrentGameState = @"SELECT	G.[UserId], G.[EndMode], G.[Type], S.[CurrentTeamId], [Status] "
+        public const string GetCurrentGameState = @"SELECT	G.[Id] AS [GameId], G.[UserId], G.[EndMode], G.[Type], S.[CurrentTeamId], [Status] "
                                                     + "FROM	Games G INNER JOIN GameStatuses S ON G.Id = S.GameId "
-                                                    + "WHERE	G.[Id] = @GameId AND S.[Latest] = 1";
+                                                    + "WHERE G.[Id] = @GameId AND S.[Latest] = 1";
+    }
+
+    public static class ModificationQueries
+    {
+
+        public const string CheckField = @"UPDATE GameFields SET [Checked] = 1, [CheckedByTeamId] = @TeamId WHERE [Id] = @FieldId";
+
+        public const string EndGame = @"UPDATE Games SET [WinningTeamId] = @WinningTeamId WHERE [Id] = @GameId;
+                                        UPDATE GameStatuses SET [Latest] = 0 WHERE [GameId] = @GameId;
+                                        INSERT INTO GameStatuses ([CurrentTeamId], [GameId], [Latest], [Status]) 
+                                        VALUES (@WinningTeamId, @GameId, 1, @Status)";
+
+        public const string DecrementRemainingFieldCount = @"UPDATE GameTeams SET RemainingFieldCount = RemainingFieldCount - 1 WHERE Id = @TeamId
+                                                            SELECT [RemainingFieldCount] FROM GameTeams WHERE [Id] = @TeamId";
     }
 
     public static class CreationQueries

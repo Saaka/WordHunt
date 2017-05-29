@@ -17,6 +17,11 @@ namespace WordHunt.WebAPI.Hubs
             HubContext.Clients.Group(args.GameId.ToString()).FieldChecked(args);
         }
 
+        public void EndGame(GameEnded args)
+        {
+            HubContext.Clients.Group(args.GameId.ToString()).GameEnded(args);
+        }
+
         IHubContext<IEventClient> HubContext { get; } = GlobalHost.ConnectionManager.GetHubContext<Broadcaster, IEventClient>();
     }
 }

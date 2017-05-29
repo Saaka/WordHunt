@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { SignalRConnectionFactory } from '../../core/signalr/signalr-connection.factory';
 import { ISignalRConnection, BroadcastEventListener } from 'ng2-signalr';
-import { TeamChanged, FieldChecked } from "../game.models";
+import { TeamChanged, FieldChecked, GameEnded } from "../game.models";
 
 @Injectable()
 export class GameHubService {
@@ -11,6 +11,7 @@ export class GameHubService {
     private onSubscribed$: BroadcastEventListener<string>;
     private onTeamChanged$: BroadcastEventListener<TeamChanged>;
     private onFieldChecked$: BroadcastEventListener<FieldChecked>;
+    private onGameEnded$: BroadcastEventListener<GameEnded>;
 
     constructor(private connectionFactory: SignalRConnectionFactory) { }
 
@@ -43,6 +44,13 @@ export class GameHubService {
         this.onTeamChanged$.subscribe(onTeamChanged);
     }
 
+    public gameEnded(onGameEnded: (args: GameEnded) => void) {
+        if (!this.onGameEnded$)
+            this.onGameEnded$ = this.connection.listenFor('GameEnded');
+
+        this.onGameEnded$.subscribe(onGameEnded);
+    }
+
     public subscribed(onSubscribed: (message: string) => void) {
         if (!this.onSubscribed$)
             this.onSubscribed$ = this.connection.listenFor('Subscribed');
@@ -62,6 +70,10 @@ export class GameHubService {
         if (this.onTeamChanged$) {
             this.onTeamChanged$.unsubscribe();
             this.onTeamChanged$ = null;
+        }
+        if (this.onGameEnded$) {
+            this.onGameEnded$.unsubscribe();
+            this.onGameEnded$ = null;
         }
         if (this.connection) {
             this.connection.stop();

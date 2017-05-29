@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordHunt.Base.Exceptions;
 using WordHunt.Models.Games.Access;
 
 namespace WordHunt.Games.Moves.Validation
@@ -21,7 +22,7 @@ namespace WordHunt.Games.Moves.Validation
             BaseGameValidations(gameState, userId);
 
             if (fieldState.Checked)
-                throw new ValidationException("This field was already checked");
+                throw new ValidationFailedException("This field was already checked");
         }
 
         protected void BaseGameValidations(CurrentGameState gameState, int userId)
@@ -30,10 +31,10 @@ namespace WordHunt.Games.Moves.Validation
                 throw new InvalidOperationException("Wrong validator seleceted for game type");
 
             if (gameState.UserId != userId)
-                throw new ValidationException("Current user can't do this action");
+                throw new ValidationFailedException("Current user can't do this action");
 
             if (gameState.Status == Base.Enums.Game.Status.Canceled || gameState.Status == Base.Enums.Game.Status.Finished)
-                throw new ValidationException("Game has ended");
+                throw new ValidationFailedException("Game has ended");
         }
     }
 }
