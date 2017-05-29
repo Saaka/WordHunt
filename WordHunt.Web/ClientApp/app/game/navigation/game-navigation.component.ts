@@ -16,6 +16,9 @@ export class GameNavigationComponent {
     colorClass: string = "team-not-selected";
     skippingTurn: boolean = false;
 
+    @Input()
+    showSkip: boolean = true;
+
     constructor(private gameHub: GameHubService,
         private gameService: GameService,
         private snackbar: SnackbarService) { }
@@ -24,7 +27,7 @@ export class GameNavigationComponent {
         this.isSkippingTurn(true);
         this.gameService
             .skipRound(this.game.id)
-            .subscribe(() => this.isSkippingTurn(true),
+            .subscribe(() => this.isSkippingTurn(false),
             (e) => {
                 this.isSkippingTurn(false);
                 this.snackbar.openSnackbar(e.error);

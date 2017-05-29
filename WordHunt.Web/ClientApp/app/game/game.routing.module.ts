@@ -3,15 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { GameComponent } from './game.component';
 import { GameMainComponent } from './main/main-game.component';
+import { GameMapComponent } from './map/game-map.component';
 
 const routes: Routes = [
     {
         path: '',
         component: GameComponent,
         children: [
-            { path: '', component: GameMainComponent }
+            { path: '', component: GameMainComponent },
+            { path: 'map', component: GameMapComponent }
         ]
-    },    
+    },
 ];
 
 @NgModule({
@@ -21,5 +23,5 @@ const routes: Routes = [
 export class GameRoutingModule { }
 
 export const routableComponents = [
-    GameComponent, GameMainComponent
+    GameComponent, GameMainComponent, GameMapComponent
 ];

@@ -1,0 +1,13 @@
+﻿@import '../styles/game.scss';
+
+.fixed-toolbar {
+    padding-left: 0px;
+
+    @include when-xs {
+        height: $toolbar-height-xs;
+    }
+
+    @include when-sm {
+        height: $toolbar-height-sm;
+    }
+}

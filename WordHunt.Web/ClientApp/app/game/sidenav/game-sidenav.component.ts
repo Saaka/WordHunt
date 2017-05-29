@@ -14,6 +14,9 @@ export class GameSidenavComponent {
     game: Game;
     skippingTurn: boolean = false;
 
+    @Input()
+    showSkip: boolean = true;
+
     constructor(private gameHub: GameHubService,
         private gameService: GameService,
         private snackbar: SnackbarService) { }

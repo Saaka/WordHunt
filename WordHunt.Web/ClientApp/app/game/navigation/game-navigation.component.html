@@ -2,5 +2,5 @@
     <button md-raised-button color="accent" class="current-team" [ngClass]="colorClass">
         {{teamName}}
     </button>
-    <button md-raised-button color="accent" class="end-turn" (click)="skipRound()" [disabled]="skippingTurn">End turn</button>
+    <button *ngIf="showSkip" md-raised-button color="accent" class="end-turn" (click)="skipRound()" [disabled]="skippingTurn">End turn</button>
 </div>

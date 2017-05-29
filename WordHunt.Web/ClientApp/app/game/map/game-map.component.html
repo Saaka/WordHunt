@@ -1,0 +1,16 @@
+﻿<md-sidenav-container fullscreen>
+
+    <md-sidenav #sidenav mode="over">
+        <game-sidenav [showSkip]="false"></game-sidenav>
+    </md-sidenav>
+
+    <md-toolbar color="primary" class="fixed-toolbar">
+        <button md-button (click)="sidenav.toggle()" class="toggle-menu-button">
+            <i class="material-icons app-toolbar-menu">menu</i>
+        </button>
+        <game-navigation [showSkip]="false"></game-navigation>
+    </md-toolbar>
+
+    <!--<map-board></map-board>-->
+
+</md-sidenav-container>
