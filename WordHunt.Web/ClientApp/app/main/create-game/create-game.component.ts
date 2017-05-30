@@ -44,7 +44,7 @@ export class CreateGameComponent {
         game.teams = [];
         for (let i = 0; i < game.teamCount; i++) {
             game.teams.push({
-                fieldCount: 8 + i,
+                fieldCount: 9-i,
                 name: 'Team' + (i + 1),
                 color: colors[i]
             });
