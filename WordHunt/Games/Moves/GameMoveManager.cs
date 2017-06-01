@@ -27,7 +27,7 @@ namespace WordHunt.Games.Moves
         private readonly IGameFieldRepository gameFieldRepository;
         private readonly INextTeamProvider nextTeamProvider;
         private readonly IEndGameChecker endGameChecker;
-        
+
         public GameMoveManager(IGameRepository gameRepository,
             IGameTeamRepository gameTeamRepository,
             IGameStatusRepository gameStatusRepository,
@@ -61,9 +61,9 @@ namespace WordHunt.Games.Moves
 
             var endGame = await endGameChecker.VerifyEndGame(gameState, fieldChecked);
 
-            if(endGame.GameEnded)
+            if (endGame.GameEnded)
             {
-                await ProcessEndGame(gameId, gameState.CurrentTeamId, endGame.WinningTeamId.Value);
+                await ProcessEndGame(gameId, gameState.CurrentTeamId, endGame.WinningTeamId.Value, fieldChecked);
             }
             else
             {
@@ -95,14 +95,14 @@ namespace WordHunt.Games.Moves
             }
         }
 
-        private async Task ProcessEndGame(int gameId, int currentTeamId, int winningTeamId)
+        private async Task ProcessEndGame(int gameId, int currentTeamId, int winningTeamId, FieldChecked fieldChecked)
         {
             await gameRepository.EndGame(gameId, winningTeamId);
-            if (winningTeamId == currentTeamId)
+            if (fieldChecked.Type == FieldType.Team)
             {
                 await gameTeamRepository.DecrementRemainingFieldCount(winningTeamId);
             }
-            else
+            if(winningTeamId != currentTeamId)
             {
                 var teamChanged = CreateTeamChangedEvent(gameId, currentTeamId, winningTeamId, Base.Enums.Events.TeamChangeReason.WonGame);
                 eventBroadcaster.TeamChanged(teamChanged);
