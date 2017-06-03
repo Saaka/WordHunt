@@ -75,7 +75,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
         var team = this.getTeam(args.winningTeamId);
 
         this.dialogService.openEndGameDialog({
-            canRestart: this.canRestart(),
+            canRestart: this.gameService.canRestart(this.game),
             teamName: team.name,
             teamColor: team.color 
         }).subscribe(result => {
@@ -88,10 +88,6 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     private createNewGame() {
 
-    }
-
-    private canRestart() {
-        return true;
     }
 
     private getTeam(teamId: number) {

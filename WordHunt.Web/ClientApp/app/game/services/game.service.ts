@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../core/http/http.service';
 import { AuthHttpService } from '../../core/http/auth-http.service';
 import { Game, Team, Field, TeamChanged, FieldChecked } from '../game.models';
+import { UserService } from '../../core/core.imports';
 
 @Injectable()
 export class GameService {
 
     constructor(private http: HttpService,
-        private authHttp: AuthHttpService) { }
+        private authHttp: AuthHttpService,
+        private userService: UserService) { }
 
     getGame(gameId: number) {
 
@@ -37,5 +39,9 @@ export class GameService {
         return this.authHttp
             .get('game/' + gameId + '/field/' + fieldId + '/check')
             .map(res => <FieldChecked>res.json());
+    }
+
+    canRestart(game: Game) {
+        return game.userId == this.userService.userId();
     }
 }
