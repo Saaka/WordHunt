@@ -1,10 +1,11 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
-import { GameHubService, GameService } from '../services/game-services.imports';
+import { GameHubService, GameService, GameDialogsService } from '../services/game-services.imports';
 import { Game, GameEnded } from '../game.models';
 import { Observable } from 'rxjs';
 import { SnackbarService } from '../../core/core.imports';
+import { GameEndedDialogResult } from '../dialogs/dialog.imports';
 
 @Component({
     selector: 'main-game',
@@ -26,7 +27,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
         private gameService: GameService,
-        private snackbar: SnackbarService) { }
+        private snackbar: SnackbarService,
+        private dialogService: GameDialogsService) { }
 
     ngOnInit() {
         this.paramsSub = this.route.params
@@ -69,7 +71,19 @@ export class GameMainComponent implements OnInit, OnDestroy {
     }
 
     onGameEnded = (args: GameEnded) => {
-        console.log(args.winningTeamId);
+        var teamName = this.getTeamName(args.winningTeamId);
+        console.log(teamName);
+
+        this.dialogService.openEndGameDialog({
+            canRestart: false,
+            teamName: teamName
+        }).subscribe(result => {
+            console.log(result);
+        });
+    }
+
+    private getTeamName(teamId: number) {
+        return this.game.teams.filter(t => t.id == teamId)[0].name;
     }
 
     ngOnDestroy() {

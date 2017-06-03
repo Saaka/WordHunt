@@ -18,6 +18,9 @@ import { SignalRModule, SignalRConfiguration } from 'ng2-signalr';
 import { CustomMaterialModule } from './core/material/custom-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { MdDialogModule } from '@angular/material';
+//import { GameEndedDialog } from './game/dialogs/dialog.imports';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -28,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         GameModule,
         CoreModule,
         AsyncLocalStorageModule,
-        SignalRModule.forRoot(CreateSignalRConfig)
+        SignalRModule.forRoot(CreateSignalRConfig), 
+        MdDialogModule
     ],
     declarations: [
         AppComponent,
