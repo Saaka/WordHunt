@@ -71,19 +71,23 @@ export class GameMainComponent implements OnInit, OnDestroy {
     }
 
     onGameEnded = (args: GameEnded) => {
-        var teamName = this.getTeamName(args.winningTeamId);
-        console.log(teamName);
+        var team = this.getTeam(args.winningTeamId);
 
         this.dialogService.openEndGameDialog({
-            canRestart: false,
-            teamName: teamName
+            canRestart: this.canRestart(),
+            teamName: team.name,
+            teamColor: team.color 
         }).subscribe(result => {
             console.log(result);
         });
     }
 
-    private getTeamName(teamId: number) {
-        return this.game.teams.filter(t => t.id == teamId)[0].name;
+    private canRestart() {
+        return true;
+    }
+
+    private getTeam(teamId: number) {
+        return this.game.teams.filter(t => t.id == teamId)[0];
     }
 
     ngOnDestroy() {

@@ -1,9 +1,12 @@
-﻿<h3 md-dialog-title>Delete all</h3>
+﻿<h3 md-dialog-title>
+    <button md-button [ngClass]="colorClass">{{data.teamName}} wins!</button>
+</h3>
 <md-dialog-content>
-    <div>Game has ended. The winner is <strong>{{data.teamName}}!</strong></div>
-    <div>What do you want to do?</div>
+    <div>Go back to main menu or wait for the game host to start new game!</div>
 </md-dialog-content>
 <md-dialog-actions>
-    <button md-button [md-dialog-close]="1" >Go to main menu</button>
-    <button *ngIf="data.canRestart" md-button [md-dialog-close]="2" >Restart game</button>
+    <div>
+        <button md-raised-button color="accent" [md-dialog-close]="1">Go to main menu</button>
+        <button *ngIf="data.canRestart" md-raised-button color="primary" [md-dialog-close]="2">Restart game</button>
+    </div>
 </md-dialog-actions>

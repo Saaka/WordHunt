@@ -8,7 +8,7 @@ export class GameDialogsService {
     constructor(private dialog: MdDialog) { }
 
     openEndGameDialog(data: GameEndedDialogData) {
-        let dialogRef = this.dialog.open(GameEndedDialog);
+        let dialogRef = this.dialog.open(GameEndedDialog, { data: data });
         return dialogRef.afterClosed().map(result => <GameEndedDialogResult>result);
     }
 }

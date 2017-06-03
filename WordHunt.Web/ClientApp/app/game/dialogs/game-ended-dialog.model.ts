@@ -1,5 +1,6 @@
 ﻿export class GameEndedDialogData {
     teamName: string;
+    teamColor: string;
     canRestart: boolean;
 }
 
