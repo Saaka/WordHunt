@@ -5,7 +5,7 @@
 }
 
 export enum GameEndedDialogResult {
-    newGame = 1,
-    mainMenu,
-    doNothing
+    doNothing = 0,
+    newGame,
+    mainMenu
 }

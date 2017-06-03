@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
 import { GameHubService, GameService, GameDialogsService } from '../services/game-services.imports';
 import { Game, GameEnded } from '../game.models';
@@ -25,6 +25,7 @@ export class GameMainComponent implements OnInit, OnDestroy {
     private gameNavigation: GameNavigationComponent;
 
     constructor(private route: ActivatedRoute,
+        private router: Router, 
         private gameHub: GameHubService,
         private gameService: GameService,
         private snackbar: SnackbarService,
@@ -78,8 +79,15 @@ export class GameMainComponent implements OnInit, OnDestroy {
             teamName: team.name,
             teamColor: team.color 
         }).subscribe(result => {
-            console.log(result);
+            if (result == GameEndedDialogResult.mainMenu)
+                this.router.navigate(['/main']);
+            else if (result == GameEndedDialogResult.newGame)
+                this.createNewGame();
         });
+    }
+
+    private createNewGame() {
+
     }
 
     private canRestart() {

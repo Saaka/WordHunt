@@ -11,11 +11,11 @@ import { GameEndedDialogData, GameEndedDialogResult } from "./game-ended-dialog.
 })
 export class GameEndedDialog {
 
-    //result: GameEndedDialogResult = GameEndedDialogResult.doNothing;
+    result: GameEndedDialogResult = GameEndedDialogResult.doNothing;
     private colorClass: string = "";
 
-    constructor( @Inject(MD_DIALOG_DATA) public data: GameEndedDialogData
-        //, public dialogRef: MdDialogRef<GameEndedDialogResult>
+    constructor( @Inject(MD_DIALOG_DATA) public data: GameEndedDialogData,
+        public dialogRef: MdDialogRef<GameEndedDialogResult>
     ) {
         console.log(data);
         this.setColor(data.teamColor);
@@ -26,10 +26,12 @@ export class GameEndedDialog {
     }
 
     public restartGame() {
-        //this.result = GameEndedDialogResult.newGame;
+        this.result = GameEndedDialogResult.newGame;
+        this.dialogRef.close(this.result);
     }
 
     public goToMainMenu() {
-        //this.result = GameEndedDialogResult.mainMenu;
+        this.result = GameEndedDialogResult.mainMenu;
+        this.dialogRef.close(this.result);
     }
 }
