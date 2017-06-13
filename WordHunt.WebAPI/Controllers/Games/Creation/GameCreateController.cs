@@ -16,12 +16,17 @@ namespace WordHunt.WebAPI.Controllers.Game.Creation
         {
             this.gameCreator = gameCreator;
         }
-
-        // POST api/values
+        
         [HttpPost("create")]
-        public async Task<GameCreateResult> Post([FromBody]GameCreate model)
+        public async Task<GameCreateResult> Create([FromBody]GameCreate model)
         {
             return await gameCreator.CreateGame(model);
+        }
+        
+        [HttpGet("{gameId}/restart")]
+        public async Task<GameCreateResult> Restart(int gameId)
+        {
+            return await gameCreator.CreateGameBasedOnAnother(gameId);
         }
     }
 }

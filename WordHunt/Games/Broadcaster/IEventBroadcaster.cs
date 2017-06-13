@@ -7,5 +7,6 @@ namespace WordHunt.Games.Broadcaster
         void TeamChanged(TeamChanged args);
         void FieldChecked(FieldChecked args);
         void EndGame(GameEnded args);
+        void RestartGame(GameRestarted args);
     }
 }

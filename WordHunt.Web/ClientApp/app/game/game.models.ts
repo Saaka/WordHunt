@@ -43,6 +43,10 @@ export class TeamChanged {
     remainingFieldCount: number;
 }
 
+export class GameRestart {
+    gameId: number;
+}
+
 export class FieldChecked {
     gameId: number;
     fieldId: number;
@@ -54,4 +58,9 @@ export class FieldChecked {
 export class GameEnded {
     gameId: number;
     winningTeamId: number;
+}
+
+export class GameRestarted {
+    gameId: number;
+    oldGameId: number;
 }

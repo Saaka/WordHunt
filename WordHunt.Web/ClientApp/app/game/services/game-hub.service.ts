@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { SignalRConnectionFactory } from '../../core/signalr/signalr-connection.factory';
 import { ISignalRConnection, BroadcastEventListener } from 'ng2-signalr';
-import { TeamChanged, FieldChecked, GameEnded } from "../game.models";
+import { TeamChanged, FieldChecked, GameEnded, GameRestarted } from "../game.models";
 
 @Injectable()
 export class GameHubService {
@@ -12,6 +12,7 @@ export class GameHubService {
     private onTeamChanged$: BroadcastEventListener<TeamChanged>;
     private onFieldChecked$: BroadcastEventListener<FieldChecked>;
     private onGameEnded$: BroadcastEventListener<GameEnded>;
+    private onGameRestarted$: BroadcastEventListener<GameRestarted>;
 
     constructor(private connectionFactory: SignalRConnectionFactory) { }
 
@@ -51,6 +52,13 @@ export class GameHubService {
         this.onGameEnded$.subscribe(onGameEnded);
     }
 
+    public gameRestarted(onGameRestarted: (args: GameRestarted) => void) {
+        if (!this.onGameRestarted$)
+            this.onGameRestarted$ = this.connection.listenFor('GameRestarted');
+
+        this.onGameRestarted$.subscribe(onGameRestarted);
+    }
+
     public subscribed(onSubscribed: (message: string) => void) {
         if (!this.onSubscribed$)
             this.onSubscribed$ = this.connection.listenFor('Subscribed');
@@ -74,6 +82,10 @@ export class GameHubService {
         if (this.onGameEnded$) {
             this.onGameEnded$.unsubscribe();
             this.onGameEnded$ = null;
+        }
+        if (this.onGameRestarted$) {
+            this.onGameRestarted$.unsubscribe();
+            this.onGameRestarted$ = null;
         }
         if (this.connection) {
             this.connection.stop();

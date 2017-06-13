@@ -10,4 +10,9 @@ export class GameNavigation {
         
         this.router.navigate(['/game', gameId]);
     }
+
+    goToGameMap(gameId: number) {
+
+        this.router.navigate(['/game', gameId, 'map']);
+    }
 }

@@ -2,9 +2,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
 import { GameHubService, GameService, GameDialogsService } from '../services/game-services.imports';
-import { Game, GameEnded } from '../game.models';
+import { Game, GameEnded, GameRestarted } from '../game.models';
 import { Observable } from 'rxjs';
 import { SnackbarService } from '../../core/core.imports';
+import { GameNavigation } from '../../core/navigation/game-navigation.service';
 import { GameEndedDialogResult } from '../dialogs/dialog.imports';
 
 @Component({
@@ -29,7 +30,8 @@ export class GameMainComponent implements OnInit, OnDestroy {
         private gameHub: GameHubService,
         private gameService: GameService,
         private snackbar: SnackbarService,
-        private dialogService: GameDialogsService) { }
+        private dialogService: GameDialogsService,
+        private gameNavigationService: GameNavigation) { }
 
     ngOnInit() {
         this.paramsSub = this.route.params
@@ -69,6 +71,13 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     private init() {
         this.gameHub.gameEnded(this.onGameEnded);
+        this.gameHub.gameRestarted(this.onGameRestarted);
+    }
+
+    onGameRestarted = (args: GameRestarted) => {
+
+        this.gameHub.disconnect();
+        this.gameNavigationService.goToGame(args.gameId);
     }
 
     onGameEnded = (args: GameEnded) => {
@@ -88,6 +97,14 @@ export class GameMainComponent implements OnInit, OnDestroy {
 
     private createNewGame() {
 
+
+        this.gameService
+            .restartGame(this.game.id)
+            .subscribe(res => {
+                this.snackbar.openSnackbar("Restarting game");
+            }, err => {
+                this.snackbar.openSnackbar(err);
+            });  
     }
 
     private getTeam(teamId: number) {

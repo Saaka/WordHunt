@@ -22,6 +22,11 @@ namespace WordHunt.WebAPI.Hubs
             HubContext.Clients.Group(args.GameId.ToString()).GameEnded(args);
         }
 
+        public void RestartGame(GameRestarted args)
+        {
+            HubContext.Clients.Group(args.OldGameId.ToString()).GameRestarted(args);
+        }
+
         IHubContext<IEventClient> HubContext { get; } = GlobalHost.ConnectionManager.GetHubContext<Broadcaster, IEventClient>();
     }
 }

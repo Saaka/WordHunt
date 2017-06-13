@@ -47,6 +47,8 @@ namespace WordHunt.Games.Repository
 
         //GAME TEAM
         public const string GetGameTeamsQuery = @"SELECT [Id], [UserId], [Name], [Color], [Icon], [FieldCount], [RemainingFieldCount] FROM GameTeams WHERE GameId = @GameId";
+
+        public const string GetGameFieldsForCreationQuery = @"SELECT [Id], [GameId], [UserId], [Name], [Color], [Icon], [FieldCount], [Order] FROM GameTeams WHERE GameId = @GameId";
         public const string GetFirstTeamIdQuery = @"SELECT TOP 1 [Id] FROM GameTeams WHERE [GameId] = @GameId ORDER BY [Order]";
 
         public const string GetNextTeamQuery = @"SELECT	GT.Id, GT.[Order], GT.[RemainingFieldCount] "
@@ -87,6 +89,12 @@ namespace WordHunt.Games.Repository
                                     OUTPUT INSERTED.[Id], INSERTED.[BoardWidth], INSERTED.[BoardHeight], INSERTED.[TrapCount], INSERTED.[LanguageId]
                                     VALUES (@Name, @BoardWidth, @BoardHeight, @TeamCount, @TrapCount, @Type, @EndMode, @UserId, @CreationDate, @LanguageId)";
 
+        public const string CreateGameBasedOnAnotherQuery = @"INSERT INTO Games ([Name], [BoardWidth], [BoardHeight], [TeamCount], [TrapCount], [Type], [UserId], [EndMode], [CreationDate], [LanguageId])
+                                                            OUTPUT INSERTED.[Id], INSERTED.[BoardWidth], INSERTED.[BoardHeight], INSERTED.[TrapCount], INSERTED.[LanguageId]
+                                                            SELECT G.[Name], G.[BoardWidth], G.[BoardHeight], G.[TeamCount], G.[TrapCount], G.[Type], G.[UserId], G.[EndMode], @Date, G.[LanguageId]
+                                                            FROM Games G
+                                                            WHERE G.Id = @GameId";
+
         public const string CreateGameStatusQuery = @"INSERT INTO GameStatuses ([CurrentTeamId], [GameId], [Latest], [Status])
                                     VALUES (@CurrentTeamId, @GameId, @Latest, @Status)";
 
@@ -98,10 +106,12 @@ namespace WordHunt.Games.Repository
                                             + "OUTPUT inserted.[Id], inserted.[GameId], inserted.[CurrentTeamId], inserted.[Latest], inserted.[Status] "
                                             + "VALUES (@CurrentTeamId, @GameId, 1, @Status)";
 
-        public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount], [Color], [Active])
+        public const string CreateGameTeamQuery = @"INSERT INTO GameTeams ([FieldCount], [GameId], [Name], [Order], [UserId], [RemainingFieldCount], [Color], [Icon], [Active])
                                     OUTPUT INSERTED.[Id], INSERTED.[Order], INSERTED.[FieldCount]
-                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount, @Color, 1)";
+                                    VALUES (@FieldCount, @GameId, @Name, @Order, @UserId, @RemainingFieldCount, @Color, @Icon, 1)";
 
+        public const string CreateGameTeamsFromGameQuery = @"";
+        
         public const string CreateGameMoveQuery = @"INSERT INTO [GameMoves] ([FieldId], [GameId], [TeamId], [Timestamp], [Type]) 
                                                     OUTPUT INSERTED.[Id]
                                                     VALUES (@FieldId, @GameId, @TeamId, @Timestamp, @Type)";

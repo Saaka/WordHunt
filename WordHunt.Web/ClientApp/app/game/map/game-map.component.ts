@@ -2,8 +2,9 @@
 import { ActivatedRoute } from '@angular/router';
 import { MapBoardComponent, GameSidenavComponent, GameNavigationComponent } from '../game.imports';
 import { GameHubService, GameService } from '../services/game-services.imports';
-import { Game, GameEnded } from '../game.models';
+import { Game, GameEnded, GameRestarted } from '../game.models';
 import { Observable } from 'rxjs';
+import { GameNavigation } from '../../core/navigation/game-navigation.service';
 import { SnackbarService } from '../../core/core.imports';
 
 @Component({
@@ -26,7 +27,8 @@ export class GameMapComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
         private gameHub: GameHubService,
         private gameService: GameService,
-        private snackbar: SnackbarService) { }
+        private snackbar: SnackbarService,
+        private gameNavigationService: GameNavigation) { }
 
     ngOnInit() {
         this.paramsSub = this.route.parent.params
@@ -65,6 +67,13 @@ export class GameMapComponent implements OnInit, OnDestroy {
 
     private init() {
         this.gameHub.gameEnded(this.onGameEnded);
+        this.gameHub.gameRestarted(this.onGameRestarted);
+    }
+
+    onGameRestarted = (args: GameRestarted) => {
+        
+        this.gameHub.disconnect();
+        this.gameNavigationService.goToGameMap(args.gameId);
     }
 
     onGameEnded = (args: GameEnded) => {

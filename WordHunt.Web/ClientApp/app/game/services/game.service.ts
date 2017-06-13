@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from '../../core/http/http.service';
 import { AuthHttpService } from '../../core/http/auth-http.service';
-import { Game, Team, Field, TeamChanged, FieldChecked } from '../game.models';
+import { Game, Team, Field, TeamChanged, FieldChecked, GameRestart } from '../game.models';
 import { UserService } from '../../core/core.imports';
 
 @Injectable()
@@ -18,6 +18,13 @@ export class GameService {
         return this.http
             .get('game/' + gameId)
             .map(res => <Game>res.json());
+    }
+
+    restartGame(gameId: number) {
+
+        return this.authHttp
+            .get('game/' + gameId + '/restart')
+            .map(res => <GameRestart>res.json());
     }
 
     getGameMap(gameId: number) {

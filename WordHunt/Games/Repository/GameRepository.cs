@@ -18,6 +18,7 @@ namespace WordHunt.Games.Repository
         Task<Models.Games.Access.CurrentGameState> GetCurrentGameState(int gameId);
         Task EndGame(int gameId, int winningTeamId);
         Task<Models.Games.Access.Game> GetCompleteGameMap(int gameId);
+        Task<GameCreated> CreatedBasedOnGame(int gameId);
     }
 
     class GameRepository : IGameRepository
@@ -43,6 +44,17 @@ namespace WordHunt.Games.Repository
             using (var connection = connectionFactory.CreateConnection())
             {
                 var game = await connection.QueryFirstAsync<GameCreated>(CreationQueries.CreateGameQuery, entity);
+
+                return game;
+            }
+        }
+
+        public async Task<GameCreated> CreatedBasedOnGame(int gameId)
+        {
+            var creationDate = timeProvider.GetCurrentTime();
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                var game = await connection.QueryFirstAsync<GameCreated>(CreationQueries.CreateGameBasedOnAnotherQuery, new { GameId = gameId, Date = creationDate });
 
                 return game;
             }

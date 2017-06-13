@@ -1,19 +1,20 @@
 ﻿using Dapper;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WordHunt.Base.Services;
 using WordHunt.Data.Connection;
 using WordHunt.Models.Games.Creation;
 using AutoMapper;
 using WordHunt.Data.Entities;
+using WordHunt.Models.Games.Access;
 
 namespace WordHunt.Games.Repository
 {
     public interface IGameTeamRepository
     {
         Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> model);
+        Task<IEnumerable<GameTeamCreate>> GetGameTeams(int baseGameId);
         Task<int> GetFirstTeamId(int gameId);
         Task<Models.Games.Access.NextTeam> GetNextTeam(int gameId);
         Task<int> GetRemainingFieldCount(int teamId);
@@ -33,6 +34,14 @@ namespace WordHunt.Games.Repository
             this.connectionFactory = connectionFactory;
             this.timeProvider = timeProvider;
             this.mapper = mapper;
+        }
+
+        public async Task<IEnumerable<GameTeamCreate>> GetGameTeams(int baseGameId)
+        {
+            using (var connection = connectionFactory.CreateConnection())
+            {
+                return await connection.QueryAsync<GameTeamCreate>(AccessQueries.GetGameFieldsForCreationQuery, new { GameId = baseGameId });
+            }
         }
 
         public async Task<IEnumerable<GameTeamCreated>> CreateGameTeams(IEnumerable<GameTeamCreate> models)
